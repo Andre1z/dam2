@@ -7,3 +7,5 @@ Si escogéis tipografías, que sean porque os gustan, os representan, y signific
 Si escogéis un logo, que sea porque signifique algo
 
 Todo eso se tiene que ver reflejado en el diseño de interfaces de usuario
+
+Coged mi manual como referencia
