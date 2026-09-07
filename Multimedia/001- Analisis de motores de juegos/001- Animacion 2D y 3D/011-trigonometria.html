@@ -17,6 +17,7 @@
       let temporizador = setTimeout("bucle()",1000) // Llamo al bucle por primera vez
       function bucle(){	// Este es el bucle
         contexto.clearRect(0,0,400,400)							// Borramos el canvas
+        angulo += (Math.random()-0.5)*0.8						// Varío ligeramente el angulo
         x += Math.cos(angulo)												// La componente x = cos
         y += Math.sin(angulo)												// La componente y = sin
       	contexto.fillRect(x,y,5,5)
