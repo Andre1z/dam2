@@ -12,3 +12,11 @@ y ejecuta su código contra la máquina virtual de Python
 
 Nosotros, cuando ejecutamos un código fuente
 No creamos un proceso, sino que la máquina virtual de Python genera un proceso
+
+Un ejecutable es un archivo que contiene instrucciones en un lenguaje
+que puede entender un procesador
+
+Cuando lanzamos ese ejecutable al procesador, crea un proceso (un proceso
+es como un conjunto de obreros trabajando sobre el plano para construir una casa)
+
+Un ejecutable puede crear tantos procesos como quieras
