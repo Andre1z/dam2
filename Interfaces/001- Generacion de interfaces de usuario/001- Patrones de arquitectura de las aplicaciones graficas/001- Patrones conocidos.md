@@ -4,6 +4,9 @@ Ejemplos de estilo visual consistente:
 - Google - Las aplicacione son casi iguales
 - iOS - Muy iguales entre sí
 - Android - directamente se llama Material Design
+- Spotify
+- Steam
+- Facebook/Meta
 
 Antecedente en el diseño de interfaces informáticas
 Diseño aqua de MacOSX - Steve Jobs y Johnny Ive
