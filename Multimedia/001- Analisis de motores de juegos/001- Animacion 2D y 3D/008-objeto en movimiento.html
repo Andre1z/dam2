@@ -13,7 +13,13 @@
       const contexto = lienzo.getContext("2d");
       let x = 40;
       let y = 40;
-      contexto.fillRect(x,y,x+20,y+20)
+      let temporizador = setTimeout("bucle()",1000)
+      function bucle(){
+      	contexto.fillRect(x,y,x+20,y+20)
+        clearTimeout(temporizador)
+        temporizador = setTimeout("bucle()",100)
+      }
+      
     </script>
   </body>
 </html>
