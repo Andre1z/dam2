@@ -16,11 +16,11 @@
       let temporizador = setTimeout("bucle()",1000) // Llamo al bucle por primera vez
       function bucle(){	// Este es el bucle
         contexto.clearRect(0,0,400,400)							// Borramos el canvas
-        x += (Math.random()-0.5)*5 											// Varía un poco la x
-        y += (Math.random()-0.5)*5											// Varia un poco la y
+        x += 1 											// Varía un poco la x
+        y += 0											// Varia un poco la y
       	contexto.fillRect(x,y,5,5)
         clearTimeout(temporizador)									// Elimino el temporizador
-        temporizador = setTimeout("bucle()",100)		// Vuelvo a ejecutar el bucle
+        temporizador = setTimeout("bucle()",50)		// Vuelvo a ejecutar el bucle
       }
       
     </script>
