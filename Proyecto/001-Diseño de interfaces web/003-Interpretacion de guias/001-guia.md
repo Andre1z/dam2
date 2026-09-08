@@ -16,3 +16,7 @@ Top: fuente personalizada
 Si no, usad fuentes existentes
 Fuente de título - artística y bonita
 Fuente de párrafo - normal, legible
+
+Usos incorrectos
+
+Aplicaciones - muestras del uso de tu logo
