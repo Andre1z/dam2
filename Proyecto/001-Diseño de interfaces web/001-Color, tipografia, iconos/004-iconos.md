@@ -10,3 +10,4 @@ Qué iconos vais a usar o necesitar en vuestra aplicación?
 Recomiendo usar Inkscape como herramienta sencilla para crear vuestros iconos
 
 1.-Abrimos Inkscape
+2.-Plantilla cuadrada
