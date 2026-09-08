@@ -6,3 +6,6 @@ Empresa iniciativa individual o colectiva
 Particular, autonomo, sociedad, comunidad, ONG
 Muchas empresas tienen un fin económico
 Y otras tienen otro tipo de fines
+
+ERP - Enterprise Resource Planning - Gestión de empresa
+CRM - Customer Relationship Management - Gestión de las ventas
