@@ -23,3 +23,8 @@ Años 90
 Windows 95 - Pentium MMX - Revolución multimedia
 Teclado, raton, microfono
 Pantalla, impresora, altavoces
+
+Años 2000-2010
+Portatiles
+Moviles
+Se populariza Internet
