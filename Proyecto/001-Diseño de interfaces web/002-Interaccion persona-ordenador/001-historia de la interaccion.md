@@ -28,3 +28,5 @@ Años 2000-2010
 Portatiles
 Moviles
 Se populariza Internet
+
+Siri - Interfaz de audio, microfono dictas lo que necesitas, y el sistema te devuelve voz
