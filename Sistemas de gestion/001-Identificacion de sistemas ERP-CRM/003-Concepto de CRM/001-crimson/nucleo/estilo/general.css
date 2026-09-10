@@ -6,6 +6,6 @@ body,html{
 body{display:flex;flex-direction:column;}
 header{flex:1;background:crimson;padding:20px;}
 footer{flex:1;background:crimson;padding:20px;}
-section{flex:10;display:flex;}
+section{flex:40;display:flex;}
 nav{flex:1;background:crimson;padding:20px;}
-main{flex:5;padding:20px;}
+main{flex:10;padding:20px;}
