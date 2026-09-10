@@ -7,3 +7,6 @@ body{display:flex;flex-direction:column;}
 header{flex:1;background:crimson;}
 section{flex:10;}
 footer{flex:1;background:crimson;}
+section{display:flex;}
+nav{flex:1;background:crimson;}
+main{flex:5;}
