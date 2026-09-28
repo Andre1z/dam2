@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from JocarsaBBDD import JocarsaBBDD
+from AndreiBBDD import AndreiBBDD
 import os
 
 
@@ -20,7 +20,7 @@ class Colores:
 class AplicacionEmpresa:
 
   def __init__(self):
-    self.bbdd = JocarsaBBDD()
+    self.bbdd = AndreiBBDD()
     self.nombreBaseDatos = "empresa_demo"
     self.ancho = 86
 
@@ -544,8 +544,8 @@ class AplicacionEmpresa:
         pass
 
     self.cabecera(
-      "JOCARSA EMPRESA",
-      "Demostración empresarial utilizando JocarsaBBDD"
+      "ANDREI EMPRESA",
+      "Demostración empresarial utilizando AndreiBBDD"
     )
 
     print(
@@ -638,7 +638,7 @@ class AplicacionEmpresa:
           pass
 
         elif opcion == "0":
-          self.cabecera("JOCARSA EMPRESA")
+          self.cabecera("ANDREI EMPRESA")
           self.centrar(
             "Gracias por utilizar la demostración.",
             Colores.VERDE

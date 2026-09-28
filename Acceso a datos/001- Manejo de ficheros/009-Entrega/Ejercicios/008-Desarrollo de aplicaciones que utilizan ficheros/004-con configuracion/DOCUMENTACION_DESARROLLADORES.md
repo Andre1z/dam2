@@ -1,4 +1,4 @@
-# JocarsaBBDD — Documentación para desarrolladores
+# AndreiBBDD — Documentación para desarrolladores
 
 
 ## Resumen rápido de operaciones
@@ -10,13 +10,13 @@
 | Crear una tabla | `creaTabla()` | `bbdd.creaTabla("clientes","nombre,apellidos,email")` |
 | Obtener el esquema | `obtenerEsquema()` | `esquema = bbdd.obtenerEsquema("clientes")` |
 | Obtener el siguiente ID | `siguienteId()` | `id = bbdd.siguienteId("clientes")` |
-| Insertar un registro | `insertarDatos()` | `id = bbdd.insertarDatos("clientes",["Jose","Carratala","jose@example.com"])` |
+| Insertar un registro | `insertarDatos()` | `id = bbdd.insertarDatos("clientes",["Andrei","Carratala","Andrei@example.com"])` |
 | Buscar la posición física de un ID | `buscarPosicion()` | `posicion = bbdd.buscarPosicion("clientes",1)` |
 | Leer un registro | `leerRegistro()` | `registro = bbdd.leerRegistro("clientes",1)` |
 | Seleccionar un registro como diccionario | `seleccionar()` | `cliente = bbdd.seleccionar("clientes",1)` |
 | Listar todos los registros activos | `listarTodo()` | `bbdd.listarTodo("clientes")` |
-| Buscar por una columna | `buscarColumna()` | `bbdd.buscarColumna("clientes","nombre","Jose")` |
-| Actualizar un registro | `actualizar()` | `bbdd.actualizar("clientes",1,["Jose","Carratala","nuevo@example.com"])` |
+| Buscar por una columna | `buscarColumna()` | `bbdd.buscarColumna("clientes","nombre","Andrei")` |
+| Actualizar un registro | `actualizar()` | `bbdd.actualizar("clientes",1,["Andrei","Carratala","nuevo@example.com"])` |
 | Eliminar lógicamente un registro | `eliminar()` | `bbdd.eliminar("clientes",1)` |
 | Serializar una lista | `serializar()` | `cadena = serial.serializar(["uno","dos","tres"])` |
 | Desserializar una cadena | `desserializar()` | `lista = serial.desserializar("uno,dos,tres")` |
@@ -26,24 +26,24 @@
 Antes de utilizar las operaciones de base de datos:
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from Andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 Para utilizar directamente el serializador:
 
 ```python
-from jocarsa_bbdd import JocarsaSerializador
+from Andrei_bbdd import AndreiSerializador
 
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 ```
 
 ---
 
 ## 1. Descripción
 
-`JocarsaBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
+`AndreiBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
 
 El sistema utiliza tres archivos por tabla:
 
@@ -58,13 +58,13 @@ Los registros tienen un tamaño fijo de **512 bytes**. Esta decisión permite ac
 La biblioteca contiene dos clases:
 
 ```text
-JocarsaSerializador
-JocarsaBBDD
+AndreiSerializador
+AndreiBBDD
 ```
 
-`JocarsaSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
+`AndreiSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
 
-`JocarsaBBDD` administra bases de datos, tablas, registros e índices.
+`AndreiBBDD` administra bases de datos, tablas, registros e índices.
 
 ---
 
@@ -76,7 +76,7 @@ Estructura esperada:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
@@ -86,10 +86,10 @@ Estructura esperada:
 | `instalacion` | cadena | Directorio raíz en el que se crean las bases de datos. |
 | `tamanoRegistro` | entero | Tamaño fijo, en bytes, reservado para cada registro. |
 
-La configuración se carga una sola vez durante la construcción de `JocarsaBBDD`.
+La configuración se carga una sola vez durante la construcción de `AndreiBBDD`.
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 No es necesario abrir ni leer manualmente `config.json` desde el programa que utiliza la biblioteca.
@@ -100,12 +100,12 @@ La distribución recomendada es:
 
 ```text
 proyecto/
-├── JocarsaBBDD.py
+├── AndreiBBDD.py
 ├── config.json
 └── programa.py
 ```
 
-La biblioteca busca `config.json` junto al propio archivo `JocarsaBBDD.py`, no junto al programa que importa la librería.
+La biblioteca busca `config.json` junto al propio archivo `AndreiBBDD.py`, no junto al programa que importa la librería.
 
 ---
 
@@ -121,19 +121,19 @@ Configuración por defecto:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
 
 La propiedad `instalacion` indica el directorio raíz donde se almacenan las bases de datos. La propiedad `tamanoRegistro` determina el tamaño fijo, en bytes, de cada registro.
 
-El archivo `config.json` debe estar en el mismo directorio que `JocarsaBBDD.py`. La biblioteca localiza la configuración mediante `__file__`, por lo que no depende del directorio desde el que se ejecute el programa.
+El archivo `config.json` debe estar en el mismo directorio que `AndreiBBDD.py`. La biblioteca localiza la configuración mediante `__file__`, por lo que no depende del directorio desde el que se ejecute el programa.
 
 Cada base de datos es un directorio:
 
 ```text
-/var/jocarsa-basededatos/
+/var/Andrei-basededatos/
 └── empresa/
     ├── clientes.csv
     ├── clientes.esquema
@@ -154,7 +154,7 @@ De esta forma, la configuración queda separada de la implementación de la bibl
 Para pruebas automatizadas sigue siendo posible sobrescribir temporalmente el atributo después de crear el objeto:
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 bbdd.instalacion = "/tmp/pruebas/"
 ```
 
@@ -211,7 +211,7 @@ bytes.
 Un registro lógico como:
 
 ```text
-1,1,Jose Vicente,Carratala,jose@example.com
+1,1,Andrei Vicente,Carratala,Andrei@example.com
 ```
 
 se codifica en UTF-8, se rellena con espacios y termina con un salto de línea hasta completar exactamente 512 bytes.
@@ -262,24 +262,24 @@ Actualmente el índice se recorre secuencialmente, por lo que la búsqueda en el
 
 ---
 
-## 6. JocarsaSerializador
+## 6. AndreiSerializador
 
 ### serializar(lista, delimitador=",")
 
 Convierte una lista en una cadena.
 
 ```python
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 
 cadena = serial.serializar(
-  ["Jose","Valencia",48]
+  ["Andrei","Valencia",48]
 )
 ```
 
 Resultado:
 
 ```text
-Jose,Valencia,48
+Andrei,Valencia,48
 ```
 
 También admite otro delimitador:
@@ -300,41 +300,41 @@ Realiza la operación inversa:
 
 ```python
 serial.desserializar(
-  "Jose,Valencia,48"
+  "Andrei,Valencia,48"
 )
 ```
 
 Resultado:
 
 ```python
-["Jose","Valencia","48"]
+["Andrei","Valencia","48"]
 ```
 
 Todos los valores recuperados son cadenas.
 
 ---
 
-## 7. JocarsaBBDD
+## 7. AndreiBBDD
 
 ### Constructor
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
-Al construir el objeto, `JocarsaBBDD` carga automáticamente `config.json`.
+Al construir el objeto, `AndreiBBDD` carga automáticamente `config.json`.
 
 Conceptualmente:
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 produce una instancia cuyos valores configurables proceden de:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
@@ -356,7 +356,7 @@ bbdd.creaBaseDatos("empresa")
 Produce:
 
 ```text
-/var/jocarsa-basededatos/empresa/
+/var/Andrei-basededatos/empresa/
 ```
 
 La operación falla si la base de datos ya existe.
@@ -450,9 +450,9 @@ Inserta un nuevo registro.
 id = bbdd.insertarDatos(
   "clientes",
   [
-    "Jose Vicente",
+    "Andrei Vicente",
     "Carratala",
-    "jose@example.com"
+    "Andrei@example.com"
   ]
 )
 ```
@@ -518,9 +518,9 @@ Resultado:
 [
   "1",
   "1",
-  "Jose Vicente",
+  "Andrei Vicente",
   "Carratala",
-  "jose@example.com"
+  "Andrei@example.com"
 ]
 ```
 
@@ -545,9 +545,9 @@ Resultado:
 {
   "id":"1",
   "activo":"1",
-  "nombre":"Jose Vicente",
+  "nombre":"Andrei Vicente",
   "apellidos":"Carratala",
-  "email":"jose@example.com"
+  "email":"Andrei@example.com"
 }
 ```
 
@@ -699,9 +699,9 @@ dependiendo del método.
 ## 22. Ejemplo completo
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from Andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 
 bbdd.creaBaseDatos("empresa")
 bbdd.usaBaseDatos("empresa")
@@ -714,9 +714,9 @@ bbdd.creaTabla(
 id = bbdd.insertarDatos(
   "clientes",
   [
-    "Jose Vicente",
+    "Andrei Vicente",
     "Carratala",
-    "jose@example.com"
+    "Andrei@example.com"
   ]
 )
 
@@ -731,7 +731,7 @@ bbdd.actualizar(
   "clientes",
   id,
   [
-    "Jose Vicente",
+    "Andrei Vicente",
     "Carratala Sanchis",
     "nuevo@example.com"
   ]
@@ -750,7 +750,7 @@ bbdd.eliminar(
 El archivo:
 
 ```text
-pruebas_jocarsa_bbdd.py
+pruebas_Andrei_bbdd.py
 ```
 
 crea una instalación temporal y comprueba, entre otras cosas:
@@ -776,18 +776,18 @@ crea una instalación temporal y comprueba, entre otras cosas:
 - duplicados;
 - número incorrecto de campos.
 
-La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/jocarsa-basededatos/`.
+La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/Andrei-basededatos/`.
 
 Ejecución:
 
 ```bash
-python3 pruebas_jocarsa_bbdd.py
+python3 pruebas_Andrei_bbdd.py
 ```
 
 Si el módulo principal no se llama:
 
 ```text
-jocarsa_bbdd.py
+Andrei_bbdd.py
 ```
 
 hay que modificar el `import` inicial del archivo de pruebas.

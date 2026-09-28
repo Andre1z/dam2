@@ -1,4 +1,4 @@
-# JocarsaBBDD — Documentación para desarrolladores
+# AndreiBBDD — Documentación para desarrolladores
 
 
 ## Resumen rápido de operaciones
@@ -26,24 +26,24 @@
 Antes de utilizar las operaciones de base de datos:
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from Andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 Para utilizar directamente el serializador:
 
 ```python
-from jocarsa_bbdd import JocarsaSerializador
+from Andrei_bbdd import AndreiSerializador
 
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 ```
 
 ---
 
 ## 1. Descripción
 
-`JocarsaBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
+`AndreiBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
 
 El sistema utiliza tres archivos por tabla:
 
@@ -58,13 +58,13 @@ Los registros tienen un tamaño fijo de **512 bytes**. Esta decisión permite ac
 La biblioteca contiene dos clases:
 
 ```text
-JocarsaSerializador
-JocarsaBBDD
+AndreiSerializador
+AndreiBBDD
 ```
 
-`JocarsaSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
+`AndreiSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
 
-`JocarsaBBDD` administra bases de datos, tablas, registros e índices.
+`AndreiBBDD` administra bases de datos, tablas, registros e índices.
 
 ---
 
@@ -76,7 +76,7 @@ Estructura esperada:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
@@ -86,10 +86,10 @@ Estructura esperada:
 | `instalacion` | cadena | Directorio raíz en el que se crean las bases de datos. |
 | `tamanoRegistro` | entero | Tamaño fijo, en bytes, reservado para cada registro. |
 
-La configuración se carga una sola vez durante la construcción de `JocarsaBBDD`.
+La configuración se carga una sola vez durante la construcción de `AndreiBBDD`.
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 No es necesario abrir ni leer manualmente `config.json` desde el programa que utiliza la biblioteca.
@@ -100,12 +100,12 @@ La distribución recomendada es:
 
 ```text
 proyecto/
-├── JocarsaBBDD.py
+├── AndreiBBDD.py
 ├── config.json
 └── programa.py
 ```
 
-La biblioteca busca `config.json` junto al propio archivo `JocarsaBBDD.py`, no junto al programa que importa la librería.
+La biblioteca busca `config.json` junto al propio archivo `AndreiBBDD.py`, no junto al programa que importa la librería.
 
 ---
 
@@ -121,19 +121,19 @@ Configuración por defecto:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
 
 La propiedad `instalacion` indica el directorio raíz donde se almacenan las bases de datos. La propiedad `tamanoRegistro` determina el tamaño fijo, en bytes, de cada registro.
 
-El archivo `config.json` debe estar en el mismo directorio que `JocarsaBBDD.py`. La biblioteca localiza la configuración mediante `__file__`, por lo que no depende del directorio desde el que se ejecute el programa.
+El archivo `config.json` debe estar en el mismo directorio que `AndreiBBDD.py`. La biblioteca localiza la configuración mediante `__file__`, por lo que no depende del directorio desde el que se ejecute el programa.
 
 Cada base de datos es un directorio:
 
 ```text
-/var/jocarsa-basededatos/
+/var/Andrei-basededatos/
 └── empresa/
     ├── clientes.csv
     ├── clientes.esquema
@@ -154,7 +154,7 @@ De esta forma, la configuración queda separada de la implementación de la bibl
 Para pruebas automatizadas sigue siendo posible sobrescribir temporalmente el atributo después de crear el objeto:
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 bbdd.instalacion = "/tmp/pruebas/"
 ```
 
@@ -262,14 +262,14 @@ Actualmente el índice se recorre secuencialmente, por lo que la búsqueda en el
 
 ---
 
-## 6. JocarsaSerializador
+## 6. AndreiSerializador
 
 ### serializar(lista, delimitador=",")
 
 Convierte una lista en una cadena.
 
 ```python
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 
 cadena = serial.serializar(
   ["Jose","Valencia",48]
@@ -314,27 +314,27 @@ Todos los valores recuperados son cadenas.
 
 ---
 
-## 7. JocarsaBBDD
+## 7. AndreiBBDD
 
 ### Constructor
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
-Al construir el objeto, `JocarsaBBDD` carga automáticamente `config.json`.
+Al construir el objeto, `AndreiBBDD` carga automáticamente `config.json`.
 
 Conceptualmente:
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 produce una instancia cuyos valores configurables proceden de:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/Andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
@@ -356,7 +356,7 @@ bbdd.creaBaseDatos("empresa")
 Produce:
 
 ```text
-/var/jocarsa-basededatos/empresa/
+/var/Andrei-basededatos/empresa/
 ```
 
 La operación falla si la base de datos ya existe.
@@ -699,9 +699,9 @@ dependiendo del método.
 ## 22. Ejemplo completo
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from Andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 
 bbdd.creaBaseDatos("empresa")
 bbdd.usaBaseDatos("empresa")
@@ -750,7 +750,7 @@ bbdd.eliminar(
 El archivo:
 
 ```text
-pruebas_jocarsa_bbdd.py
+pruebas_Andrei_bbdd.py
 ```
 
 crea una instalación temporal y comprueba, entre otras cosas:
@@ -776,18 +776,18 @@ crea una instalación temporal y comprueba, entre otras cosas:
 - duplicados;
 - número incorrecto de campos.
 
-La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/jocarsa-basededatos/`.
+La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/Andrei-basededatos/`.
 
 Ejecución:
 
 ```bash
-python3 pruebas_jocarsa_bbdd.py
+python3 pruebas_Andrei_bbdd.py
 ```
 
 Si el módulo principal no se llama:
 
 ```text
-jocarsa_bbdd.py
+Andrei_bbdd.py
 ```
 
 hay que modificar el `import` inicial del archivo de pruebas.
