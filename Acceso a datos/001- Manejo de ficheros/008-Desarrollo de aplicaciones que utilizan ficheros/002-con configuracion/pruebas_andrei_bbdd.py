@@ -5,21 +5,21 @@ from contextlib import redirect_stdout
 from io import StringIO
 
 # Ajusta este import al nombre real del archivo que contiene las clases.
-# Ejemplo: from jocarsa_bbdd import JocarsaSerializador, JocarsaBBDD
+# Ejemplo: from andrei_bbdd import AndreiSerializador, AndreiBBDD
 try:
-  from JocarsaBBDD import JocarsaSerializador, JocarsaBBDD
+  from AndreiBBDD import AndreiSerializador, AndreiBBDD
 except Exception as error:
   print("Se ha producido un error al importar las clases:")
   print(error)
-  print("Edita la línea 'from jocarsa_bbdd import ...' con el nombre de tu módulo.")
+  print("Edita la línea 'from Andrei_bbdd import ...' con el nombre de tu módulo.")
   raise
 
 
-class PruebasJocarsaBBDD:
+class PruebasAndreiBBDD:
   def __init__(self):
     self.correctas = 0
     self.incorrectas = 0
-    self.directorio = tempfile.mkdtemp(prefix="jocarsa-bbdd-pruebas-")+"/"
+    self.directorio = tempfile.mkdtemp(prefix="andrei-bbdd-pruebas-")+"/"
 
   def comprobar(self,nombre,condicion):
     try:
@@ -45,11 +45,11 @@ class PruebasJocarsaBBDD:
   def ejecutar(self):
     try:
       print("========================================")
-      print(" PRUEBAS EXHAUSTIVAS JOCARSA BBDD")
+      print(" PRUEBAS EXHAUSTIVAS Andrei BBDD")
       print("========================================")
       print("Directorio temporal:",self.directorio)
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
 
       self.comprobar(
         "serializar lista",
@@ -71,7 +71,7 @@ class PruebasJocarsaBBDD:
         serial.desserializar("uno|dos|tres","|") == ["uno","dos","tres"]
       )
 
-      bbdd = JocarsaBBDD()
+      bbdd = AndreiBBDD()
       bbdd.instalacion = self.directorio
 
       bbdd.creaBaseDatos("empresa")
@@ -92,7 +92,7 @@ class PruebasJocarsaBBDD:
         bbdd.basededatos == "empresa"
       )
 
-      bbdd2 = JocarsaBBDD()
+      bbdd2 = AndreiBBDD()
       bbdd2.instalacion = self.directorio
       _,salida = self.captura(bbdd2.usaBaseDatos,"inexistente")
       self.comprobar(
@@ -276,7 +276,7 @@ class PruebasJocarsaBBDD:
         bbdd.seleccionar("clientes",999999) == None
       )
 
-      bbdd3 = JocarsaBBDD()
+      bbdd3 = AndreiBBDD()
       bbdd3.instalacion = self.directorio
       _,salida = self.captura(bbdd3.creaTabla,"sinbbdd","campo")
       self.comprobar(
@@ -321,5 +321,5 @@ class PruebasJocarsaBBDD:
 
 
 if __name__ == "__main__":
-  pruebas = PruebasJocarsaBBDD()
+  pruebas = PruebasAndreiBBDD()
   pruebas.ejecutar()
