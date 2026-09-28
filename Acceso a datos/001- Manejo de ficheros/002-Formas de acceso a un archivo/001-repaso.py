@@ -1,7 +1,7 @@
 # Crear
 
 archivo = open("agenda.txt",'w')
-archivo.write("Este es un texto\n")
+archivo.write("Este es uno de los textos\n")
 archivo.close()
 
 # leer
@@ -14,7 +14,7 @@ archivo.close()
 # añadir
 
 archivo = open("agenda.txt",'a')
-archivo.write("Este es un texto\n")
+archivo.write("Este es uno de los textos 2\n")
 archivo.close()
 
 # leer
