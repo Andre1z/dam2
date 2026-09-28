@@ -1,4 +1,4 @@
-class JocarsaSerializador():
+class AndreiSerializador():
   def serializar(self,lista,delimitador=","):
     cadena = ""
     for elemento in  lista:
@@ -9,5 +9,5 @@ class JocarsaSerializador():
     lista = cadena.split(delimitador)
     return lista
 
-serial = JocarsaSerializador()
-print(serial.desserializar("manzanas,peras,platanos"))
+serial = AndreiSerializador()
+print(serial.desserializar("BMW,Audi,Mercedes,Ferrari"))

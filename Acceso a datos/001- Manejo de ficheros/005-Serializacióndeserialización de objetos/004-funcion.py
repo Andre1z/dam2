@@ -1,10 +1,13 @@
+from pathlib import Path
+
 def serializar(lista,delimitador=","):
   cadena = ""
   for elemento in  lista:
     cadena += elemento+delimitador
   return cadena
 
-archivo = open("prueba.txt",'w')
-frutas = ['manzanas','platanos','naranjas']
-archivo.write(serializar(frutas))
+ruta = Path(__file__).resolve().parent / "prueba.txt"
+archivo = open(ruta, 'w')
+coches = ['BMW','Audi','Mercedes','Ferrari']
+archivo.write(serializar(coches))
 archivo.close()
