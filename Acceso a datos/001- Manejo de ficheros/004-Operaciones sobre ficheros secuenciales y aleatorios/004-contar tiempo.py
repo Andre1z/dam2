@@ -2,7 +2,7 @@ import time
 
 inicio = time.perf_counter()
 
-archivo = open("/var/www/html/agenda_ficticia_1_millon_contactos.csv")
+archivo = open("D:/dam2/agenda_1M.csv")
 lineas = archivo.readlines()
 
 for linea in lineas:
