@@ -1,7 +1,7 @@
 <?php
 
-    $archivo = fopen("agenda.txt", 'w');
-    fwrite($archivo, "Este es un contenido que escribo desde PHP");
+    $archivo = fopen("texto.txt", 'w');
+    fwrite($archivo, "Este es el archivo que se ha escrito desde PHP");
     fclose($archivo);
    
 ?>
