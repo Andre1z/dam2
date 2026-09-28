@@ -1,6 +1,6 @@
 import os
 
-class JocarsaSerializador():
+class AndreiSerializador():
   def serializar(self,lista,delimitador=","):
     try:
       cadena = ""
@@ -23,9 +23,9 @@ class JocarsaSerializador():
       return None
 
 
-class JocarsaBBDD:
+class AndreiBBDD:
   def __init__(self):
-    self.instalacion = "/var/jocarsa-basededatos/"
+    self.instalacion = "C:/xampp/htdocs/dam2/Acceso a datos/001- Manejo de ficheros/003-Clases para gestión de flujos de datos desdehacia ficheros/andrei-basededatos/"
     self.basededatos = ""
     self.tamanoRegistro = 512
 
@@ -76,7 +76,7 @@ class JocarsaBBDD:
       esquema = archivo.read()
       archivo.close()
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
       resultado = serial.desserializar(esquema)
       assert resultado != None, "No se ha podido desserializar el esquema"
       return resultado
@@ -113,7 +113,7 @@ class JocarsaBBDD:
       ruta = self.instalacion+self.basededatos+"/"+tabla+".csv"
       assert os.path.exists(ruta), "La tabla '"+tabla+"' no existe"
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
       id = self.siguienteId(tabla)
       assert id != None, "No se ha podido obtener el siguiente id"
 
@@ -180,7 +180,7 @@ class JocarsaBBDD:
 
       cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
       elementos = serial.desserializar(cadena)
 
       assert elementos != None, "No se ha podido desserializar el registro"
@@ -222,7 +222,7 @@ class JocarsaBBDD:
       assert os.path.exists(ruta), "La tabla '"+tabla+"' no existe"
 
       archivo = open(ruta,'rb')
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
 
       while True:
         registro = archivo.read(self.tamanoRegistro)
@@ -262,7 +262,7 @@ class JocarsaBBDD:
       assert os.path.exists(ruta), "La tabla '"+tabla+"' no existe"
 
       archivo = open(ruta,'rb')
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
 
       while True:
         registro = archivo.read(self.tamanoRegistro)
@@ -302,7 +302,7 @@ class JocarsaBBDD:
       assert esquema != None, "No se ha podido obtener el esquema"
       assert len(datos) == len(esquema)-2, "Se esperaban "+str(len(esquema)-2)+" campos y se han recibido "+str(len(datos))
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
       elementos = [id,1]+datos
       cadena = serial.serializar(elementos)
       assert cadena != None, "No se ha podido serializar el registro actualizado"
@@ -338,7 +338,7 @@ class JocarsaBBDD:
 
       cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
       elementos = serial.desserializar(cadena)
 
       assert elementos != None, "No se ha podido desserializar el registro"

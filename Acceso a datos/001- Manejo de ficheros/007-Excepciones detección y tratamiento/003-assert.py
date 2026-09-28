@@ -1,2 +1,2 @@
-assert 4 < 3
+assert 8 < 7
 
