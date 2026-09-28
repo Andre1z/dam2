@@ -280,7 +280,7 @@ conexion.usaBaseDatos("empresa")
 
 # conexion.creaTabla("clientes","nombre,apellidos,telefono")
 
-# id1 = conexion.insertarDatos("clientes",["Jose Vicente","Carratala",54354])
+# id1 = conexion.insertarDatos("clientes",["Andrei","Buga Mihailescu",682713])
 # id2 = conexion.insertarDatos("clientes",["Ana","Garcia",666666666])
 # id3 = conexion.insertarDatos("clientes",["Juan","Lopez",777777777])
 
