@@ -1,1 +1,1 @@
-manzanas,platanos,naranjas,
+esto es una cadena
