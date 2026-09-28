@@ -2,7 +2,7 @@ import random
 import time
 import csv
 
-ruta = "/var/www/html/agenda_ficticia_1_millon_contactos.csv"
+ruta = "D:/dam2/agenda_1M.csv"
 
 # 1. Contar líneas
 archivo = open(ruta, "rb")

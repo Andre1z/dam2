@@ -2,7 +2,7 @@ import random
 import time
 import csv
 
-ruta = "/var/jocarsa-basededatos/empresa/clientes.csv"
+ruta = "D:/dam2/agenda_1M.csv"
 
 # ============================================
 # 1. CREAR ÍNDICE DE POSICIONES
