@@ -2,128 +2,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <errno.h>
-#include <limits.h>
-#include <time.h>
-
-#ifndef _WIN32
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <limits.h>
+#include <time.h>
 #include <pwd.h>
 #include <sys/utsname.h>
-#include <strings.h>
-#else
-#include <direct.h>
-#include <windows.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#ifndef S_ISREG
-#define S_ISREG(mode) (((mode) & _S_IFREG) != 0)
-#endif
-#ifndef S_ISDIR
-#define S_ISDIR(mode) (((mode) & _S_IFDIR) != 0)
-#endif
-#define getuid() 0
-struct passwd {
-    char *pw_name;
-};
-static struct passwd *getpwuid(int uid) {
-    static struct passwd user = { "desconocido" };
-    (void)uid;
-    return &user;
-}
-struct utsname {
-    char sysname[256];
-    char release[256];
-    char machine[256];
-};
-static int uname(struct utsname *u) {
-    if (u == NULL) {
-        return -1;
-    }
-    snprintf(u->sysname, sizeof(u->sysname), "Windows");
-    snprintf(u->release, sizeof(u->release), "%lu", (unsigned long)GetVersion() & 0xFF);
-    snprintf(u->machine, sizeof(u->machine), "%s", sizeof(void *) == 8 ? "x86_64" : "x86");
-    return 0;
-}
-static char *realpath(const char *path, char *resolved_path) {
-    DWORD len;
-    if (path == NULL || resolved_path == NULL) return NULL;
-    len = GetFullPathNameA(path, 4096, resolved_path, NULL);
-    if (len == 0 || len >= 4096) return NULL;
-    return resolved_path;
-}
-#ifndef __MINGW32__
-typedef int errno_t;
-#endif
-static int localtime_s(struct tm *tm_ptr, const time_t *timer) {
-    struct tm *tmp;
-    if (tm_ptr == NULL || timer == NULL) {
-        return EINVAL;
-    }
-    tmp = localtime(timer);
-    if (tmp == NULL) {
-        return EINVAL;
-    }
-    *tm_ptr = *tmp;
-    return 0;
-}
-#endif
-
-#if defined(__has_include)
-#  if __has_include(<sqlite3.h>)
-#    include <sqlite3.h>
-#  else
-typedef struct sqlite3 sqlite3;
-typedef struct sqlite3_stmt sqlite3_stmt;
-#define SQLITE_OK 0
-#define SQLITE_ROW 100
-#define SQLITE_OPEN_READONLY 0x00000001
-#define SQLITE_CANTOPEN 14
-static const char *sqlite3_errmsg(sqlite3 *db) {
-    (void)db;
-    return "SQLite no disponible en este entorno";
-}
-static int sqlite3_open_v2(const char *filename, sqlite3 **db, int flags, const char *vfs) {
-    (void)filename; (void)db; (void)flags; (void)vfs;
-    return SQLITE_CANTOPEN;
-}
-static int sqlite3_close(sqlite3 *db) {
-    (void)db;
-    return SQLITE_OK;
-}
-static int sqlite3_prepare_v2(sqlite3 *db, const char *sql, int n, sqlite3_stmt **stmt, const char **tail) {
-    (void)db; (void)sql; (void)n; (void)stmt; (void)tail;
-    return SQLITE_CANTOPEN;
-}
-static int sqlite3_step(sqlite3_stmt *stmt) {
-    (void)stmt;
-    return SQLITE_CANTOPEN;
-}
-static const unsigned char *sqlite3_column_text(sqlite3_stmt *stmt, int i) {
-    (void)stmt; (void)i;
-    return (const unsigned char *)"";
-}
-static int sqlite3_column_int(sqlite3_stmt *stmt, int i) {
-    (void)stmt; (void)i;
-    return 0;
-}
-static int sqlite3_column_count(sqlite3_stmt *stmt) {
-    (void)stmt;
-    return 0;
-}
-static int sqlite3_finalize(sqlite3_stmt *stmt) {
-    (void)stmt;
-    return SQLITE_OK;
-}
-#  endif
-#else
 #include <sqlite3.h>
-#endif
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
@@ -566,17 +457,10 @@ static void generate_metadata_header(Buffer *out, const char *root, const char *
         }
     }
 
-#ifdef _WIN32
-    if (GetComputerNameA(hostname, &(DWORD){ sizeof(hostname) }) == 0)
-    {
-        strcpy(hostname, "desconocido");
-    }
-#else
     if (gethostname(hostname, sizeof(hostname)) != 0)
     {
         strcpy(hostname, "desconocido");
     }
-#endif
 
     hostname[sizeof(hostname) - 1] = '\0';
 
@@ -586,11 +470,7 @@ static void generate_metadata_header(Buffer *out, const char *root, const char *
     }
 
     now = time(NULL);
-#ifdef _WIN32
-    localtime_s(&local_time, &now);
-#else
     localtime_r(&now, &local_time);
-#endif
     strftime(date_text, sizeof(date_text), "%Y-%m-%d %H:%M:%S %z", &local_time);
 
     buf_append(out, "# Reporte de proyecto\n\n");
@@ -684,10 +564,8 @@ static void die_oom(void)  {
     exit(2);
 }
 static char *xstrdup(const char *s)  {
-    size_t len = strlen(s ? s : "");
-    char *p = malloc(len + 1);
+    char *p = strdup(s ? s : "");
     if (!p) die_oom();
-    memcpy(p, s ? s : "", len + 1);
     return p;
 }
 static void buf_init(Buffer *b)  {
@@ -767,20 +645,6 @@ static bool ends_with_ci(const char *s,const char *suffix) {
     }
     return true;
 }
-static int x_strcasecmp(const char *a, const char *b) {
-    while (*a && *b) {
-        unsigned char ca = (unsigned char)*a;
-        unsigned char cb = (unsigned char)*b;
-        if (ca >= 'A' && ca <= 'Z') ca = (unsigned char)(ca + 32);
-        if (cb >= 'A' && cb <= 'Z') cb = (unsigned char)(cb + 32);
-        if (ca < cb) return -1;
-        if (ca > cb) return 1;
-        a++;
-        b++;
-    }
-    if (*a == *b) return 0;
-    return (*a) < (*b) ? -1 : 1;
-}
 static bool matches_exts(const char *name,const char **exts) {
     for(size_t i=0;exts[i];i++)if(ends_with_ci(name,exts[i]))return true;
     return false;
@@ -791,7 +655,7 @@ static const char *file_ext(const char *name) {
 }
 static const char *lang_for(const char *name) {
     const char *e=file_ext(name);
-    for(size_t i=0;LANG_MAP[i].ext;i++)if(x_strcasecmp(e,LANG_MAP[i].ext)==0)return LANG_MAP[i].lang;
+    for(size_t i=0;LANG_MAP[i].ext;i++)if(strcasecmp(e,LANG_MAP[i].ext)==0)return LANG_MAP[i].lang;
     return "";
 }
 static bool excluded_dir_name(const char *name) {
@@ -1202,18 +1066,10 @@ static int mkdir_p(const char *path) {
     if(n&&tmp[n-1]=='/')tmp[n-1]='\0';
     for(char *p=tmp+1;*p;p++)if(*p=='/') {
         *p='\0';
-#ifdef _WIN32
-        if(_mkdir(tmp)!=0&&errno!=EEXIST)return -1;
-#else
         if(mkdir(tmp,0755)!=0&&errno!=EEXIST)return -1;
-#endif
         *p='/';
     }
-#ifdef _WIN32
-    if(_mkdir(tmp)!=0&&errno!=EEXIST)return -1;
-#else
     if(mkdir(tmp,0755)!=0&&errno!=EEXIST)return -1;
-#endif
     return 0;
 }
 int main(int argc, char **argv)
@@ -1316,11 +1172,7 @@ int main(int argc, char **argv)
     }
 
     now = time(NULL);
-#ifdef _WIN32
-    localtime_s(&local_time, &now);
-#else
     localtime_r(&now, &local_time);
-#endif
     strftime(timestamp, sizeof(timestamp), "%Y%m%d%H%M%S", &local_time);
 
     project_name = base_name(root);
