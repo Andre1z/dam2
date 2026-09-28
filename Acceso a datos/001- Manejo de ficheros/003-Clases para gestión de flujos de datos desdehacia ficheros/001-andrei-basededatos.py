@@ -1,6 +1,6 @@
 import csv
 
-class JocarsaBBDD:
+class AndreiBBDD:
   def listarTodo(self):
     archivo = open("agenda.csv", mode='r', newline='')
     lector = csv.DictReader(archivo)
@@ -8,5 +8,5 @@ class JocarsaBBDD:
       print(linea)
     archivo.close()
     
-conexion = JocarsaBBDD()
+conexion = AndreiBBDD()
 conexion.listarTodo()
