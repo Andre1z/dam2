@@ -1,9 +1,9 @@
 import csv
 import os
 
-class JocarsaBBDD:
+class AndreiBBDD:
   def __init__(self):
-    self.instalacion = "/var/jocarsa-basededatos/"
+    self.instalacion = "C:/xampp/htdocs/dam2/Acceso a datos/001- Manejo de ficheros/003-Clases para gestión de flujos de datos desdehacia ficheros/andrei-basededatos/"
     self.basededatos = ""
     
   def listarTodo(self,tabla):
@@ -60,12 +60,12 @@ class JocarsaBBDD:
     archivo.close()
 
 
-conexion = JocarsaBBDD()
+conexion = AndreiBBDD()
 #conexion.creaBaseDatos("empresa")
 conexion.usaBaseDatos("empresa")
 #conexion.creaTabla("clientes","nombre,apellidos,telefono")
-#conexion.insertarDatos("clientes",["Jose Vicente","Carratala",54354])
+#conexion.insertarDatos("clientes",["Andrei","Buga Mihailescu",682713])
 
-conexion.eliminar("clientes","nombre","Jose Vicente")
+conexion.eliminar("clientes","nombre","Andrei")
 
 conexion.listarTodo("clientes")
