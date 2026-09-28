@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Andrei",
+    "apellidos": "Buga Mihailescu",
+    "telefono": "343212213",
+    "created": "2026-09-28T13:10:21.475695"
+  },
+  {
+    "nombre": "Juan",
+    "apellidos": "Magan",
+    "telefono": "9874323678",
+    "created": "2026-09-28T13:10:37.562223"
+  },
+  {
+    "nombre": "Luis",
+    "apellidos": "Gonzalez",
+    "telefono": "543212872",
+    "created": "2026-09-28T13:10:55.472278"
+  },
+  {
+    "nombre": "Ejemplo",
+    "apellidos": "Agenda",
+    "telefono": "00000000",
+    "created": "2026-09-28T13:11:45.813047"
+  },
+  {
+    "nombre": "Andrei",
+    "apellidos": "Buga Mihailescu",
+    "telefono": "343212213",
+    "created": "2026-09-28T13:10:21.475695"
+  },
+  {
+    "nombre": "Juan",
+    "apellidos": "Magan",
+    "telefono": "9874323678",
+    "created": "2026-09-28T13:10:37.562223"
+  },
+  {
+    "nombre": "Luis",
+    "apellidos": "Gonzalez",
+    "telefono": "543212872",
+    "created": "2026-09-28T13:10:55.472278"
+  },
+  {
+    "nombre": "Ejemplo",
+    "apellidos": "Agenda",
+    "telefono": "00000000",
+    "created": "2026-09-28T13:11:45.813047"
+  },
+  {
+    "nombre": "Raul",
+    "apellidos": "Perez",
+    "telefono": "542321321",
+    "created": "2026-09-28T13:14:21.746110"
+  }
+]
