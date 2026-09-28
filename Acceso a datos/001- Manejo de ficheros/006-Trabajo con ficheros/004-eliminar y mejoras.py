@@ -1,6 +1,6 @@
 import os
 
-class JocarsaSerializador():
+class AndreiSerializador():
   def serializar(self,lista,delimitador=","):
     cadena = ""
     for elemento in lista:
@@ -13,9 +13,9 @@ class JocarsaSerializador():
     return lista
 
 
-class JocarsaBBDD:
+class AndreiBBDD:
   def __init__(self):
-    self.instalacion = "/var/jocarsa-basededatos/"
+    self.instalacion = "C:/xampp/htdocs/dam2/Acceso a datos/001- Manejo de ficheros/003-Clases para gestión de flujos de datos desdehacia ficheros/andrei-basededatos/"
     self.basededatos = ""
     self.tamanoRegistro = 512
 
@@ -43,7 +43,7 @@ class JocarsaBBDD:
     esquema = archivo.read()
     archivo.close()
 
-    serial = JocarsaSerializador()
+    serial = AndreiSerializador()
     return serial.desserializar(esquema)
 
   def siguienteId(self,tabla):
@@ -63,7 +63,7 @@ class JocarsaBBDD:
     return ultimo+1
 
   def insertarDatos(self,tabla,datos):
-    serial = JocarsaSerializador()
+    serial = AndreiSerializador()
     id = self.siguienteId(tabla)
 
     elementos = [id,1]+datos
@@ -119,7 +119,7 @@ class JocarsaBBDD:
 
     cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-    serial = JocarsaSerializador()
+    serial = AndreiSerializador()
     elementos = serial.desserializar(cadena)
 
     if len(elementos) < 2:
@@ -159,7 +159,7 @@ class JocarsaBBDD:
       cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
       if cadena != "":
-        serial = JocarsaSerializador()
+        serial = AndreiSerializador()
         elementos = serial.desserializar(cadena)
 
         if len(elementos) > 1 and elementos[1] == "1":
@@ -192,7 +192,7 @@ class JocarsaBBDD:
       cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
       if cadena != "":
-        serial = JocarsaSerializador()
+        serial = AndreiSerializador()
         elementos = serial.desserializar(cadena)
 
         if len(elementos) > 1:
@@ -219,7 +219,7 @@ class JocarsaBBDD:
       print("Error: registro no encontrado o eliminado")
       return
 
-    serial = JocarsaSerializador()
+    serial = AndreiSerializador()
     elementos = [id,1]+datos
     cadena = serial.serializar(elementos)
 
@@ -253,7 +253,7 @@ class JocarsaBBDD:
 
     cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-    serial = JocarsaSerializador()
+    serial = AndreiSerializador()
     elementos = serial.desserializar(cadena)
 
     if len(elementos) < 2:
@@ -273,7 +273,7 @@ class JocarsaBBDD:
 
 # EJEMPLO DE USO
 
-conexion = JocarsaBBDD()
+conexion = AndreiBBDD()
 
 # conexion.creaBaseDatos("empresa")
 conexion.usaBaseDatos("empresa")
