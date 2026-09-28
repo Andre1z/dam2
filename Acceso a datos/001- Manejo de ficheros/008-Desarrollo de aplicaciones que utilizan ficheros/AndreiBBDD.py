@@ -1,7 +1,7 @@
 import os
 
 
-class JocarsaSerializador():
+class AndreiSerializador():
 
     def serializar(self, lista, delimitador=","):
         try:
@@ -28,10 +28,10 @@ class JocarsaSerializador():
             return None
 
 
-class JocarsaBBDD:
+class AndreiBBDD:
 
     def __init__(self):
-        self.instalacion = "/var/jocarsa-basededatos/"
+        self.instalacion = "/var/andrei-basededatos/"
         self.basededatos = ""
         self.tamanoRegistro = 512
 
@@ -106,7 +106,7 @@ class JocarsaBBDD:
             esquema = archivo.read()
             archivo.close()
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
             resultado = serial.desserializar(esquema)
 
             assert resultado != None, \
@@ -158,7 +158,7 @@ class JocarsaBBDD:
             assert os.path.exists(ruta), \
                 "La tabla '" + tabla + "' no existe"
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             id = self.siguienteId(tabla)
 
@@ -268,7 +268,7 @@ class JocarsaBBDD:
 
             cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             elementos = serial.desserializar(cadena)
 
@@ -331,7 +331,7 @@ class JocarsaBBDD:
 
             archivo = open(ruta, 'rb')
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             while True:
 
@@ -387,7 +387,7 @@ class JocarsaBBDD:
 
             archivo = open(ruta, 'rb')
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             while True:
 
@@ -446,7 +446,7 @@ class JocarsaBBDD:
                 "Se esperaban " + str(len(esquema) - 2) + \
                 " campos y se han recibido " + str(len(datos))
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             elementos = [id, 1] + datos
 
@@ -507,7 +507,7 @@ class JocarsaBBDD:
 
             cadena = registro.decode("utf-8").rstrip("\n").rstrip()
 
-            serial = JocarsaSerializador()
+            serial = AndreiSerializador()
 
             elementos = serial.desserializar(cadena)
 

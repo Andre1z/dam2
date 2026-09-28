@@ -1,4 +1,4 @@
-# JocarsaBBDD — Documentación para desarrolladores
+# AndreiBBDD — Documentación para desarrolladores
 
 
 ## Resumen rápido de operaciones
@@ -26,24 +26,24 @@
 Antes de utilizar las operaciones de base de datos:
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 Para utilizar directamente el serializador:
 
 ```python
-from jocarsa_bbdd import JocarsaSerializador
+from Andrei_bbdd import AndreiSerializador
 
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 ```
 
 ---
 
 ## 1. Descripción
 
-`JocarsaBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
+`AndreiBBDD` es una implementación didáctica de un pequeño motor de almacenamiento persistente basado en archivos.
 
 El sistema utiliza tres archivos por tabla:
 
@@ -58,13 +58,13 @@ Los registros tienen un tamaño fijo de **512 bytes**. Esta decisión permite ac
 La biblioteca contiene dos clases:
 
 ```text
-JocarsaSerializador
-JocarsaBBDD
+AndreiSerializador
+AndreiBBDD
 ```
 
-`JocarsaSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
+`AndreiSerializador` convierte listas a cadenas delimitadas y realiza la operación inversa.
 
-`JocarsaBBDD` administra bases de datos, tablas, registros e índices.
+`AndreiBBDD` administra bases de datos, tablas, registros e índices.
 
 ---
 
@@ -73,13 +73,13 @@ JocarsaBBDD
 Por defecto las bases de datos se almacenan en:
 
 ```text
-/var/jocarsa-basededatos/
+/var/Andrei-basededatos/
 ```
 
 Cada base de datos es un directorio:
 
 ```text
-/var/jocarsa-basededatos/
+/var/Andrei-basededatos/
 └── empresa/
     ├── clientes.csv
     ├── clientes.esquema
@@ -196,14 +196,14 @@ Actualmente el índice se recorre secuencialmente, por lo que la búsqueda en el
 
 ---
 
-## 6. JocarsaSerializador
+## 6. AndreiSerializador
 
 ### serializar(lista, delimitador=",")
 
 Convierte una lista en una cadena.
 
 ```python
-serial = JocarsaSerializador()
+serial = AndreiSerializador()
 
 cadena = serial.serializar(
   ["Jose","Valencia",48]
@@ -248,18 +248,18 @@ Todos los valores recuperados son cadenas.
 
 ---
 
-## 7. JocarsaBBDD
+## 7. AndreiBBDD
 
 ### Constructor
 
 ```python
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 ```
 
 Valores iniciales principales:
 
 ```python
-self.instalacion = "/var/jocarsa-basededatos/"
+self.instalacion = "/var/Andrei-basededatos/"
 self.basededatos = ""
 self.tamanoRegistro = 512
 ```
@@ -277,7 +277,7 @@ bbdd.creaBaseDatos("empresa")
 Produce:
 
 ```text
-/var/jocarsa-basededatos/empresa/
+/var/Andrei-basededatos/empresa/
 ```
 
 La operación falla si la base de datos ya existe.
@@ -620,9 +620,9 @@ dependiendo del método.
 ## 22. Ejemplo completo
 
 ```python
-from jocarsa_bbdd import JocarsaBBDD
+from Andrei_bbdd import AndreiBBDD
 
-bbdd = JocarsaBBDD()
+bbdd = AndreiBBDD()
 
 bbdd.creaBaseDatos("empresa")
 bbdd.usaBaseDatos("empresa")
@@ -671,7 +671,7 @@ bbdd.eliminar(
 El archivo:
 
 ```text
-pruebas_jocarsa_bbdd.py
+pruebas_Andrei_bbdd.py
 ```
 
 crea una instalación temporal y comprueba, entre otras cosas:
@@ -697,18 +697,18 @@ crea una instalación temporal y comprueba, entre otras cosas:
 - duplicados;
 - número incorrecto de campos.
 
-La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/jocarsa-basededatos/`.
+La prueba utiliza un directorio temporal y lo elimina al finalizar, por lo que no debería afectar a `/var/Andrei-basededatos/`.
 
 Ejecución:
 
 ```bash
-python3 pruebas_jocarsa_bbdd.py
+python3 pruebas_Andrei_bbdd.py
 ```
 
 Si el módulo principal no se llama:
 
 ```text
-jocarsa_bbdd.py
+Andrei_bbdd.py
 ```
 
 hay que modificar el `import` inicial del archivo de pruebas.

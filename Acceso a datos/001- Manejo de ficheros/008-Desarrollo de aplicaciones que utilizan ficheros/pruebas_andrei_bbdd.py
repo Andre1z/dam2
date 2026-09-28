@@ -15,11 +15,11 @@ except Exception as error:
   raise
 
 
-class PruebasJocarsaBBDD:
+class PruebasAndreiBBDD:
   def __init__(self):
     self.correctas = 0
     self.incorrectas = 0
-    self.directorio = tempfile.mkdtemp(prefix="jocarsa-bbdd-pruebas-")+"/"
+    self.directorio = tempfile.mkdtemp(prefix="andrei-bbdd-pruebas-")+"/"
 
   def comprobar(self,nombre,condicion):
     try:
@@ -45,7 +45,7 @@ class PruebasJocarsaBBDD:
   def ejecutar(self):
     try:
       print("========================================")
-      print(" PRUEBAS EXHAUSTIVAS JOCARSA BBDD")
+      print(" PRUEBAS EXHAUSTIVAS ANDREI BBDD")
       print("========================================")
       print("Directorio temporal:",self.directorio)
 
@@ -174,7 +174,7 @@ class PruebasJocarsaBBDD:
       )
 
       _,salida = self.captura(bbdd.listarTodo,"clientes")
-      self.comprobar("listarTodo incluye Jose","Jose Vicente" in salida)
+      self.comprobar("listarTodo incluye Andrei","Andrei" in salida)
       self.comprobar("listarTodo incluye Ana","Ana" in salida)
       self.comprobar("listarTodo incluye Luis","Luis" in salida)
 
@@ -321,5 +321,5 @@ class PruebasJocarsaBBDD:
 
 
 if __name__ == "__main__":
-  pruebas = PruebasJocarsaBBDD()
+  pruebas = PruebasAndreiBBDD()
   pruebas.ejecutar()
