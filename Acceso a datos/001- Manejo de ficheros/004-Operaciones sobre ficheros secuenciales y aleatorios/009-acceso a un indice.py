@@ -1,4 +1,4 @@
-archivo = open("/var/www/html/agenda_ficticia_1_millon_contactos.csv", "r")
+archivo = open("D:/dam2/agenda_1M.csv", "r")
 
 for numero, linea in enumerate(archivo, start=1):
     if numero == 500:
