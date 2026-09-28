@@ -9,5 +9,5 @@ def buscar(columna,valor):
       print(linea)
   archivo.close()
   
-buscar("nombre","Laura")
-# SELECT * FROM X WHERE nombre = "Laura"
+buscar("nombre","Inés")
+# SELECT * FROM X WHERE nombre = "Inés"
