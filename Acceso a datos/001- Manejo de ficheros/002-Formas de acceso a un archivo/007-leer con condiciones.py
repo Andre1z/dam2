@@ -1,7 +1,7 @@
 import csv
 
 columna = "nombre"
-valor = "Laura"
+valor = "Inés"
 
 archivo = open("agenda.csv", mode='r', newline='')
 lector = csv.DictReader(archivo)
