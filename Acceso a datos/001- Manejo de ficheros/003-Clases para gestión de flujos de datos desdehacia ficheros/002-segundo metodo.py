@@ -1,20 +1,21 @@
 import csv
+from pathlib import Path
 
-class JocarsaBBDD:
+ARCHIVO_CSV = Path(__file__).with_name("agenda.csv")
+
+class AndreiBBDD:
   def listarTodo(self):
-    archivo = open("agenda.csv", mode='r', newline='')
-    lector = csv.DictReader(archivo)
-    for linea in lector:
-      print(linea)
-    archivo.close()
+    with open(ARCHIVO_CSV, mode='r', newline='', encoding='utf-8') as archivo:
+      lector = csv.DictReader(archivo)
+      for linea in lector:
+        print(linea)
   def buscarColumna(self,columna,valor):
-    archivo = open("agenda.csv", mode='r', newline='')
-    lector = csv.DictReader(archivo)
-    for linea in lector:
-      if linea[columna] == valor:
-      	print(linea)
-    archivo.close()
+    with open(ARCHIVO_CSV, mode='r', newline='', encoding='utf-8') as archivo:
+      lector = csv.DictReader(archivo)
+      for linea in lector:
+        if linea[columna] == valor:
+          print(linea)
     
-conexion = JocarsaBBDD()
+conexion = AndreiBBDD()
 conexion.listarTodo()
-conexion.buscarColumna("nombre","Laura")
+conexion.buscarColumna("nombre","Inés")
