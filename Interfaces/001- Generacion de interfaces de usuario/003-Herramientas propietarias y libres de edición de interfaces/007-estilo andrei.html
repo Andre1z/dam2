@@ -7,72 +7,275 @@
         --saturacion:50%;
         --brillo:70%;
         --escalon:20%;
-        
+
         --colorsecundario: lightsteelblue;
         --colortexto: white;
         --relleno:12px;
-        
+
         --color: hsl(var(--tono),var(--saturacion),var(--brillo));
         --color2:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)));
         --color3:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + calc(var(--escalon) * 2)));
-        
+
         --colortextonav:hsl(0,0%,calc((var(--brillo) - 50%) * -1000));
         --colortextosection:hsl(0,0%,calc((var(--brillo) + var(--escalon) - 50%) * -1000));
         --texto:12px;
-      }
-      
-      html{width:100%;height:100%;padding:0px;}
-      
-      .jocarsa-iu{width:100%;height:100%;padding:0px;margin:0px;font-family:sans-serif;
-      display:flex;flex-direction:column;font-size:var(--texto);}
-      
-      .jocarsa-iu header{background:var(--color);display:flex;justify-content:space-between;
-      padding:var(--relleno);color:var(--colortextonav);flex:1;align-items:center;}
-      
-      .jocarsa-iu main{display:flex;flex:20;}
-      
-      .jocarsa-iu main nav{background:var(--color);flex:1;display:flex;flex-direction:column;
-      padding:var(--relleno);box-sizing:border-box;gap:var(--relleno);padding-top:0px;
-      color:var(--colortextonav);}
-      
-      .jocarsa-iu main section{background:var(--color2);flex:1;padding:var(--relleno);
-        gap:var(--relleno);
-        display:flex;flex-direction:column;
-        color:var(--colortextosection);
-        }
-        
-      .jocarsa-iu main div{flex:4;background:var(--color3);}
-      
-      .jocarsa-iu main nav a{color:inherit;text-decoration:none;
-        background:var(--color2);padding:var(--relleno);
-      }
-      
-      .jocarsa-iu main nav .activo{width: calc(100% + var(--relleno));}
-      
-      .jocarsa-iu main section article{background:var(--color3);padding:var(--relleno);}
-      
-      .jocarsa-iu main section .activo{width: calc(100% + var(--relleno));}
-      .jocarsa-iu header .corporativo{display:flex;align-items:center;}
-      .jocarsa-iu header .corporativo img{width:40px;}
-      .jocarsa-iu header .corporativo h1{padding:0px;margin:0px;font-size:14px;}
-      .jocarsa-iu main>div{padding:var(--relleno);overflow-y:scroll;}
-      .jocarsa-iu main>div table{width:100%;height:100%;border-spacing: 0px}
-      .jocarsa-iu main>div table thead{background:var(--color);}
-      .jocarsa-iu main>div table th,.jocarsa-iu main>div table td{padding:var(--relleno); border-bottom:1px solid var(--color2);}
 
+        --accent-naranja: #D97218;
+        --activo-color: hsl(200,50%,70%);
+        --espacio:12px;
+        --radio:12px;
+        --sombra:0 10px 28px rgba(13,13,13,0.14);
+        --header-h:72px;
+        --nav-item-h:56px;
+      }
+
+      /* Reset y base */
+      *{box-sizing:border-box;margin:0;padding:0}
+      html,body{height:100%;width:100%;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+      body{background:linear-gradient(180deg,#f7f8fb 0%,#ffffff 100%);padding:var(--espacio);font-size:var(--texto);}
+
+      /* Contenedor principal ocupa todo el ancho y alto disponible */
+      .andrei-iu{
+        width:100%;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        gap:var(--espacio);
+        min-height:calc(100vh - 2 * var(--espacio));
+      }
+
+      /* Header con altura fija para calcular la altura del main */
+      .andrei-iu header{
+        background:linear-gradient(180deg, var(--accent-naranja), #c86a14);
+        color:var(--colortextonav);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        height:var(--header-h);
+        min-height:var(--header-h);
+        padding:0 calc(var(--relleno) + 6px);
+        border-radius:calc(var(--radio) + 2px);
+        box-shadow:var(--sombra);
+        margin:0 calc(var(--espacio));
+      }
+
+      /* Corporativo: más espacio entre imagen y texto del h1 */
+      .andrei-iu header .corporativo{
+        display:flex;
+        align-items:center;
+        gap:22px; /* separación aumentada entre imagen y h1 */
+      }
+      .andrei-iu header .corporativo img{
+        width:40px;
+        height:auto;
+        display:block;
+      }
+      .andrei-iu header .corporativo h1{
+        margin:0;
+        font-size:16px;
+        line-height:1.2;
+        letter-spacing:0.2px;
+        padding-left:0;
+      }
+
+      /* Herramientas y usuario */
+      .andrei-iu header > div{ padding:8px 12px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:600; }
+
+      /*
+        Layout principal: nav | section (más estrecha) | escenario (más espacio)
+        Ajusta grid-template-columns para dar más espacio a .escenario
+      */
+      .andrei-iu main{
+        display:grid;
+        grid-template-columns: 240px 360px 1fr; /* nav | section | escenario */
+        gap:var(--espacio);
+        margin:0 calc(var(--espacio));
+        height:calc(100vh - var(--header-h) - (2 * var(--espacio)));
+        min-height:0;
+      }
+
+      /* Nav vertical: acento naranja como fondo principal */
+      .andrei-iu main nav{
+        background:linear-gradient(180deg, var(--accent-naranja), #c86a14);
+        color:var(--colortextonav);
+        padding:calc(var(--relleno));
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:var(--espacio);
+        height:100%;
+        max-height:100%;
+        overflow:auto;
+        box-sizing:border-box;
+      }
+
+      /* Enlaces del nav con altura fija y centrado vertical */
+      .andrei-iu main nav a{
+        display:flex;
+        align-items:center;
+        height:var(--nav-item-h);
+        min-height:var(--nav-item-h);
+        padding:0 14px;
+        border-radius:10px;
+        color:var(--colortextonav);
+        text-decoration:none;
+        background:rgba(255,255,255,0.03);
+        transition:background .18s, transform .12s, box-shadow .12s;
+        width:100%;
+        box-sizing:border-box;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+
+      .andrei-iu main nav a:hover{
+        background:rgba(255,255,255,0.08);
+        transform:translateX(6px);
+      }
+
+      /* Estilo del enlace activo en el nav: usa --activo-color */
+      .andrei-iu main nav a.activo{
+        background:var(--activo-color);
+        color:#0a0a0a;
+        box-shadow:0 8px 22px rgba(10,10,10,0.12);
+        transform:none;
+        border-radius:12px;
+        outline:2px solid rgba(0,0,0,0.04);
+      }
+
+      .andrei-iu main nav a.activo.fullwidth{
+        width:calc(100% + 32px);
+        margin-left:-16px;
+        padding-left:28px;
+      }
+
+      .andrei-iu main nav.compact a{
+        height:44px;
+        min-height:44px;
+        font-size:14px;
+        padding:0 10px;
+      }
+
+      /* Sección central: más estrecha, tarjetas internas y scroll */
+      .andrei-iu main section{
+        background:var(--color2);
+        padding:calc(var(--relleno));
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:var(--espacio);
+        overflow:auto;
+        min-height:320px;
+        color:var(--colortextosection);
+        transition: transform .18s ease, padding .18s ease;
+      }
+
+      .andrei-iu main section article{
+        background:var(--color3);
+        padding:calc(var(--relleno) - 4px);
+        border-radius:10px;
+        box-shadow:0 8px 20px rgba(13,13,13,0.06);
+        display:flex;
+        align-items:center;
+        gap:12px;
+        transition:transform .12s, box-shadow .12s, background .12s;
+        width:100%;
+        box-sizing:border-box;
+      }
+
+      .andrei-iu main section article:hover{
+        transform:translateY(-6px);
+        box-shadow:0 16px 36px rgba(13,13,13,0.10);
+      }
+
+      .andrei-iu main section article.activo{
+        background:linear-gradient(90deg, #ffffff, var(--activo-color));
+        border:1px solid rgba(0,0,0,0.06);
+        box-shadow:0 12px 30px rgba(0,0,0,0.06);
+        transform:none;
+        outline:2px solid rgba(0,0,0,0.04);
+      }
+
+      .andrei-iu main section article.activo.fullwidth{
+        width:calc(100% + 32px);
+        margin-left:-16px;
+        padding-left:28px;
+      }
+
+      /* Panel derecho .escenario: más espacio horizontal */
+      .andrei-iu main>div.escenario{
+        padding:var(--relleno);
+        overflow-y:scroll;
+        background:var(--color3);
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+      }
+
+      /* Tabla dentro de .escenario */
+      .andrei-iu main>div table{width:100%;height:100%;border-spacing:0}
+      .andrei-iu main>div table caption{caption-side:top;padding-bottom:8px;font-weight:700}
+      .andrei-iu main>div table thead{background:var(--color);color:var(--colortextonav)}
+      .andrei-iu main>div table th,.andrei-iu main>div table td{padding:var(--relleno); border-bottom:1px solid var(--color2); text-align:left; font-size:13px}
+      .andrei-iu main>div table tbody tr:nth-child(even){background:rgba(255,255,255,0.02)}
+
+      /* Badges y acentos de color */
+      .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px}
+      .badge-primario{background:var(--color); color:var(--colortextonav)}
+      .badge-naranja{background:var(--accent-naranja); color:#fff}
+      .badge-activo{background:var(--activo-color); color:#000}
+
+      /* Sticky headers dentro del nav si se usan secciones */
+      .andrei-iu main nav h4{margin:6px 0 2px;font-size:12px;color:rgba(255,255,255,0.85);position:sticky;top:8px;background:transparent;padding:6px 0;}
+
+      /* ---------------------------
+         Condición CSS sin JS: si main contiene .escenario.activo
+         usamos :has() para "pegar" visualmente section al nav
+         --------------------------- */
+
+      /* Reduce el gap entre columnas y desplaza section hacia la izquierda */
+      .andrei-iu main:has(.escenario.activo) {
+        grid-template-columns: 240px 360px 1fr;
+        gap:6px;
+      }
+
+      .andrei-iu main:has(.escenario.activo) section {
+        transform: translateX(-10px);
+        padding-left: calc(var(--relleno) + 6px);
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+
+      .andrei-iu main:has(.escenario.activo) nav {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      /* Evita solapamientos en pantallas pequeñas */
+      @media (max-width:980px){
+        :root{ --header-h: auto; }
+        .andrei-iu main{height:auto; grid-template-columns:1fr;}
+        .andrei-iu header{flex-direction:column; align-items:stretch; gap:10px; margin:0 calc(var(--espacio)); height:auto; padding:14px;}
+        .andrei-iu main nav{flex-direction:row; overflow:auto; padding:10px; gap:8px; height:auto; max-height:none;}
+        .andrei-iu main nav a{height:44px; min-width:120px; white-space:nowrap;}
+        .andrei-iu main section{flex-direction:column;}
+      }
+
+      /* Notas: si el navegador no soporta :has(), la clase .escenario.activo en el HTML no tendrá efecto.
+         En ese caso, usa el checkbox-hack o añade la clase .escenario-activa en <main> manualmente. */
     </style>
   </head>
-  <body class="jocarsa-iu">
+  <body class="andrei-iu">
     <header>
-    	<div class="corporativo">
-        <img src="https://static.jocarsa.com/logos/white.svg">
-        <h1>jocarsa | programa</h1>
+      <div class="corporativo">
+        <img src="IU.svg" alt="logo">
+        <h1>andrei | programa</h1>
       </div>
-      <div id="herramientas">Herramientas
-      </div>
-      <div id="usuario">Usuario
-      </div>
+      <div id="herramientas">Herramientas</div>
+      <div id="usuario">Usuario</div>
     </header>
+
     <main>
       <nav>
         <a href="">Entidad</a>
@@ -82,6 +285,7 @@
         <a href="">Entidad</a>
         <a href="">Entidad</a>
       </nav>
+
       <section>
         <article>Elemento</article>
         <article>Elemento</article>
@@ -95,8 +299,10 @@
         <article>Elemento</article>
         <article>Elemento</article>
       </section>
-      <div class="escenario">
-      	<table>
+
+      <!-- Añade la clase "activo" a .escenario para activar la condición :has() sin JS -->
+      <div class="escenario activo">
+        <table>
           <caption>Listado de clientes</caption>
 
           <thead>
@@ -117,105 +323,105 @@
           <tbody>
             <tr>
               <th scope="row">1</th>
-              <td>Laura</td>
-              <td>Martínez García</td>
-              <td>laura.martinez@example.com</td>
-              <td>+34 612 345 678</td>
-              <td>Soluciones Levante S.L.</td>
+              <td>María</td>
+              <td>Vega López</td>
+              <td>maria.vega@nova-solutions.com</td>
+              <td>+34 600 111 222</td>
+              <td>Nova Solutions</td>
               <td>Valencia</td>
               <td>España</td>
-              <td><time datetime="2026-01-15">15/01/2026</time></td>
+              <td><time datetime="2026-01-20">20/01/2026</time></td>
               <td>Activo</td>
             </tr>
 
             <tr>
               <th scope="row">2</th>
-              <td>Carlos</td>
-              <td>Navarro Pérez</td>
-              <td>carlos.navarro@example.com</td>
-              <td>+34 623 456 789</td>
-              <td>Innovación Digital S.A.</td>
+              <td>Óscar</td>
+              <td>Ramos Ortega</td>
+              <td>oscar.ramos@techwave.es</td>
+              <td>+34 611 222 333</td>
+              <td>TechWave</td>
               <td>Madrid</td>
               <td>España</td>
-              <td><time datetime="2026-02-03">03/02/2026</time></td>
+              <td><time datetime="2026-02-10">10/02/2026</time></td>
               <td>Activo</td>
             </tr>
 
             <tr>
               <th scope="row">3</th>
-              <td>Ana</td>
-              <td>Ruiz Fernández</td>
-              <td>ana.ruiz@example.com</td>
-              <td>+34 634 567 890</td>
-              <td>Formación Mediterránea S.L.</td>
+              <td>Beatriz</td>
+              <td>Suárez Molina</td>
+              <td>beatriz.suarez@edulink.org</td>
+              <td>+34 622 333 444</td>
+              <td>EduLink</td>
               <td>Alicante</td>
               <td>España</td>
-              <td><time datetime="2026-02-18">18/02/2026</time></td>
+              <td><time datetime="2026-02-25">25/02/2026</time></td>
               <td>Activo</td>
             </tr>
 
             <tr>
               <th scope="row">4</th>
-              <td>David</td>
-              <td>Sánchez López</td>
-              <td>david.sanchez@example.com</td>
-              <td>+34 645 678 901</td>
-              <td>Tecnologías Norte S.L.</td>
+              <td>Hugo</td>
+              <td>García Ruiz</td>
+              <td>hugo.garcia@northtech.es</td>
+              <td>+34 633 444 555</td>
+              <td>NorthTech</td>
               <td>Bilbao</td>
               <td>España</td>
-              <td><time datetime="2026-03-07">07/03/2026</time></td>
+              <td><time datetime="2026-03-12">12/03/2026</time></td>
               <td>Inactivo</td>
             </tr>
 
             <tr>
               <th scope="row">5</th>
-              <td>Marta</td>
-              <td>Gómez Torres</td>
-              <td>marta.gomez@example.com</td>
-              <td>+34 656 789 012</td>
-              <td>Grupo Atlántico</td>
+              <td>Elena</td>
+              <td>Pérez Soto</td>
+              <td>elena.perez@atlanticgroup.com</td>
+              <td>+34 644 555 666</td>
+              <td>Atlantic Group</td>
               <td>A Coruña</td>
               <td>España</td>
-              <td><time datetime="2026-03-22">22/03/2026</time></td>
+              <td><time datetime="2026-03-28">28/03/2026</time></td>
               <td>Activo</td>
             </tr>
 
             <tr>
               <th scope="row">6</th>
-              <td>Javier</td>
-              <td>Moreno Díaz</td>
-              <td>javier.moreno@example.com</td>
-              <td>+34 667 890 123</td>
-              <td>Desarrollos del Sur S.L.</td>
+              <td>Raúl</td>
+              <td>Domínguez</td>
+              <td>raul.dominguez@surdev.es</td>
+              <td>+34 655 666 777</td>
+              <td>SurDev</td>
               <td>Sevilla</td>
               <td>España</td>
-              <td><time datetime="2026-04-11">11/04/2026</time></td>
+              <td><time datetime="2026-04-15">15/04/2026</time></td>
               <td>Pendiente</td>
             </tr>
 
             <tr>
               <th scope="row">7</th>
-              <td>Lucía</td>
-              <td>Romero Vidal</td>
-              <td>lucia.romero@example.com</td>
-              <td>+34 678 901 234</td>
-              <td>EducaTech S.L.</td>
+              <td>Clara</td>
+              <td>Ibáñez Ruiz</td>
+              <td>clara.ibanez@educatech.es</td>
+              <td>+34 666 777 888</td>
+              <td>EducaTech</td>
               <td>Castellón</td>
               <td>España</td>
-              <td><time datetime="2026-05-09">09/05/2026</time></td>
+              <td><time datetime="2026-05-20">20/05/2026</time></td>
               <td>Activo</td>
             </tr>
 
             <tr>
               <th scope="row">8</th>
-              <td>Daniel</td>
-              <td>Ortega Molina</td>
-              <td>daniel.ortega@example.com</td>
-              <td>+34 689 012 345</td>
-              <td>Cloud Business S.L.</td>
+              <td>Mateo</td>
+              <td>Herrera López</td>
+              <td>mateo.herrera@cloudbiz.es</td>
+              <td>+34 677 888 999</td>
+              <td>CloudBiz</td>
               <td>Barcelona</td>
               <td>España</td>
-              <td><time datetime="2026-06-01">01/06/2026</time></td>
+              <td><time datetime="2026-06-05">05/06/2026</time></td>
               <td>Activo</td>
             </tr>
           </tbody>
