@@ -19,13 +19,13 @@ Y abre `http://localhost:8000`.
 ## Estructura
 
 - `index.html`: estructura y templates base.
-- `css/estilo.css`: estilo jocarsa-iu.
+- `css/estilo.css`: estilo andrei-iu.
 - `js/componentes.js`: renderizado y eventos.
 - `data/`: orígenes de datos JSON recuperados de las prácticas previas.
 - `templates/`: templates reutilizables preparados para seguir separando componentes.
 
 
-## Ampliación jocarsa-iu
+## Ampliación andrei-iu
 
 - Separadores de 7 px que heredan visualmente el color de la columna situada a la derecha y feedback en hover.
 - Columnas contraídas a 52 px, tarjetas de 40×40 px, sin ensanchamiento por hover/activo y restauración del ancho previo.

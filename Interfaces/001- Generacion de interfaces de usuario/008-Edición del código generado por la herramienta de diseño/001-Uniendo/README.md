@@ -19,7 +19,7 @@ Y abre `http://localhost:8000`.
 ## Estructura
 
 - `index.html`: estructura y templates base.
-- `css/estilo.css`: estilo jocarsa-iu.
+- `css/estilo.css`: estilo andrei-iu.
 - `js/componentes.js`: renderizado y eventos.
 - `data/`: orígenes de datos JSON recuperados de las prácticas previas.
 - `templates/`: templates reutilizables preparados para seguir separando componentes.
