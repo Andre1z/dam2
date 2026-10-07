@@ -9,13 +9,13 @@
       let entrada = document.querySelector("input")
       let elemento = document.querySelector("div")
       entrada.onfocus = function(){
-      	elemento.textContent ="has focalizado"
+      	elemento.textContent ="Acabas de focalizar"
       }
       entrada.onblur = function(){
-      	//elemento.textContent ="has desfocalizado"
+      	//elemento.textContent ="Acabas de desfocalizar"
       }
       entrada.onchange = function(){
-      	elemento.textContent ="has cambiado"
+      	elemento.textContent ="Acabas de cambiar"
       }
       entrada.onkeypress = function(e){
       	console.log(e)
