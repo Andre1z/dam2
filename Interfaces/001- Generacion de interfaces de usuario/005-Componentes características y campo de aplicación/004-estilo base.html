@@ -1,270 +1,227 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>jocarsa | programa</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="https://static.jocarsa.com/logos/white.svg" type="image/svg" />
+    <title>andrei | programa</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" type="image/svg" />
 
     <style>
       :root{
-        --tono:200;
-        --saturacion:50%;
-        --brillo:30%;
-        --escalon:20%;
-        
-        --colorsecundario:lightsteelblue;
-        --colortexto:white;
-        --relleno:12px;
-        --texto:12px;
-        
-        --chaflan:12px;
-        --chaflan-si:0px;
-        --chaflan-sd:var(--chaflan);
-        --chaflan-id:0px;
-        --chaflan-ii:0px;
-        
-        --color0:hsl(var(--tono),var(--saturacion),calc(var(--brillo) - var(--escalon)));
-        --color:hsl(var(--tono),var(--saturacion),var(--brillo));
-        --color2:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)));
-        --color3:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + calc(var(--escalon) * 2)));
-        --color4:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + calc(var(--escalon) * 3)));
-        
-        --colortextonav:hsl(0,0%,calc((var(--brillo) - 50%) * -1000));
-        --colortextosection:hsl(0,0%,calc((var(--brillo) + var(--escalon) - 50%) * -1000));
+        --azul:#363CBF;
+        --naranja:#D97218;
+        --rojo:#F23005;
+        --gris:#D9D9D9;
+        --negro:#0D0D0D;
+        --texto-claro:#FFFFFF;
+        --espacio:12px;
+        --radio:12px;
+        --sombra:0 10px 28px rgba(13,13,13,0.14);
+        --header-h:72px;
+        --nav-item-h:56px;
       }
-      
-      *{box-sizing:border-box;}
-      
-      html{width:100%;height:100%;padding:0px;margin:0px;}
-      
-      body{margin:0px;}
-      
-      .jocarsa-iu{width:100%;height:100%;padding:0px;margin:0px;font-family:Ubuntu,sans-serif;
-      display:flex;flex-direction:column;font-size:var(--texto);overflow:hidden;}
-      
-      .jocarsa-iu header{background:var(--color);display:flex;justify-content:space-between;
-      padding:var(--relleno);color:var(--colortextonav);align-items:center;
-      gap:var(--relleno);height:52px;flex:none;}
-      
-      .jocarsa-iu main{display:flex;flex:1;min-height:0;}
-      
-      .jocarsa-iu main nav{background:var(--color);flex:1;display:flex;flex-direction:column;
-      padding:var(--relleno);box-sizing:border-box;gap:var(--relleno);padding-top:0px;
-      color:var(--colortextonav);min-width:150px;}
-      
-      .jocarsa-iu main section{background:var(--color2);flex:1;padding:var(--relleno);
-        gap:var(--relleno);
-        display:flex;flex-direction:column;
-        color:var(--colortextosection);
-        min-width:150px;
-        overflow-y:auto;
-      }
-        
-      .jocarsa-iu main div{flex:4;background:var(--color3);}
-      
-      /* NAV */
-      
-      .jocarsa-iu main nav a{
-        color:inherit;
-        text-decoration:none;
-        background:var(--color2);
-        padding:var(--relleno);
-        clip-path:polygon(
-          var(--chaflan-si) 0,
-          calc(100% - var(--chaflan-sd)) 0,
-          100% var(--chaflan-sd),
-          100% calc(100% - var(--chaflan-id)),
-          calc(100% - var(--chaflan-id)) 100%,
-          var(--chaflan-ii) 100%,
-          0 calc(100% - var(--chaflan-ii)),
-          0 var(--chaflan-si)
-        );
-        transition:all 1s;
+
+      *{box-sizing:border-box;margin:0;padding:0}
+      html,body{height:100%;width:100%;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+      body{background:linear-gradient(180deg,#f7f8fb 0%,#ffffff 100%);padding:var(--espacio);}
+
+      .andrei-iu{
         width:100%;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        gap:var(--espacio);
+        min-height:calc(100vh - 2 * var(--espacio));
       }
-      
-      .jocarsa-iu main nav a:hover{
-        background:var(--color3);
-        width:calc(100% + calc(var(--relleno) * 0.9));
+
+      .andrei-iu header{
+        background:linear-gradient(180deg, var(--naranja), #c86a14);
+        color:var(--texto-claro);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        height:var(--header-h);
+        min-height:var(--header-h);
+        padding:0 22px;
+        border-radius:calc(var(--radio) + 2px);
+        box-shadow:var(--sombra);
+        margin:0 calc(var(--espacio));
       }
-      
-      .jocarsa-iu main nav .activo{
-        width:calc(100% + calc(var(--relleno) * 2));
-      }
-      
-      /* SECTION */
-      
-      .jocarsa-iu main section article{
-        background:var(--color3);
-        padding:var(--relleno);
-        clip-path:polygon(
-          var(--chaflan-si) 0,
-          calc(100% - var(--chaflan-sd)) 0,
-          100% var(--chaflan-sd),
-          100% calc(100% - var(--chaflan-id)),
-          calc(100% - var(--chaflan-id)) 100%,
-          var(--chaflan-ii) 100%,
-          0 calc(100% - var(--chaflan-ii)),
-          0 var(--chaflan-si)
-        );
-        transition:all 1s;
-        width:100%;
-      }
-      
-      .jocarsa-iu main section article:hover{
-        background:var(--color4);
-        width:calc(100% + calc(var(--relleno) * 0.9));
-      }
-      
-      .jocarsa-iu main section .activo{
-        width:calc(100% + calc(var(--relleno) * 2));
-      }
-      
-      /* HEADER */
-      
-      .jocarsa-iu header .corporativo{
+
+      .andrei-iu header .corporativo{
         display:flex;
         align-items:center;
-        gap:var(--relleno);
-        flex:1;
-        height:100%;
+        gap:18px;
       }
-      
-      .jocarsa-iu header .corporativo img{
-        width:28px;
-        height:28px;
+
+      .andrei-iu header .corporativo img{width:40px;height:auto;display:block;}
+      .andrei-iu header .corporativo h1{margin:0;font-size:16px;line-height:1.2;letter-spacing:0.2px;}
+
+      .andrei-iu header #herramientas{
+        display:flex;
+        align-items:center;
+        gap:8px;
       }
-      
-      .jocarsa-iu header .corporativo h1{
-        padding:0px;
-        margin:0px;
-        font-size:14px;
-        font-weight:normal;
-        white-space:nowrap;
+
+      .andrei-iu header #usuario{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        padding:8px 12px;
+        background:rgba(255,255,255,0.06);
+        border-radius:8px;
       }
-      
-      /* ESCENARIO */
-      
-      .jocarsa-iu main>div{
-        padding:var(--relleno);
-        overflow:auto;
-        min-width:0;
-      }
-      
-      .jocarsa-iu main>div table{
-        width:100%;
-        border-spacing:0px;
-        border-collapse:collapse;
-        background:white;
-      }
-      
-      .jocarsa-iu main>div table caption{
-        text-align:left;
-        padding:var(--relleno);
-        font-weight:bold;
-        background:var(--color2);
-      }
-      
-      .jocarsa-iu main>div table thead{
-        background:var(--color);
-      }
-      
-      .jocarsa-iu main>div table th,
-      .jocarsa-iu main>div table td{
-        padding:var(--relleno);
-        border-bottom:1px solid var(--color2);
-        text-align:left;
-        white-space:nowrap;
-      }
-      
-      .jocarsa-iu main>div table tbody tr:hover{
-        background:var(--color3);
-      }
-      
-      .jocarsa-iu main>div table tfoot{
-        background:var(--color2);
-        font-weight:bold;
-      }
-      
-      /* HERRAMIENTAS */
-      
-      .jocarsa-iu header input{
-        background:var(--color0);
-        border:0px;
-        padding:calc(var(--relleno) / 2);
+
+      .andrei-iu header input{
+        padding:6px 8px;
+        border-radius:6px;
+        border:0;
+        background:rgba(255,255,255,0.08);
+        color:var(--texto-claro);
         outline:none;
-        height:28px;
-        color:var(--colortextonav);
       }
-      
-      .jocarsa-iu header button,
-      .jocarsa-iu header a{
-        background:var(--color2);
-        border:none;
-        padding:calc(var(--relleno) / 2);
-        height:28px;
-        display:flex;
-        align-items:center;
-        color:var(--colortextonav);
+
+      .andrei-iu header button,
+      .andrei-iu header a{
+        padding:6px 10px;
+        border-radius:6px;
+        border:0;
+        background:rgba(255,255,255,0.08);
+        color:var(--texto-claro);
         text-decoration:none;
         font:inherit;
       }
-      
-      .jocarsa-iu header #herramientas{
-        display:flex;
-        gap:var(--relleno);
-        align-items:center;
-        justify-content:center;
-        flex:2;
-        height:100%;
-      }
-      
-      .jocarsa-iu header #usuario{
-        display:flex;
-        align-items:center;
-        justify-content:flex-end;
-        gap:var(--relleno);
-        flex:1;
-        height:100%;
-      }
-      
-      .jocarsa-iu header #usuario .imagen{
+
+      .andrei-iu header #usuario .imagen{
         width:28px;
         height:28px;
-        background:var(--color2);
+        background:rgba(255,255,255,0.12);
         border-radius:100px;
         flex:none;
       }
-      
-      .jocarsa-iu header #usuario>div:last-child{
-        background:transparent;
-        flex:none;
+
+      .andrei-iu main{
+        display:grid;
+        grid-template-columns: 240px 360px 1fr;
+        gap:var(--espacio);
+        margin:0 calc(var(--espacio));
+        height:calc(100vh - var(--header-h) - (2 * var(--espacio)));
+        min-height:0;
+      }
+
+      .andrei-iu main nav{
+        background:linear-gradient(180deg, var(--naranja), #c86a14);
+        color:var(--texto-claro);
+        padding:16px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        height:100%;
+        max-height:100%;
+        overflow:auto;
+      }
+
+      .andrei-iu main nav a{
         display:flex;
         align-items:center;
-        gap:var(--relleno);
+        height:var(--nav-item-h);
+        min-height:var(--nav-item-h);
+        padding:0 14px;
+        border-radius:10px;
+        color:var(--texto-claro);
+        text-decoration:none;
+        background:rgba(255,255,255,0.04);
+        transition:background .18s, transform .12s;
+        width:100%;
+        box-sizing:border-box;
       }
-      
-      .jocarsa-iu header #usuario p{
-        margin:0px;
-        white-space:nowrap;
+
+      .andrei-iu main nav a:hover{
+        background:rgba(255,255,255,0.09);
+        transform:translateX(6px);
+      }
+
+      .andrei-iu main nav .activo{
+        background:linear-gradient(90deg, var(--azul), #2d36b0);
+        transform:none;
+      }
+
+      .andrei-iu main section{
+        background:var(--gris);
+        padding:22px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        min-height:320px;
+        overflow:auto;
+      }
+
+      .andrei-iu main section article{
+        background:linear-gradient(180deg,#f5f5f7,#dfe5ee);
+        padding:12px;
+        border-radius:10px;
+        box-shadow:0 8px 20px rgba(13,13,13,0.06);
+        transition:transform .12s, box-shadow .12s;
+      }
+
+      .andrei-iu main section article:hover{
+        transform:translateY(-4px);
+        box-shadow:0 16px 36px rgba(13,13,13,0.10);
+      }
+
+      .andrei-iu main section .activo{
+        background:linear-gradient(90deg, #ffffff, var(--gris));
+        box-shadow:0 12px 30px rgba(0,0,0,0.06);
+      }
+
+      .andrei-iu main > div.escenario{
+        background:linear-gradient(180deg,#ffffff,#f3f6fb);
+        padding:22px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        min-height:320px;
+        overflow:auto;
+      }
+
+      .andrei-iu main>div table{width:100%;border-spacing:0;border-collapse:collapse;background:#fff;}
+      .andrei-iu main>div table caption{caption-side:top;padding-bottom:8px;font-weight:700;text-align:left;}
+      .andrei-iu main>div table thead{background:var(--azul);color:var(--texto-claro);}
+      .andrei-iu main>div table th,
+      .andrei-iu main>div table td{
+        padding:12px;
+        border-bottom:1px solid #e5e7eb;
+        text-align:left;
+        font-size:13px;
+      }
+      .andrei-iu main>div table tbody tr:nth-child(even){background:rgba(54,60,191,0.03);}
+      .andrei-iu main>div table tbody tr:hover{background:rgba(217,114,24,0.08);}
+      .andrei-iu main>div table tfoot{background:#eef2ff;font-weight:700;}
+
+      @media (max-width:980px){
+        .andrei-iu main{grid-template-columns:1fr;height:auto;}
+        .andrei-iu header{flex-direction:column;align-items:stretch;gap:10px;height:auto;padding:14px;border-radius:12px;}
+        .andrei-iu main nav{flex-direction:row;overflow:auto;padding:10px;gap:8px;max-height:none;}
+        .andrei-iu main nav a{min-width:120px;white-space:nowrap;}
       }
     </style>
   </head>
-  
-  <body class="jocarsa-iu">
-    
+
+  <body class="andrei-iu">
     <header>
       <div class="corporativo">
-        <img src="https://static.jocarsa.com/logos/white.svg">
-        <h1>jocarsa | programa</h1>
+        <img src="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" alt="Logo andrei">
+        <h1>andrei | programa</h1>
       </div>
-      
+
       <div id="herramientas">
         <input type="text" placeholder="Buscar...">
         <button>Acción 1</button>
         <button>Acción 2</button>
       </div>
-      
+
       <div id="usuario">
         <div class="imagen"></div>
         <div>
@@ -273,9 +230,8 @@
         </div>
       </div>
     </header>
-    
+
     <main>
-      
       <nav>
         <a href="">Entidad</a>
         <a href="" class="activo">Entidad</a>
@@ -284,7 +240,7 @@
         <a href="">Entidad</a>
         <a href="">Entidad</a>
       </nav>
-      
+
       <section>
         <article>Elemento</article>
         <article>Elemento</article>
@@ -298,9 +254,8 @@
         <article>Elemento</article>
         <article>Elemento</article>
       </section>
-      
+
       <div class="escenario">
-        
         <table>
           <caption>Listado de clientes</caption>
 
@@ -418,6 +373,24 @@
               <td>daniel.ortega@example.com</td>
               <td>+34 689 012 345</td>
               <td>Cloud Business S.L.</td>
+              <td>Murcia</td>
+              <td>España</td>
+              <td><time datetime="2026-06-15">15/06/2026</time></td>
+              <td>Activo</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="10">Total de clientes: 8</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
+
               <td>Barcelona</td>
               <td>España</td>
               <td><time datetime="2026-06-01">01/06/2026</time></td>
