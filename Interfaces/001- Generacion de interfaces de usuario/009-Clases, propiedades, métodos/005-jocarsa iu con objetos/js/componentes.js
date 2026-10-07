@@ -1,13 +1,13 @@
 /**
- * jocarsa | iu
+ * andrei | iu
  * Control principal de la interfaz mediante programación orientada a objetos.
  *
  * Nota sobre el namespace:
  * JavaScript no admite "|" dentro de un identificador. Por ello el namespace
- * técnico equivalente es `jocarsa.iu`.
+ * técnico equivalente es `andrei.iu`.
  */
-window.jocarsa = window.jocarsa || {};
-window.jocarsa.iu = window.jocarsa.iu || {};
+window.andrei = window.andrei || {};
+window.andrei.iu = window.andrei.iu || {};
 
 (() => {
   "use strict";
@@ -357,7 +357,7 @@ window.jocarsa.iu = window.jocarsa.iu || {};
       escenario.innerHTML = `
         <article class="ju-card">
           <h2>Librería · Formularios</h2>
-          <p>Controles reutilizables con el lenguaje visual jocarsa-iu.</p>
+          <p>Controles reutilizables con el lenguaje visual andrei-iu.</p>
           <form id="demoForm" class="ju-form-grid">
             <label>
               <span>Nombre</span>
@@ -412,9 +412,9 @@ window.jocarsa.iu = window.jocarsa.iu || {};
         <div class="ju-login-layout" style="margin:auto">
           <article class="ju-login-side">
             <div class="ju-login-brand">
-              <img src="https://static.jocarsa.com/logos/white.svg" alt="">
-              <h1 class="ju-login-product-title">jocarsa | interfaz integrada</h1>
-              <p>Pantalla de acceso basada en jocarsa-iu.</p>
+              <img src="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" alt="Logo Andrei">
+              <h1 class="ju-login-product-title">andrei | interfaz integrada</h1>
+              <p>Pantalla de acceso basada en andrei-iu.</p>
             </div>
           </article>
           <article class="ju-login-card">
@@ -525,17 +525,17 @@ window.jocarsa.iu = window.jocarsa.iu || {};
     }
   }
 
-  window.jocarsa.iu.DOM = DOM;
-  window.jocarsa.iu.Utilidades = Utilidades;
-  window.jocarsa.iu.OrigenDatos = OrigenDatos;
-  window.jocarsa.iu.EstadoIU = EstadoIU;
-  window.jocarsa.iu.FichaIU = FichaIU;
-  window.jocarsa.iu.ToastIU = ToastIU;
-  window.jocarsa.iu.GestorColumnas = GestorColumnas;
-  window.jocarsa.iu.AplicacionIU = AplicacionIU;
+  window.andrei.iu.DOM = DOM;
+  window.andrei.iu.Utilidades = Utilidades;
+  window.andrei.iu.OrigenDatos = OrigenDatos;
+  window.andrei.iu.EstadoIU = EstadoIU;
+  window.andrei.iu.FichaIU = FichaIU;
+  window.andrei.iu.ToastIU = ToastIU;
+  window.andrei.iu.GestorColumnas = GestorColumnas;
+  window.andrei.iu.AplicacionIU = AplicacionIU;
 
   document.addEventListener("DOMContentLoaded", () => {
-    window.jocarsa.iu.aplicacion = new AplicacionIU();
-    window.jocarsa.iu.aplicacion.iniciar();
+    window.andrei.iu.aplicacion = new AplicacionIU();
+    window.andrei.iu.aplicacion.iniciar();
   });
 })();
