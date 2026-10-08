@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrei | Gestor de Contactos</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <h1>Andrei | Gestor de Contactos</h1>
+
+    <div id="form">
+        <input id="nombre" type="text" placeholder="Nombre">
+        <input id="telefono" type="text" placeholder="Teléfono">
+        <button id="btnAdd">Añadir</button>
+        <button id="btnSave">Guardar</button>
+        <button id="btnLoad">Cargar</button>
+    </div>
+
+    <table id="tabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
