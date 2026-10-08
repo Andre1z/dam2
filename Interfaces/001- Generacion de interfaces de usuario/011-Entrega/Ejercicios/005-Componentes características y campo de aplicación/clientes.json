@@ -1,0 +1,73 @@
+{
+  "titulo": "Listado de clientes Andrei",
+
+  "columnas": [
+    {
+      "campo": "id",
+      "etiqueta": "ID"
+    },
+    {
+      "campo": "nombre",
+      "etiqueta": "Nombre"
+    },
+    {
+      "campo": "apellidos",
+      "etiqueta": "Apellidos"
+    },
+    {
+      "campo": "email",
+      "etiqueta": "Email"
+    },
+    {
+      "campo": "telefono",
+      "etiqueta": "Teléfono"
+    },
+    {
+      "campo": "empresa",
+      "etiqueta": "Empresa"
+    }
+  ],
+
+  "registros": [
+    {
+      "id": 1,
+      "nombre": "Alejandro",
+      "apellidos": "Ruiz López",
+      "email": "alejandro.ruiz@andrei.es",
+      "telefono": "+34 611 223 344",
+      "empresa": "Energía Norte S.L."
+    },
+    {
+      "id": 2,
+      "nombre": "María",
+      "apellidos": "García Moreno",
+      "email": "maria.garcia@bluepeak.com",
+      "telefono": "+34 622 334 455",
+      "empresa": "BluePeak Tech"
+    },
+    {
+      "id": 3,
+      "nombre": "Javier",
+      "apellidos": "Torres Vega",
+      "email": "javier.torres@luminaweb.net",
+      "telefono": "+34 633 445 566",
+      "empresa": "LuminaWeb"
+    },
+    {
+      "id": 4,
+      "nombre": "Sofía",
+      "apellidos": "Martín Castro",
+      "email": "sofia.martin@solarisstudio.es",
+      "telefono": "+34 644 556 677",
+      "empresa": "Solaris Studio"
+    },
+    {
+      "id": 5,
+      "nombre": "Daniel",
+      "apellidos": "Pérez Sanz",
+      "email": "daniel.perez@orbitadigital.io",
+      "telefono": "+34 655 667 788",
+      "empresa": "Orbita Digital"
+    }
+  ]
+}

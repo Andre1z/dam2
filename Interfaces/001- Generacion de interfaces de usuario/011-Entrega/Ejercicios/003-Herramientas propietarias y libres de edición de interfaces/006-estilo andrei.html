@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <style>
+      :root{
+  /* Valores base */
+  --tono:200;
+  --saturacion:50%;
+  --brillo:70%;
+  --escalon:20%;
+
+  /* Espaciado y estilo */
+  --relleno:12px;
+  --espacio:12px;
+  --radio:12px;
+  --sombra:0 10px 28px rgba(13,13,13,0.14);
+  --header-h:72px;
+  --nav-item-h:56px;
+  --texto-base:12px;
+
+  /* Colores derivados */
+  --color: hsl(var(--tono), var(--saturacion), var(--brillo));
+  --color2: hsl(var(--tono), var(--saturacion), calc(var(--brillo) + var(--escalon)));
+  --color3: hsl(var(--tono), var(--saturacion), calc(var(--brillo) + calc(var(--escalon) * 2)));
+
+  /* Inversión solicitada */
+  --accent-naranja: #D97218;            /* usado como fondo principal de los navs y header */
+  --activo-color: hsl(200,50%,70%);     /* color del estado activo */
+  --texto-nav: hsl(0,0%,calc((var(--brillo) - 50%) * -1000));
+  --texto-section: hsl(0,0%,calc((var(--brillo) + var(--escalon) - 50%) * -1000));
+}
+
+/* Reset y base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+body{background:linear-gradient(180deg,#f7f8fb 0%,#ffffff 100%);padding:var(--espacio);font-size:var(--texto-base);}
+
+/* Contenedor principal ocupa todo el ancho y alto disponible */
+.andrei-iu{
+  width:100%;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:var(--espacio);
+  min-height:calc(100vh - 2 * var(--espacio));
+}
+
+/* Header con altura fija para calcular la altura del main */
+.andrei-iu header{
+  background:linear-gradient(180deg, var(--accent-naranja), #c86a14);
+  color:var(--texto-nav);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  height:var(--header-h);
+  min-height:var(--header-h);
+  padding:0 calc(var(--relleno) + 6px);
+  border-radius:calc(var(--radio) + 2px);
+  box-shadow:var(--sombra);
+  margin:0 calc(var(--espacio));
+}
+
+/* Corporativo: más espacio entre imagen y texto del h1 */
+.andrei-iu header .corporativo{
+  display:flex;
+  align-items:center;
+  gap:18px;               /* aumenta la separación entre la imagen y el h1 */
+}
+.andrei-iu header .corporativo img{
+  width:40px;
+  height:auto;
+  display:block;
+}
+.andrei-iu header .corporativo h1{
+  margin:0;
+  font-size:14px;
+  line-height:1.1;
+  letter-spacing:0.2px;
+  padding-left:0;        /* el gap ya gestiona el espacio; si quieres más, aumenta gap */
+}
+
+/* Herramientas y usuario */
+.andrei-iu header > div{ padding:8px 12px; background:rgba(255,255,255,0.06); border-radius:8px; font-weight:600; }
+
+/* Main: grid fluido que ocupa la altura restante */
+.andrei-iu main{
+  display:grid;
+  grid-template-columns: 240px minmax(420px, 1fr) 360px;
+  gap:var(--espacio);
+  margin:0 calc(var(--espacio));
+  height:calc(100vh - var(--header-h) - (2 * var(--espacio)));
+  min-height:0;
+}
+
+/* Nav vertical: ahora usa el acento naranja como fondo principal */
+.andrei-iu main nav{
+  background:linear-gradient(180deg, var(--accent-naranja), #c86a14);
+  color:var(--texto-nav);
+  padding:calc(var(--relleno));
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+  display:flex;
+  flex-direction:column;
+  gap:var(--espacio);
+  height:100%;
+  max-height:100%;
+  overflow:auto;
+  box-sizing:border-box;
+}
+
+/* Enlaces del nav con altura fija y centrado vertical */
+.andrei-iu main nav a{
+  display:flex;
+  align-items:center;
+  height:var(--nav-item-h);
+  min-height:var(--nav-item-h);
+  padding:0 14px;
+  border-radius:10px;
+  color:var(--texto-nav);
+  text-decoration:none;
+  background:rgba(255,255,255,0.03);
+  transition:background .18s, transform .12s, box-shadow .12s;
+  width:100%;
+  box-sizing:border-box;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Hover */
+.andrei-iu main nav a:hover{
+  background:rgba(255,255,255,0.08);
+  transform:translateX(6px);
+}
+
+/* Estilo del enlace activo en el nav: ahora usa --activo-color */
+.andrei-iu main nav a.activo{
+  background:var(--activo-color);
+  color:#0a0a0a;
+  box-shadow:0 8px 22px rgba(10,10,10,0.12);
+  transform:none;
+  border-radius:12px;
+  outline:2px solid rgba(0,0,0,0.04);
+}
+
+/* Opción para que el activo sobresalga ligeramente fuera del padding del nav */
+.andrei-iu main nav a.activo.fullwidth{
+  width:calc(100% + 32px);
+  margin-left:-16px;
+  padding-left:28px;
+}
+
+/* Compact mode para listas largas */
+.andrei-iu main nav.compact a{
+  height:44px;
+  min-height:44px;
+  font-size:14px;
+  padding:0 10px;
+}
+
+/* Sección central: layout de artículos con scroll interno */
+.andrei-iu main section{
+  background:var(--color2);
+  padding:calc(var(--relleno));
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+  display:flex;
+  flex-direction:column;
+  gap:var(--espacio);
+  overflow:auto;
+  min-height:320px;
+  color:var(--texto-section);
+}
+
+/* Cada article como tarjeta flotante */
+.andrei-iu main section article{
+  background:var(--color3);
+  padding:calc(var(--relleno) - 4px);
+  border-radius:10px;
+  box-shadow:0 8px 20px rgba(13,13,13,0.06);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  transition:transform .12s, box-shadow .12s, background .12s;
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* Hover en article */
+.andrei-iu main section article:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 36px rgba(13,13,13,0.10);
+}
+
+/* Estilo del article activo: usa el mismo color activo para coherencia visual */
+.andrei-iu main section article.activo{
+  background:linear-gradient(90deg, #ffffff, var(--activo-color));
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+  transform:none;
+  outline:2px solid rgba(0,0,0,0.04);
+}
+
+/* Si quieres que el article activo sobresalga en ancho */
+.andrei-iu main section article.activo.fullwidth{
+  width:calc(100% + 32px);
+  margin-left:-16px;
+  padding-left:28px;
+}
+
+/* Panel derecho como tarjeta flotante */
+.andrei-iu main div{
+  background:var(--color3);
+  padding:22px;
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+  min-height:320px;
+  overflow:auto;
+}
+
+/* Badges y acentos de color */
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
+}
+.badge-primario{background:var(--color); color:var(--texto-nav);}
+.badge-naranja{background:var(--accent-naranja); color:#fff;}
+.badge-activo{background:var(--activo-color); color:#000;}
+
+/* Sticky headers dentro del nav si se usan secciones */
+.andrei-iu main nav h4{
+  margin:6px 0 2px;
+  font-size:12px;
+  color:rgba(255,255,255,0.85);
+  position:sticky;
+  top:8px;
+  background:transparent;
+  padding:6px 0;
+}
+
+/* Responsive: en pantallas pequeñas el layout se apila y el nav pasa a fila */
+@media (max-width:1200px){
+  .andrei-iu main{grid-template-columns:200px 1fr 300px;}
+}
+@media (max-width:980px){
+  :root{ --header-h: auto; }
+  .andrei-iu main{height:auto; grid-template-columns:1fr;}
+  .andrei-iu header{flex-direction:column; align-items:stretch; gap:10px; margin:0 calc(var(--espacio)); height:auto; padding:14px;}
+  .andrei-iu main nav{flex-direction:row; overflow:auto; padding:10px; gap:8px; height:auto; max-height:none;}
+  .andrei-iu main nav a{height:44px; min-width:120px; white-space:nowrap;}
+  .andrei-iu main section{flex-direction:column;}
+}
+    </style>
+  </head>
+  <body class="andrei-iu">
+    <header>
+    	<div class="corporativo">
+        <img src="IU.svg">
+        <h1>andrei | programa</h1>
+      </div>
+      <div id="herramientas">Herramientas
+      </div>
+      <div id="usuario">Usuario
+      </div>
+    </header>
+    <main>
+      <nav>
+        <a href="">Entidad</a>
+        <a href="" class="activo">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+      </nav>
+      <section>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article class="activo">Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+      </section>
+      <div></div>
+    </main>
+  </body>
+</html>

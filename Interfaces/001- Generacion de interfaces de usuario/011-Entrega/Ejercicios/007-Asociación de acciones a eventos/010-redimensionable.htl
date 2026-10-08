@@ -1,0 +1,361 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>andrei | programa</title>
+    <link rel="shortcut icon" href="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" type="image/svg" />
+    <style>
+      :root {
+        --naranja: #D97218;
+        --azul: #363CBF;
+        --gris: #D9D9D9;
+        --blanco: #ffffff;
+        --negro: #0D0D0D;
+        --texto: #f5f5f5;
+        --sombra: 0 12px 28px rgba(0, 0, 0, 0.12);
+        --radio: 14px;
+        --espacio: 12px;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #f5f7fb 0%, #ffffff 100%);
+      }
+
+      body {
+        padding: var(--espacio);
+      }
+
+      .andrei-iu {
+        display: flex;
+        flex-direction: column;
+        gap: var(--espacio);
+        min-height: calc(100vh - (var(--espacio) * 2));
+      }
+
+      .andrei-iu header {
+        background: linear-gradient(180deg, var(--naranja), #c16a15);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--texto);
+        padding: 0 24px;
+        height: 72px;
+        border-radius: calc(var(--radio) + 2px);
+        box-shadow: var(--sombra);
+      }
+
+      .andrei-iu header .corporativo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: 1;
+      }
+
+      .andrei-iu header .corporativo img {
+        width: 34px;
+        height: 34px;
+      }
+
+      .andrei-iu header .corporativo h1 {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .andrei-iu header #herramientas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 2;
+        gap: 8px;
+      }
+
+      .andrei-iu header #usuario {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        flex: 1;
+      }
+
+      .andrei-iu header #usuario .imagen {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .andrei-iu header input,
+      .andrei-iu header button,
+      .andrei-iu header a {
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--texto);
+        font: inherit;
+        padding: 6px 10px;
+        text-decoration: none;
+      }
+
+      .andrei-iu main {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        gap: var(--espacio);
+      }
+
+      .andrei-iu main nav,
+      .andrei-iu main section {
+        position: relative;
+        box-shadow: var(--sombra);
+        border-radius: var(--radio);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .andrei-iu main nav {
+        flex: 1;
+        background: linear-gradient(180deg, var(--naranja), #c16a15);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px 12px 52px;
+        min-width: 160px;
+      }
+
+      .andrei-iu main section {
+        flex: 1;
+        background: #edf1f7;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px 12px 52px;
+        min-width: 160px;
+      }
+
+      .andrei-iu main nav a,
+      .andrei-iu main section article {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        min-height: 40px;
+        padding: 10px;
+        color: var(--blanco);
+        background: rgba(255, 255, 255, 0.06);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .andrei-iu main section article {
+        background: linear-gradient(180deg, #f8f9fb, #dfe4ee);
+        color: var(--negro);
+      }
+
+      .andrei-iu main nav a:hover,
+      .andrei-iu main section article:hover {
+        transform: translateX(2px);
+      }
+
+      .andrei-iu main nav a.activo,
+      .andrei-iu main section article.activo {
+        background: linear-gradient(90deg, var(--azul), #2b2ea8);
+        color: var(--blanco);
+      }
+
+      .andrei-iu main nav.compacto,
+      .andrei-iu main section.compacto {
+        flex: 0 0 52px;
+        min-width: 52px;
+        width: 52px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+
+      .andrei-iu main nav.compacto a,
+      .andrei-iu main section.compacto article {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        padding: 0;
+        font-size: 0;
+      }
+
+      .andrei-iu main .minimizar {
+        position: absolute;
+        left: var(--espacio);
+        right: var(--espacio);
+        bottom: var(--espacio);
+        height: 28px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.12);
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .andrei-iu main > .escenario {
+        flex: 4;
+        background: linear-gradient(180deg, #ffffff, #f3f5f9);
+        border-radius: var(--radio);
+        box-shadow: var(--sombra);
+      }
+
+      .andrei-iu main > .escenario table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .andrei-iu main > .escenario caption {
+        text-align: left;
+        padding: 14px 16px;
+        font-weight: 700;
+        background: rgba(54, 60, 191, 0.06);
+      }
+
+      .andrei-iu main > .escenario th,
+      .andrei-iu main > .escenario td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #e7eaf1;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .andrei-iu main > .escenario thead {
+        background: var(--azul);
+        color: var(--blanco);
+      }
+
+      .andrei-iu main > .escenario tbody tr:hover {
+        background: rgba(217, 114, 24, 0.08);
+      }
+    </style>
+  </head>
+  <body class="andrei-iu">
+    <header>
+      <div class="corporativo">
+        <img src="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" alt="Logo andrei">
+        <h1>andrei | programa</h1>
+      </div>
+
+      <div id="herramientas">
+        <input type="text" placeholder="Buscar..." />
+        <button>Acción 1</button>
+        <button>Acción 2</button>
+      </div>
+
+      <div id="usuario">
+        <div class="imagen"></div>
+        <div>
+          <p>Andrei Valero</p>
+          <a href="">Cerrar sesión</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <nav>
+        <a href="">Clientes</a>
+        <a href="" class="activo">Productos</a>
+        <a href="">Pedidos</a>
+        <a href="">Proveedores</a>
+        <a href="">Configuración</a>
+        <button class="minimizar">◀</button>
+      </nav>
+
+      <section>
+        <article>Elemento</article>
+        <article>Panel</article>
+        <article class="activo">Resumen</article>
+        <article>Listado</article>
+        <article>Ventas</article>
+        <article>Compras</article>
+        <button class="minimizar">◀</button>
+      </section>
+
+      <div class="escenario">
+        <table>
+          <caption>Listado de clientes</caption>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Empresa</th>
+              <th>Ciudad</th>
+              <th>País</th>
+              <th>Fecha de alta</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>Laura</td>
+              <td>Martínez García</td>
+              <td>laura.martinez@example.com</td>
+              <td>+34 612 345 678</td>
+              <td>Soluciones Levante S.L.</td>
+              <td>Valencia</td>
+              <td>España</td>
+              <td>15/01/2026</td>
+              <td>Activo</td>
+            </tr>
+            <tr>
+              <th>2</th>
+              <td>Carlos</td>
+              <td>Navarro Pérez</td>
+              <td>carlos.navarro@example.com</td>
+              <td>+34 623 456 789</td>
+              <td>Innovación Digital S.A.</td>
+              <td>Madrid</td>
+              <td>España</td>
+              <td>03/02/2026</td>
+              <td>Activo</td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td>Lucía</td>
+              <td>Romero Vidal</td>
+              <td>lucia.romero@example.com</td>
+              <td>+34 678 901 234</td>
+              <td>EducaTech S.L.</td>
+              <td>Castellón</td>
+              <td>España</td>
+              <td>09/05/2026</td>
+              <td>Activo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      document.querySelectorAll('main nav, main section').forEach(function(columna){
+        const boton = columna.querySelector('.minimizar');
+        const elementos = columna.querySelectorAll(columna.tagName === 'NAV' ? 'a' : 'article');
+
+        elementos.forEach(function(elemento){
+          elemento.dataset.originalText = elemento.textContent.trim();
+        });
+
+        boton.addEventListener('click', function(){
+          columna.classList.toggle('compacto');
+          const compact = columna.classList.contains('compacto');
+
+          elementos.forEach(function(elemento){
+            elemento.textContent = compact ? elemento.dataset.originalText.charAt(0).toUpperCase() : elemento.dataset.originalText;
+          });
+
+          boton.textContent = compact ? '▶' : '◀';
+        });
+      });
+    </script>
+  </body>
+</html>

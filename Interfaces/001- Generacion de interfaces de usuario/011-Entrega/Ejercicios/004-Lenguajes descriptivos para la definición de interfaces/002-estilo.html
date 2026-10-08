@@ -1,0 +1,387 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <title>andrei | programa</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg" type="image/svg" />
+
+    <style>
+      :root{
+        --azul:#363CBF;
+        --naranja:#D97218;
+        --rojo:#F23005;
+        --gris:#D9D9D9;
+        --negro:#0D0D0D;
+        --texto-claro:#FFFFFF;
+        --espacio:12px;
+        --radio:12px;
+        --sombra:0 10px 28px rgba(13,13,13,0.14);
+        --header-h:72px;
+        --nav-item-h:56px;
+      }
+
+      *{box-sizing:border-box;margin:0;padding:0}
+      html,body{height:100%;width:100%;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+      body{background:linear-gradient(180deg,#f7f8fb 0%,#ffffff 100%);padding:var(--espacio);}
+
+      .andrei-iu{
+        width:100%;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        gap:var(--espacio);
+        min-height:calc(100vh - 2 * var(--espacio));
+      }
+
+      .andrei-iu header{
+        background:linear-gradient(180deg, var(--naranja), #c86a14);
+        color:var(--texto-claro);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        height:var(--header-h);
+        min-height:var(--header-h);
+        padding:0 22px;
+        border-radius:calc(var(--radio) + 2px);
+        box-shadow:var(--sombra);
+        margin:0 calc(var(--espacio));
+      }
+
+      .andrei-iu header .corporativo{
+        display:flex;
+        align-items:center;
+        gap:18px;
+      }
+
+      .andrei-iu header .corporativo img{width:40px;height:auto;display:block;}
+      .andrei-iu header .corporativo h1{margin:0;font-size:16px;line-height:1.2;letter-spacing:0.2px;}
+
+      .andrei-iu header #herramientas{
+        display:flex;
+        align-items:center;
+        gap:8px;
+      }
+
+      .andrei-iu header #usuario{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        padding:8px 12px;
+        background:rgba(255,255,255,0.06);
+        border-radius:8px;
+      }
+
+      .andrei-iu header input{
+        padding:6px 8px;
+        border-radius:6px;
+        border:0;
+        background:rgba(255,255,255,0.08);
+        color:var(--texto-claro);
+        outline:none;
+      }
+
+      .andrei-iu header button,
+      .andrei-iu header a{
+        padding:6px 10px;
+        border-radius:6px;
+        border:0;
+        background:rgba(255,255,255,0.08);
+        color:var(--texto-claro);
+        text-decoration:none;
+        font:inherit;
+      }
+
+      .andrei-iu header #usuario .imagen{
+        width:28px;
+        height:28px;
+        background:rgba(255,255,255,0.12);
+        border-radius:100px;
+        flex:none;
+      }
+
+      .andrei-iu main{
+        display:grid;
+        grid-template-columns: 240px 360px 1fr;
+        gap:var(--espacio);
+        margin:0 calc(var(--espacio));
+        height:calc(100vh - var(--header-h) - (2 * var(--espacio)));
+        min-height:0;
+      }
+
+      .andrei-iu main nav{
+        background:linear-gradient(180deg, var(--naranja), #c86a14);
+        color:var(--texto-claro);
+        padding:16px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        height:100%;
+        max-height:100%;
+        overflow:auto;
+      }
+
+      .andrei-iu main nav a{
+        display:flex;
+        align-items:center;
+        height:var(--nav-item-h);
+        min-height:var(--nav-item-h);
+        padding:0 14px;
+        border-radius:10px;
+        color:var(--texto-claro);
+        text-decoration:none;
+        background:rgba(255,255,255,0.04);
+        transition:background .18s, transform .12s;
+        width:100%;
+        box-sizing:border-box;
+      }
+
+      .andrei-iu main nav a:hover{
+        background:rgba(255,255,255,0.09);
+        transform:translateX(6px);
+      }
+
+      .andrei-iu main nav .activo{
+        background:linear-gradient(90deg, var(--azul), #2d36b0);
+        transform:none;
+      }
+
+      .andrei-iu main section{
+        background:var(--gris);
+        padding:22px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        min-height:320px;
+        overflow:auto;
+      }
+
+      .andrei-iu main section article{
+        background:linear-gradient(180deg,#f5f5f7,#dfe5ee);
+        padding:12px;
+        border-radius:10px;
+        box-shadow:0 8px 20px rgba(13,13,13,0.06);
+        transition:transform .12s, box-shadow .12s;
+      }
+
+      .andrei-iu main section article:hover{
+        transform:translateY(-4px);
+        box-shadow:0 16px 36px rgba(13,13,13,0.10);
+      }
+
+      .andrei-iu main section .activo{
+        background:linear-gradient(90deg, #ffffff, var(--gris));
+        box-shadow:0 12px 30px rgba(0,0,0,0.06);
+      }
+
+      .andrei-iu main > div.escenario{
+        background:linear-gradient(180deg,#ffffff,#f3f6fb);
+        padding:22px;
+        border-radius:var(--radio);
+        box-shadow:var(--sombra);
+        min-height:320px;
+        overflow:auto;
+      }
+
+      .andrei-iu main>div table{width:100%;border-spacing:0;border-collapse:collapse;background:#fff;}
+      .andrei-iu main>div table caption{caption-side:top;padding-bottom:8px;font-weight:700;text-align:left;}
+      .andrei-iu main>div table thead{background:var(--azul);color:var(--texto-claro);}
+      .andrei-iu main>div table th,
+      .andrei-iu main>div table td{
+        padding:12px;
+        border-bottom:1px solid #e5e7eb;
+        text-align:left;
+        font-size:13px;
+      }
+      .andrei-iu main>div table tbody tr:nth-child(even){background:rgba(54,60,191,0.03);}
+      .andrei-iu main>div table tbody tr:hover{background:rgba(217,114,24,0.08);}
+      .andrei-iu main>div table tfoot{background:#eef2ff;font-weight:700;}
+
+      @media (max-width:980px){
+        .andrei-iu main{grid-template-columns:1fr;height:auto;}
+        .andrei-iu header{flex-direction:column;align-items:stretch;gap:10px;height:auto;padding:14px;border-radius:12px;}
+        .andrei-iu main nav{flex-direction:row;overflow:auto;padding:10px;gap:8px;max-height:none;}
+        .andrei-iu main nav a{min-width:120px;white-space:nowrap;}
+      }
+    </style>
+  </head>
+  <body class="andrei-iu">
+    <header>
+    	<div class="corporativo">
+        <img src="../003-Herramientas propietarias y libres de edición de interfaces/IU.svg">
+        <h1>andrei | programa</h1>
+      </div>
+      <div id="herramientas">
+        <input type="text">
+        <button>AcciÃ³n 1</button>
+        <button>AcciÃ³n 2</button>
+      </div>
+      <div id="usuario">
+        <div class="imagen"></div>
+        <div>
+        <p>Jose Vicente CarratalÃ¡</p>
+        <a href="">Cerrar sesiÃ³n</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <nav>
+        <a href="">Entidad</a>
+        <a href="" class="activo">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+        <a href="">Entidad</a>
+      </nav>
+      <section>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article class="activo">Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+        <article>Elemento</article>
+      </section>
+      <div class="escenario">
+      	<table>
+          <caption>Listado de clientes</caption>
+
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Email</th>
+              <th scope="col">TelÃ©fono</th>
+              <th scope="col">Empresa</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">PaÃ­s</th>
+              <th scope="col">Fecha de alta</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Laura</td>
+              <td>MartÃ­nez GarcÃ­a</td>
+              <td>laura.martinez@example.com</td>
+              <td>+34 612 345 678</td>
+              <td>Soluciones Levante S.L.</td>
+              <td>Valencia</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-01-15">15/01/2026</time></td>
+              <td>Activo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">2</th>
+              <td>Carlos</td>
+              <td>Navarro PÃ©rez</td>
+              <td>carlos.navarro@example.com</td>
+              <td>+34 623 456 789</td>
+              <td>InnovaciÃ³n Digital S.A.</td>
+              <td>Madrid</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-02-03">03/02/2026</time></td>
+              <td>Activo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>Ana</td>
+              <td>Ruiz FernÃ¡ndez</td>
+              <td>ana.ruiz@example.com</td>
+              <td>+34 634 567 890</td>
+              <td>FormaciÃ³n MediterrÃ¡nea S.L.</td>
+              <td>Alicante</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-02-18">18/02/2026</time></td>
+              <td>Activo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">4</th>
+              <td>David</td>
+              <td>SÃ¡nchez LÃ³pez</td>
+              <td>david.sanchez@example.com</td>
+              <td>+34 645 678 901</td>
+              <td>TecnologÃ­as Norte S.L.</td>
+              <td>Bilbao</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-03-07">07/03/2026</time></td>
+              <td>Inactivo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">5</th>
+              <td>Marta</td>
+              <td>GÃ³mez Torres</td>
+              <td>marta.gomez@example.com</td>
+              <td>+34 656 789 012</td>
+              <td>Grupo AtlÃ¡ntico</td>
+              <td>A CoruÃ±a</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-03-22">22/03/2026</time></td>
+              <td>Activo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">6</th>
+              <td>Javier</td>
+              <td>Moreno DÃ­az</td>
+              <td>javier.moreno@example.com</td>
+              <td>+34 667 890 123</td>
+              <td>Desarrollos del Sur S.L.</td>
+              <td>Sevilla</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-04-11">11/04/2026</time></td>
+              <td>Pendiente</td>
+            </tr>
+
+            <tr>
+              <th scope="row">7</th>
+              <td>LucÃ­a</td>
+              <td>Romero Vidal</td>
+              <td>lucia.romero@example.com</td>
+              <td>+34 678 901 234</td>
+              <td>EducaTech S.L.</td>
+              <td>CastellÃ³n</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-05-09">09/05/2026</time></td>
+              <td>Activo</td>
+            </tr>
+
+            <tr>
+              <th scope="row">8</th>
+              <td>Daniel</td>
+              <td>Ortega Molina</td>
+              <td>daniel.ortega@example.com</td>
+              <td>+34 689 012 345</td>
+              <td>Cloud Business S.L.</td>
+              <td>Barcelona</td>
+              <td>EspaÃ±a</td>
+              <td><time datetime="2026-06-01">01/06/2026</time></td>
+              <td>Activo</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="9">Total de clientes</th>
+              <td>8</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
