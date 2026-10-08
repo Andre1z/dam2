@@ -13,7 +13,13 @@
   --color4:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)*3));
   --texto-nav:white;
   --ancho-nav:210px;
-  --ancho-section:260px
+  --ancho-section:260px;
+  --naranja:#D97218;
+  --azul:#363CBF;
+  --gris:#D9D9D9;
+  --fondo:#f6f7fb;
+  --sombra:0 12px 28px rgba(13,13,13,0.14);
+  --radio:14px
 }
 * {
   box-sizing:border-box
@@ -920,4 +926,108 @@ body.ju-library-page .library-section .contenido-columna > a {
   width:40px !important;
   min-width:40px;
   max-width:40px;
+}
+
+/* Paleta de referencia: naranja, gris, azul y fondo claro. */
+.andrei-iu,
+body.ju-library-page,
+.ju-demo-page {
+  background:var(--fondo)
+}
+header,
+.ju-demo-header {
+  background:var(--naranja)
+}
+header input {
+  background:rgba(255,255,255,.18)
+}
+header #nuevo,
+header #herramientas > a,
+header #usuario a {
+  background:rgba(255,255,255,.18)
+}
+header #herramientas > a,
+header #usuario a {
+  color:var(--texto-nav);
+  text-decoration:none
+}
+header #usuario .imagen {
+  background:rgba(255,255,255,.28)
+}
+.andrei-iu #navegacion,
+body.ju-library-page .library-nav {
+  background:var(--naranja);
+  color:var(--texto-nav)
+}
+.andrei-iu #navegacion .contenido-columna > a,
+body.ju-library-page .library-nav .contenido-columna > a {
+  background:rgba(255,255,255,.12);
+  color:var(--texto-nav)
+}
+.andrei-iu #navegacion .contenido-columna > a.activo,
+body.ju-library-page .library-nav .contenido-columna > a.activo {
+  background:var(--azul);
+  color:white
+}
+.andrei-iu #entidades,
+body.ju-library-page .library-section {
+  background:var(--gris);
+  color:#111
+}
+.andrei-iu #entidades .contenido-columna > article,
+body.ju-library-page .library-section .contenido-columna > a {
+  background:var(--fondo)
+}
+.andrei-iu #entidades .contenido-columna > article.activo,
+body.ju-library-page .library-section .contenido-columna > a.activo {
+  background:var(--azul);
+  color:white
+}
+.andrei-iu .escenario,
+body.ju-library-page .library-stage {
+  background:var(--fondo)
+}
+.andrei-iu table thead {
+  background:var(--azul);
+  color:white
+}
+.andrei-iu table caption {
+  background:#f1f2fb
+}
+.andrei-iu nav + .separador,
+body.ju-library-page .library-nav + .separador {
+  background:#4299be
+}
+.andrei-iu section + .separador,
+body.ju-library-page .library-section + .separador {
+  background:#91c3d8
+}
+.andrei-iu nav .minimizar,
+body.ju-library-page .library-nav .minimizar {
+  background:#4299be;
+  color:white
+}
+.andrei-iu section .minimizar,
+body.ju-library-page .library-section .minimizar {
+  background:#91c3d8;
+  color:#111
+}
+body.ju-login-page {
+  background:var(--fondo)
+}
+.ju-login-side {
+  background:var(--naranja)
+}
+.ju-btn {
+  background:var(--naranja)
+}
+.ju-btn.secondary {
+  background:#e6e8f2;
+  color:#222
+}
+.ju-text-link {
+  color:var(--azul)
+}
+.ju-demo-header a {
+  background:rgba(255,255,255,.18)
 }
