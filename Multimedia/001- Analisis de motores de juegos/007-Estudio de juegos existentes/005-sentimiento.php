@@ -5,7 +5,7 @@ function ollama($prompt) {
     $url = 'http://localhost:11434/api/generate';
 
     $data = [
-        'model' => 'qwen2.5:3b',
+        'model' => 'qwen3.5:4b',
         'prompt' => $prompt,
         'stream' => false
     ];

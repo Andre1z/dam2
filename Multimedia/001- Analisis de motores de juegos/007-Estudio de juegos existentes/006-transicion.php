@@ -4,7 +4,7 @@
 // CONFIGURACIÓN
 // ============================================================
 
-$modelo = 'qwen2.5:3b';
+$modelo = 'qwen3.5:4b';
 
 $urlOllama = 'http://localhost:11434/api/generate';
 

@@ -22,7 +22,7 @@ Separa claramente los párrafos con una línea en blanco.
 PROMPT;
 
 $data = [
-    'model' => 'qwen2.5:3b',
+    'model' => 'qwen3.5:4b',
     'prompt' => $prompt,
     'stream' => false
 ];
