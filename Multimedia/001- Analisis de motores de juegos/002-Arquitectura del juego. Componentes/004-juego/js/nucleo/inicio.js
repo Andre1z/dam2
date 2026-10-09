@@ -1,3 +1,3 @@
 function inicio(){
-	console.log("Soy el inicio")
+	console.log("Esto es el inicio del juego");
 }
