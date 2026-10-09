@@ -41,7 +41,7 @@
     const scene = new THREE.Scene();
 
     scene.background = new THREE.Color(
-        0xeeeeee
+        0x172554
     );
 
 
@@ -58,8 +58,8 @@
 
     camera.position.set(
         0,
-        3.5,
-        5
+        2.8,
+        6
     );
 
 
@@ -94,14 +94,14 @@
 
     const directionalLight =
         new THREE.DirectionalLight(
-            0xffffff,
-            3
+            0xffd166,
+            2.5
         );
 
     directionalLight.position.set(
+        -4,
         5,
-        10,
-        5
+        6
     );
 
     scene.add(
@@ -163,6 +163,10 @@
                 gltf
             );
 
+
+            gltf.scene.position.set(0.3, 0.1, 0);
+            gltf.scene.rotation.y = Math.PI / 7.2;
+            gltf.scene.scale.setScalar(1.5);
 
             scene.add(
                 gltf.scene

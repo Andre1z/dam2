@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World - Three.js</title>
+    <title>Hola Mundo - Three.js</title>
 
     <style>
         body {
@@ -24,7 +24,7 @@
     // 1. Crear escena
     const scene = new THREE.Scene();
 
-    scene.background = new THREE.Color(0xeeeeee);
+    scene.background = new THREE.Color(0x172554);
 
 
     // 2. Crear cámara
@@ -35,7 +35,7 @@
         1000
     );
 
-    camera.position.z = 5;
+    camera.position.set(0, 0, 6);
 
 
     // 3. Crear renderer
@@ -53,15 +53,15 @@
 
     // 4. Crear geometría
     const geometry = new THREE.BoxGeometry(
-        1,
-        1,
-        1
+        1.4,
+        1.1,
+        1.2
     );
 
 
     // 5. Crear material
     const material = new THREE.MeshStandardMaterial({
-        color: 0x00aa66
+        color: 0xe879f9
     });
 
 
@@ -71,16 +71,18 @@
         material
     );
 
+    cube.position.set(0.3, 0.1, 0);
+
     scene.add(cube);
 
 
     // 7. Añadir luz
     const light = new THREE.DirectionalLight(
-        0xffffff,
-        3
+        0xffd166,
+        2.5
     );
 
-    light.position.set(5, 5, 5);
+    light.position.set(-4, 5, 6);
 
     scene.add(light);
 
