@@ -1,9 +1,9 @@
 import { FaceDetector, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest";
 
-export default class JocarsaFace3D {
+export default class AndreiFace3D {
     constructor(selector, opciones = {}) {
         this.contenedor = typeof selector === "string" ? document.querySelector(selector) : selector;
-        if (!this.contenedor) throw new Error("JocarsaFace3D: contenedor no encontrado");
+        if (!this.contenedor) throw new Error("AndreiFace3D: contenedor no encontrado");
         this.config = {
             rotacionX:28, rotacionY:34,
             desplazamientoX:38, desplazamientoY:24,
@@ -32,15 +32,15 @@ export default class JocarsaFace3D {
     }
 
     crearDOM(){
-        this.raiz=document.createElement("div"); this.raiz.className="jocarsa-face3d";
-        this.escena=document.createElement("div"); this.escena.className="jocarsa-face3d-escena";
+        this.raiz=document.createElement("div"); this.raiz.className="andrei-face3d";
+        this.escena=document.createElement("div"); this.escena.className="andrei-face3d-escena";
         this.raiz.appendChild(this.escena);
         if(this.config.mostrarEstado){
-            this.estado=document.createElement("div"); this.estado.className="jocarsa-face3d-estado";
+            this.estado=document.createElement("div"); this.estado.className="andrei-face3d-estado";
             this.estado.textContent="Cargando SVG, webcam y MediaPipe…"; document.body.appendChild(this.estado);
         }
         if(this.config.mostrarCamara){
-            this.pip=document.createElement("div"); this.pip.className="jocarsa-face3d-pip";
+            this.pip=document.createElement("div"); this.pip.className="andrei-face3d-pip";
             this.video=document.createElement("video"); this.video.autoplay=true; this.video.muted=true; this.video.playsInline=true;
             this.canvas=document.createElement("canvas"); this.canvas.width=640; this.canvas.height=480;
             this.pip.append(this.video,this.canvas); document.body.appendChild(this.pip);
@@ -58,7 +58,7 @@ export default class JocarsaFace3D {
         if(original.querySelector("parsererror")) throw new Error("No se pudo interpretar avatar.svg");
         this.config.capas.forEach((ids,i)=>{
             const plano=document.createElement("div");
-            plano.className=`jocarsa-face3d-capa jocarsa-face3d-capa-${i+1}`;
+            plano.className=`andrei-face3d-capa andrei-face3d-capa-${i+1}`;
             const profundidades=[-120,-60,0,60,120];
             plano.style.transform=`translateZ(${profundidades[i] * this.config.profundidad}px)`;
             const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
@@ -85,7 +85,7 @@ export default class JocarsaFace3D {
     setProfundidad(multiplicador){
         this.config.profundidad=Number(multiplicador);
         const profundidades=[-120,-60,0,60,120];
-        this.escena.querySelectorAll(".jocarsa-face3d-capa").forEach((capa,i)=>{
+        this.escena.querySelectorAll(".andrei-face3d-capa").forEach((capa,i)=>{
             capa.style.transform=`translateZ(${profundidades[i] * this.config.profundidad}px)`;
         });
     }

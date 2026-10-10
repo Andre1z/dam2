@@ -1,0 +1,162 @@
+:root {
+    color-scheme: dark;
+    font-family: Inter, "Segoe UI", sans-serif;
+    background: #080b14;
+    color: #f5f7ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    background:
+        radial-gradient(ellipse at 50% 42%, #202d4c 0%, #101626 38%, #080b14 76%);
+}
+
+body::before,
+body::after {
+    position: fixed;
+    z-index: 0;
+    width: 34rem;
+    height: 34rem;
+    border: 1px solid #a6b9ff12;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+}
+
+body::after {
+    width: 46rem;
+    height: 46rem;
+    border-color: #a6b9ff0a;
+}
+
+#mi-avatar {
+    position: relative;
+    z-index: 1;
+    width: min(80vmin, 650px);
+    height: min(80vmin, 650px);
+    overflow: visible;
+    border: 1px solid #c6d3ff26;
+    border-radius: 28px;
+    background:
+        linear-gradient(#ffffff08 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff08 1px, transparent 1px),
+        radial-gradient(ellipse at center, #273758aa, #111827cc 72%);
+    background-size: 36px 36px, 36px 36px, auto;
+    box-shadow: 0 32px 90px #0009, inset 0 1px #ffffff12, 0 0 80px #668cff12;
+}
+
+.andrei-face3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    perspective: 1100px;
+}
+
+.andrei-face3d-escena {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.andrei-face3d-capa {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.andrei-face3d-capa svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.andrei-face3d-pip {
+    position: fixed;
+    right: clamp(14px, 3vw, 28px);
+    bottom: clamp(14px, 3vw, 28px);
+    z-index: 99999;
+    width: min(25vw, 260px);
+    min-width: 150px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid #a9bdff70;
+    border-radius: 18px;
+    background: #121a2b;
+    box-shadow: 0 14px 42px #0008, 0 0 24px #7194ff1c;
+}
+
+.andrei-face3d-pip::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid #ffffff12;
+    border-radius: inherit;
+    content: "";
+    pointer-events: none;
+}
+
+.andrei-face3d-pip video,
+.andrei-face3d-pip canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.andrei-face3d-pip canvas {
+    z-index: 2;
+    pointer-events: none;
+}
+
+.andrei-face3d-estado {
+    position: fixed;
+    top: clamp(14px, 3vw, 28px);
+    left: clamp(14px, 3vw, 28px);
+    z-index: 99999;
+    max-width: min(420px, calc(100vw - 28px));
+    padding: 12px 16px;
+    border: 1px solid #a9bdff38;
+    border-radius: 14px;
+    background: #111a2bd9;
+    color: #e8edff;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 10px 32px #0005;
+    backdrop-filter: blur(14px);
+}
+
+@media (max-width: 600px) {
+    #mi-avatar {
+        width: min(92vmin, 650px);
+        height: min(92vmin, 650px);
+        border-radius: 20px;
+    }
+
+    .andrei-face3d-pip {
+        width: 34vw;
+        min-width: 120px;
+        border-radius: 14px;
+    }
+}
