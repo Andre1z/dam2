@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HabitSensor Web</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <header class="card">
+    <div class="row" style="gap:12px; align-items:center;">
+      <h1>HabitSensor Web</h1>
+      <div class="sub muted">Seguimiento de hábitos y sensores</div>
+    </div>
+    <div class="row">
+      <button id="applyProfile" class="pulse">Aplicar perfil detectado</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Columna principal -->
+    <section id="main" class="card">
+      <div class="section-title">
+        <h2>Registrar hábito</h2>
+      </div>
+
+      <div id="habit-form" class="row" style="gap:10px; margin-bottom:12px;">
+        <input id="habitInput" placeholder="Ej: Beber agua" />
+        <button id="addHabit">Añadir</button>
+      </div>
+
+      <div class="section-title">
+        <h3>Lista de hábitos</h3>
+      </div>
+      <ul id="habitList" aria-live="polite"></ul>
+
+      <div class="section-title" style="margin-top:14px;">
+        <h3>Estadísticas</h3>
+      </div>
+      <div id="stats" class="card" style="margin-top:8px;">
+        <div class="row" style="justify-content:space-between; align-items:center;">
+          <div>
+            <div class="small muted">Hábito más frecuente</div>
+            <div id="topHabit" class="badge">—</div>
+          </div>
+          <div>
+            <div class="small muted">Total registros</div>
+            <div id="totalHabits" class="badge">0</div>
+          </div>
+        </div>
+        <!-- Aquí puedes insertar un canvas para Chart.js si lo deseas -->
+        <canvas id="chart" style="width:100%; height:140px; margin-top:12px;"></canvas>
+      </div>
+
+      <div id="sensor-section" class="card" style="margin-top:14px;">
+        <div class="section-title"><h3>Sensores</h3></div>
+        <p id="sensorStatus">Esperando permiso / disponibilidad</p>
+        <p>Pasos aproximados: <span id="steps">0</span></p>
+        <div class="row" style="margin-top:8px;">
+          <button id="startSensor">Iniciar sensor</button>
+          <button id="stopSensor" class="secondary">Detener sensor</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra lateral -->
+    <aside id="sidebar" class="card">
+      <div class="section-title"><h3>Información del dispositivo</h3></div>
+      <pre id="deviceText">Detectando...</pre>
+
+      <div class="section-title" style="margin-top:12px;"><h3>Ajustes y perfiles</h3></div>
+      <div id="profiles" class="small">
+        <div class="row" style="justify-content:space-between; margin-bottom:8px;">
+          <div class="muted">Perfil detectado</div>
+          <div id="detectedProfile" class="badge">—</div>
+        </div>
+        <div class="row" style="gap:8px;">
+          <button id="applyAuto" class="ghost">Aplicar automático</button>
+          <button id="openSettings" class="ghost">Editar</button>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:12px;"><h3>Debug</h3></div>
+      <div id="debugPanel" class="small muted">
+        <div>UA: <span id="dbgUa">—</span></div>
+        <div>Memoria: <span id="dbgMem">—</span></div>
+        <div>PixelRatio: <span id="dbgPR">—</span></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="muted small">
+    HabitSensor Web — documentación en docs/informe.md
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* styles.css - HabitSensor Web (texto blanco, tema oscuro por defecto)
+   Mobile-first, responsive, accesible y con layout principal + sidebar
+*/
+
+/* Variables de tema (ajustadas para fondo oscuro y texto blanco) */
+:root{
+  --bg-1: #071226;
+  --bg-2: #0b1b2b;
+  --card: #071428;
+  --muted: rgba(255,255,255,0.78);
+  --accent: #60a5fa;
+  --accent-2: #2dd4bf;
+  --success: #34d399;
+  --danger: #fb7185;
+  --glass: rgba(255,255,255,0.04);
+  --radius: 12px;
+  --shadow: 0 8px 28px rgba(2,6,23,0.6);
+  --mono: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --max-width: 980px;
+  --card-border: rgba(255,255,255,0.04);
+  --input-bg: rgba(255,255,255,0.02);
+  --muted-strong: rgba(255,255,255,0.9);
+}
+
+/* Reset ligero */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--mono);
+  background:linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color:#ffffff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  padding:20px;
+  display:flex;
+  justify-content:center;
+}
+
+/* Contenedor principal y layout */
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+header.card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--card-border);
+}
+main{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+/* Sidebar + main responsive layout (applied en pantallas grandes) */
+@media(min-width:880px){
+  main{
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* Header */
+header h1{
+  font-size:1.25rem;
+  margin:0;
+  letter-spacing: -0.2px;
+  color:#ffffff;
+}
+header .sub{
+  color:var(--muted);
+  font-size:0.9rem;
+}
+
+/* Card component */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:14px;
+  border:1px solid var(--card-border);
+}
+
+/* Section titles */
+.section-title h2, .section-title h3{
+  margin:0 0 8px 0;
+  font-weight:700;
+  color:#ffffff;
+}
+.section-title h3{font-size:0.98rem}
+
+/* Device info pre */
+#deviceText{
+  margin:8px 0 12px;
+  padding:10px;
+  background:linear-gradient(90deg, rgba(96,165,250,0.04), rgba(45,212,191,0.02));
+  border-radius:8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size:0.85rem;
+  color:#e6f7ff;
+  overflow:auto;
+  max-height:160px;
+}
+
+/* Buttons */
+button{
+  appearance:none;
+  border:0;
+  background:var(--accent);
+  color:#071428;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  box-shadow: 0 8px 18px rgba(96,165,250,0.12);
+}
+button:active{transform:translateY(1px)}
+button.secondary{
+  background:transparent;
+  color:var(--accent);
+  border:1px solid rgba(96,165,250,0.12);
+  box-shadow:none;
+}
+button.ghost{
+  background:transparent;
+  color:var(--muted);
+  border:1px dashed rgba(255,255,255,0.04);
+}
+button.pulse{animation:pulse 2s infinite}
+
+/* Forms and inputs */
+input[type="text"], input[type="search"], textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:var(--input-bg);
+  color:#ffffff;
+  font-size:0.95rem;
+  outline:none;
+}
+input::placeholder{color: rgba(255,255,255,0.6)}
+label{display:block; font-size:0.85rem; color:var(--muted); margin-bottom:6px}
+
+/* Habit list */
+#habitList{
+  list-style:none;
+  padding:0;
+  margin:12px 0 0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+#habitList li{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px;
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  font-size:0.95rem;
+  color:#ffffff;
+}
+.habit-meta{font-size:0.8rem; color:var(--muted)}
+
+/* Stats card specifics */
+#stats{padding:12px}
+#chart{background:transparent; width:100%; height:140px}
+
+/* Sensor section */
+#sensor-section p{margin:8px 0; color:#ffffff}
+#sensor-section .status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.02);
+  color:var(--muted);
+  font-weight:600;
+  font-size:0.9rem;
+}
+.indicator{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--danger);
+  box-shadow:0 0 8px rgba(251,113,133,0.18);
+}
+.indicator.ok{background:var(--success); box-shadow:0 0 8px rgba(52,211,153,0.12)}
+
+/* Steps counter */
+#steps{
+  display:inline-block;
+  min-width:48px;
+  text-align:center;
+  font-weight:700;
+  color:var(--accent-2);
+  font-size:1.1rem;
+}
+
+/* Sidebar specifics */
+#sidebar{padding:12px}
+#profiles .badge, .badge{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:999px;
+  background:var(--glass);
+  color:var(--muted-strong);
+  font-weight:700;
+  font-size:0.8rem;
+  border:1px solid rgba(255,255,255,0.03);
+}
+
+/* Debug panel */
+#debugPanel{margin-top:8px; font-size:0.86rem; color:var(--muted)}
+#debugPanel div{margin-bottom:6px}
+
+/* Utilities */
+.row{display:flex; gap:8px; align-items:center}
+.center{display:flex; align-items:center; justify-content:center}
+.muted{color:var(--muted)}
+.small{font-size:0.85rem}
+
+/* Accessibility: focus states */
+button:focus, input:focus, a:focus{
+  outline:3px solid rgba(96,165,250,0.12);
+  outline-offset:2px;
+}
+
+/* Tiny animations */
+@keyframes pulse {
+  0%{transform:scale(1); opacity:1}
+  50%{transform:scale(1.04); opacity:0.9}
+  100%{transform:scale(1); opacity:1}
+}
+
+/* Profile-specific helpers (aplicadas por JS añadiendo clase al body) */
+body.profile-Low .card{opacity:0.98}
+body.profile-Low button{padding:8px 10px; font-size:0.95rem}
+body.profile-High .card{box-shadow: 0 16px 48px rgba(2,6,23,0.18)}
+body.profile-SensorRich .indicator{box-shadow:0 0 14px rgba(45,212,191,0.18)}
+
+/* Mobile adjustments */
+@media(max-width:880px){
+  body{padding:14px}
+  header.card{flex-direction:column; align-items:flex-start}
+  .section-title h2{font-size:1rem}
+  #deviceText{max-height:120px}
+  #chart{height:120px}
+}
+
+/* Small print for docs and footer */
+.docs{
+  font-size:0.82rem;
+  color:var(--muted);
+  margin-top:8px;
+}
+footer{margin-top:18px; text-align:center; color:var(--muted); font-size:0.85rem}
+
+/* Extra: ensure any text elements default to white for safety */
+h1,h2,h3,h4,h5,h6,p,span,li,div,button,label,small,pre,canvas{
+  color: #ffffff !important;
+}
+
+/* Inputs and placeholders contrast */
+input, textarea, select {
+  color: #ffffff;
+  caret-color: var(--accent-2);
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Links */
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
