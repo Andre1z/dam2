@@ -3,23 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Capas 3D controladas con la cabeza</title>
+<title>Andrei - Capas 3D controladas con la cabeza</title>
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111;font-family:Arial,sans-serif}
-body{display:flex;align-items:center;justify-content:center;perspective:1100px}
-#estado{position:fixed;left:16px;top:16px;z-index:100;background:#000b;color:#fff;padding:10px 14px;border-radius:10px;font-size:13px}
-#pip{position:fixed;right:18px;bottom:18px;width:240px;aspect-ratio:4/3;z-index:100;border-radius:14px;overflow:hidden;border:2px solid #fff8;box-shadow:0 8px 30px #0008;background:#222}
-#pip video,#pip canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
-#pip canvas{z-index:2;pointer-events:none}
-#escena{position:relative;width:min(70vw,650px);aspect-ratio:1;transform-style:preserve-3d;will-change:transform}
-.capa{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.25);font-size:42px;font-weight:bold;color:white;transform-style:preserve-3d;backface-visibility:hidden}
-.capa1{background:rgba(255,70,70,.22);transform:translateZ(-120px)}
-.capa2{background:rgba(255,170,40,.22);transform:translateZ(-60px)}
-.capa3{background:rgba(70,220,120,.22);transform:translateZ(0)}
-.capa4{background:rgba(50,160,255,.22);transform:translateZ(60px)}
-.capa5{background:rgba(190,70,255,.22);transform:translateZ(120px)}
-.capa img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+* { box-sizing: border-box; }
+html, body { width: 100%; min-width: 320px; height: 100%; margin: 0; }
+body {
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  perspective: 1100px;
+  background: radial-gradient(ellipse at 50% 42%, #202d4c 0%, #101626 38%, #080b14 76%);
+  color: #f5f7ff;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+#estado {
+  position: fixed; top: clamp(14px, 3vw, 28px); left: clamp(14px, 3vw, 28px); z-index: 100;
+  max-width: min(420px, calc(100vw - 28px)); padding: 12px 16px;
+  border: 1px solid #a9bdff38; border-radius: 14px;
+  background: #111a2bd9; color: #e8edff; font-size: 13px; line-height: 1.5;
+  box-shadow: 0 10px 32px #0005; backdrop-filter: blur(14px);
+}
+#pip {
+  position: fixed; right: clamp(14px, 3vw, 28px); bottom: clamp(14px, 3vw, 28px); z-index: 100;
+  width: min(25vw, 260px); min-width: 150px; aspect-ratio: 4 / 3; overflow: hidden;
+  border: 1px solid #a9bdff70; border-radius: 18px; background: #121a2b;
+  box-shadow: 0 14px 42px #0008, 0 0 24px #7194ff1c;
+}
+#pip video, #pip canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1);
+}
+#pip canvas { z-index: 2; pointer-events: none; }
+#escena {
+  position: relative; z-index: 1; width: min(70vw, 650px); aspect-ratio: 1;
+  border: 1px solid #c6d3ff26; border-radius: 28px;
+  background:
+    linear-gradient(#ffffff08 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px),
+    radial-gradient(ellipse at center, #273758aa, #111827cc 72%);
+  background-size: 36px 36px, 36px 36px, auto;
+  box-shadow: 0 32px 90px #0009, inset 0 1px #ffffff12, 0 0 80px #668cff12;
+  transform-style: preserve-3d; will-change: transform;
+}
+.capa {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  border: 1px solid #dce5ff55; border-radius: 20px;
+  color: #ffffffeb; font-size: clamp(22px, 5vw, 42px); font-weight: 700;
+  letter-spacing: .12em; text-shadow: 0 2px 18px #0008;
+  transform-style: preserve-3d; backface-visibility: hidden;
+  box-shadow: inset 0 1px #ffffff20, 0 18px 42px #0002;
+}
+.capa1 { background: #f05b6838; transform: translateZ(-120px); }
+.capa2 { background: #ffb45438; transform: translateZ(-60px); }
+.capa3 { background: #51d99b38; transform: translateZ(0); }
+.capa4 { background: #56a9ff38; transform: translateZ(60px); }
+.capa5 { background: #b77bff38; transform: translateZ(120px); }
+.capa img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+@media (max-width: 600px) {
+  #escena { width: min(84vw, 650px); border-radius: 20px; }
+  #pip { width: 34vw; min-width: 120px; border-radius: 14px; }
+}
 </style>
 </head>
 <body>
