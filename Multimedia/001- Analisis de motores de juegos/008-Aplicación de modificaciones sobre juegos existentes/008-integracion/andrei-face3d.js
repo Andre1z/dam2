@@ -4,7 +4,7 @@ import {
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest";
 
 
-export default class JocarsaFace3D {
+export default class AndreiFace3D {
 
     constructor(selector, opciones = {}) {
 
@@ -14,7 +14,7 @@ export default class JocarsaFace3D {
                 : selector;
 
         if (!this.contenedor) {
-            throw new Error("JocarsaFace3D: contenedor no encontrado");
+            throw new Error("AndreiFace3D: contenedor no encontrado");
         }
 
 
@@ -73,7 +73,7 @@ export default class JocarsaFace3D {
 
         this.raiz = document.createElement("div");
 
-        this.raiz.className = "jocarsa-face3d";
+        this.raiz.className = "andrei-face3d";
 
 
         /* ESCENA */
@@ -81,7 +81,7 @@ export default class JocarsaFace3D {
         this.escena = document.createElement("div");
 
         this.escena.className =
-            "jocarsa-face3d-escena";
+            "andrei-face3d-escena";
 
 
         this.config.capas.forEach((imagen, i) => {
@@ -89,7 +89,7 @@ export default class JocarsaFace3D {
             const capa = document.createElement("div");
 
             capa.className =
-                `jocarsa-face3d-capa jocarsa-face3d-capa-${i+1}`;
+                `andrei-face3d-capa andrei-face3d-capa-${i+1}`;
 
             if(imagen){
 
@@ -115,7 +115,7 @@ export default class JocarsaFace3D {
                 document.createElement("div");
 
             this.estado.className =
-                "jocarsa-face3d-estado";
+                "andrei-face3d-estado";
 
             this.estado.textContent =
                 "Cargando webcam y MediaPipe…";
@@ -134,7 +134,7 @@ export default class JocarsaFace3D {
                 document.createElement("div");
 
             this.pip.className =
-                "jocarsa-face3d-pip";
+                "andrei-face3d-pip";
 
 
             this.video =
