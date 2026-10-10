@@ -1,0 +1,27 @@
+<!doctype html>
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar SVG 3D | Andrei</title>
+    <link rel="stylesheet" href="andrei-face3d.css">
+</head>
+<body>
+    <main id="mi-avatar" aria-label="Avatar 3D interactivo"></main>
+    <script type="module">
+        import AndreiFace3D from "./andrei-face3d.js";
+
+        const avatar = new AndreiFace3D("#mi-avatar", {
+            svg: "avatar.svg",
+            profundidad: 0.5,
+            suavizado: 0.035,
+            suavizadoDetector: 0.12,
+            zonaMuerta: 0.012
+        });
+
+        await avatar.iniciar();
+        window.avatar = avatar;
+    </script>
+</body>
+</html>
