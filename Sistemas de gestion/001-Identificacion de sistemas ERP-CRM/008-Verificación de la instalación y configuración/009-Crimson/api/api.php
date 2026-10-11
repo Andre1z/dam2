@@ -51,24 +51,24 @@
             },
             {
               "id": 7,
-              "nombre": "Webcam Full HD",
-              "categoria": "Periféricos",
-              "precio": 54.99,
-              "stock": 18
+              "nombre": "Router Wi-Fi 6 AX3000",
+              "categoria": "Redes",
+              "precio": 89.95,
+              "stock": 27
             },
             {
               "id": 8,
-              "nombre": "Auriculares Studio X",
-              "categoria": "Audio",
-              "precio": 69.50,
-              "stock": 35
+              "nombre": "Impresora Multifunción LaserJet",
+              "categoria": "Impresión",
+              "precio": 189.99,
+              "stock": 14
             },
             {
               "id": 9,
-              "nombre": "Altavoces SoundBox",
-              "categoria": "Audio",
-              "precio": 49.95,
-              "stock": 22
+              "nombre": "Disco Duro Externo 2TB",
+              "categoria": "Almacenamiento",
+              "precio": 74.90,
+              "stock": 31
             },
             {
               "id": 10,

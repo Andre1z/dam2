@@ -1,5 +1,5 @@
 :root{
-	--color-principal: mediumseagreen;
+	--color-principal: hsl(130, 75%,38%);
   --margen-interior: 20px;
 }
 body,html{
