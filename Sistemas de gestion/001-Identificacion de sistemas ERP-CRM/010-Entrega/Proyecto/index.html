@@ -3,24 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <title>Mini CRM</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body>
 
-    <h1>Mini CRM</h1>
+    <header>
+        <h1>Mini CRM</h1>
+        <p class="subtitle">Proyecto HTML + CSS + JS</p>
+    </header>
 
-    <!-- Menú -->
-    <nav>
+    <nav class="main-nav">
+        <button data-section="inicio">Inicio</button>
         <button data-section="clientes">Clientes</button>
         <button data-section="productos">Productos</button>
         <button data-section="tareas">Tareas</button>
-        <button data-section="info">Información ERP-CRM</button>
+        <button data-section="info">ERP-CRM</button>
         <button data-section="diag">Diagnóstico</button>
         <button data-section="docs">Documentación</button>
+        <button onclick="cargarJSON()">Cargar JSON</button>
     </nav>
 
-    <!-- Contenedor dinámico -->
-    <section id="content"></section>
+    <section id="content">
+
+        <div id="inicio" class="section active">
+            <h2>Bienvenido</h2>
+            <p>Esta aplicación es un Mini CRM desarrollado con HTML, CSS y JavaScript.</p>
+            <p>Permite gestionar clientes, productos y tareas usando LocalStorage.</p>
+        </div>
+
+        <div id="clientes" class="section">
+            <h2>Gestión de Clientes</h2>
+
+            <form id="form-clientes">
+                <label>Nombre:</label>
+                <input type="text" id="cliente-nombre" required>
+
+                <label>Email:</label>
+                <input type="email" id="cliente-email" required>
+
+                <label>Teléfono:</label>
+                <input type="text" id="cliente-telefono">
+
+                <button type="submit">Guardar Cliente</button>
+            </form>
+
+            <h3>Listado de Clientes</h3>
+            <ul id="lista-clientes"></ul>
+        </div>
+
+        <div id="productos" class="section">
+            <h2>Gestión de Productos</h2>
+
+            <form id="form-productos">
+                <label>Producto:</label>
+                <input type="text" id="producto-nombre" required>
+
+                <label>Precio (€):</label>
+                <input type="number" id="producto-precio" required>
+
+                <button type="submit">Guardar Producto</button>
+            </form>
+
+            <h3>Listado de Productos</h3>
+            <ul id="lista-productos"></ul>
+        </div>
+
+        <div id="tareas" class="section">
+            <h2>Gestión de Tareas</h2>
+
+            <form id="form-tareas">
+                <label>Tarea:</label>
+                <input type="text" id="tarea-nombre" required>
+
+                <label>Estado:</label>
+                <select id="tarea-estado">
+                    <option>Pendiente</option>
+                    <option>En progreso</option>
+                    <option>Completada</option>
+                </select>
+
+                <button type="submit">Guardar Tarea</button>
+            </form>
+
+            <h3>Listado de Tareas</h3>
+            <ul id="lista-tareas"></ul>
+        </div>
+
+        <div id="info" class="section">
+            <h2>Información sobre ERP y CRM</h2>
+            <p>Aquí se documentan los sistemas ERP-CRM, licencias, comparativas y requisitos.</p>
+
+            <h3>Sistemas ERP-CRM reconocidos</h3>
+            <ul>
+                <li>Odoo</li>
+                <li>Dolibarr</li>
+                <li>SuiteCRM</li>
+            </ul>
+
+            <h3>Tipos de licencia</h3>
+            <ul>
+                <li>GPL</li>
+                <li>LGPL</li>
+                <li>AGPL</li>
+                <li>Licencias propietarias</li>
+            </ul>
+
+            <h3>Comparativa</h3>
+            <p>Tabla comparativa pendiente de completar.</p>
+        </div>
+
+        <div id="diag" class="section">
+            <h2>Diagnóstico del Sistema</h2>
+            <ul id="diagnostico-lista"></ul>
+        </div>
+
+        <div id="docs" class="section">
+            <h2>Documentación del Proyecto</h2>
+
+            <h3>Operaciones realizadas</h3>
+            <textarea id="doc-operaciones" rows="6"></textarea>
+
+            <h3>Incidencias</h3>
+            <textarea id="doc-incidencias" rows="6"></textarea>
+        </div>
+
+    </section>
 
     <script src="app.js"></script>
 </body>

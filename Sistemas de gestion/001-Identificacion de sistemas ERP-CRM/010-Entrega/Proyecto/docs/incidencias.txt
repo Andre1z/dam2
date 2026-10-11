@@ -1,0 +1,27 @@
+INCIDENCIAS DEL PROYECTO MINI CRM
+
+1. Error: Los datos no se guardaban correctamente en LocalStorage.
+Causa: El objeto se guardaba sin convertir a JSON.
+Solución: Se aplicó JSON.stringify() antes de guardar.
+
+2. Error: Las listas no se actualizaban después de eliminar un elemento.
+Causa: No se llamaba a la función de recarga tras eliminar.
+Solución: Se añadió cargarClientes(), cargarProductos() y cargarTareas() después de cada eliminación.
+
+3. Error: El botón "Cargar JSON" no funcionaba.
+Causa: Ruta incorrecta hacia data/datos.json.
+Solución: Se corrigió la ruta y se añadió manejo de errores con try/catch.
+
+4. Error: Las secciones no cambiaban correctamente.
+Causa: Faltaba la clase "active" en la sección inicial.
+Solución: Se añadió la clase en la sección "inicio".
+
+5. Error: El diagnóstico mostraba errores aunque los datos estaban cargados.
+Causa: El diagnóstico se ejecutaba antes de cargar el JSON.
+Solución: Se llamó a diagnostico() después de cargar los datos.
+
+6. Error: El CSS no aplicaba el color principal correctamente.
+Causa: Algunos elementos seguían usando colores antiguos.
+Solución: Se actualizó todo el CSS con hsl(130, 75%, 38%).
+
+No se han detectado más incidencias relevantes.

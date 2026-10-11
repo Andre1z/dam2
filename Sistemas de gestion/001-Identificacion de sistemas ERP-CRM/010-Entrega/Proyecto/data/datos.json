@@ -1,0 +1,41 @@
+{
+    "clientes": [
+        {
+            "nombre": "Juan Pérez",
+            "email": "juan@example.com",
+            "telefono": "600123456"
+        },
+        {
+            "nombre": "María López",
+            "email": "maria@example.com",
+            "telefono": "611987654"
+        }
+    ],
+
+    "productos": [
+        {
+            "nombre": "Laptop Lenovo",
+            "precio": 799
+        },
+        {
+            "nombre": "Ratón inalámbrico",
+            "precio": 25
+        }
+    ],
+
+    "tareas": [
+        {
+            "nombre": "Llamar a Juan",
+            "estado": "Pendiente"
+        },
+        {
+            "nombre": "Enviar presupuesto a María",
+            "estado": "En progreso"
+        }
+    ],
+
+    "documentacion": {
+        "operaciones": "Se han añadido clientes, productos y tareas de ejemplo para probar la aplicación.",
+        "incidencias": "No se han detectado incidencias en la carga inicial de datos."
+    }
+}

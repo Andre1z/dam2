@@ -1,0 +1,38 @@
+OPERACIONES REALIZADAS EN EL PROYECTO MINI CRM
+
+1. Creación de la estructura del proyecto
+- Se creó la carpeta principal mini_crm.
+- Se añadieron los archivos index.html, styles.css y app.js.
+- Se creó la carpeta data/ con datos.json.
+- Se creó la carpeta docs/ con criterios.txt, incidencias.txt y operaciones.txt.
+
+2. Desarrollo de la interfaz HTML
+- Se implementó un menú de navegación con botones.
+- Se añadieron secciones: Inicio, Clientes, Productos, Tareas, ERP-CRM, Diagnóstico y Documentación.
+- Se añadieron formularios para clientes, productos y tareas.
+
+3. Implementación de estilos CSS
+- Se aplicó un diseño limpio y profesional.
+- Se añadió el color principal hsl(130, 75%, 38%).
+- Se estilizaron formularios, listas y navegación.
+
+4. Desarrollo de la lógica en JavaScript
+- Se implementó navegación entre secciones.
+- Se añadieron funciones CRUD para clientes, productos y tareas.
+- Se utilizó LocalStorage para persistencia de datos.
+- Se añadió diagnóstico del sistema.
+- Se añadió documentación editable desde la aplicación.
+- Se añadió función para cargar datos desde datos.json.
+
+5. Pruebas y verificación
+- Se verificó el funcionamiento de cada módulo.
+- Se comprobó la persistencia de datos.
+- Se probó la carga del JSON.
+- Se revisó la interfaz en distintos navegadores.
+
+6. Documentación del proyecto
+- Se redactaron criterios.txt, incidencias.txt y operaciones.txt.
+- Se documentaron todas las operaciones realizadas.
+- Se registraron incidencias y soluciones.
+
+El proyecto cumple todos los criterios del módulo y funciona correctamente.

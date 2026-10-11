@@ -1,13 +1,149 @@
+/* ============================
+   ESTILOS GENERALES
+============================ */
+
 body {
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background: hsl(130, 75%, 38%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* ============================
+   NAVEGACIÓN
+============================ */
+
+.main-nav {
+    background: hsl(130, 75%, 30%);
+    padding: 10px;
+    text-align: center;
+}
+
+.main-nav button {
+    background: white;
+    border: 2px solid hsl(130, 75%, 38%);
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: 0.2s;
+    color: hsl(130, 75%, 20%);
+}
+
+.main-nav button:hover {
+    background: hsl(130, 75%, 38%);
+    color: white;
+}
+
+/* ============================
+   SECCIONES
+============================ */
+
+.section {
+    display: none;
     padding: 20px;
 }
 
-nav button {
-    margin-right: 10px;
-    padding: 8px 12px;
+.section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-#content {
-    margin-top: 20px;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================
+   FORMULARIOS
+============================ */
+
+form {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input,
+form select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    margin-top: 15px;
+    padding: 10px;
+    background: hsl(130, 75%, 38%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: hsl(130, 75%, 30%);
+}
+
+/* ============================
+   LISTADOS
+============================ */
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: white;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    border-left: 5px solid hsl(130, 75%, 38%);
+}
+
+ul li:hover {
+    background: #f0f0f0;
+}
+
+/* ============================
+   DOCUMENTACIÓN
+============================ */
+
+textarea {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    padding: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.1);
 }
