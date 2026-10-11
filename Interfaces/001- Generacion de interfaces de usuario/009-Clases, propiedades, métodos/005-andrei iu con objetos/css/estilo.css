@@ -11,7 +11,7 @@
   --color2:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)));
   --color3:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)*2));
   --color4:hsl(var(--tono),var(--saturacion),calc(var(--brillo) + var(--escalon)*3));
-  --texto-nav:white;
+  --texto-nav:rgb(15, 8, 8);
   --ancho-nav:210px;
   --ancho-section:260px;
   --naranja:#D97218;
