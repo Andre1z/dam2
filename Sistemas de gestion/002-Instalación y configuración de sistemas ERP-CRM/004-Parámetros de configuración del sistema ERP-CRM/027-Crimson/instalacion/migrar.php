@@ -517,20 +517,22 @@ try{
   <title>Migración · Crimson ERP</title>
   <style>
     body{font-family:sans-serif;max-width:1100px;margin:40px auto;padding:20px}
-    h1,h2{color:mediumseagreen}
+    h1,h2{color:hsl(130, 75%, 38%)}
     table{width:100%;border-collapse:collapse;margin:15px 0 30px}
     th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
-    th{background:mediumseagreen;color:white}
-    .ok{border-left:5px solid mediumseagreen;padding:10px 20px;margin:20px 0}
+    th{background:hsl(130, 75%, 38%);color:white}
+    .ok{border-left:5px solid hsl(130, 75%, 38%);padding:10px 20px;margin:20px 0}
     .error{border-left:5px solid crimson;padding:10px 20px}
     .aviso{border-left:5px solid darkorange;padding:10px 20px;margin:20px 0}
     .destructivo{color:crimson;font-weight:bold}
     .seguro{color:seagreen}
-    button{background:mediumseagreen;color:white;border:0;padding:12px 20px;cursor:pointer}
+    button{background:hsl(130, 75%, 38%);color:white;border:0;padding:12px 20px;cursor:pointer}
     label{display:block;margin:20px 0}
     code{background:#eee;padding:2px 5px}
-    a{color:mediumseagreen}
-  </style>
+    a{color:hsl(130, 75%, 38%)}
+    button,table,th,td,code,.ok,.error,.aviso{border-radius:10px}
+    button{padding:12px 20px}
+</style>
 </head>
 <body>
   <h1>Migración de Crimson ERP</h1>

@@ -4,7 +4,7 @@
     <title>Crimson ERP</title>
     <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <link rel="stylesheet" href="nucleo/estilo/general.css?v=031">
+    <link rel="stylesheet" href="nucleo/estilo/general.css?v=033">
   </head>
   <body>
     <div id="crud" data-include="nucleo/componentes/crud.html?v=031"></div>
@@ -27,7 +27,7 @@
         return fetch("api/auth.php?action=status",{cache:"no-store"}).then(r=>r.json()).then(auth=>{
           if(!auth.authenticated){window.location.href="login.php";return;}
           window.CRIMSON_USER=auth.user;
-          let script=document.createElement("script");script.src="nucleo/js/incluir.js?v=031";document.body.appendChild(script);
+          let script=document.createElement("script");script.src="nucleo/js/incluir.js?v=033";document.body.appendChild(script);
         });
       })
       .catch(function(error){
