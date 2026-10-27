@@ -516,20 +516,21 @@ try{
   <meta charset="utf-8">
   <title>Migración · Crimson ERP</title>
   <style>
+    :root{--color-principal:hsl(130, 75%,38%)}
     body{font-family:sans-serif;max-width:1100px;margin:40px auto;padding:20px}
-    h1,h2{color:mediumseagreen}
-    table{width:100%;border-collapse:collapse;margin:15px 0 30px}
+    h1,h2{color:var(--color-principal)}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:15px 0 30px;border-radius:8px;overflow:hidden}
     th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
-    th{background:mediumseagreen;color:white}
-    .ok{border-left:5px solid mediumseagreen;padding:10px 20px;margin:20px 0}
-    .error{border-left:5px solid crimson;padding:10px 20px}
-    .aviso{border-left:5px solid darkorange;padding:10px 20px;margin:20px 0}
+    th{background:var(--color-principal);color:white}
+    .ok,.error,.aviso{padding:10px 20px;margin:20px 0;border:1px solid #ddd;border-left:5px solid var(--color-principal);border-radius:8px}
+    .error{border-left-color:crimson}
+    .aviso{border-left-color:darkorange}
     .destructivo{color:crimson;font-weight:bold}
-    .seguro{color:seagreen}
-    button{background:mediumseagreen;color:white;border:0;padding:12px 20px;cursor:pointer}
+    .seguro{color:var(--color-principal)}
+    button{background:var(--color-principal);color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer}
     label{display:block;margin:20px 0}
-    code{background:#eee;padding:2px 5px}
-    a{color:mediumseagreen}
+    code{background:#eee;padding:2px 5px;border-radius:4px}
+    a{color:var(--color-principal)}
   </style>
 </head>
 <body>

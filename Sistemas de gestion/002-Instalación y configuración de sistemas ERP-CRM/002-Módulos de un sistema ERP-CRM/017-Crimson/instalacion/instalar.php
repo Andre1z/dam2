@@ -214,7 +214,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <title>Instalación · Crimson ERP</title>
   <style>
     :root{
-      --color-principal:crimson;
+      --color-principal:hsl(130, 75%,38%);
       --padding:10px;
       --gap:10px;
     }
@@ -238,6 +238,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       font-size:14px;
       resize:vertical;
       border:1px solid #ccc;
+      border-radius:8px;
     }
 
     button{
@@ -248,12 +249,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       margin-top:var(--gap);
       font:inherit;
       cursor:pointer;
+      border-radius:8px;
     }
 
     table{
       width:100%;
-      border-collapse:collapse;
+      border-collapse:separate;
+      border-spacing:0;
       margin:var(--gap) 0px;
+      border-radius:8px;
+      overflow:hidden;
     }
 
     th,td{
@@ -268,12 +273,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     .ok,.error{
-      border-left:5px solid var(--color-principal);
       padding:var(--padding);
       margin:var(--gap) 0px;
+      border:1px solid #ddd;
+      border-left:5px solid var(--color-principal);
+      border-radius:8px;
     }
 
-    code{background:#eee;padding:2px 5px}
+    code{background:#eee;padding:2px 5px;border-radius:4px}
     a{color:var(--color-principal)}
   </style>
 </head>

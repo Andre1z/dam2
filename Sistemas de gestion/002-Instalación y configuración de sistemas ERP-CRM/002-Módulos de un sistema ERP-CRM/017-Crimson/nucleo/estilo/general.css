@@ -1,5 +1,5 @@
 :root{
-  --color-principal:crimson;
+  --color-principal:hsl(130, 75%,38%);
   --padding:10px;
   --gap:10px;
   --altura-header:60px;
@@ -69,6 +69,7 @@ header a{
   color:var(--color-principal);
   background:white;
   padding:var(--padding);
+  border-radius:6px;
 }
 
 /* CONTENIDO */
@@ -94,6 +95,7 @@ nav a{
   color:var(--color-principal);
   background:white;
   padding:var(--padding);
+  border-radius:6px;
 }
 
 main{
@@ -131,10 +133,13 @@ footer div:last-child{
 
 table{
   width:100%;
-  border-collapse:collapse;
+  border-collapse:separate;
+  border-spacing:0;
   font-family:inherit;
   font-size:14px;
   background:white;
+  border-radius:8px;
+  overflow:hidden;
 }
 
 th,
@@ -168,6 +173,7 @@ td a{
   text-decoration:none;
   padding:var(--padding);
   margin:var(--padding);
+  border-radius:6px;
 }
 
 /* FORMULARIOS */
@@ -204,6 +210,7 @@ main form input{
   border:1px solid #ddd;
   background:white;
   font:inherit;
+  border-radius:6px;
 }
 
 main form button{
@@ -214,6 +221,7 @@ main form button{
   margin:0px;
   font:inherit;
   cursor:pointer;
+  border-radius:6px;
 }
 
 main pre{

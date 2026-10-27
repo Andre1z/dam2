@@ -6,7 +6,7 @@ async function cargarIncludes() {
 
     const archivo = elemento.dataset.include;
 
-    const respuesta = await fetch(archivo);
+    const respuesta = await fetch(archivo, { cache: "no-store" });
 
     if (!respuesta.ok) {
       console.error("No se puede cargar:", archivo);

@@ -3,11 +3,11 @@ $modelo=dirname(__DIR__)."/modelo/schema.json";
 $initial=file_exists($modelo)?file_get_contents($modelo):'{"version":1,"tables":[],"relations":[]}';
 ?>
 <!doctype html><html lang="es"><head><meta charset="utf-8"><title>Instalador visual · Crimson</title>
-<link rel="stylesheet" href="../nucleo/estilo/designer.css?v=025">
+<link rel="stylesheet" href="../nucleo/estilo/designer.css?v=026">
 <style>
-html,body{height:100%;margin:0;font-family:Ubuntu,Arial,sans-serif;color:#292d31;overflow:hidden}.top{height:64px;background:crimson;color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}.top strong{font-size:17px}.top span{opacity:.8}.top .spacer{flex:1}.top button{border:0;background:white;color:crimson;padding:9px 12px;cursor:pointer;font:inherit}.work{height:calc(100vh - 64px)}dialog{width:min(1000px,92vw);border:0;box-shadow:0 10px 40px #0006}dialog textarea{width:100%;height:60vh;font-family:monospace;font-size:12px}.dialog-actions{text-align:right;margin-top:8px}.dialog-actions button{padding:8px 12px}
+html,body{height:100%;margin:0;font-family:Ubuntu,Arial,sans-serif;color:#292d31;overflow:hidden}.top{height:64px;background:hsl(130, 75%,38%);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}.top strong{font-size:17px}.top span{opacity:.8}.top .spacer{flex:1}.top button{border:0;background:white;color:hsl(130, 75%,38%);padding:9px 12px;cursor:pointer;font:inherit;border-radius:8px}.work{height:calc(100vh - 64px)}dialog{width:min(1000px,92vw);border:0;border-radius:8px;box-shadow:0 10px 40px #0006}dialog textarea{width:100%;height:60vh;font-family:monospace;font-size:12px;border:1px solid #ccc;border-radius:8px}.dialog-actions{text-align:right;margin-top:8px}.dialog-actions button{padding:8px 12px}
 </style></head><body>
-<header class="top"><strong>jocarsa | crimson · instalador visual</strong><span>Diseña el modelo inicial</span><span class="spacer"></span><button id="sqlBtn">Ver SQL</button><button id="installBtn">Crear base de datos</button></header>
+<header class="top"><strong>Andrei | crimson · instalador visual</strong><span>Diseña el modelo inicial</span><span class="spacer"></span><button id="sqlBtn">Ver SQL</button><button id="installBtn">Crear base de datos</button></header>
 <div class="work"><div class="designer-shell">
 <aside class="designer-tools"><button class="primary" id="addEntity">+ Entidad</button><button id="fkMode">→ Crear FK</button><button id="layoutBtn">↔ Redistribuir</button><button id="deleteSelected">Eliminar selección</button><button id="clearBtn">Vaciar diagrama</button>
 <small>Este es ahora el instalador: diseña entidades, campos y flechas FK directamente. Al crear la base se genera <b>schema.sql</b> y <b>crimson.sqlite</b>.</small><div class="status" id="status"></div></aside>

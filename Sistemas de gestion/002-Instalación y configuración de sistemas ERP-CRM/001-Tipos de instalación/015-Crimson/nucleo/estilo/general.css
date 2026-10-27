@@ -1,5 +1,5 @@
 :root{
-  --color-principal: mediumseagreen;
+  --color-principal: hsl(130, 75%,38%);
   --margen-interior: 20px;
   --altura-header: 80px;
   --altura-footer: 40px;
@@ -64,6 +64,7 @@ header a{
   color:var(--color-principal);
   background:white;
   padding:10px;
+  border-radius:6px;
 }
 
 /* CONTENIDO */
@@ -90,6 +91,7 @@ nav a{
   color:var(--color-principal);
   background:white;
   padding:10px;
+  border-radius:6px;
 }
 
 main{
@@ -127,10 +129,13 @@ footer div:last-child{
 
 table{
   width:100%;
-  border-collapse:collapse;
+  border-collapse:separate;
+  border-spacing:0;
   font-family:Arial,sans-serif;
   font-size:14px;
   background:white;
+  border-radius:8px;
+  overflow:hidden;
 }
 
 th,
@@ -196,6 +201,7 @@ main form input{
   border:1px solid #ddd;
   background:white;
   font:inherit;
+  border-radius:6px;
 }
 
 main form button{
@@ -206,6 +212,7 @@ main form button{
   margin:0px;
   font:inherit;
   cursor:pointer;
+  border-radius:6px;
 }
 
 main pre{

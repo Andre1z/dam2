@@ -193,15 +193,16 @@ try{
   <meta charset="utf-8">
   <title>Instalación · Crimson ERP</title>
   <style>
+    :root{--color-principal:mediumseagreen}
     body{font-family:sans-serif;max-width:1000px;margin:40px auto;padding:20px}
-    h1,h2{color:mediumseagreen}
-    table{width:100%;border-collapse:collapse;margin:15px 0 30px}
+    h1,h2{color:var(--color-principal)}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:15px 0 30px;border-radius:8px;overflow:hidden}
     th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
-    th{background:mediumseagreen;color:white}
-    .ok{border-left:5px solid mediumseagreen;padding:10px 20px;margin:20px 0}
-    .error{border-left:5px solid crimson;padding:10px 20px}
-    code{background:#eee;padding:2px 5px}
-    a{color:mediumseagreen}
+    th{background:var(--color-principal);color:white}
+    .ok,.error{padding:10px 20px;margin:20px 0;border:1px solid #ddd;border-left:5px solid var(--color-principal);border-radius:8px}
+    .error{border-left-color:crimson}
+    code{background:#eee;padding:2px 5px;border-radius:4px}
+    a{color:var(--color-principal)}
   </style>
 </head>
 <body>

@@ -1,7 +1,7 @@
 :root{
-  --color-principal:crimson;
-  --color-principal-oscuro:#b80f32;
-  --color-principal-suave:#fff4f6;
+  --color-principal:hsl(130, 75%,38%);
+  --color-principal-oscuro:hsl(130, 75%,28%);
+  --color-principal-suave:hsl(130, 60%,96%);
   --color-texto:#2f3337;
   --color-texto-suave:#697078;
   --color-borde:#e5e7ea;
@@ -9,7 +9,7 @@
   --blanco:#ffffff;
   --padding:10px;
   --gap:8px;
-  --radio:3px;
+  --radio:8px;
   --altura-header:60px;
   --altura-footer:38px;
 }
@@ -135,12 +135,15 @@ nav{
 }
 
 #menu{
+  min-height:0;
   padding-left:4px;
   border-right:1px solid rgba(0,0,0,.10);
+  overflow-y:auto;
 }
 
 nav a{
   display:block;
+  flex:0 0 auto;
   padding:9px 10px;
   color:var(--color-principal);
   background:white;
@@ -154,7 +157,7 @@ nav a{
 nav a:hover{
   color:var(--color-principal-oscuro);
   background:var(--color-principal-suave);
-  border-color:rgba(184,15,50,.22);
+  border-color:rgba(18,124,39,.22);
   transform:translateX(2px);
 }
 

@@ -9,73 +9,73 @@
           "productos": [
             {
               "id": 1,
-              "nombre": "Portátil ProBook 15",
-              "categoria": "Informática",
-              "precio": 749.99,
-              "stock": 12
+              "nombre": "Zenvora Nexo Mini",
+              "categoria": "Ordenadores",
+              "precio": 429.99,
+              "stock": 10
             },
             {
               "id": 2,
-              "nombre": "Monitor UltraView 27",
-              "categoria": "Informática",
-              "precio": 229.90,
-              "stock": 25
+              "nombre": "Orbytea Placa Modular",
+              "categoria": "Componentes",
+              "precio": 139.90,
+              "stock": 16
             },
             {
               "id": 3,
-              "nombre": "Teclado Mecánico K500",
-              "categoria": "Periféricos",
-              "precio": 79.95,
-              "stock": 40
+              "nombre": "Lunetra Malla AX",
+              "categoria": "Redes",
+              "precio": 89.95,
+              "stock": 24
             },
             {
               "id": 4,
-              "nombre": "Ratón Inalámbrico M200",
-              "categoria": "Periféricos",
-              "precio": 34.50,
-              "stock": 65
+              "nombre": "Grafenia Trazo 12",
+              "categoria": "Periféricos de diseño",
+              "precio": 119.50,
+              "stock": 14
             },
             {
               "id": 5,
-              "nombre": "Disco SSD 1TB",
-              "categoria": "Almacenamiento",
-              "precio": 89.99,
-              "stock": 30
+              "nombre": "Datavora Archivo Duo",
+              "categoria": "Almacenamiento en red",
+              "precio": 249.99,
+              "stock": 9
             },
             {
               "id": 6,
-              "nombre": "Memoria USB 128GB",
-              "categoria": "Almacenamiento",
-              "precio": 19.90,
-              "stock": 120
+              "nombre": "Pixelmora Captura HD",
+              "categoria": "Captura de vídeo",
+              "precio": 74.90,
+              "stock": 20
             },
             {
               "id": 7,
-              "nombre": "Webcam Full HD",
-              "categoria": "Periféricos",
-              "precio": 54.99,
-              "stock": 18
+              "nombre": "Voltessa Fuente Modular 650",
+              "categoria": "Alimentación",
+              "precio": 94.99,
+              "stock": 13
             },
             {
               "id": 8,
-              "nombre": "Auriculares Studio X",
-              "categoria": "Audio",
-              "precio": 69.50,
-              "stock": 35
+              "nombre": "Cryoniva Flujo 240",
+              "categoria": "Refrigeración",
+              "precio": 84.50,
+              "stock": 17
             },
             {
               "id": 9,
-              "nombre": "Altavoces SoundBox",
-              "categoria": "Audio",
-              "precio": 49.95,
-              "stock": 22
+              "nombre": "Mecalume Impresora 3D Compacta",
+              "categoria": "Fabricación digital",
+              "precio": 329.95,
+              "stock": 6
             },
             {
               "id": 10,
-              "nombre": "Hub USB-C 8 en 1",
-              "categoria": "Accesorios",
-              "precio": 44.90,
-              "stock": 50
+              "nombre": "Conexia Selector Dual",
+              "categoria": "Conectividad",
+              "precio": 59.90,
+              "stock": 21
             }
           ]
         }
