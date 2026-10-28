@@ -141,7 +141,7 @@ window.CrimsonDesigner = function(opts){
     arrows.querySelectorAll("line").forEach(l=>l.classList.remove("sel"));
     if(selected?.type==="table"){
       const e=[...canvas.querySelectorAll(".entity")].find(x=>x.dataset.table===selected.table);
-      if(e)e.style.outline="3px solid #dc143c55";
+      if(e)e.style.outline="3px solid rgba(25,170,54,.33)";
     }
     if(selected?.type==="relation") arrows.querySelector(`line[data-i="${selected.index}"]`)?.classList.add("sel");
   }

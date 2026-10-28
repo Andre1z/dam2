@@ -64,7 +64,7 @@ function renderArrows(){
 function highlight(){
  canvas.querySelectorAll(".entity").forEach(e=>e.style.outline="");
  arrows.querySelectorAll("line").forEach(l=>l.classList.remove("sel"));
- if(selected?.type==="table"){const e=[...canvas.querySelectorAll(".entity")].find(x=>x.dataset.table===selected.table);if(e)e.style.outline="3px solid #dc143c55"}
+ if(selected?.type==="table"){const e=[...canvas.querySelectorAll(".entity")].find(x=>x.dataset.table===selected.table);if(e)e.style.outline="3px solid rgba(25,170,54,.33)"}
  if(selected?.type==="relation"){arrows.querySelector(`line[data-i="${selected.index}"]`)?.classList.add("sel")}
 }
 document.querySelector("#addEntity").onclick=()=>{let n="nueva_entidad",i=1;while(tableByName(n))n="nueva_entidad_"+(++i);model.tables.push({name:n,x:260,y:120,columns:[{name:"Identificador",type:"INTEGER",pk:true}]});render()};
