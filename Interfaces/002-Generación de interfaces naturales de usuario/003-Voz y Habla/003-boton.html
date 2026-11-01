@@ -1,37 +1,71 @@
 <!doctype html>
-<html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Botón de voz | Voz y habla</title>
+    <style>
+      :root{color-scheme:light;--naranja:#f97316;--azul:#1d4ed8;--azul-claro:#eff6ff;--blanco:#fff;--negro:#111827;--gris:#4b5563}
+      *{box-sizing:border-box}
+      body{min-height:100vh;margin:0;padding:32px 18px;display:grid;place-items:center;background:var(--azul-claro);color:var(--negro);font-family:Arial,sans-serif}
+      main{width:min(100%,680px);padding:clamp(22px,5vw,40px);border-top:6px solid var(--naranja);border-radius:16px;background:var(--blanco);box-shadow:0 18px 50px #1118271a}
+      h1{margin:0 0 8px;color:var(--azul);font-size:clamp(1.7rem,5vw,2.2rem)}
+      p{color:var(--gris);line-height:1.6}
+      label{font-weight:700}
+      .campo{display:grid;gap:8px;margin-top:20px}
+      textarea{width:100%;min-height:130px;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:var(--blanco);color:var(--negro);font:inherit;resize:vertical}
+      textarea:focus,button:focus-visible{outline:3px solid #1d4ed855;outline-offset:2px}
+      .acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+      button{min-height:44px;padding:10px 16px;border:0;border-radius:8px;background:var(--naranja);color:var(--blanco);cursor:pointer;font:inherit;font-weight:700}
+      button.secundario{background:var(--azul)}
+      button:disabled{cursor:not-allowed;opacity:.5}
+      #estado{min-height:1.5em;margin:18px 0 0;color:var(--negro);font-weight:700}
+    </style>
+  </head>
   <body>
-
-    <button onclick="hablar()">Hablar</button>
-
+    <main>
+      <h1>Habla con el navegador</h1>
+      <p>Esta práctica convierte en voz el texto que escribas cuando pulses el botón.</p>
+      <div class="campo">
+        <label for="texto">Texto para leer</label>
+        <textarea id="texto" maxlength="1000">Hola, soy el navegador Chrome. Pulsa el botón para escucharme.</textarea>
+      </div>
+      <div class="acciones">
+        <button id="hablar" type="button">▶ Hablar</button>
+        <button id="detener" class="secundario" type="button" disabled>Detener</button>
+      </div>
+      <p id="estado" role="status" aria-live="polite">Listo para leer el texto.</p>
+    </main>
     <script>
-      let voces = [];
+      const sintetizador=window.speechSynthesis;
+      const texto=document.querySelector("#texto");
+      const hablar=document.querySelector("#hablar");
+      const detener=document.querySelector("#detener");
+      const estado=document.querySelector("#estado");
+      let mensajeActual=null;
 
-      speechSynthesis.onvoiceschanged = function(){
-        voces = speechSynthesis.getVoices();
-        console.log(voces);
-      };
-
-      function hablar(){
-
-        // Por si las voces ya estaban cargadas
-        voces = speechSynthesis.getVoices();
-
-        let mensaje = new SpeechSynthesisUtterance(
-          "Hola, soy el navegador Chrome"
-        );
-
-        mensaje.lang = "es-ES";
-
-        let voz = voces.find(v => v.lang === "es-US");
-
-        if(voz){
-          mensaje.voice = voz;
-        }
-
-        speechSynthesis.speak(mensaje);
+      if(!sintetizador||typeof SpeechSynthesisUtterance==="undefined"){
+        estado.textContent="Este navegador no admite la síntesis de voz.";
+        hablar.disabled=true;
+      }else{
+        hablar.addEventListener("click",()=>{
+          const contenido=texto.value.trim();
+          if(!contenido){estado.textContent="Escribe un texto antes de iniciar la lectura.";texto.focus();return;}
+          sintetizador.cancel();
+          const mensaje=new SpeechSynthesisUtterance(contenido);
+          mensaje.lang="es-ES";
+          mensajeActual=mensaje;
+          mensaje.onstart=()=>{if(mensajeActual===mensaje)estado.textContent="Leyendo…";};
+          mensaje.onend=()=>{if(mensajeActual===mensaje){mensajeActual=null;detener.disabled=true;estado.textContent="Lectura finalizada."; }};
+          mensaje.onerror=(evento)=>{if(mensajeActual===mensaje){mensajeActual=null;detener.disabled=true;estado.textContent=`No se pudo completar la lectura (${evento.error}).`;}};
+          detener.disabled=false;
+          estado.textContent="Iniciando lectura…";
+          sintetizador.speak(mensaje);
+        });
+        detener.addEventListener("click",()=>{
+          mensajeActual=null;sintetizador.cancel();detener.disabled=true;estado.textContent="Lectura detenida.";
+        });
       }
     </script>
-
   </body>
 </html>

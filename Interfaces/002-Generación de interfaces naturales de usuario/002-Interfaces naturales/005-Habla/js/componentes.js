@@ -34,7 +34,9 @@ window.jocarsa.iu = window.jocarsa.iu || {};
     }
 
     static colorTexto(texto) {
-      return `hsl(${Utilidades.hashTexto(texto) % 360},55%,45%)`;
+      return Utilidades.hashTexto(texto) % 2
+        ? "var(--naranja)"
+        : "var(--azul)";
     }
   }
 

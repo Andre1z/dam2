@@ -1,276 +1,143 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asistente de voz | Voz y habla</title>
     <style>
-
-      body{
-        font-family:Arial,sans-serif;
-      }
-
-      /* -------------------------
-         VENTANA DEL CHAT
-      ------------------------- */
-
-      #chat{
-        position:fixed;
-        right:30px;
-        bottom:105px;
-
-        width:350px;
-        height:450px;
-
-        background:#f5f5f5;
-
-        border-radius:15px;
-        box-shadow:0 5px 30px #0004;
-
-        display:none;
-        flex-direction:column;
-
-        overflow:hidden;
-      }
-
-
-      /* Cabecera */
-
-      #cabecera{
-        background:dodgerblue;
-        color:white;
-
-        padding:15px;
-
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-
-        font-weight:bold;
-      }
-
-      #cerrar{
-        cursor:pointer;
-        font-size:20px;
-      }
-
-
-      /* Conversación */
-
-      #conversacion{
-        flex:1;
-
-        padding:20px;
-
-        display:flex;
-        flex-direction:column;
-        gap:15px;
-
-        overflow-y:auto;
-      }
-
-
-      /* Bocadillos */
-
-      .bocadillo{
-        padding:10px 15px;
-        border-radius:18px;
-
-        max-width:75%;
-
-        line-height:1.4;
-      }
-
-      .yo{
-        background:dodgerblue;
-        color:white;
-
-        align-self:flex-end;
-
-        border-bottom-right-radius:4px;
-      }
-
-      .maquina{
-        background:white;
-
-        align-self:flex-start;
-
-        border-bottom-left-radius:4px;
-
-        box-shadow:0 2px 8px #0002;
-      }
-
-
-      /* -------------------------
-         BOTÓN FLOTANTE
-      ------------------------- */
-
-      #microfono{
-        position:fixed;
-
-        right:30px;
-        bottom:30px;
-
-        width:60px;
-        height:60px;
-
-        border:0;
-        border-radius:50%;
-
-        background:dodgerblue;
-        color:white;
-
-        font-size:28px;
-
-        cursor:pointer;
-
-        box-shadow:0 4px 15px #0004;
-
-        transition:0.2s;
-      }
-
-      #microfono:hover{
-        transform:scale(1.1);
-      }
-
+      :root{color-scheme:light;--naranja:#f97316;--azul:#1d4ed8;--azul-claro:#eff6ff;--blanco:#fff;--negro:#111827;--gris:#4b5563}
+      *{box-sizing:border-box}
+      body{min-height:100vh;margin:0;padding:32px 18px;display:grid;place-items:center;background:var(--azul-claro);color:var(--negro);font-family:Arial,sans-serif}
+      main{width:min(100%,760px);padding:clamp(22px,5vw,40px);border-top:6px solid var(--naranja);border-radius:16px;background:var(--blanco);box-shadow:0 18px 50px #1118271a}
+      h1{margin:0 0 8px;color:var(--azul);font-size:clamp(1.7rem,5vw,2.2rem)}
+      p{color:var(--gris);line-height:1.6}
+      #chat{display:none;flex-direction:column;gap:12px;margin-top:22px}
+      #chat.abierto{display:flex}
+      #cabecera{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:10px;background:var(--azul);color:var(--blanco);font-weight:700}
+      #cerrar{width:36px;height:36px;border:0;border-radius:8px;background:var(--naranja);color:var(--blanco);cursor:pointer;font-size:22px}
+      #conversacion{height:min(45vh,350px);min-height:200px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;padding:16px;border:1px solid #cbd5e1;border-radius:10px;background:var(--azul-claro)}
+      .bocadillo{max-width:80%;padding:11px 15px;border-radius:16px;background:var(--blanco);line-height:1.5;overflow-wrap:anywhere;box-shadow:0 2px 8px #11182712}
+      .yo{align-self:flex-end;border-bottom-right-radius:4px;background:var(--azul);color:var(--blanco)}
+      .maquina{align-self:flex-start;border-bottom-left-radius:4px;color:var(--negro)}
+      .acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+      button{min-height:44px;padding:10px 16px;border:0;border-radius:8px;background:var(--naranja);color:var(--blanco);cursor:pointer;font:inherit;font-weight:700}
+      button.secundario{background:var(--azul)}
+      button:disabled{cursor:not-allowed;opacity:.5}
+      button:focus-visible,#cerrar:focus-visible{outline:3px solid #1d4ed855;outline-offset:2px}
+      #estado{min-height:1.5em;margin:16px 0 0;color:var(--negro);font-weight:700}
+      #microfono{position:fixed;right:26px;bottom:26px;width:62px;height:62px;padding:0;border:0;border-radius:50%;background:var(--naranja);color:var(--blanco);font-size:26px;box-shadow:0 8px 24px #11182730;transition:transform .2s,background .2s}
+      #microfono:hover{transform:scale(1.06);background:var(--azul)}
+      @media(max-width:520px){body{padding:18px 12px 100px}#microfono{right:18px;bottom:18px}}
     </style>
   </head>
-
   <body>
-
-
-    <!-- Aquí estaría tu web normal -->
-
-    <h1>Mi página web</h1>
-
-    <p>
-      Este es el contenido normal de mi página.
-    </p>
-
-
-
-    <!-- CHAT FLOTANTE -->
-
-    <div id="chat">
-
-      <div id="cabecera">
-
-        <span>Asistente</span>
-
-        <span id="cerrar" onclick="cerrarChat()">
-          ×
-        </span>
-
-      </div>
-
-
-      <div id="conversacion">
-
-        <div class="bocadillo maquina">
-          Hola, pulsa el micrófono y háblame.
+    <main>
+      <h1>Asistente de voz</h1>
+      <p>Abre el chat y habla. En esta práctica el asistente repite la frase reconocida; no utiliza un servicio de inteligencia artificial.</p>
+      <section id="chat" aria-label="Chat de voz">
+        <div id="cabecera">
+          <span>Asistente de demostración</span>
+          <button id="cerrar" type="button" aria-label="Cerrar chat">×</button>
         </div>
-
-      </div>
-
-    </div>
-
-
-
-    <!-- BOTÓN FLOTANTE -->
-
-    <button id="microfono" onclick="escuchar()">
-      🎤
-    </button>
-
-
-
+        <div id="conversacion" aria-live="polite">
+          <div class="bocadillo maquina">Hola. Pulsa el micrófono para empezar a hablar.</div>
+        </div>
+        <div class="acciones">
+          <button id="hablar" type="button">🎤 Hablar</button>
+          <button id="detener" class="secundario" type="button" disabled>Detener</button>
+          <button id="limpiar" class="secundario" type="button">Limpiar conversación</button>
+        </div>
+        <p id="estado" role="status" aria-live="polite">Listo para escuchar.</p>
+      </section>
+    </main>
+    <button id="microfono" type="button" aria-label="Abrir chat y empezar a hablar">🎤</button>
     <script>
+      const Reconocimiento=window.SpeechRecognition||window.webkitSpeechRecognition;
+      const sintetizador=window.speechSynthesis;
+      const chat=document.querySelector("#chat");
+      const conversacion=document.querySelector("#conversacion");
+      const botonMicrofono=document.querySelector("#microfono");
+      const botonHablar=document.querySelector("#hablar");
+      const botonDetener=document.querySelector("#detener");
+      const estado=document.querySelector("#estado");
+      let reconocimiento=null;
 
-      function bocadillo(texto, quien){
-
-        let mensaje = document.createElement("div");
-
-        mensaje.classList.add("bocadillo");
-        mensaje.classList.add(quien);
-
-        mensaje.textContent = texto;
-
-        let conversacion =
-          document.querySelector("#conversacion");
-
+      function agregarMensaje(texto,clase){
+        const mensaje=document.createElement("div");
+        mensaje.className=`bocadillo ${clase}`;
+        mensaje.textContent=texto;
         conversacion.appendChild(mensaje);
-
-
-        // Scroll automático hacia abajo
-
-        conversacion.scrollTop =
-          conversacion.scrollHeight;
-
+        conversacion.scrollTop=conversacion.scrollHeight;
       }
 
+      function iniciarEscucha(){
+        chat.classList.add("abierto");
+        if(!Reconocimiento){
+          estado.textContent="Este navegador no admite reconocimiento de voz. Prueba con Chrome o Edge.";
+          botonHablar.disabled=true;botonMicrofono.disabled=true;
+          return;
+        }
+        if(reconocimiento)return;
 
-
-      function escuchar(){
-
-        // Mostrar chat
-
-        document.querySelector("#chat").style.display = "flex";
-
-
-        // Reconocimiento de voz
-
-        let reconocimiento =
-          new webkitSpeechRecognition();
-
-        reconocimiento.lang = "es-ES";
-
-
-        reconocimiento.onresult = function(evento){
-
-          let texto =
-            evento.results[0][0].transcript;
-
-
-          // Mensaje usuario
-
-          bocadillo(texto,"yo");
-
-
-          // Respuesta de momento
-
-          let respuesta = texto;
-
-
-          // Mensaje máquina
-
-          bocadillo(respuesta,"maquina");
-
-
-          // Hablar
-
-          let mensaje =
-            new SpeechSynthesisUtterance(respuesta);
-
-          mensaje.lang = "es-ES";
-
-          speechSynthesis.speak(mensaje);
-
+        reconocimiento=new Reconocimiento();
+        reconocimiento.lang="es-ES";
+        reconocimiento.continuous=false;
+        reconocimiento.interimResults=false;
+        reconocimiento.onstart=()=>{
+          estado.textContent="Escuchando…";
+          botonHablar.disabled=true;botonDetener.disabled=false;
         };
-
-
-        reconocimiento.start();
-
+        reconocimiento.onresult=(evento)=>{
+          const texto=evento.results[0][0].transcript.trim();
+          agregarMensaje(texto,"yo");
+          const respuesta=`Has dicho: ${texto}`;
+          agregarMensaje(respuesta,"maquina");
+          if(sintetizador&&typeof SpeechSynthesisUtterance!=="undefined"){
+            const mensaje=new SpeechSynthesisUtterance(respuesta);
+            mensaje.lang="es-ES";
+            mensaje.onstart=()=>{estado.textContent="El asistente está respondiendo…";};
+            mensaje.onend=()=>{estado.textContent="Listo para escuchar.";};
+            mensaje.onerror=(error)=>{estado.textContent=`La respuesta no pudo reproducirse (${error.error}).`;};
+            sintetizador.cancel();
+            sintetizador.speak(mensaje);
+          }else{
+            estado.textContent="Frase transcrita. Este navegador no admite síntesis de voz.";
+          }
+        };
+        reconocimiento.onerror=(evento)=>{
+          estado.textContent=evento.error==="not-allowed"
+            ?"No hay permiso para usar el micrófono."
+            :`Error de reconocimiento: ${evento.error}.`;
+        };
+        reconocimiento.onend=()=>{
+          reconocimiento=null;botonHablar.disabled=false;botonDetener.disabled=true;
+          if(estado.textContent==="Escuchando…")estado.textContent="No se detectó ninguna frase. Inténtalo otra vez.";
+        };
+        try{reconocimiento.start();}
+        catch(error){
+          reconocimiento=null;botonHablar.disabled=false;botonDetener.disabled=true;
+          estado.textContent=`No se pudo iniciar el reconocimiento: ${error.message}`;
+        }
       }
 
-
-
-      function cerrarChat(){
-
-        document.querySelector("#chat")
-          .style.display = "none";
-
-      }
-
+      botonMicrofono.addEventListener("click",iniciarEscucha);
+      botonHablar.addEventListener("click",iniciarEscucha);
+      document.querySelector("#detener").addEventListener("click",()=>{
+        if(reconocimiento){estado.textContent="Deteniendo escucha…";reconocimiento.stop();}
+      });
+      document.querySelector("#cerrar").addEventListener("click",()=>{
+        if(reconocimiento)reconocimiento.stop();
+        if(sintetizador)sintetizador.cancel();
+        chat.classList.remove("abierto");
+        botonMicrofono.focus();
+      });
+      document.querySelector("#limpiar").addEventListener("click",()=>{
+        if(reconocimiento)reconocimiento.stop();
+        if(sintetizador)sintetizador.cancel();
+        conversacion.replaceChildren();
+        agregarMensaje("Conversación limpiada. Pulsa «Hablar» para empezar otra vez.","maquina");
+        estado.textContent="Conversación limpiada.";
+      });
     </script>
-
   </body>
 </html>

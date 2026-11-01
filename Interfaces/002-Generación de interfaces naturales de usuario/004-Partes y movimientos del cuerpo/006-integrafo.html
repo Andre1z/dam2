@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MediaPipe Face → Sprite Fade 5x5</title>
 
   <style>
@@ -80,6 +81,110 @@
     .mensaje{margin:7px 0;padding:8px 12px;border-radius:10px;max-width:75%;}
     .yo{margin-left:auto;background:dodgerblue;}
     .maquina{background:#333;}
+
+    :root{
+      color-scheme:light;
+      --naranja:#f97316;
+      --azul:#1d4ed8;
+      --azul-claro:#eff6ff;
+      --blanco:#fff;
+      --negro:#111827;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      padding:22px;
+      background:var(--azul-claro);
+      color:var(--negro);
+      font-family:Arial,sans-serif;
+    }
+
+    h1{
+      max-width:1280px;
+      margin:0 auto 16px;
+      padding:15px 20px;
+      border-top:5px solid var(--naranja);
+      border-radius:12px;
+      background:var(--blanco);
+      color:var(--azul);
+      font-size:clamp(1.35rem,4vw,2rem);
+      box-shadow:0 10px 30px #11182714;
+    }
+
+    #pantalla{
+      width:min(1280px,100%);
+      height:auto;
+      aspect-ratio:8/3;
+      overflow:hidden;
+      border:3px solid var(--azul);
+      border-radius:12px;
+      background:var(--blanco);
+      box-shadow:0 16px 36px #11182724;
+    }
+
+    .mitad{width:50%;height:auto;aspect-ratio:4/3}
+    #webcam{background:var(--negro)}
+    #avatar{background:var(--blanco)}
+    video,canvas{width:100%;height:100%}
+
+    .titulo{
+      border-left:4px solid var(--naranja);
+      border-radius:7px;
+      background:var(--azul);
+      color:var(--blanco);
+      font-family:Arial,sans-serif;
+      font-weight:700;
+    }
+
+    #controlesChat{
+      width:min(1280px,100%);
+      margin:16px auto 10px;
+      padding:12px;
+      border:1px solid #dbeafe;
+      border-radius:12px;
+      background:var(--blanco);
+      box-shadow:0 8px 24px #11182710;
+    }
+
+    #textoUsuario{
+      min-width:0;
+      border:1px solid #cbd5e1;
+      background:var(--blanco);
+      color:var(--negro);
+      font:inherit;
+    }
+
+    #enviar,#microfono{
+      min-height:44px;
+      background:var(--naranja);
+      color:var(--blanco);
+      font:inherit;
+      font-weight:700;
+    }
+
+    #microfono{background:var(--azul)}
+
+    #conversacion{
+      width:min(1280px,100%);
+      height:180px;
+      margin:0 auto 20px;
+      border:1px solid #cbd5e1;
+      background:var(--blanco);
+      color:var(--negro);
+    }
+
+    .mensaje{background:var(--azul-claro);color:var(--negro)}
+    .yo{background:var(--azul);color:var(--blanco)}
+    .maquina{border-left:4px solid var(--naranja)}
+
+    @media(max-width:700px){
+      body{padding:14px 12px}
+      #pantalla{flex-direction:column;aspect-ratio:auto}
+      .mitad{width:100%;height:auto;aspect-ratio:4/3}
+      #controlesChat{flex-wrap:wrap}
+      #textoUsuario{flex-basis:100%}
+    }
   </style>
 </head>
 

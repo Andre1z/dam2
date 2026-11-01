@@ -1,31 +1,99 @@
 <!doctype html>
-<html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Escucha y repite | Voz y habla</title>
+    <style>
+      :root{color-scheme:light;--naranja:#f97316;--azul:#1d4ed8;--azul-claro:#eff6ff;--blanco:#fff;--negro:#111827;--gris:#4b5563}
+      *{box-sizing:border-box}
+      body{min-height:100vh;margin:0;padding:32px 18px;display:grid;place-items:center;background:var(--azul-claro);color:var(--negro);font-family:Arial,sans-serif}
+      main{width:min(100%,680px);padding:clamp(22px,5vw,40px);border-top:6px solid var(--naranja);border-radius:16px;background:var(--blanco);box-shadow:0 18px 50px #1118271a}
+      h1{margin:0 0 8px;color:var(--azul);font-size:clamp(1.7rem,5vw,2.2rem)}
+      p{color:var(--gris);line-height:1.6}
+      .acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+      button{min-height:44px;padding:10px 16px;border:0;border-radius:8px;background:var(--naranja);color:var(--blanco);cursor:pointer;font:inherit;font-weight:700}
+      button.secundario{background:var(--azul)}
+      button:disabled{cursor:not-allowed;opacity:.5}
+      button:focus-visible{outline:3px solid #1d4ed855;outline-offset:2px}
+      .resultado{min-height:130px;margin-top:22px;padding:16px;border:1px solid #cbd5e1;border-radius:10px;background:var(--azul-claro);line-height:1.6;overflow-wrap:anywhere}
+      #estado{min-height:1.5em;margin:18px 0 0;color:var(--negro);font-weight:700}
+    </style>
+  </head>
   <body>
-    <button onclick="escuchar()">Escuchar y repetir</button>
-
+    <main>
+      <h1>Escucha y repite</h1>
+      <p>Di una frase al micrófono. El navegador la transcribirá y la leerá en voz alta.</p>
+      <div class="acciones">
+        <button id="empezar" type="button">🎤 Hablar</button>
+        <button id="detener" class="secundario" type="button" disabled>Detener escucha</button>
+        <button id="limpiar" class="secundario" type="button">Limpiar</button>
+      </div>
+      <div class="resultado" id="resultado" aria-label="Texto reconocido">Aquí aparecerá lo que digas.</div>
+      <p id="estado" role="status" aria-live="polite">Listo para escuchar.</p>
+    </main>
     <script>
-      function escuchar(){
+      const Reconocimiento=window.SpeechRecognition||window.webkitSpeechRecognition;
+      const sintetizador=window.speechSynthesis;
+      const empezar=document.querySelector("#empezar");
+      const detener=document.querySelector("#detener");
+      const limpiar=document.querySelector("#limpiar");
+      const resultado=document.querySelector("#resultado");
+      const estado=document.querySelector("#estado");
+      let reconocimiento=null;
 
-        // Escuchar
-        let reconocimiento = new webkitSpeechRecognition();
-        reconocimiento.lang = "es-ES";
-
-        reconocimiento.onresult = function(evento){
-
-          // Obtener lo que hemos dicho
-          let texto = evento.results[0][0].transcript;
-
-          console.log(texto);
-
-          // Repetirlo
-          let mensaje = new SpeechSynthesisUtterance(texto);
-          mensaje.lang = "es-ES";
-
-          speechSynthesis.speak(mensaje);
-        };
-
-        reconocimiento.start();
+      if(!Reconocimiento){
+        estado.textContent="Este navegador no admite reconocimiento de voz. Prueba con Chrome o Edge.";
+        empezar.disabled=true;
+      }else{
+        empezar.addEventListener("click",()=>{
+          if(reconocimiento)return;
+          reconocimiento=new Reconocimiento();
+          reconocimiento.lang="es-ES";
+          reconocimiento.continuous=false;
+          reconocimiento.interimResults=false;
+          reconocimiento.onstart=()=>{
+            estado.textContent="Escuchando…";
+            empezar.disabled=true;detener.disabled=false;
+          };
+          reconocimiento.onresult=(evento)=>{
+            const texto=evento.results[0][0].transcript.trim();
+            resultado.textContent=texto;
+            estado.textContent="Repitiendo lo que has dicho…";
+            if(sintetizador&&typeof SpeechSynthesisUtterance!=="undefined"){
+              sintetizador.cancel();
+              const mensaje=new SpeechSynthesisUtterance(texto);
+              mensaje.lang="es-ES";
+              mensaje.onend=()=>{estado.textContent="Repetición finalizada.";};
+              mensaje.onerror=(error)=>{estado.textContent=`No se pudo reproducir la voz (${error.error}).`;};
+              sintetizador.speak(mensaje);
+            }else{
+              estado.textContent="Texto reconocido. Este navegador no admite la síntesis de voz.";
+            }
+          };
+          reconocimiento.onerror=(evento)=>{
+            estado.textContent=evento.error==="not-allowed"
+              ?"No hay permiso para usar el micrófono."
+              :`Error de reconocimiento: ${evento.error}.`;
+          };
+          reconocimiento.onend=()=>{
+            reconocimiento=null;empezar.disabled=false;detener.disabled=true;
+            if(estado.textContent==="Escuchando…")estado.textContent="No se detectó ninguna frase. Inténtalo otra vez.";
+          };
+          try{reconocimiento.start();}
+          catch(error){reconocimiento=null;empezar.disabled=false;detener.disabled=true;estado.textContent=`No se pudo iniciar el reconocimiento: ${error.message}`;}
+        });
+        detener.addEventListener("click",()=>{
+          if(reconocimiento){estado.textContent="Deteniendo escucha…";reconocimiento.stop();}
+        });
       }
+
+      limpiar.addEventListener("click",()=>{
+        if(reconocimiento)reconocimiento.stop();
+        if(sintetizador)sintetizador.cancel();
+        resultado.textContent="Aquí aparecerá lo que digas.";
+        estado.textContent="Contenido limpiado.";
+      });
     </script>
   </body>
 </html>

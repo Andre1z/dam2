@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MediaPipe Face → Sprite Fade 5x5</title>
 
   <style>
@@ -70,6 +71,72 @@
       padding:8px 12px;
       border-radius:5px;
       pointer-events:none;
+    }
+
+    :root{
+      color-scheme:light;
+      --naranja:#f97316;
+      --azul:#1d4ed8;
+      --azul-claro:#eff6ff;
+      --blanco:#fff;
+      --negro:#111827;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      padding:28px 18px;
+      background:var(--azul-claro);
+      color:var(--negro);
+      font-family:Arial,sans-serif;
+    }
+
+    h1{
+      margin:0 auto 18px;
+      padding:16px 20px;
+      border-top:5px solid var(--naranja);
+      border-radius:12px;
+      background:var(--blanco);
+      color:var(--azul);
+      font-size:clamp(1.4rem,4vw,2rem);
+      box-shadow:0 10px 30px #11182714;
+    }
+
+    #pantalla{
+      width:min(1280px,100%);
+      height:auto;
+      aspect-ratio:8/3;
+      overflow:hidden;
+      border:3px solid var(--azul);
+      border-radius:12px;
+      background:var(--blanco);
+      box-shadow:0 16px 36px #11182724;
+    }
+
+    .mitad{
+      width:50%;
+      height:auto;
+      aspect-ratio:4/3;
+    }
+
+    #webcam{background:var(--negro)}
+    #avatar{background:var(--blanco)}
+
+    video,canvas{width:100%;height:100%}
+
+    .titulo{
+      border-left:4px solid var(--naranja);
+      border-radius:7px;
+      background:var(--azul);
+      color:var(--blanco);
+      font-family:Arial,sans-serif;
+      font-weight:700;
+    }
+
+    @media(max-width:700px){
+      body{padding:18px 12px}
+      #pantalla{flex-direction:column;aspect-ratio:auto}
+      .mitad{width:100%;height:auto;aspect-ratio:4/3}
     }
   </style>
 </head>

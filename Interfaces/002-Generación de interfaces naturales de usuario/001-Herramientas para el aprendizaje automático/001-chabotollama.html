@@ -6,9 +6,17 @@
     <title>Asistente con Ollama</title>
 
     <style>
+      :root{
+        --naranja:#f97316;
+        --azul:#1d4ed8;
+        --blanco:#ffffff;
+        --negro:#111827;
+      }
 
       body{
         font-family:Arial,sans-serif;
+        color:var(--negro);
+        background:var(--blanco);
       }
 
       /* -------------------------
@@ -23,8 +31,9 @@
         width:350px;
         height:450px;
 
-        background:#f5f5f5;
+        background:var(--blanco);
 
+        border:2px solid var(--azul);
         border-radius:15px;
         box-shadow:0 5px 30px #0004;
 
@@ -38,8 +47,8 @@
       /* Cabecera */
 
       #cabecera{
-        background:dodgerblue;
-        color:white;
+        background:var(--azul);
+        color:var(--blanco);
 
         padding:15px;
 
@@ -53,6 +62,7 @@
       #cerrar{
         cursor:pointer;
         font-size:20px;
+        color:var(--naranja);
       }
 
 
@@ -83,8 +93,8 @@
       }
 
       .yo{
-        background:dodgerblue;
-        color:white;
+        background:var(--naranja);
+        color:var(--blanco);
 
         align-self:flex-end;
 
@@ -92,7 +102,8 @@
       }
 
       .maquina{
-        background:white;
+        background:var(--blanco);
+        color:var(--negro);
 
         align-self:flex-start;
 
@@ -118,8 +129,8 @@
         border:0;
         border-radius:50%;
 
-        background:dodgerblue;
-        color:white;
+        background:var(--naranja);
+        color:var(--blanco);
 
         font-size:28px;
 
@@ -131,6 +142,7 @@
       }
 
       #microfono:hover{
+        background:var(--azul);
         transform:scale(1.1);
       }
 

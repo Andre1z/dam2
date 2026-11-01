@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Avatar IA con Ollama</title>
 
   <style>
@@ -51,6 +52,51 @@
     #microfono:hover{transform:scale(1.08)}
     #microfono.escuchando{transform:scale(1.12);box-shadow:0 0 0 10px #1e90ff33,0 6px 24px #0004}
     #microfono.pensando{opacity:.65;cursor:wait}
+
+    :root{
+      color-scheme:light;
+      --naranja:#f97316;
+      --azul:#1d4ed8;
+      --azul-claro:#eff6ff;
+      --blanco:#fff;
+      --negro:#111827;
+    }
+
+    body,#pantalla{
+      background:var(--azul-claro);
+      color:var(--negro);
+    }
+
+    #pantalla{
+      background:radial-gradient(ellipse at center,#fff 0%,var(--azul-claro) 72%);
+    }
+
+    #webcam{
+      border:2px solid var(--azul);
+      background:var(--negro);
+      box-shadow:0 12px 32px #11182730;
+    }
+
+    #minimizarWebcam{
+      background:var(--azul);
+      color:var(--blanco);
+    }
+
+    #microfono{
+      background:var(--naranja);
+      color:var(--blanco);
+      box-shadow:0 8px 26px #11182730;
+    }
+
+    #microfono:hover{background:var(--azul)}
+    #microfono.escuchando{box-shadow:0 0 0 10px #f9731633,0 8px 26px #11182730}
+    #microfono:focus-visible,#minimizarWebcam:focus-visible{outline:3px solid var(--naranja);outline-offset:3px}
+
+    @media(max-width:600px){
+      #webcam{right:12px;top:12px;width:144px;height:108px;border-radius:12px}
+      #webcam.minimizada{width:44px;height:44px}
+      #microfono{right:16px;bottom:16px;width:58px;height:58px}
+    }
   </style>
 </head>
 

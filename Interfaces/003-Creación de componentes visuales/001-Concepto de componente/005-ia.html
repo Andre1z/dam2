@@ -1,56 +1,10 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <style>
-      .jocarsa-texto{
-        width:402px;
-        font-family:Arial,sans-serif;
-      }
-
-      .jocarsa-texto .barra{
-        display:flex;
-        gap:4px;
-        flex-wrap:wrap;
-        padding:5px;
-        background:#eee;
-        border:1px solid grey;
-        border-bottom:none;
-      }
-
-      .jocarsa-texto button{
-        min-width:32px;
-        height:30px;
-        cursor:pointer;
-        border:1px solid #aaa;
-        background:white;
-        border-radius:3px;
-      }
-
-      .jocarsa-texto button:hover{
-        background:#ddd;
-      }
-
-      .jocarsa-texto article{
-        width:400px;
-        height:400px;
-        border:1px solid grey;
-        padding:10px;
-        box-sizing:border-box;
-        overflow:auto;
-        outline:none;
-      }
-
-      .jocarsa-texto article:focus{
-        border-color:#555;
-      }
-
-      .jocarsa-texto textarea{
-        width:400px;
-        height:200px;
-        box-sizing:border-box;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor enriquecido | Componente visual</title>
+    <link rel="stylesheet" href="andrei-texto.css">
   </head>
 
   <body>
@@ -79,6 +33,8 @@
 
         let barra = document.createElement("div");
         barra.classList.add("barra");
+        barra.setAttribute("role", "toolbar");
+        barra.setAttribute("aria-label", "Formato de texto");
 
         contenedor.appendChild(barra);
 
@@ -88,7 +44,23 @@
 
           let boton = document.createElement("button");
 
+          boton.type = "button";
           boton.innerHTML = texto;
+          const nombresFormato = {
+            bold: "negrita",
+            italic: "cursiva",
+            underline: "subrayado",
+            strikeThrough: "tachado",
+            formatBlock: "bloque " + valor,
+            insertUnorderedList: "lista con viñetas",
+            insertOrderedList: "lista numerada",
+            justifyLeft: "alinear a la izquierda",
+            justifyCenter: "centrar",
+            justifyRight: "alinear a la derecha",
+            undo: "deshacer",
+            redo: "rehacer"
+          };
+          boton.setAttribute("aria-label", "Aplicar " + nombresFormato[comando]);
 
           barra.appendChild(boton);
 
@@ -148,7 +120,9 @@
 
         let boton_enlace = document.createElement("button");
 
+        boton_enlace.type = "button";
         boton_enlace.textContent = "🔗";
+        boton_enlace.setAttribute("aria-label", "Insertar enlace");
 
         barra.appendChild(boton_enlace);
 
@@ -176,7 +150,9 @@
 
         let boton_limpiar = document.createElement("button");
 
+        boton_limpiar.type = "button";
         boton_limpiar.textContent = "Tx";
+        boton_limpiar.setAttribute("aria-label", "Quitar formato");
 
         barra.appendChild(boton_limpiar);
 
@@ -202,6 +178,9 @@
           "contenteditable",
           "true"
         );
+        contenedor_rico.setAttribute("role", "textbox");
+        contenedor_rico.setAttribute("aria-label", "Editor de texto");
+        contenedor_rico.setAttribute("aria-multiline", "true");
 
         contenedor.appendChild(contenedor_rico);
 
@@ -211,6 +190,7 @@
         // ==============================
 
         let contenedor_pobre = document.createElement("textarea");
+        contenedor_pobre.setAttribute("aria-label", "Código HTML del texto");
 
         contenedor.appendChild(contenedor_pobre);
 
@@ -241,7 +221,9 @@
 
         let boton_html = document.createElement("button");
 
+        boton_html.type = "button";
         boton_html.textContent = "</>";
+        boton_html.setAttribute("aria-label", "Mostrar u ocultar código HTML");
 
         barra.appendChild(boton_html);
 

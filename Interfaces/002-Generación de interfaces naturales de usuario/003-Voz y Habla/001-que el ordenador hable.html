@@ -1,9 +1,354 @@
 <!doctype html>
-<html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Texto a voz | Voz y habla</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --naranja: #f97316;
+        --azul: #1d4ed8;
+        --azul-claro: #eff6ff;
+        --blanco: #ffffff;
+        --negro: #111827;
+        --gris: #4b5563;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 32px 18px;
+        display: grid;
+        place-items: center;
+        background: var(--azul-claro);
+        color: var(--negro);
+        font-family: Arial, sans-serif;
+      }
+
+      main {
+        width: min(100%, 680px);
+        padding: clamp(22px, 5vw, 40px);
+        border-top: 6px solid var(--naranja);
+        border-radius: 16px;
+        background: var(--blanco);
+        box-shadow: 0 18px 50px #1118271a;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        color: var(--azul);
+        font-size: clamp(1.7rem, 5vw, 2.2rem);
+      }
+
+      p {
+        color: var(--gris);
+        line-height: 1.6;
+      }
+
+      .campo {
+        display: grid;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      label,
+      output {
+        font-weight: 700;
+      }
+
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: var(--blanco);
+        color: var(--negro);
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 130px;
+        padding: 12px;
+        resize: vertical;
+      }
+
+      select {
+        min-height: 42px;
+        padding: 8px 10px;
+      }
+
+      textarea:focus,
+      select:focus,
+      input:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #1d4ed855;
+        outline-offset: 2px;
+      }
+
+      .contador {
+        justify-self: end;
+        color: var(--gris);
+        font-size: .875rem;
+      }
+
+      .ajustes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .ajustes .campo {
+        min-width: 0;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--azul);
+      }
+
+      output {
+        color: var(--azul);
+      }
+
+      .acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      button {
+        min-height: 44px;
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--naranja);
+        color: var(--blanco);
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+      }
+
+      button.secundario {
+        background: var(--azul);
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: .5;
+      }
+
+      #estado {
+        min-height: 1.5em;
+        margin: 18px 0 0;
+        color: var(--negro);
+        font-weight: 700;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          padding: 16px 12px;
+        }
+
+        .ajustes {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
   <body>
+    <main>
+      <h1>Texto a voz</h1>
+      <p>Escribe un texto, elige una voz y escucha cómo lo lee el navegador.</p>
+
+      <div class="campo">
+        <label for="texto">Texto para leer</label>
+        <textarea id="texto" maxlength="1000">Hola, soy el navegador. Escribe aquí el texto que quieras escuchar.</textarea>
+        <span class="contador" id="contador">0 / 1000</span>
+      </div>
+
+      <div class="campo">
+        <label for="voz">Voz disponible</label>
+        <select id="voz">
+          <option value="">Voz predeterminada del navegador</option>
+        </select>
+      </div>
+
+      <div class="ajustes">
+        <div class="campo">
+          <label for="velocidad">Velocidad <output id="valor-velocidad">1</output></label>
+          <input id="velocidad" type="range" min="0.5" max="2" step="0.1" value="1">
+        </div>
+        <div class="campo">
+          <label for="tono">Tono <output id="valor-tono">1</output></label>
+          <input id="tono" type="range" min="0" max="2" step="0.1" value="1">
+        </div>
+        <div class="campo">
+          <label for="volumen">Volumen <output id="valor-volumen">1</output></label>
+          <input id="volumen" type="range" min="0" max="1" step="0.1" value="1">
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button id="hablar" type="button">▶ Hablar</button>
+        <button id="pausar" class="secundario" type="button" disabled>Pausar</button>
+        <button id="detener" class="secundario" type="button" disabled>Detener</button>
+      </div>
+      <p id="estado" role="status" aria-live="polite">Preparando voces disponibles…</p>
+    </main>
+
     <script>
-        let mensaje = new SpeechSynthesisUtterance("Hola, soy el navegador Chrome");
-        speechSynthesis.speak(mensaje);
+      const sintetizador = window.speechSynthesis;
+      const texto = document.querySelector("#texto");
+      const selectorVoz = document.querySelector("#voz");
+      const botonHablar = document.querySelector("#hablar");
+      const botonPausar = document.querySelector("#pausar");
+      const botonDetener = document.querySelector("#detener");
+      const estado = document.querySelector("#estado");
+      const controles = [
+        ["velocidad", "valor-velocidad"],
+        ["tono", "valor-tono"],
+        ["volumen", "valor-volumen"]
+      ];
+      let voces = [];
+      let mensajeActual = null;
+
+      function actualizarContador() {
+        document.querySelector("#contador").textContent =
+          `${texto.value.length} / ${texto.maxLength}`;
+      }
+
+      function cargarVoces() {
+        voces = sintetizador.getVoices();
+        const vozSeleccionada = selectorVoz.value;
+
+        selectorVoz.replaceChildren(
+          new Option("Voz predeterminada del navegador", "")
+        );
+
+        voces.forEach((voz, indice) => {
+          const opcion = new Option(
+            `${voz.name} (${voz.lang})${voz.default ? " — predeterminada" : ""}`,
+            String(indice)
+          );
+          selectorVoz.add(opcion);
+        });
+
+        if (voces.some((voz, indice) => String(indice) === vozSeleccionada)) {
+          selectorVoz.value = vozSeleccionada;
+        }
+
+        estado.textContent = voces.length
+          ? "Listo. Las voces disponibles dependen del navegador y del sistema."
+          : "No se encontraron voces instaladas; se usará la voz predeterminada si está disponible.";
+      }
+
+      function actualizarBotones() {
+        const hablando = mensajeActual !== null;
+        botonPausar.disabled = !hablando;
+        botonPausar.textContent = sintetizador.paused ? "Reanudar" : "Pausar";
+        botonDetener.disabled = !hablando;
+      }
+
+      function hablar() {
+        const contenido = texto.value.trim();
+
+        if (!contenido) {
+          estado.textContent = "Escribe un texto antes de iniciar la lectura.";
+          texto.focus();
+          return;
+        }
+
+        sintetizador.cancel();
+
+        const mensaje = new SpeechSynthesisUtterance(contenido);
+        mensaje.lang = "es-ES";
+        mensaje.rate = Number(document.querySelector("#velocidad").value);
+        mensaje.pitch = Number(document.querySelector("#tono").value);
+        mensaje.volume = Number(document.querySelector("#volumen").value);
+
+        const vozElegida = selectorVoz.value === ""
+          ? null
+          : voces[Number(selectorVoz.value)];
+        if (vozElegida) {
+          mensaje.voice = vozElegida;
+          mensaje.lang = vozElegida.lang;
+        }
+
+        mensajeActual = mensaje;
+        mensaje.onstart = () => {
+          if (mensajeActual === mensaje) {
+            estado.textContent = "Leyendo el texto…";
+            actualizarBotones();
+          }
+        };
+        mensaje.onend = () => {
+          if (mensajeActual === mensaje) {
+            mensajeActual = null;
+            estado.textContent = "Lectura finalizada.";
+            actualizarBotones();
+          }
+        };
+        mensaje.onerror = (evento) => {
+          if (mensajeActual === mensaje) {
+            mensajeActual = null;
+            estado.textContent = `No se pudo completar la lectura (${evento.error}).`;
+            actualizarBotones();
+          }
+        };
+
+        estado.textContent = "Iniciando lectura…";
+        actualizarBotones();
+        sintetizador.speak(mensaje);
+      }
+
+      if (!sintetizador || typeof SpeechSynthesisUtterance === "undefined") {
+        estado.textContent = "Este navegador no admite la síntesis de voz.";
+        botonHablar.disabled = true;
+        selectorVoz.disabled = true;
+        controles.forEach(([id]) => {
+          document.querySelector(`#${id}`).disabled = true;
+        });
+      } else {
+        sintetizador.addEventListener("voiceschanged", cargarVoces);
+        cargarVoces();
+
+        botonHablar.addEventListener("click", hablar);
+        botonPausar.addEventListener("click", () => {
+          if (sintetizador.paused) {
+            sintetizador.resume();
+            estado.textContent = "Lectura reanudada.";
+          } else {
+            sintetizador.pause();
+            estado.textContent = "Lectura en pausa.";
+          }
+          actualizarBotones();
+        });
+        botonDetener.addEventListener("click", () => {
+          mensajeActual = null;
+          sintetizador.cancel();
+          estado.textContent = "Lectura detenida.";
+          actualizarBotones();
+        });
+      }
+
+      texto.addEventListener("input", actualizarContador);
+      actualizarContador();
+
+      controles.forEach(([id, idSalida]) => {
+        const control = document.querySelector(`#${id}`);
+        const salida = document.querySelector(`#${idSalida}`);
+        control.addEventListener("input", () => {
+          salida.value = control.value;
+          salida.textContent = control.value;
+        });
+      });
     </script>
   </body>
 </html>

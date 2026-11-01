@@ -29,6 +29,8 @@ elementos.forEach(function(elemento){
   let barra = document.createElement("div");
 
   barra.classList.add("barra");
+  barra.setAttribute("role", "toolbar");
+  barra.setAttribute("aria-label", "Formato de texto");
 
   contenedor.appendChild(barra);
 
@@ -47,6 +49,21 @@ elementos.forEach(function(elemento){
     boton.type = "button";
 
     boton.innerHTML = texto;
+    const nombresFormato = {
+      bold: "negrita",
+      italic: "cursiva",
+      underline: "subrayado",
+      strikeThrough: "tachado",
+      formatBlock: "bloque " + valor,
+      insertUnorderedList: "lista con viñetas",
+      insertOrderedList: "lista numerada",
+      justifyLeft: "alinear a la izquierda",
+      justifyCenter: "centrar",
+      justifyRight: "alinear a la derecha",
+      undo: "deshacer",
+      redo: "rehacer"
+    };
+    boton.setAttribute("aria-label", "Aplicar " + nombresFormato[comando]);
 
     barra.appendChild(boton);
 
@@ -111,6 +128,7 @@ elementos.forEach(function(elemento){
   boton_enlace.type = "button";
 
   boton_enlace.textContent = "🔗";
+  boton_enlace.setAttribute("aria-label", "Insertar enlace");
 
   barra.appendChild(boton_enlace);
 
@@ -142,6 +160,7 @@ elementos.forEach(function(elemento){
   boton_limpiar.type = "button";
 
   boton_limpiar.textContent = "Tx";
+  boton_limpiar.setAttribute("aria-label", "Quitar formato");
 
   barra.appendChild(boton_limpiar);
 
@@ -168,6 +187,9 @@ elementos.forEach(function(elemento){
     "contenteditable",
     "true"
   );
+  contenedor_rico.setAttribute("role", "textbox");
+  contenedor_rico.setAttribute("aria-label", "Editor de texto");
+  contenedor_rico.setAttribute("aria-multiline", "true");
 
   contenedor.appendChild(contenedor_rico);
 
@@ -177,6 +199,7 @@ elementos.forEach(function(elemento){
   // ==============================
 
   let contenedor_pobre = document.createElement("textarea");
+  contenedor_pobre.setAttribute("aria-label", "Código HTML del texto");
 
 
   // ==============================
@@ -238,6 +261,7 @@ elementos.forEach(function(elemento){
   boton_html.type = "button";
 
   boton_html.textContent = "</>";
+  boton_html.setAttribute("aria-label", "Mostrar u ocultar código HTML");
 
   barra.appendChild(boton_html);
 

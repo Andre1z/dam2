@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MediaPipe Face Mesh</title>
 
   <style>
@@ -32,6 +33,60 @@
 
     canvas{
       z-index:2;
+    }
+
+    :root{
+      color-scheme:light;
+      --naranja:#f97316;
+      --azul:#1d4ed8;
+      --azul-claro:#eff6ff;
+      --blanco:#fff;
+      --negro:#111827;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      padding:32px 18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      background:var(--azul-claro);
+      color:var(--negro);
+      font-family:Arial,sans-serif;
+    }
+
+    h1{
+      width:min(100%,800px);
+      margin:0;
+      padding:18px 22px;
+      border-top:5px solid var(--naranja);
+      border-radius:12px;
+      background:var(--blanco);
+      color:var(--azul);
+      font-size:clamp(1.4rem,4vw,2rem);
+      box-shadow:0 10px 30px #11182714;
+    }
+
+    #contenedor{
+      width:min(100%,800px);
+      height:auto;
+      aspect-ratio:4/3;
+      overflow:hidden;
+      border:3px solid var(--azul);
+      border-radius:12px;
+      background:var(--negro);
+      box-shadow:0 16px 36px #11182724;
+    }
+
+    video,canvas{
+      width:100%;
+      height:100%;
+    }
+
+    @media(max-width:520px){
+      body{padding:18px 12px}
     }
   </style>
 </head>

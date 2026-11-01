@@ -1,22 +1,25 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="jocarsa-texto.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario con texto enriquecido | Componente visual</title>
+    <link rel="stylesheet" href="andrei-texto.css">
   </head>
   <body>
 
     <form action="procesa.php" method="POST">
 
-      <input type="text" name="nombre">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" name="nombre" autocomplete="name">
 
       <jocarsa-texto name="mensaje"></jocarsa-texto>
 
-      <input type="submit">
+      <input type="submit" value="Enviar">
 
     </form>
 
-    <script src="jocarsa-texto.js"></script>
+    <script src="andrei-texto.js"></script>
 
   </body>
 </html>
