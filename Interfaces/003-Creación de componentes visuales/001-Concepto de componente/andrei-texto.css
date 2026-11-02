@@ -18,7 +18,7 @@ body{
   font-family:Arial,sans-serif;
 }
 
-.jocarsa-texto{
+.andrei-texto{
   width:min(100%,680px);
   overflow:hidden;
   border:1px solid #d5deed;
@@ -27,7 +27,7 @@ body{
   box-shadow:0 12px 32px #11182714;
 }
 
-.jocarsa-texto .barra{
+.andrei-texto .barra{
   display:flex;
   gap:6px;
   flex-wrap:wrap;
@@ -36,7 +36,7 @@ body{
   background:#f3f6fb;
 }
 
-.jocarsa-texto button{
+.andrei-texto button{
   min-width:36px;
   min-height:36px;
   padding:0 9px;
@@ -49,19 +49,19 @@ body{
   transition:background .15s ease,border-color .15s ease,color .15s ease;
 }
 
-.jocarsa-texto button:hover,
-.jocarsa-texto button:focus-visible{
+.andrei-texto button:hover,
+.andrei-texto button:focus-visible{
   border-color:var(--azul);
   background:var(--azul);
   color:var(--blanco);
 }
 
-.jocarsa-texto button:focus-visible{
+.andrei-texto button:focus-visible{
   outline:3px solid #1d4ed833;
   outline-offset:2px;
 }
 
-.jocarsa-texto article{
+.andrei-texto article{
   width:100%;
   min-height:min(65vh,480px);
   padding:18px;
@@ -71,11 +71,11 @@ body{
   font:16px/1.6 Arial,sans-serif;
 }
 
-.jocarsa-texto article:focus{
+.andrei-texto article:focus{
   box-shadow:inset 0 0 0 3px #1d4ed833;
 }
 
-.jocarsa-texto textarea{
+.andrei-texto textarea{
   width:100%;
   min-height:200px;
   padding:14px;
@@ -129,7 +129,7 @@ form input[type="submit"]:hover{background:#ea580c}
 
 @media(max-width:600px){
   body{padding:16px}
-  .jocarsa-texto article{min-height:60vh;padding:14px;font-size:15px}
-  .jocarsa-texto .barra{gap:5px;padding:8px}
-  .jocarsa-texto button{min-width:34px;min-height:36px;padding:0 8px}
+  .andrei-texto article{min-height:60vh;padding:14px;font-size:15px}
+  .andrei-texto .barra{gap:5px;padding:8px}
+  .andrei-texto button{min-width:34px;min-height:36px;padding:0 8px}
 }

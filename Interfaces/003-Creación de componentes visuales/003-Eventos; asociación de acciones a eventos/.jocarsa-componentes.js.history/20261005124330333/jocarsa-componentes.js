@@ -1,2 +1,0 @@
-let entradas = document.querySelectorAll("input")
-entradas.forEach(function(entrada){})
