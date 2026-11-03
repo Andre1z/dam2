@@ -28,14 +28,12 @@ canvas{
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas></canvas>
 
 <script>
-
-// ============================================================
-// CANVAS
-// ============================================================
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -48,29 +46,11 @@ const raton = {
     y:300
 };
 
-
-// ============================================================
-// CONFIGURACIÓN DE LA LUZ
-// ============================================================
-
 const NUM_RAYOS = 2500;
-
-// número máximo de reflexiones
 const MAX_REBOTES = 12;
-
-// distancia máxima de un rayo
 const MAX_DISTANCIA = 4000;
-
-// energía conservada después de cada rebote
 const REFLEXION = 0.32;
-
-// energía mínima antes de abandonar el rayo
 const INTENSIDAD_MINIMA = 0.01;
-
-
-// ============================================================
-// REDIMENSIONAR
-// ============================================================
 
 function redimensionar(){
 
@@ -99,11 +79,6 @@ window.addEventListener(
 
 redimensionar();
 
-
-// ============================================================
-// RATÓN
-// ============================================================
-
 canvas.addEventListener(
     "mousemove",
     function(e){
@@ -119,11 +94,6 @@ canvas.addEventListener(
     }
 );
 
-
-// ============================================================
-// MUROS
-// ============================================================
-
 let muros = [];
 
 function muro(x1,y1,x2,y2){
@@ -137,19 +107,12 @@ function muro(x1,y1,x2,y2){
 
 }
 
-
-// ============================================================
-// CREAR LABERINTO
-// ============================================================
-
 function crearLaberinto(){
 
     muros = [];
 
     const margen = 20;
 
-    // borde exterior
-
     muro(
         margen,
         margen,
@@ -177,11 +140,6 @@ function crearLaberinto(){
         margen,
         margen
     );
-
-
-    // ========================================================
-    // LABERINTO ESCALADO AL TAMAÑO DE PANTALLA
-    // ========================================================
 
     const columnas = 8;
     const filas = 6;
@@ -194,9 +152,6 @@ function crearLaberinto(){
         (H-margen*2) /
         filas;
 
-
-    // VERTICALES
-
     muro(
         margen+cw,
         margen,
@@ -293,9 +248,6 @@ function crearLaberinto(){
         margen+cw*7,
         margen+ch*5
     );
-
-
-    // HORIZONTALES
 
     muro(
         margen,
@@ -435,11 +387,6 @@ window.addEventListener(
     crearLaberinto
 );
 
-
-// ============================================================
-// INTERSECCIÓN RAYO / SEGMENTO
-// ============================================================
-
 function interseccionRayoSegmento(
     px,
     py,
@@ -517,11 +464,6 @@ function interseccionRayoSegmento(
     return null;
 }
 
-
-// ============================================================
-// BUSCAR EL PRIMER MURO
-// ============================================================
-
 function primerImpacto(
     x,
     y,
@@ -558,11 +500,6 @@ function primerImpacto(
     return mejor;
 }
 
-
-// ============================================================
-// REFLEXIÓN
-// ============================================================
-
 function reflejar(
     dx,
     dy,
@@ -588,23 +525,12 @@ function reflejar(
     wx /= longitud;
     wy /= longitud;
 
-
-    // vector normal
-
     let nx = -wy;
     let ny = wx;
-
-
-    // producto escalar
 
     const dot =
         dx*nx +
         dy*ny;
-
-
-    // fórmula de reflexión
-    //
-    // R = D - 2(D·N)N
 
     let rx =
         dx -
@@ -630,11 +556,6 @@ function reflejar(
     };
 }
 
-
-// ============================================================
-// PINTAR UN SEGMENTO DE LUZ
-// ============================================================
-
 function pintarSegmento(
     x1,
     y1,
@@ -642,8 +563,6 @@ function pintarSegmento(
     y2,
     intensidad
 ){
-
-    // resplandor exterior
 
     ctx.beginPath();
 
@@ -669,9 +588,6 @@ function pintarSegmento(
         5 * intensidad;
 
     ctx.stroke();
-
-
-    // rayo principal
 
     ctx.beginPath();
 
@@ -700,11 +616,6 @@ function pintarSegmento(
     ctx.stroke();
 
 }
-
-
-// ============================================================
-// LANZAR RAYO
-// ============================================================
 
 function lanzarRayo(
     angulo
@@ -745,11 +656,6 @@ function lanzarRayo(
                 dy
             );
 
-
-        // ====================================================
-        // NO HAY IMPACTO
-        // ====================================================
-
         if(!impacto){
 
             pintarSegmento(
@@ -770,11 +676,6 @@ function lanzarRayo(
             break;
         }
 
-
-        // ====================================================
-        // PINTAR HASTA LA PARED
-        // ====================================================
-
         pintarSegmento(
 
             x,
@@ -786,11 +687,6 @@ function lanzarRayo(
             intensidad
 
         );
-
-
-        // ====================================================
-        // REFLEXIÓN
-        // ====================================================
 
         const reflejo =
             reflejar(
@@ -806,11 +702,6 @@ function lanzarRayo(
         dy =
             reflejo.y;
 
-
-        // pequeño desplazamiento
-        // para evitar colisión inmediata
-        // con la misma pared
-
         x =
             impacto.x +
             dx*0.2;
@@ -818,11 +709,6 @@ function lanzarRayo(
         y =
             impacto.y +
             dy*0.2;
-
-
-        // ====================================================
-        // PÉRDIDA DE ENERGÍA
-        // ====================================================
 
         intensidad *=
             REFLEXION;
@@ -839,11 +725,6 @@ function lanzarRayo(
 
 }
 
-
-// ============================================================
-// DIBUJAR MUROS
-// ============================================================
-
 function dibujarMuros(){
 
     ctx.lineCap =
@@ -851,11 +732,6 @@ function dibujarMuros(){
 
     ctx.lineJoin =
         "round";
-
-
-    // ========================================================
-    // SOMBRA
-    // ========================================================
 
     ctx.beginPath();
 
@@ -881,11 +757,6 @@ function dibujarMuros(){
 
     ctx.stroke();
 
-
-    // ========================================================
-    // CUERPO DE LA PARED
-    // ========================================================
-
     ctx.beginPath();
 
     for(const m of muros){
@@ -909,11 +780,6 @@ function dibujarMuros(){
         6;
 
     ctx.stroke();
-
-
-    // ========================================================
-    // BORDE METÁLICO
-    // ========================================================
 
     ctx.beginPath();
 
@@ -940,11 +806,6 @@ function dibujarMuros(){
     ctx.stroke();
 
 }
-
-
-// ============================================================
-// DIBUJAR FUENTE DE LUZ
-// ============================================================
 
 function dibujarFuente(){
 
@@ -1006,9 +867,6 @@ function dibujarFuente(){
 
     ctx.fill();
 
-
-    // núcleo
-
     ctx.beginPath();
 
     ctx.arc(
@@ -1026,16 +884,7 @@ function dibujarFuente(){
 
 }
 
-
-// ============================================================
-// LOOP PRINCIPAL
-// ============================================================
-
 function animar(){
-
-    // ========================================================
-    // FONDO
-    // ========================================================
 
     ctx.clearRect(
         0,
@@ -1054,11 +903,6 @@ function animar(){
         W,
         H
     );
-
-
-    // ========================================================
-    // LUZ
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "lighter";
@@ -1089,17 +933,7 @@ function animar(){
     ctx.globalCompositeOperation =
         "source-over";
 
-
-    // ========================================================
-    // LABERINTO
-    // ========================================================
-
     dibujarMuros();
-
-
-    // ========================================================
-    // FUENTE
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "lighter";
@@ -1116,14 +950,9 @@ function animar(){
 
 }
 
-
-// ============================================================
-// ARRANCAR
-// ============================================================
-
 animar();
 
 </script>
-
-</body>
+  </body>
 </html>
+

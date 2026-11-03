@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 <head>
+    <title>Actualización concurrente</title>
+    <meta charset="UTF-8">
   <style>
     *{
       margin:0;
@@ -23,6 +25,8 @@
   </style>
 </head>
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas></canvas>
 
@@ -62,9 +66,6 @@
       this.x += Math.cos(this.angulo) * this.velocidad
       this.y += Math.sin(this.angulo) * this.velocidad
 
-
-      // Rebote horizontal
-
       if(this.x < 0){
 
         this.x = 0
@@ -78,9 +79,6 @@
         this.angulo = Math.PI - this.angulo
 
       }
-
-
-      // Rebote vertical
 
       if(this.y < 0){
 
@@ -118,9 +116,6 @@
 
   let numeroSeres = 10000
 
-
-  // Crear seres
-
   for(let i = 0; i < numeroSeres; i++){
 
     seres.push(
@@ -133,8 +128,6 @@
 
   function bucle(){
 
-    // Limpiar pantalla
-
     contexto.fillStyle = "black"
 
     contexto.fillRect(
@@ -143,9 +136,6 @@
       canvas.width,
       canvas.height
     )
-
-
-    // Dibujar seres
 
     contexto.fillStyle = "white"
 
@@ -166,6 +156,6 @@
   bucle()
 
 </script>
-
-</body>
+  </body>
 </html>
+

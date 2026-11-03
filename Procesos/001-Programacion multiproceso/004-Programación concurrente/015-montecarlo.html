@@ -49,6 +49,8 @@ canvas{
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas id="canvas"></canvas>
 
@@ -59,20 +61,11 @@ canvas{
 
 <script>
 
-// ============================================================
-// CANVAS PRINCIPAL
-// ============================================================
-
 const canvas =
     document.querySelector("#canvas");
 
 const ctx =
     canvas.getContext("2d");
-
-
-// ============================================================
-// CANVAS DE ACUMULACIÓN
-// ============================================================
 
 const acumulacion =
     document.createElement("canvas");
@@ -80,20 +73,10 @@ const acumulacion =
 const actx =
     acumulacion.getContext("2d");
 
-
-// ============================================================
-// VARIABLES
-// ============================================================
-
 let W;
 let H;
 
 let muestras = 0;
-
-
-// ============================================================
-// RATÓN / FUENTE DE LUZ
-// ============================================================
 
 const raton = {
 
@@ -101,43 +84,15 @@ const raton = {
     y:window.innerHeight/2
 
 };
-
-
-// ============================================================
-// CONFIGURACIÓN PATH TRACER
-// ============================================================
-
-// rayos nuevos calculados en cada frame
 const RAYOS_POR_FRAME = 500;
-
-// rebotes máximos
 const MAX_REBOTES = 12;
-
-// distancia máxima
 const MAX_DISTANCIA = 5000;
-
-// reflectancia de paredes
 const REFLECTANCIA = 0.58;
-
-// probabilidad de reflexión difusa
 const PROB_DIFUSA = 0.88;
-
-// probabilidad especular
 const PROB_ESPECULAR = 0.12;
-
-// rugosidad de reflexión especular
 const RUGOSIDAD = 0.12;
-
-// intensidad mínima
 const INTENSIDAD_MINIMA = 0.005;
-
-// intensidad visual de cada muestra
 const ALPHA_RAYO = 0.025;
-
-
-// ============================================================
-// REDIMENSIONAR
-// ============================================================
 
 function redimensionar(){
 
@@ -191,11 +146,6 @@ function redimensionar(){
 
 }
 
-
-// ============================================================
-// MUROS
-// ============================================================
-
 let muros = [];
 
 
@@ -218,21 +168,11 @@ function muro(
 
 }
 
-
-// ============================================================
-// LABERINTO ABIERTO
-// ============================================================
-
 function crearLaberinto(){
 
     muros = [];
 
     const m = 25;
-
-
-    // ========================================================
-    // BORDE EXTERIOR
-    // ========================================================
 
     muro(
         m,m,
@@ -254,14 +194,6 @@ function crearLaberinto(){
         m,m
     );
 
-
-    // ========================================================
-    // PAREDES INTERIORES
-    // ========================================================
-
-
-    // IZQUIERDA
-
     muro(
         W*0.25,
         H*0.10,
@@ -276,18 +208,12 @@ function crearLaberinto(){
         H*0.90
     );
 
-
-    // CENTRO
-
     muro(
         W*0.50,
         H*0.22,
         W*0.50,
         H*0.68
     );
-
-
-    // DERECHA
 
     muro(
         W*0.75,
@@ -302,9 +228,6 @@ function crearLaberinto(){
         W*0.75,
         H*0.90
     );
-
-
-    // HORIZONTALES
 
     muro(
         W*0.07,
@@ -349,11 +272,6 @@ function crearLaberinto(){
     );
 
 }
-
-
-// ============================================================
-// INTERSECCIÓN RAYO / SEGMENTO
-// ============================================================
 
 function interseccionRayoSegmento(
     px,
@@ -438,11 +356,6 @@ function interseccionRayoSegmento(
 
 }
 
-
-// ============================================================
-// BUSCAR IMPACTO MÁS CERCANO
-// ============================================================
-
 function primerImpacto(
     x,
     y,
@@ -487,11 +400,6 @@ function primerImpacto(
 
 }
 
-
-// ============================================================
-// NORMAL
-// ============================================================
-
 function normalMuro(
     m,
     dx,
@@ -522,10 +430,6 @@ function normalMuro(
     let ny =
         wx;
 
-
-    // orientar la normal hacia
-    // el lado incidente
-
     if(
         dx*nx +
         dy*ny
@@ -550,11 +454,6 @@ function normalMuro(
     };
 
 }
-
-
-// ============================================================
-// REFLEXIÓN ESPECULAR
-// ============================================================
 
 function reflejar(
     dx,
@@ -592,11 +491,6 @@ function reflejar(
 
 }
 
-
-// ============================================================
-// DIRECCIÓN LAMBERTIANA
-// ============================================================
-
 function direccionLambertiana(
     normal
 ){
@@ -606,13 +500,6 @@ function direccionLambertiana(
             normal.y,
             normal.x
         );
-
-
-    // ========================================================
-    // IMPORTANCE SAMPLING
-    // ========================================================
-
-    // distribución proporcional al coseno
 
     const u =
         Math.random();
@@ -639,11 +526,6 @@ function direccionLambertiana(
     };
 
 }
-
-
-// ============================================================
-// REFLEXIÓN ESPECULAR RUGOSA
-// ============================================================
 
 function direccionEspecular(
     dx,
@@ -686,11 +568,6 @@ function direccionEspecular(
 
 }
 
-
-// ============================================================
-// DIBUJAR UNA MUESTRA
-// ============================================================
-
 function pintarSegmento(
     x1,
     y1,
@@ -710,11 +587,6 @@ function pintarSegmento(
         x2,
         y2
     );
-
-
-    // ========================================================
-    // INTENSIDAD
-    // ========================================================
 
     const alpha =
         Math.min(
@@ -741,11 +613,6 @@ function pintarSegmento(
 
 }
 
-
-// ============================================================
-// PATH TRACING
-// ============================================================
-
 function lanzarPath(
     angulo
 ){
@@ -769,11 +636,6 @@ function lanzarPath(
 
 
     let energia = 1;
-
-
-    // ========================================================
-    // CAMINO
-    // ========================================================
 
     for(
         let rebote=0;
@@ -804,17 +666,8 @@ function lanzarPath(
 
         }
 
-
-        // ====================================================
-        // DISTANCIA
-        // ====================================================
-
         const distancia =
             impacto.distancia;
-
-
-        // ligera atenuación
-        // con la distancia
 
         const atenuacion =
             1 /
@@ -822,11 +675,6 @@ function lanzarPath(
                 1 +
                 distancia*0.0008
             );
-
-
-        // ====================================================
-        // PINTAR
-        // ====================================================
 
         pintarSegmento(
 
@@ -845,22 +693,12 @@ function lanzarPath(
         energia *=
             atenuacion;
 
-
-        // ====================================================
-        // NORMAL
-        // ====================================================
-
         const normal =
             normalMuro(
                 impacto.muro,
                 dx,
                 dy
             );
-
-
-        // ====================================================
-        // ÁNGULO DE INCIDENCIA
-        // ====================================================
 
         const cosIncidencia =
             Math.max(
@@ -870,11 +708,6 @@ function lanzarPath(
                     dy*normal.y
                 )
             );
-
-
-        // ====================================================
-        // FRESNEL SCHLICK
-        // ====================================================
 
         const F0 =
             PROB_ESPECULAR;
@@ -891,15 +724,6 @@ function lanzarPath(
                 5
             );
 
-
-        // ====================================================
-        // MONTE CARLO
-        //
-        // No generamos dos rayos.
-        //
-        // Elegimos UNO.
-        // ====================================================
-
         const random =
             Math.random();
 
@@ -908,10 +732,6 @@ function lanzarPath(
             random <
             fresnel
         ){
-
-            // ================================================
-            // ESPECULAR
-            // ================================================
 
             const direccion =
                 direccionEspecular(
@@ -930,10 +750,6 @@ function lanzarPath(
         }
         else{
 
-            // ================================================
-            // DIFUSA
-            // ================================================
-
             const direccion =
                 direccionLambertiana(
                     normal
@@ -948,21 +764,8 @@ function lanzarPath(
 
         }
 
-
-        // ====================================================
-        // REFLECTANCIA
-        // ====================================================
-
         energia *=
             REFLECTANCIA;
-
-
-        // ====================================================
-        // RUSSIAN ROULETTE
-        //
-        // A partir de varios rebotes dejamos que algunos
-        // caminos mueran aleatoriamente.
-        // ====================================================
 
         if(
             rebote >= 3
@@ -985,18 +788,10 @@ function lanzarPath(
 
             }
 
-
-            // compensamos estadísticamente
-
             energia /=
                 probabilidadSupervivencia;
 
         }
-
-
-        // ====================================================
-        // NUEVA POSICIÓN
-        // ====================================================
 
         x =
             impacto.x +
@@ -1010,11 +805,6 @@ function lanzarPath(
 
 }
 
-
-// ============================================================
-// CALCULAR NUEVAS MUESTRAS
-// ============================================================
-
 function calcularMuestras(){
 
     actx.globalCompositeOperation =
@@ -1026,12 +816,6 @@ function calcularMuestras(){
         i<RAYOS_POR_FRAME;
         i++
     ){
-
-        // ====================================================
-        // MONTE CARLO
-        //
-        // dirección completamente aleatoria
-        // ====================================================
 
         const angulo =
             Math.random()
@@ -1059,11 +843,6 @@ function calcularMuestras(){
 
 }
 
-
-// ============================================================
-// REINICIAR ACUMULACIÓN
-// ============================================================
-
 function reiniciarAcumulacion(){
 
     muestras = 0;
@@ -1082,11 +861,6 @@ function reiniciarAcumulacion(){
 
 }
 
-
-// ============================================================
-// RATÓN
-// ============================================================
-
 canvas.addEventListener(
     "mousemove",
     function(e){
@@ -1102,10 +876,6 @@ canvas.addEventListener(
         const nuevoY =
             e.clientY -
             rect.top;
-
-
-        // sólo reiniciamos si realmente
-        // ha cambiado la posición
 
         if(
             Math.abs(
@@ -1135,11 +905,6 @@ canvas.addEventListener(
     }
 );
 
-
-// ============================================================
-// DIBUJAR MUROS
-// ============================================================
-
 function dibujarMuros(){
 
     ctx.lineCap =
@@ -1147,11 +912,6 @@ function dibujarMuros(){
 
     ctx.lineJoin =
         "round";
-
-
-    // ========================================================
-    // SOMBRA
-    // ========================================================
 
     ctx.beginPath();
 
@@ -1179,11 +939,6 @@ function dibujarMuros(){
 
     ctx.stroke();
 
-
-    // ========================================================
-    // CUERPO
-    // ========================================================
-
     ctx.beginPath();
 
 
@@ -1209,11 +964,6 @@ function dibujarMuros(){
         7;
 
     ctx.stroke();
-
-
-    // ========================================================
-    // SUPERFICIE
-    // ========================================================
 
     ctx.beginPath();
 
@@ -1242,11 +992,6 @@ function dibujarMuros(){
     ctx.stroke();
 
 }
-
-
-// ============================================================
-// FUENTE
-// ============================================================
 
 function dibujarFuente(){
 
@@ -1310,9 +1055,6 @@ function dibujarFuente(){
 
     ctx.fill();
 
-
-    // núcleo
-
     ctx.beginPath();
 
     ctx.arc(
@@ -1330,23 +1072,9 @@ function dibujarFuente(){
 
 }
 
-
-// ============================================================
-// RENDER
-// ============================================================
-
 function render(){
 
-    // ========================================================
-    // NUEVAS MUESTRAS MONTE CARLO
-    // ========================================================
-
     calcularMuestras();
-
-
-    // ========================================================
-    // LIMPIAR PANTALLA
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "source-over";
@@ -1363,11 +1091,6 @@ function render(){
         H
     );
 
-
-    // ========================================================
-    // MOSTRAR ACUMULACIÓN
-    // ========================================================
-
     ctx.globalCompositeOperation =
         "lighter";
 
@@ -1380,21 +1103,11 @@ function render(){
         H
     );
 
-
-    // ========================================================
-    // MUROS
-    // ========================================================
-
     ctx.globalCompositeOperation =
         "source-over";
 
 
     dibujarMuros();
-
-
-    // ========================================================
-    // FUENTE
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "lighter";
@@ -1413,26 +1126,16 @@ function render(){
 
 }
 
-
-// ============================================================
-// RESIZE
-// ============================================================
-
 window.addEventListener(
     "resize",
     redimensionar
 );
-
-
-// ============================================================
-// START
-// ============================================================
 
 redimensionar();
 
 render();
 
 </script>
-
-</body>
+  </body>
 </html>
+

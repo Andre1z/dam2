@@ -1,7 +1,10 @@
-let seres = []
+const autor = "Andrei Buga";
+const estado = "actualizado";
 
-let width = 1000
-let height = 800
+const  seres = []
+
+const  width = 1000
+const  height = 800
 
 
 
@@ -33,7 +36,7 @@ class Ser{
       1 + Math.random()
 
 
-    // Sensores
+
 
     this.distanciaSensor = 30
 
@@ -47,41 +50,41 @@ class Ser{
 
   sensor(anguloSensor){
 
-    let angulo =
+    const  angulo =
       this.angulo +
       anguloSensor
 
 
-    let sensorX =
+    const  sensorX =
       this.x +
       Math.cos(angulo) *
       this.distanciaSensor
 
 
-    let sensorY =
+    const  sensorY =
       this.y +
       Math.sin(angulo) *
       this.distanciaSensor
 
 
-    let distanciaMinima = Infinity
+    const  distanciaMinima = Infinity
 
 
-    for(let otro of seres){
+    for(const  otro of seres){
 
       if(otro === this){
         continue
       }
 
 
-      let dx =
+      const  dx =
         otro.x - sensorX
 
-      let dy =
+      const  dy =
         otro.y - sensorY
 
 
-      let distanciaCuadrado =
+      const  distanciaCuadrado =
         dx * dx +
         dy * dy
 
@@ -92,7 +95,7 @@ class Ser{
         this.radioDeteccion
       ){
 
-        let distancia =
+        const  distancia =
           Math.sqrt(
             distanciaCuadrado
           )
@@ -121,17 +124,17 @@ class Ser{
 
   pensar(){
 
-    let izquierda =
+    const izquierda =
       this.sensor(
         -this.anguloSensor
       )
 
 
-    let centro =
+    const centro =
       this.sensor(0)
 
 
-    let derecha =
+    const derecha =
       this.sensor(
         this.anguloSensor
       )
@@ -203,11 +206,11 @@ class Ser{
 
 
 
-// Recibir mensajes
+
 
 onmessage = function(event){
 
-  let datos = event.data
+  const datos = event.data
 
 
   if(datos.tipo === "iniciar"){
@@ -220,7 +223,7 @@ onmessage = function(event){
 
 
     for(
-      let i = 0;
+      const  i = 0;
       i < datos.cantidad;
       i++
     ){
@@ -251,23 +254,23 @@ onmessage = function(event){
 
 function bucle(){
 
-  // Array:
-  //
-  // x,y,x,y,x,y...
-  //
-  // 1000 seres =
-  // 2000 números
 
-  let posiciones =
+
+
+
+
+
+
+  const  posiciones =
     new Float32Array(
       seres.length * 2
     )
 
 
-  let indice = 0
+  const  indice = 0
 
 
-  for(let ser of seres){
+  for(const  ser of seres){
 
     ser.pensar()
 
@@ -283,9 +286,9 @@ function bucle(){
   }
 
 
-  // Enviar al hilo principal.
-  // Transferimos el buffer para evitar
-  // copiar todos los datos.
+
+
+
 
   postMessage(
     posiciones,

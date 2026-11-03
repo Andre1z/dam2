@@ -1,37 +1,46 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <title>Conectados</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 1.5rem; }
+      #identidad { font-weight: bold; margin-bottom: 1rem; }
+      #participantes { margin: 1rem 0; }
+      .autor { margin-top: 1rem; color: #333; font-size: 0.9rem; }
+    </style>
   </head>
   <body>
-    <div id="identidad">
-    </div>
-    <div id="participantes">
-    </div>
+    <div id="identidad">Sin identidad</div>
+    <div id="participantes"></div>
     <button id="maestro">Soy maestro</button>
     <button id="esclavo">Soy esclavo</button>
+    <div class="autor">Andrei Buga</div>
     <script>
       let identidad;
-      let botonmaestro = document.querySelector("#maestro")
-     	let botonesclavo = document.querySelector("#esclavo")
-      let contenedor_identidad = document.querySelector("#identidad")
+      let botonmaestro = document.querySelector("#maestro");
+      let botonesclavo = document.querySelector("#esclavo");
+      let contenedor_identidad = document.querySelector("#identidad");
       let temporizador;
-      
-      botonmaestro.onclick = function(){
-      	identidad = "maestro"
-        contenedor_identidad.textContent = "🟢Maestro"
-        temporizador = setTimeout("latido()",1000)
-      }
-      botonesclavo.onclick = function(){
-      	identidad = "esclavo"
-        contenedor_identidad.textContent = "🔵Esclavo"
-        temporizador = setTimeout("latido()",1000)
-      }
-      function latido(){
-        if(identidad == "esclavo"){
-        	fetch("/")
+
+      botonmaestro.onclick = function () {
+        identidad = "maestro";
+        contenedor_identidad.textContent = "🟢 Maestro - Andrei Buga";
+        temporizador = setTimeout("latido()", 1000);
+      };
+
+      botonesclavo.onclick = function () {
+        identidad = "esclavo";
+        contenedor_identidad.textContent = "🔵 Esclavo - Andrei Buga";
+        temporizador = setTimeout("latido()", 1000);
+      };
+
+      function latido() {
+        if (identidad == "esclavo") {
+          fetch("/");
         }
-      	clearTimeout(temporizador)
-        temporizador = setTimeout("latido()",1000)
+        clearTimeout(temporizador);
+        temporizador = setTimeout("latido()", 1000);
       }
     </script>
   </body>

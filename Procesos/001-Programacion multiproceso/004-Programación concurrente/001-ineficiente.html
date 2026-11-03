@@ -1,14 +1,21 @@
 <!doctype html>
 <html>
   <head>
+    <title>Actualización concurrente</title>
+    <meta charset="UTF-8">
+      <style>body { background: #0f172a; color: #e2e8f0; font-family: Arial, sans-serif; } </style>
   </head>
   <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
     <script>
+      const autor = "";
       let numero = 0.0000000054;
-      for(let i = 0;i<10000000000;i++){
-      	numero *= 1.00000000545
+      for (let i = 0; i < 10000000000; i++) {
+        numero *= 1.00000000545;
       }
-      console.log("Ya he acabado");
+      console.log(`${autor}: cÃ¡lculo finalizado`);
     </script>
   </body>
 </html>
+

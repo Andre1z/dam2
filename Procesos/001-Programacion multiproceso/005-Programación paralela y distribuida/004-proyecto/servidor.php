@@ -39,6 +39,8 @@ $archivoResultados =
     __DIR__ .
     "/resultados.json";
 
+$autor = "Andrei Buga";
+
 
 // ============================================================
 // RESPONDER JSON
@@ -340,6 +342,9 @@ if(
         "maestro" =>
             $entrada["maestro"],
 
+        "autor" =>
+            $entrada["autor"] ?? $autor,
+
         "datos" =>
             $entrada["datos"],
 
@@ -490,6 +495,9 @@ if(
         "esclavo" =>
             $entrada["hash"],
 
+        "autor" =>
+            $entrada["autor"] ?? $autor,
+
         "resultado" =>
             $entrada["resultado"],
 
@@ -593,6 +601,9 @@ if(
 
         "hash" =>
             $hash,
+
+        "autor" =>
+            $autor,
 
         "ultimo_latido" =>
             time()

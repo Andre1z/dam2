@@ -60,6 +60,8 @@ canvas{
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas></canvas>
 
@@ -69,7 +71,7 @@ canvas{
 
   <br>
 
-  Población:
+  PoblaciÃ³n:
   <span id="poblacion">0</span>
 
   <br>
@@ -84,29 +86,29 @@ canvas{
 
   <br>
 
-  Generación máxima:
+  GeneraciÃ³n mÃ¡xima:
   <span id="generacion">0</span>
 
 
   <div class="leyenda">
 
-    🟩 Comida<br>
-    🟦 Refugio<br>
-    ⬜ Obstáculo<br>
-    🟥 Zona mortal<br><br>
+    ðŸŸ© Comida<br>
+    ðŸŸ¦ Refugio<br>
+    â¬œ ObstÃ¡culo<br>
+    ðŸŸ¥ Zona mortal<br><br>
 
-    🟠 Hambre<br>
-    🔵 Cansancio<br>
-    ⚪ Saludable
+    ðŸŸ  Hambre<br>
+    ðŸ”µ Cansancio<br>
+    âšª Saludable
 
   </div>
 
 </div>
 
 
-<!-- ================================================= -->
-<!-- CÓDIGO DEL WORKER                                  -->
-<!-- ================================================= -->
+
+
+
 
 <script id="codigoWorker" type="javascript/worker">
 
@@ -121,12 +123,6 @@ let nacimientos = 0
 let muertes = 0
 
 let siguienteId = 0
-
-
-
-// =====================================================
-// UTILIDADES
-// =====================================================
 
 function limitar(valor,min,max){
 
@@ -205,12 +201,6 @@ function estaEn(x,y,zonas){
 
 }
 
-
-
-// =====================================================
-// GENOMA
-// =====================================================
-
 function genomaAleatorio(){
 
   return {
@@ -257,12 +247,6 @@ function genomaAleatorio(){
 
 }
 
-
-
-// =====================================================
-// HERENCIA GENÉTICA
-// =====================================================
-
 function heredar(a,b){
 
   let hijo = {}
@@ -277,9 +261,6 @@ function heredar(a,b){
       :
       b[propiedad]
 
-
-    // Mutación genética +-5%
-
     hijo[propiedad] =
       mutar(
         valor,
@@ -292,12 +273,6 @@ function heredar(a,b){
   return hijo
 
 }
-
-
-
-// =====================================================
-// CLASE SER
-// =====================================================
 
 class Ser{
 
@@ -353,12 +328,6 @@ class Ser{
     this.objetivo = null
 
   }
-
-
-
-  // ===================================================
-  // BUSCAR ZONA
-  // ===================================================
 
   buscarZona(zonas){
 
@@ -421,17 +390,7 @@ class Ser{
 
   }
 
-
-
-  // ===================================================
-  // PENSAR
-  // ===================================================
-
   pensar(){
-
-    // -----------------------------------------------
-    // TIENE HAMBRE
-    // -----------------------------------------------
 
     if(this.hambre > 60){
 
@@ -444,11 +403,6 @@ class Ser{
 
     }
 
-
-    // -----------------------------------------------
-    // ESTÁ CANSADO
-    // -----------------------------------------------
-
     if(this.energia < 35){
 
       this.objetivo =
@@ -459,11 +413,6 @@ class Ser{
       return
 
     }
-
-
-    // -----------------------------------------------
-    // EXPLORACIÓN
-    // -----------------------------------------------
 
     this.objetivo = null
 
@@ -476,12 +425,6 @@ class Ser{
       this.genoma.exploracion
 
   }
-
-
-
-  // ===================================================
-  // MOVER
-  // ===================================================
 
   mover(){
 
@@ -520,12 +463,6 @@ class Ser{
       Math.sin(this.angulo) *
       velocidad
 
-
-
-    // -----------------------------------------------
-    // OBSTÁCULOS
-    // -----------------------------------------------
-
     if(
       estaEn(
         nx,
@@ -550,10 +487,6 @@ class Ser{
     this.x = nx
     this.y = ny
 
-
-
-    // Mundo toroidal
-
     if(this.x < 0)
       this.x = width
 
@@ -568,44 +501,20 @@ class Ser{
 
   }
 
-
-
-  // ===================================================
-  // VIVIR
-  // ===================================================
-
   vivir(){
 
     this.edad++
 
     this.reproduccionCooldown--
 
-
-
-    // -----------------------------------------------
-    // HAMBRE
-    // -----------------------------------------------
-
     this.hambre +=
       0.015 *
       this.genoma.metabolismo
-
-
-
-    // -----------------------------------------------
-    // GASTO ENERGÉTICO
-    // -----------------------------------------------
 
     this.energia -=
       0.008 *
       this.genoma.metabolismo *
       this.genoma.velocidad
-
-
-
-    // =================================================
-    // COMER
-    // =================================================
 
     if(
       estaEn(
@@ -620,12 +529,6 @@ class Ser{
       this.energia += 0.15
 
     }
-
-
-
-    // =================================================
-    // DORMIR
-    // =================================================
 
     if(
       estaEn(
@@ -659,12 +562,6 @@ class Ser{
         100
       )
 
-
-
-    // =================================================
-    // MUERTE POR ZONA LETAL
-    // =================================================
-
     if(
       estaEn(
         this.x,
@@ -679,12 +576,6 @@ class Ser{
 
     }
 
-
-
-    // =================================================
-    // MUERTE POR HAMBRE
-    // =================================================
-
     if(this.hambre >= 100){
 
       this.morir()
@@ -693,12 +584,6 @@ class Ser{
 
     }
 
-
-
-    // =================================================
-    // MUERTE POR ENERGÍA
-    // =================================================
-
     if(this.energia <= 0){
 
       this.morir()
@@ -706,12 +591,6 @@ class Ser{
       return
 
     }
-
-
-
-    // =================================================
-    // MUERTE POR VEJEZ
-    // =================================================
 
     if(
       this.edad >
@@ -740,15 +619,7 @@ class Ser{
 
 }
 
-
-
-// =====================================================
-// REPRODUCCIÓN
-// =====================================================
-
 function reproducir(){
-
-  // Evitar explosión poblacional
 
   if(seres.length > 2500)
     return
@@ -804,10 +675,6 @@ function reproducir(){
       dx * dx +
       dy * dy
 
-
-
-    // Deben encontrarse físicamente
-
     if(distancia2 > 400)
       continue
 
@@ -830,12 +697,6 @@ function reproducir(){
       continue
 
     }
-
-
-
-    // -----------------------------------------------
-    // CREAR GENOMA DEL HIJO
-    // -----------------------------------------------
 
     let genes =
       heredar(
@@ -878,10 +739,6 @@ function reproducir(){
 
     nacimientos++
 
-
-
-    // Reproducirse tiene coste
-
     a.energia -= 20
 
     b.energia -= 20
@@ -896,12 +753,6 @@ function reproducir(){
   }
 
 }
-
-
-
-// =====================================================
-// ACTUALIZAR SIMULACIÓN
-// =====================================================
 
 function actualizar(){
 
@@ -923,10 +774,6 @@ function actualizar(){
 
   reproducir()
 
-
-
-  // Retirar cadáveres
-
   seres =
     seres.filter(
       s => s.vivo
@@ -934,23 +781,9 @@ function actualizar(){
 
 }
 
-
-
-// =====================================================
-// ENVIAR INFORMACIÓN AL MAIN THREAD
-// =====================================================
-
 function enviar(){
 
-  /*
-    Por cada individuo:
-
-    x
-    y
-    energia
-    hambre
-    generacion
-  */
+  
 
   let datos =
     new Float32Array(
@@ -1017,12 +850,6 @@ function enviar(){
 
 }
 
-
-
-// =====================================================
-// BUCLE DEL WORKER
-// =====================================================
-
 function bucle(){
 
   actualizar()
@@ -1036,12 +863,6 @@ function bucle(){
   )
 
 }
-
-
-
-// =====================================================
-// MENSAJES
-// =====================================================
 
 onmessage = function(event){
 
@@ -1105,9 +926,9 @@ onmessage = function(event){
 </script>
 
 
-<!-- ================================================= -->
-<!-- PROGRAMA PRINCIPAL                                -->
-<!-- ================================================= -->
+
+
+
 
 <script>
 
@@ -1132,12 +953,6 @@ let poblaciones =
 
 let estadisticas =
   new Array(numeroWorkers)
-
-
-
-// =====================================================
-// MUNDO
-// =====================================================
 
 let mundo = {
 
@@ -1218,12 +1033,6 @@ let mundo = {
 
 }
 
-
-
-// =====================================================
-// CREAR BLOB CON EL CÓDIGO DEL WORKER
-// =====================================================
-
 let codigoWorker =
   document.querySelector(
     "#codigoWorker"
@@ -1244,12 +1053,6 @@ let urlWorker =
   URL.createObjectURL(
     blobWorker
   )
-
-
-
-// =====================================================
-// CREAR LOS 10 WORKERS
-// =====================================================
 
 for(
   let i = 0;
@@ -1306,12 +1109,6 @@ for(
 
 }
 
-
-
-// =====================================================
-// RESIZE
-// =====================================================
-
 function redimensionar(){
 
   canvas.width =
@@ -1348,12 +1145,6 @@ window.addEventListener(
   redimensionar
 )
 
-
-
-// =====================================================
-// RECTÁNGULO RELATIVO
-// =====================================================
-
 function rectangulo(
   zona,
   color
@@ -1381,18 +1172,7 @@ function rectangulo(
 
 }
 
-
-
-// =====================================================
-// DIBUJAR MUNDO
-// =====================================================
-
 function dibujarMundo(){
-
-
-  // -----------------------------------------------
-  // COMIDA
-  // -----------------------------------------------
 
   for(
     let zona of
@@ -1406,12 +1186,6 @@ function dibujarMundo(){
 
   }
 
-
-
-  // -----------------------------------------------
-  // REFUGIOS
-  // -----------------------------------------------
-
   for(
     let zona of
     mundo.refugios
@@ -1424,12 +1198,6 @@ function dibujarMundo(){
 
   }
 
-
-
-  // -----------------------------------------------
-  // OBSTÁCULOS
-  // -----------------------------------------------
-
   for(
     let zona of
     mundo.obstaculos
@@ -1441,12 +1209,6 @@ function dibujarMundo(){
     )
 
   }
-
-
-
-  // -----------------------------------------------
-  // ZONAS LETALES
-  // -----------------------------------------------
 
   for(
     let zona of
@@ -1461,12 +1223,6 @@ function dibujarMundo(){
   }
 
 }
-
-
-
-// =====================================================
-// DIBUJAR SERES
-// =====================================================
 
 function dibujarSeres(){
 
@@ -1496,12 +1252,6 @@ function dibujarSeres(){
 
       let generacion =
         grupo[i+4]
-
-
-
-      // ---------------------------------------------
-      // COLOR SEGÚN ESTADO
-      // ---------------------------------------------
 
       if(hambre > 75){
 
@@ -1547,12 +1297,6 @@ function dibujarSeres(){
   }
 
 }
-
-
-
-// =====================================================
-// ESTADÍSTICAS
-// =====================================================
 
 function actualizarEstadisticas(){
 
@@ -1621,12 +1365,6 @@ function actualizarEstadisticas(){
 
 }
 
-
-
-// =====================================================
-// BUCLE GRÁFICO
-// =====================================================
-
 function dibujar(){
 
   ctx.fillStyle =
@@ -1660,6 +1398,6 @@ function dibujar(){
 dibujar()
 
 </script>
-
-</body>
+  </body>
 </html>
+

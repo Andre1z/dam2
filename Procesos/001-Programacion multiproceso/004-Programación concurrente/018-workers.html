@@ -123,6 +123,8 @@ button:hover{
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas id="canvas"></canvas>
 
@@ -183,7 +185,7 @@ button:hover{
 
 
     <button id="limpiar">
-        Limpiar acumulación
+        Limpiar acumulaciÃ³n
     </button>
 
     <div id="hardware"></div>
@@ -192,10 +194,6 @@ button:hover{
 
 
 <script>
-
-// ============================================================
-// CANVAS
-// ============================================================
 
 const canvas =
     document.querySelector("#canvas");
@@ -208,21 +206,11 @@ const ctx =
         }
     );
 
-
-// ============================================================
-// BUFFER DE ACUMULACIÓN
-// ============================================================
-
 const acumulacion =
     document.createElement("canvas");
 
 const actx =
     acumulacion.getContext("2d");
-
-
-// ============================================================
-// VARIABLES
-// ============================================================
 
 let W;
 let H;
@@ -237,11 +225,6 @@ let rayosSegundo = 0;
 
 let contadorRayosSegundo = 0;
 
-
-// ============================================================
-// RATÓN
-// ============================================================
-
 const raton = {
 
     x:
@@ -251,11 +234,6 @@ const raton = {
         window.innerHeight/2
 
 };
-
-
-// ============================================================
-// CONFIGURACIÓN
-// ============================================================
 
 const MAX_REBOTES = 12;
 
@@ -267,20 +245,7 @@ const RUGOSIDAD = 0.12;
 
 const INTENSIDAD_MINIMA = 0.005;
 
-
-// ============================================================
-// TEMPORAL ACCUMULATION
-// ============================================================
-
-// Cuanto mayor sea, más rápidamente
-// desaparece la iluminación antigua.
-
 const DECAY_POR_SEGUNDO = 0.35;
-
-
-// ============================================================
-// MUROS
-// ============================================================
 
 function muro(
     x1,
@@ -300,19 +265,11 @@ function muro(
 
 }
 
-
-// ============================================================
-// LABERINTO
-// ============================================================
-
 function crearLaberinto(){
 
     muros = [];
 
     const m = 25;
-
-
-    // borde
 
     muro(
         m,m,
@@ -334,9 +291,6 @@ function crearLaberinto(){
         m,m
     );
 
-
-    // izquierda
-
     muro(
         W*0.25,
         H*0.10,
@@ -351,18 +305,12 @@ function crearLaberinto(){
         H*0.90
     );
 
-
-    // centro
-
     muro(
         W*0.50,
         H*0.22,
         W*0.50,
         H*0.68
     );
-
-
-    // derecha
 
     muro(
         W*0.75,
@@ -377,9 +325,6 @@ function crearLaberinto(){
         W*0.75,
         H*0.90
     );
-
-
-    // horizontales
 
     muro(
         W*0.07,
@@ -425,11 +370,6 @@ function crearLaberinto(){
 
 }
 
-
-// ============================================================
-// CÓDIGO DEL WORKER
-// ============================================================
-
 const codigoWorker = `
 
 let W = 0;
@@ -445,11 +385,6 @@ let REFLECTANCIA;
 let PROB_ESPECULAR;
 let RUGOSIDAD;
 let INTENSIDAD_MINIMA;
-
-
-// ============================================================
-// INTERSECCIÓN
-// ============================================================
 
 function interseccion(
     px,
@@ -536,11 +471,6 @@ function interseccion(
 
 }
 
-
-// ============================================================
-// IMPACTO MÁS CERCANO
-// ============================================================
-
 function primerImpacto(
     x,
     y,
@@ -588,11 +518,6 @@ function primerImpacto(
     return mejor;
 
 }
-
-
-// ============================================================
-// NORMAL
-// ============================================================
 
 function normalMuro(
     m,
@@ -650,11 +575,6 @@ function normalMuro(
 
 }
 
-
-// ============================================================
-// REFLEXIÓN
-// ============================================================
-
 function reflejar(
     dx,
     dy,
@@ -694,11 +614,6 @@ function reflejar(
 
 }
 
-
-// ============================================================
-// LAMBERT
-// ============================================================
-
 function direccionLambertiana(
     normal
 ){
@@ -736,11 +651,6 @@ function direccionLambertiana(
     };
 
 }
-
-
-// ============================================================
-// ESPECULAR
-// ============================================================
 
 function direccionEspecular(
     dx,
@@ -782,11 +692,6 @@ function direccionEspecular(
     };
 
 }
-
-
-// ============================================================
-// PATH
-// ============================================================
 
 function lanzarPath(
     origenX,
@@ -842,11 +747,6 @@ function lanzarPath(
             break;
         }
 
-
-        // ================================================
-        // ATENUACIÓN
-        // ================================================
-
         const distancia =
             impacto.distancia;
 
@@ -862,11 +762,6 @@ function lanzarPath(
         const intensidad =
             energia *
             atenuacion;
-
-
-        // ================================================
-        // PINTAR DIRECTAMENTE EN EL WORKER
-        // ================================================
 
         const alpha =
             Math.min(
@@ -903,11 +798,6 @@ function lanzarPath(
         energia *=
             atenuacion;
 
-
-        // ================================================
-        // NORMAL
-        // ================================================
-
         const normal =
             normalMuro(
                 impacto.muro,
@@ -925,11 +815,6 @@ function lanzarPath(
                 )
             );
 
-
-        // ================================================
-        // FRESNEL
-        // ================================================
-
         const fresnel =
             PROB_ESPECULAR
             +
@@ -941,11 +826,6 @@ function lanzarPath(
                 1-cosIncidencia,
                 5
             );
-
-
-        // ================================================
-        // MONTE CARLO
-        // ================================================
 
         if(
             Math.random()
@@ -988,11 +868,6 @@ function lanzarPath(
         energia *=
             REFLECTANCIA;
 
-
-        // ================================================
-        // RUSSIAN ROULETTE
-        // ================================================
-
         if(
             rebote >= 3
         ){
@@ -1031,21 +906,11 @@ function lanzarPath(
 
 }
 
-
-// ============================================================
-// MENSAJES
-// ============================================================
-
 self.onmessage =
 function(e){
 
     const datos =
         e.data;
-
-
-    // ========================================================
-    // INICIALIZACIÓN
-    // ========================================================
 
     if(
         datos.tipo === "init"
@@ -1107,18 +972,9 @@ function(e){
 
     }
 
-
-    // ========================================================
-    // RENDER
-    // ========================================================
-
     if(
         datos.tipo === "render"
     ){
-
-        // ----------------------------------------------
-        // limpiar SOLO el pequeño frame del worker
-        // ----------------------------------------------
 
         ctx.globalCompositeOperation =
             "source-over";
@@ -1133,11 +989,6 @@ function(e){
 
         ctx.globalCompositeOperation =
             "lighter";
-
-
-        // ----------------------------------------------
-        // paths
-        // ----------------------------------------------
 
         for(
             let i=0;
@@ -1158,11 +1009,6 @@ function(e){
             );
 
         }
-
-
-        // ----------------------------------------------
-        // TRANSFERIR IMAGEN
-        // ----------------------------------------------
 
         const bitmap =
             canvasWorker
@@ -1191,11 +1037,6 @@ function(e){
 
 `;
 
-
-// ============================================================
-// BLOB
-// ============================================================
-
 const blob =
     new Blob(
         [codigoWorker],
@@ -1211,14 +1052,7 @@ const workerURL =
         blob
     );
 
-
-// ============================================================
-// CREAR WORKERS
-// ============================================================
-
 function crearWorkers(){
-
-    // destruir anteriores
 
     for(
         const item of workers
@@ -1255,11 +1089,6 @@ function crearWorkers(){
     ).value =
         cantidad;
 
-
-    // ========================================================
-    // CREACIÓN
-    // ========================================================
-
     for(
         let i=0;
         i<cantidad;
@@ -1289,11 +1118,6 @@ function crearWorkers(){
             const datos =
                 e.data;
 
-
-            // ================================================
-            // READY
-            // ================================================
-
             if(
                 datos.tipo === "ready"
             ){
@@ -1311,18 +1135,9 @@ function crearWorkers(){
 
             }
 
-
-            // ================================================
-            // BITMAP TERMINADO
-            // ================================================
-
             if(
                 datos.tipo === "bitmap"
             ){
-
-                // ------------------------------------------
-                // COMPOSICIÓN
-                // ------------------------------------------
 
                 actx.globalCompositeOperation =
                     "lighter";
@@ -1339,24 +1154,12 @@ function crearWorkers(){
 
                 datos.bitmap.close();
 
-
-                // ------------------------------------------
-                // ESTADÍSTICAS
-                // ------------------------------------------
-
                 muestras +=
                     datos.rayos;
 
 
                 contadorRayosSegundo +=
                     datos.rayos;
-
-
-                // ------------------------------------------
-                // EL WORKER NO ESPERA AL FRAME
-                //
-                // recibe inmediatamente otro trabajo
-                // ------------------------------------------
 
                 mandarTrabajo(
                     item
@@ -1380,11 +1183,6 @@ function crearWorkers(){
         workers.push(
             item
         );
-
-
-        // ====================================================
-        // INIT
-        // ====================================================
 
         worker.postMessage({
 
@@ -1426,11 +1224,6 @@ function crearWorkers(){
         cantidad;
 
 }
-
-
-// ============================================================
-// MANDAR TRABAJO
-// ============================================================
 
 function mandarTrabajo(
     item
@@ -1479,11 +1272,6 @@ function mandarTrabajo(
 
 }
 
-
-// ============================================================
-// REDIMENSIONAR
-// ============================================================
-
 function redimensionar(){
 
     const dpr =
@@ -1519,15 +1307,6 @@ function redimensionar(){
         0,0
     );
 
-
-    // ========================================================
-    // BUFFER
-    //
-    // Lo mantenemos a resolución CSS.
-    //
-    // Esto reduce muchísimo el coste de los ImageBitmap.
-    // ========================================================
-
     acumulacion.width =
         W;
 
@@ -1545,11 +1324,6 @@ function redimensionar(){
 
 }
 
-
-// ============================================================
-// RATÓN
-// ============================================================
-
 canvas.addEventListener(
     "mousemove",
     function(e){
@@ -1566,21 +1340,8 @@ canvas.addEventListener(
             e.clientY -
             rect.top;
 
-
-        // ====================================================
-        // NO SE BORRA NADA
-        //
-        // Los workers siguientes reciben automáticamente
-        // la nueva posición.
-        // ====================================================
-
     }
 );
-
-
-// ============================================================
-// LIMPIAR
-// ============================================================
 
 function limpiar(){
 
@@ -1606,22 +1367,12 @@ document.querySelector(
 ).onclick =
     limpiar;
 
-
-// ============================================================
-// CAMBIO DE WORKERS
-// ============================================================
-
 document.querySelector(
     "#numeroWorkers"
 ).addEventListener(
     "change",
     crearWorkers
 );
-
-
-// ============================================================
-// DECAY TEMPORAL
-// ============================================================
 
 let ultimoDecay =
     performance.now();
@@ -1644,11 +1395,6 @@ function decayTemporal(){
 
     ultimoDecay =
         ahora;
-
-
-    // ========================================================
-    // Fade independiente de FPS
-    // ========================================================
 
     const alpha =
         1 -
@@ -1680,11 +1426,6 @@ function decayTemporal(){
 
 }
 
-
-// ============================================================
-// DIBUJAR MUROS
-// ============================================================
-
 function dibujarMuros(){
 
     ctx.lineCap =
@@ -1692,11 +1433,6 @@ function dibujarMuros(){
 
     ctx.lineJoin =
         "round";
-
-
-    // ========================================================
-    // SOMBRA
-    // ========================================================
 
     ctx.beginPath();
 
@@ -1726,11 +1462,6 @@ function dibujarMuros(){
 
     ctx.stroke();
 
-
-    // ========================================================
-    // CUERPO
-    // ========================================================
-
     ctx.beginPath();
 
 
@@ -1758,11 +1489,6 @@ function dibujarMuros(){
         7;
 
     ctx.stroke();
-
-
-    // ========================================================
-    // SUPERFICIE
-    // ========================================================
 
     ctx.beginPath();
 
@@ -1793,11 +1519,6 @@ function dibujarMuros(){
     ctx.stroke();
 
 }
-
-
-// ============================================================
-// FUENTE
-// ============================================================
 
 function dibujarFuente(){
 
@@ -1880,22 +1601,12 @@ function dibujarFuente(){
 
 }
 
-
-// ============================================================
-// FPS
-// ============================================================
-
 let frames = 0;
 
 let fps = 0;
 
 let ultimoFPS =
     performance.now();
-
-
-// ============================================================
-// RENDER
-// ============================================================
 
 function render(){
 
@@ -1959,17 +1670,7 @@ function render(){
 
     }
 
-
-    // ========================================================
-    // DECAY
-    // ========================================================
-
     decayTemporal();
-
-
-    // ========================================================
-    // FONDO
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "source-over";
@@ -1986,11 +1687,6 @@ function render(){
         H
     );
 
-
-    // ========================================================
-    // ACUMULACIÓN
-    // ========================================================
-
     ctx.globalCompositeOperation =
         "lighter";
 
@@ -2003,21 +1699,11 @@ function render(){
         H
     );
 
-
-    // ========================================================
-    // MUROS
-    // ========================================================
-
     ctx.globalCompositeOperation =
         "source-over";
 
 
     dibujarMuros();
-
-
-    // ========================================================
-    // FUENTE
-    // ========================================================
 
     ctx.globalCompositeOperation =
         "lighter";
@@ -2036,11 +1722,6 @@ function render(){
 
 }
 
-
-// ============================================================
-// HARDWARE
-// ============================================================
-
 const hardware =
     navigator.hardwareConcurrency
     ||
@@ -2053,11 +1734,6 @@ document.querySelector(
     "hardwareConcurrency: "
     +
     hardware;
-
-
-// ============================================================
-// RESIZE
-// ============================================================
 
 let temporizadorResize;
 
@@ -2080,16 +1756,11 @@ window.addEventListener(
     }
 );
 
-
-// ============================================================
-// START
-// ============================================================
-
 redimensionar();
 
 render();
 
 </script>
-
-</body>
+  </body>
 </html>
+

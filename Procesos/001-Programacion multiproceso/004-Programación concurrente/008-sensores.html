@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <title>Actualización concurrente</title>
   <meta charset="UTF-8">
 
   <style>
@@ -26,6 +27,8 @@
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas></canvas>
 
@@ -59,8 +62,6 @@ class Ser{
 
     this.velocidad = 1 + Math.random()
 
-    // Sensores
-
     this.distanciaSensor = 30
 
     this.anguloSensor = 0.5
@@ -75,8 +76,6 @@ class Ser{
 
     let angulo = this.angulo + anguloSensor
 
-    // Posición del extremo del sensor
-
     let sensorX =
       this.x +
       Math.cos(angulo) *
@@ -90,9 +89,6 @@ class Ser{
 
     let distanciaMinima = Infinity
 
-
-    // Comprobar contra TODOS los seres
-
     for(let otro of seres){
 
       if(otro === this){
@@ -102,9 +98,6 @@ class Ser{
 
       let dx = otro.x - sensorX
       let dy = otro.y - sensorY
-
-
-      // Evitamos sqrt para parte del cálculo
 
       let distanciaCuadrado =
         dx * dx +
@@ -140,8 +133,6 @@ class Ser{
 
   pensar(){
 
-    // Tres sensores
-
     let izquierda =
       this.sensor(
         -this.anguloSensor
@@ -155,12 +146,7 @@ class Ser{
         this.anguloSensor
       )
 
-
-    // Algo delante
-
     if(centro !== Infinity){
-
-      // Girar hacia el lado más libre
 
       if(izquierda > derecha){
 
@@ -174,17 +160,11 @@ class Ser{
 
     }
 
-
-    // Algo a la izquierda
-
     if(izquierda !== Infinity){
 
       this.angulo += 0.05
 
     }
-
-
-    // Algo a la derecha
 
     if(derecha !== Infinity){
 
@@ -205,11 +185,6 @@ class Ser{
     this.y +=
       Math.sin(this.angulo) *
       this.velocidad
-
-
-
-    // En lugar de rebotar,
-    // aparece por el otro lado
 
     if(this.x < 0)
       this.x = canvas.width
@@ -243,9 +218,6 @@ class Ser{
 
 
 let seres = []
-
-// Empieza con 2000.
-// Luego prueba 5000, 10000...
 
 let numeroSeres = 10000
 
@@ -294,6 +266,6 @@ function bucle(){
 bucle()
 
 </script>
-
-</body>
+  </body>
 </html>
+

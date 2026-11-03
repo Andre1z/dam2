@@ -1,13 +1,18 @@
 <!doctype html>
 <html>
 <head>
+    <title>Actualización concurrente</title>
+    <meta charset="UTF-8">
   <style>
     canvas{
       border:1px solid black;
     }
   </style>
-</head>
+    <style>body { background: #0f172a; color: #e2e8f0; font-family: Arial, sans-serif; } </style>
+  </head>
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas width="512" height="512"></canvas>
 
@@ -26,8 +31,6 @@
     mover(){
       this.x += Math.cos(this.angulo)
       this.y += Math.sin(this.angulo)
-
-      // Rebotar contra las paredes
       if(this.x < 0 || this.x > 512){
         this.angulo = Math.PI - this.angulo
       }
@@ -49,8 +52,6 @@
   let contexto = canvas.getContext("2d")
 
   let seres = []
-
-  // Creamos 500 seres
   for(let i = 0; i < 500; i++){
     seres.push(new Ser())
   }
@@ -71,6 +72,6 @@
   bucle()
 
 </script>
-
-</body>
+  </body>
 </html>
+

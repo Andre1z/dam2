@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <title>Actualización concurrente</title>
   <meta charset="UTF-8">
 
   <style>
@@ -26,6 +27,8 @@
 </head>
 
 <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
 
 <canvas></canvas>
 
@@ -37,8 +40,6 @@ let contexto = canvas.getContext("2d")
 function redimensionar(){
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
-
-  // Avisamos a todos los workers
   for(let worker of workers){
     worker.postMessage({
       tipo:"resize",
@@ -53,13 +54,7 @@ let workers = []
 let numeroWorkers = 10
 let seresPorWorker = 1000
 
-// Aquí guardaremos las posiciones
-// recibidas de cada worker
-
 let posiciones = new Array(numeroWorkers)
-
-
-// Crear workers
 
 for(let i = 0; i < numeroWorkers; i++){
 
@@ -67,18 +62,12 @@ for(let i = 0; i < numeroWorkers; i++){
 
   workers.push(worker)
 
-
-  // Inicializar worker
-
   worker.postMessage({
     tipo:"iniciar",
     cantidad:seresPorWorker,
     width:window.innerWidth,
     height:window.innerHeight
   })
-
-
-  // Recibir posiciones
 
   worker.onmessage = function(event){
 
@@ -112,10 +101,6 @@ function dibujar(){
 
   contexto.fillStyle = "white"
 
-
-  // Dibujamos los resultados
-  // de todos los workers
-
   for(let grupo of posiciones){
 
     if(!grupo){
@@ -145,6 +130,6 @@ function dibujar(){
 dibujar()
 
 </script>
-
-</body>
+  </body>
 </html>
+
