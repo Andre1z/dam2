@@ -1,34 +1,125 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Habitantes</title>
+    <style>
+      body {
+        margin: 24px;
+        color: #222;
+        font-family: Arial, sans-serif;
+      }
+
+      main {
+        width: min(100%, 512px);
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #aaa;
+        background: #f5f5f5;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+    </style>
   </head>
   <body>
-    <canvas width=512 height=512></canvas>
+    <main>
+      <h1>Habitantes</h1>
+      <canvas width="512" height="512" aria-label="Habitantes moviéndose por el canvas"></canvas>
+      <div class="footer">
+        <span>20 habitantes</span>
+        <span>Movimiento autónomo</span>
+      </div>
+    </main>
     <script>
       const lienzo = document.querySelector("canvas")
       const contexto = lienzo.getContext("2d")
-      class Actor{
-      	constructor(){
-        	this.x = Math.random()*512;
-          this.y = Math.random()*512
+      const colores = ["#83e3ae", "#72c8f2", "#ffc978", "#e7a3e8", "#f28f83"]
+
+      class Actor {
+        constructor() {
+          this.radio = 7
+          this.x = this.radio + Math.random() * (lienzo.width - this.radio * 2)
+          this.y = this.radio + Math.random() * (lienzo.height - this.radio * 2)
+          const angulo = Math.random() * Math.PI * 2
+          const velocidad = 0.25 + Math.random() * 0.55
+          this.velocidadX = Math.cos(angulo) * velocidad
+          this.velocidadY = Math.sin(angulo) * velocidad
+          this.color = colores[Math.floor(Math.random() * colores.length)]
         }
-        dibuja(){
-        	contexto.beginPath()
-          contexto.arc(this.x,this.y,10,0,Math.PI*2)
+
+        actualiza() {
+          this.x += this.velocidadX
+          this.y += this.velocidadY
+
+          if (this.x < this.radio || this.x > lienzo.width - this.radio) {
+            this.velocidadX *= -1
+            this.x = Math.max(this.radio, Math.min(lienzo.width - this.radio, this.x))
+          }
+
+          if (this.y < this.radio || this.y > lienzo.height - this.radio) {
+            this.velocidadY *= -1
+            this.y = Math.max(this.radio, Math.min(lienzo.height - this.radio, this.y))
+          }
+        }
+
+        dibuja() {
+          contexto.beginPath()
+          contexto.arc(this.x, this.y, this.radio + 4, 0, Math.PI * 2)
+          contexto.fillStyle = `${this.color}24`
+          contexto.fill()
+          contexto.beginPath()
+          contexto.arc(this.x, this.y, this.radio, 0, Math.PI * 2)
+          contexto.fillStyle = this.color
+          contexto.shadowColor = this.color
+          contexto.shadowBlur = 12
+          contexto.fill()
+          contexto.shadowBlur = 0
+          contexto.beginPath()
+          contexto.arc(this.x - 2, this.y - 2, 1.5, 0, Math.PI * 2)
+          contexto.fillStyle = "#ffffffcc"
           contexto.fill()
         }
       }
-      
-      let numeroactores = 20;
-      let actores = []
-      for(let i = 0;i<numeroactores;i++){
-      	actores.push(new Actor())
+
+      const actores = Array.from({ length: 20 }, () => new Actor())
+
+      function anima() {
+        contexto.fillStyle = "#10231f"
+        contexto.fillRect(0, 0, lienzo.width, lienzo.height)
+        contexto.beginPath()
+        contexto.strokeStyle = "#c2efdc0c"
+        contexto.lineWidth = 1
+        for (let posicion = 32; posicion < lienzo.width; posicion += 32) {
+          contexto.moveTo(posicion, 0)
+          contexto.lineTo(posicion, lienzo.height)
+          contexto.moveTo(0, posicion)
+          contexto.lineTo(lienzo.width, posicion)
+        }
+        contexto.stroke()
+
+        for (const actor of actores) {
+          actor.actualiza()
+          actor.dibuja()
+        }
+
+        requestAnimationFrame(anima)
       }
-      for(let i = 0;i<actores.length;i++){
-      	actores[i].dibuja()
-        console.log("hola")
-      }
-      console.log(actores)
+
+      anima()
     </script>
   </body>
 </html>
