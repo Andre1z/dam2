@@ -1,36 +1,56 @@
 from pymongo import MongoClient
+from pymongo.errors import ServerSelectionTimeoutError
 
-# Conectar a MongoDB
-cliente = MongoClient("mongodb://localhost:27017/")
+cliente = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=5000)
 
-# Crear/seleccionar base de datos
-db = cliente["empresa"]
+try:
+    cliente.admin.command("ping")
 
-# Crear/seleccionar colección
-clientes = db["clientes"]
+    db = cliente["clientes"]
+    clientes = db["clientes"]
 
-# Insertar datos de demostración
-clientes.insert_one({
-    "nombre": "Ana García",
-    "email": "ana@correo.com",
-    "telefono": "600111222"
-})
+    datos_clientes = [
+        {
+            "nombre": "Ana García",
+            "email": "ana@correo.com",
+            "telefono": "600111222"
+        },
+        {
+            "nombre": "Juan López",
+            "email": "juan@correo.com",
+            "telefono": "600333444"
+        },
+        {
+            "nombre": "María Pérez",
+            "email": "maria@correo.com",
+            "telefono": "600555666"
+        },
+        {
+            "nombre": "Pedro Sánchez",
+            "email": "pedro@correo.com",
+            "telefono": "600777888"
+        },
+        {
+            "nombre": "Laura Gómez",
+            "email": "laura@correo.com",
+            "telefono": "600999000"
+        }
+    ]
 
-clientes.insert_one({
-    "nombre": "Juan López",
-    "email": "juan@correo.com",
-    "telefono": "600333444"
-})
+    for datos_cliente in datos_clientes:
+        clientes.update_one(
+            {"email": datos_cliente["email"]},
+            {"$setOnInsert": datos_cliente},
+            upsert=True
+        )
 
-clientes.insert_one({
-    "nombre": "María Pérez",
-    "email": "maria@correo.com",
-    "telefono": "600555666"
-})
-
-# Mostrar clientes
-for cliente in clientes.find():
-    print(cliente)
-
-# Cerrar conexión
-cliente.close()
+    for datos_cliente in clientes.find():
+        print(datos_cliente)
+except ServerSelectionTimeoutError:
+    print(
+        "No se puede conectar con MongoDB en localhost:27017. "
+        "Instala MongoDB Community Server e inicia el servicio MongoDB."
+    )
+    raise SystemExit(1)
+finally:
+    cliente.close()
