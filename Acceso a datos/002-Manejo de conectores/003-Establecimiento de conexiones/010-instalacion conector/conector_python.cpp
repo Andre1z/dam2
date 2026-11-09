@@ -1,13 +1,13 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <memory>
 #include <stdexcept>
 
-static std::unique_ptr<JocarsaBBDD> db;
+static std::unique_ptr<AndreiBBDD> db;
 
-static JocarsaBBDD& motor() {
-    if (!db) db = std::make_unique<JocarsaBBDD>();
+static AndreiBBDD& motor() {
+    if (!db) db = std::make_unique<AndreiBBDD>();
     return *db;
 }
 
@@ -116,5 +116,5 @@ static PyMethodDef Metodos[] = {
     {"configuracion",configuracion,METH_NOARGS,"Devuelve la configuracion activa"},
     {nullptr,nullptr,0,nullptr}
 };
-static PyModuleDef modulo={PyModuleDef_HEAD_INIT,"jocarsabbdd","Conector nativo Python para Jocarsa BBDD",-1,Metodos};
-PyMODINIT_FUNC PyInit_jocarsabbdd(void){ return PyModule_Create(&modulo); }
+static PyModuleDef modulo={PyModuleDef_HEAD_INIT,"andreibbdd","Conector nativo Python para Andrei BBDD",-1,Metodos};
+PyMODINIT_FUNC PyInit_andreibbdd(void){ return PyModule_Create(&modulo); }

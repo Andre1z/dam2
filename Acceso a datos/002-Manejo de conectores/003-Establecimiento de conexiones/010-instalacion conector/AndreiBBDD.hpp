@@ -1,22 +1,23 @@
 #pragma once
+#include <cstddef>
 #include <cstdint>
 #include <map>
 #include <string>
 #include <vector>
 
-class JocarsaSerializador {
+class AndreiSerializador {
 public:
     std::string serializar(const std::vector<std::string>& lista, char delimitador = ',') const;
     std::vector<std::string> desserializar(const std::string& cadena, char delimitador = ',') const;
 };
 
-class JocarsaBBDD {
+class AndreiBBDD {
 public:
     std::string instalacion;
     std::string basededatos;
     std::size_t tamanoRegistro = 512;
 
-    explicit JocarsaBBDD(const std::string& config = "config.json");
+    explicit AndreiBBDD(const std::string& config = "config.json");
     bool creaBaseDatos(const std::string& nombre);
     bool usaBaseDatos(const std::string& nombre);
     bool creaTabla(const std::string& nombre, const std::string& esquema);
