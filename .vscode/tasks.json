@@ -2,6 +2,30 @@
     "tasks": [
         {
             "type": "cppbuild",
+            "label": "C/C++: g++.exe compilar Andrei BBDD",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-std=c++11",
+                "-fdiagnostics-color=always",
+                "-g",
+                "${workspaceFolder}\\Acceso a datos\\002-Manejo de conectores\\003-Establecimiento de conexiones\\006-pasando a cpp\\main.cpp",
+                "${workspaceFolder}\\Acceso a datos\\002-Manejo de conectores\\003-Establecimiento de conexiones\\006-pasando a cpp\\AndreiBBDD.cpp",
+                "-o",
+                "${workspaceFolder}\\Acceso a datos\\002-Manejo de conectores\\003-Establecimiento de conexiones\\006-pasando a cpp\\andrei.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\Acceso a datos\\002-Manejo de conectores\\003-Establecimiento de conexiones\\006-pasando a cpp"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "cppbuild",
             "label": "C/C++: gcc.exe compilar archivo activo",
             "command": "C:\\MinGW\\bin\\gcc.exe",
             "args": [
@@ -17,10 +41,6 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
             "detail": "Tarea generada por el depurador."
         }
     ],

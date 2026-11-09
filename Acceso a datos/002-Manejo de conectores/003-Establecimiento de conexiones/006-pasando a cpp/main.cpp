@@ -1,10 +1,35 @@
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
+
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
 
-static std::vector<std::string> separar(const std::string&s){return JocarsaSerializador().desserializar(s);}
-static void imprimir(const std::map<std::string,std::string>& r){for(auto const&[k,v]:r)std::cout<<k<<"="<<v<<"  ";std::cout<<"\n";}
-static void ayuda(){std::cout<<R"(
+namespace {
+
+std::vector<std::string> separar(const std::string& texto) {
+    return AndreiSerializador().desserializar(texto);
+}
+
+bool leerId(std::istringstream& entrada, std::string& tabla, long long& id) {
+    if (!(entrada >> tabla >> id)) {
+        std::cerr << "Uso: <comando> tabla id\n";
+        return false;
+    }
+    return true;
+}
+
+void imprimir(const std::map<std::string, std::string>& registro) {
+    for (std::map<std::string, std::string>::const_iterator elemento = registro.begin();
+         elemento != registro.end();
+         ++elemento) {
+        std::cout << elemento->first << '=' << elemento->second << "  ";
+    }
+    std::cout << '\n';
+}
+
+void ayuda() {
+    std::cout << R"(
 Comandos:
   CREAR BASE nombre
   USAR nombre
@@ -18,24 +43,165 @@ Comandos:
   ESQUEMA tabla
   AYUDA
   SALIR
-)";}
-int main(int argc,char**argv){
- try{
-  std::string cfg=argc>1?argv[1]:"config.json"; JocarsaBBDD db(cfg);
-  std::cout<<"JocarsaBBDD C++ - terminal\n"; ayuda(); std::string linea;
-  while(std::cout<<(db.basededatos.empty()?"jocarsa> ":("jocarsa["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
-   std::istringstream ss(linea);std::string a,b,c;ss>>a;if(a.empty())continue;
-   if(a=="SALIR"||a=="salir")break;if(a=="AYUDA"||a=="ayuda"){ayuda();continue;}
-   if(a=="CREAR"){ss>>b;if(b=="BASE"){ss>>c;std::cout<<(db.creaBaseDatos(c)?"OK\n":"ERROR\n");}else if(b=="TABLA"){ss>>c;std::string e;std::getline(ss,e);if(!e.empty()&&e[0]==' ')e.erase(0,1);std::cout<<(db.creaTabla(c,e)?"OK\n":"ERROR\n");}continue;}
-   if(a=="USAR"){ss>>b;std::cout<<(db.usaBaseDatos(b)?"OK\n":"ERROR\n");continue;}
-   if(a=="INSERTAR"){ss>>b;std::string d;std::getline(ss,d);if(!d.empty()&&d[0]==' ')d.erase(0,1);auto id=db.insertarDatos(b,separar(d));std::cout<<(id<0?"ERROR":"ID="+std::to_string(id))<<"\n";continue;}
-   if(a=="SELECCIONAR"){long long id;ss>>b>>id;auto r=db.seleccionar(b,id);if(r.empty())std::cout<<"No encontrado\n";else imprimir(r);continue;}
-   if(a=="LISTAR"){ss>>b;for(auto&r:db.listarTodo(b))imprimir(r);continue;}
-   if(a=="BUSCAR"){ss>>b>>c;std::string v;std::getline(ss,v);if(!v.empty()&&v[0]==' ')v.erase(0,1);for(auto&r:db.buscarColumna(b,c,v))imprimir(r);continue;}
-   if(a=="ACTUALIZAR"){long long id;ss>>b>>id;std::string d;std::getline(ss,d);if(!d.empty()&&d[0]==' ')d.erase(0,1);std::cout<<(db.actualizar(b,id,separar(d))?"OK\n":"ERROR\n");continue;}
-   if(a=="ELIMINAR"){long long id;ss>>b>>id;std::cout<<(db.eliminar(b,id)?"OK\n":"ERROR\n");continue;}
-   if(a=="ESQUEMA"){ss>>b;auto e=db.obtenerEsquema(b);for(size_t i=0;i<e.size();++i)std::cout<<(i?",":"")<<e[i];std::cout<<"\n";continue;}
-   std::cout<<"Comando desconocido. Escribe AYUDA.\n";
-  }
- }catch(const std::exception&e){std::cerr<<"Error: "<<e.what()<<"\n";return 1;}
+)";
+}
+
+}
+
+int main(int argc, char** argv) {
+    try {
+        const std::string config = argc > 1 ? argv[1] : "config.json";
+        AndreiBBDD db(config);
+        std::cout << "Andrei BBDD C++ - terminal\n";
+        ayuda();
+
+        std::string linea;
+        while (
+            std::cout << (db.basededatos.empty()
+                ? "andrei> "
+                : "andrei[" + db.basededatos + "]> ")
+            && std::getline(std::cin, linea)
+        ) {
+            std::istringstream entrada(linea);
+            std::string comando;
+            entrada >> comando;
+            if (comando.empty()) {
+                continue;
+            }
+
+            if (comando == "SALIR" || comando == "salir") {
+                break;
+            }
+            if (comando == "AYUDA" || comando == "ayuda") {
+                ayuda();
+                continue;
+            }
+            if (comando == "CREAR" || comando == "crear") {
+                std::string tipo;
+                std::string nombre;
+                if (!(entrada >> tipo >> nombre)) {
+                    std::cerr << "Uso: CREAR BASE nombre o CREAR TABLA nombre esquema\n";
+                    continue;
+                }
+
+                if (tipo == "BASE" || tipo == "base") {
+                    std::cout << (db.creaBaseDatos(nombre) ? "OK\n" : "ERROR\n");
+                } else if (tipo == "TABLA" || tipo == "tabla") {
+                    std::string esquema;
+                    std::getline(entrada >> std::ws, esquema);
+                    if (esquema.empty()) {
+                        std::cerr << "Indica las columnas de la tabla.\n";
+                        continue;
+                    }
+                    std::cout << (db.creaTabla(nombre, esquema) ? "OK\n" : "ERROR\n");
+                } else {
+                    std::cerr << "Tipo desconocido. Usa BASE o TABLA.\n";
+                }
+                continue;
+            }
+            if (comando == "USAR" || comando == "usar") {
+                std::string nombre;
+                if (!(entrada >> nombre)) {
+                    std::cerr << "Uso: USAR nombre\n";
+                    continue;
+                }
+                std::cout << (db.usaBaseDatos(nombre) ? "OK\n" : "ERROR\n");
+                continue;
+            }
+            if (comando == "INSERTAR" || comando == "insertar") {
+                std::string tabla;
+                if (!(entrada >> tabla)) {
+                    std::cerr << "Uso: INSERTAR tabla valor1,valor2,...\n";
+                    continue;
+                }
+                std::string datos;
+                std::getline(entrada >> std::ws, datos);
+                const auto id = db.insertarDatos(tabla, separar(datos));
+                std::cout << (id < 0 ? "ERROR" : "ID=" + std::to_string(id)) << '\n';
+                continue;
+            }
+            if (comando == "SELECCIONAR" || comando == "seleccionar") {
+                std::string tabla;
+                long long id = 0;
+                if (!leerId(entrada, tabla, id)) {
+                    continue;
+                }
+                const auto registro = db.seleccionar(tabla, id);
+                if (registro.empty()) {
+                    std::cout << "No encontrado\n";
+                } else {
+                    imprimir(registro);
+                }
+                continue;
+            }
+            if (comando == "LISTAR" || comando == "listar") {
+                std::string tabla;
+                if (!(entrada >> tabla)) {
+                    std::cerr << "Uso: LISTAR tabla\n";
+                    continue;
+                }
+                for (const auto& registro : db.listarTodo(tabla)) {
+                    imprimir(registro);
+                }
+                continue;
+            }
+            if (comando == "BUSCAR" || comando == "buscar") {
+                std::string tabla;
+                std::string columna;
+                if (!(entrada >> tabla >> columna)) {
+                    std::cerr << "Uso: BUSCAR tabla columna valor\n";
+                    continue;
+                }
+                std::string valor;
+                std::getline(entrada >> std::ws, valor);
+                for (const auto& registro : db.buscarColumna(tabla, columna, valor)) {
+                    imprimir(registro);
+                }
+                continue;
+            }
+            if (comando == "ACTUALIZAR" || comando == "actualizar") {
+                std::string tabla;
+                long long id = 0;
+                if (!leerId(entrada, tabla, id)) {
+                    continue;
+                }
+                std::string datos;
+                std::getline(entrada >> std::ws, datos);
+                if (datos.empty()) {
+                    std::cerr << "Indica los valores que quieres guardar.\n";
+                    continue;
+                }
+                std::cout << (db.actualizar(tabla, id, separar(datos)) ? "OK\n" : "ERROR\n");
+                continue;
+            }
+            if (comando == "ELIMINAR" || comando == "eliminar") {
+                std::string tabla;
+                long long id = 0;
+                if (!leerId(entrada, tabla, id)) {
+                    continue;
+                }
+                std::cout << (db.eliminar(tabla, id) ? "OK\n" : "ERROR\n");
+                continue;
+            }
+            if (comando == "ESQUEMA" || comando == "esquema") {
+                std::string tabla;
+                if (!(entrada >> tabla)) {
+                    std::cerr << "Uso: ESQUEMA tabla\n";
+                    continue;
+                }
+                const auto esquema = db.obtenerEsquema(tabla);
+                for (std::size_t i = 0; i < esquema.size(); ++i) {
+                    std::cout << (i == 0 ? "" : ",") << esquema[i];
+                }
+                std::cout << '\n';
+                continue;
+            }
+
+            std::cout << "Comando desconocido. Escribe AYUDA.\n";
+        }
+    } catch (const std::exception& error) {
+        std::cerr << "Error: " << error.what() << '\n';
+        return 1;
+    }
+    return 0;
 }

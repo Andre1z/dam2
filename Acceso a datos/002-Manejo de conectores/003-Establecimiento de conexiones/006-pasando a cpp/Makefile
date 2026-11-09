@@ -1,6 +1,6 @@
 CXX=g++
-CXXFLAGS=-std=c++20 -O2 -Wall -Wextra -pedantic
-jocarsabbdd: main.cpp JocarsaBBDD.cpp JocarsaBBDD.hpp
-	$(CXX) $(CXXFLAGS) main.cpp JocarsaBBDD.cpp -o jocarsabbdd
+CXXFLAGS=-std=c++11 -O2 -Wall -Wextra -pedantic
+andrei: main.cpp AndreiBBDD.cpp AndreiBBDD.hpp
+	$(CXX) $(CXXFLAGS) main.cpp AndreiBBDD.cpp -o andrei
 clean:
-	rm -f jocarsabbdd
+	rm -f andrei

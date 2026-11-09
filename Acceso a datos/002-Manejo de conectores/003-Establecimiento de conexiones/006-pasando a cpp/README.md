@@ -1,6 +1,6 @@
-# JocarsaBBDD C++ — uso desde terminal
+# Andrei BBDD C++ — uso desde terminal
 
-Conversión directa a C++ del motor `JocarsaBBDD.py`. Mantiene el mismo concepto y formato de almacenamiento: un archivo `.csv` binario de registros de tamaño fijo, un `.idx` con `id,posicion` y un `.esquema` con los nombres de campos.
+Conversión a C++ del motor `AndreiBBDD.py`. Mantiene el mismo concepto y formato de almacenamiento: un archivo `.csv` binario de registros de tamaño fijo, un `.idx` con `id,posicion` y un `.esquema` con los nombres de campos.
 
 ## 1. Compilar
 
@@ -11,52 +11,47 @@ sudo apt install g++ make
 make
 ```
 
-Se genera el ejecutable:
+Se genera el ejecutable `andrei`:
 
 ```bash
-./jocarsabbdd
+./andrei
 ```
 
 El programa busca `config.json` en el directorio actual. También se puede indicar otra configuración:
 
 ```bash
-./jocarsabbdd /ruta/a/config.json
+./andrei /ruta/a/config.json
 ```
 
 ## 2. Configuración
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "C:/htdocs/andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
 
-`instalacion` indica dónde se guardan las bases de datos. `tamanoRegistro` indica el tamaño fijo, en bytes, de cada registro. Si se usa `/var/jocarsa-basededatos/`, el usuario debe tener permisos de escritura.
+`instalacion` indica dónde se guardan las bases de datos. `tamanoRegistro` indica el tamaño fijo, en bytes, de cada registro. El directorio debe existir o el programa debe poder crearlo y tener permisos de escritura.
 
-Ejemplo:
-
-```bash
-sudo mkdir -p /var/jocarsa-basededatos
-sudo chown $USER:$USER /var/jocarsa-basededatos
-```
+En Windows, se puede usar una ruta como `C:/htdocs/andrei-basededatos/`. En Linux, se puede cambiar por una ruta con permisos de escritura, por ejemplo `/tmp/andrei-basededatos/`.
 
 ## 3. Arrancar la terminal
 
 ```bash
-./jocarsabbdd
+./andrei
 ```
 
 El prompt inicial es:
 
 ```text
-jocarsa>
+andrei>
 ```
 
 Después de seleccionar una base:
 
 ```text
-jocarsa[empresa]>
+andrei[empresa]>
 ```
 
 ## 4. Comandos
@@ -105,6 +100,12 @@ Respuesta:
 
 ```text
 ID=1
+```
+
+Para incluir una coma o una barra inversa dentro de un campo, escápala con `\`. Por ejemplo:
+
+```text
+INSERTAR clientes Ana\, Maria,Garcia,ana@empresa.com
 ```
 
 ### Seleccionar por ID
@@ -157,34 +158,34 @@ SALIR
 ## 5. Sesión completa de ejemplo
 
 ```text
-jocarsa> CREAR BASE empresa
+andrei> CREAR BASE empresa
 OK
-jocarsa> USAR empresa
+andrei> USAR empresa
 OK
-jocarsa[empresa]> CREAR TABLA clientes nombre,apellidos,email
+andrei[empresa]> CREAR TABLA clientes nombre,apellidos,email
 OK
-jocarsa[empresa]> INSERTAR clientes Ana,García,ana@empresa.com
+andrei[empresa]> INSERTAR clientes Ana,García,ana@empresa.com
 ID=1
-jocarsa[empresa]> INSERTAR clientes Luis,Pérez,luis@empresa.com
+andrei[empresa]> INSERTAR clientes Luis,Pérez,luis@empresa.com
 ID=2
-jocarsa[empresa]> LISTAR clientes
+andrei[empresa]> LISTAR clientes
 activo=1  apellidos=García  email=ana@empresa.com  id=1  nombre=Ana
 activo=1  apellidos=Pérez  email=luis@empresa.com  id=2  nombre=Luis
-jocarsa[empresa]> BUSCAR clientes nombre Ana
+andrei[empresa]> BUSCAR clientes nombre Ana
 activo=1  apellidos=García  email=ana@empresa.com  id=1  nombre=Ana
-jocarsa[empresa]> ACTUALIZAR clientes 1 Ana,García,ana.nueva@empresa.com
+andrei[empresa]> ACTUALIZAR clientes 1 Ana,García,ana.nueva@empresa.com
 OK
-jocarsa[empresa]> ELIMINAR clientes 2
+andrei[empresa]> ELIMINAR clientes 2
 OK
-jocarsa[empresa]> LISTAR clientes
+andrei[empresa]> LISTAR clientes
 activo=1  apellidos=García  email=ana.nueva@empresa.com  id=1  nombre=Ana
-jocarsa[empresa]> SALIR
+andrei[empresa]> SALIR
 ```
 
 ## 6. Estructura en disco
 
 ```text
-/var/jocarsa-basededatos/
+C:/htdocs/andrei-basededatos/
 └── empresa/
     ├── clientes.csv
     ├── clientes.esquema

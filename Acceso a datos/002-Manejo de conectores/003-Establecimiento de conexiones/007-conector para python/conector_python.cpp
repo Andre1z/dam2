@@ -1,8 +1,11 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 
-static JocarsaBBDD db;
+static AndreiBBDD& baseDatos(){
+    static AndreiBBDD db;
+    return db;
+}
 
 
 // ============================================
@@ -10,7 +13,7 @@ static JocarsaBBDD db;
 // ============================================
 
 static PyObject* crear_base(
-    PyObject* self,
+    PyObject*,
     PyObject* args
 ){
     const char* nombre;
@@ -20,8 +23,7 @@ static PyObject* crear_base(
     }
 
     try{
-        db.creaBaseDatos(nombre);
-        Py_RETURN_TRUE;
+        return PyBool_FromLong(baseDatos().creaBaseDatos(nombre));
     }
     catch(const std::exception& e){
         PyErr_SetString(
@@ -39,7 +41,7 @@ static PyObject* crear_base(
 // ============================================
 
 static PyObject* usar_base(
-    PyObject* self,
+    PyObject*,
     PyObject* args
 ){
     const char* nombre;
@@ -49,8 +51,7 @@ static PyObject* usar_base(
     }
 
     try{
-        db.usaBaseDatos(nombre);
-        Py_RETURN_TRUE;
+        return PyBool_FromLong(baseDatos().usaBaseDatos(nombre));
     }
     catch(const std::exception& e){
         PyErr_SetString(
@@ -68,7 +69,7 @@ static PyObject* usar_base(
 // ============================================
 
 static PyObject* crear_tabla(
-    PyObject* self,
+    PyObject*,
     PyObject* args
 ){
     const char* tabla;
@@ -84,12 +85,10 @@ static PyObject* crear_tabla(
     }
 
     try{
-        db.creaTabla(
+        return PyBool_FromLong(baseDatos().creaTabla(
             tabla,
             esquema
-        );
-
-        Py_RETURN_TRUE;
+        ));
     }
     catch(const std::exception& e){
 
@@ -108,7 +107,7 @@ static PyObject* crear_tabla(
 // ============================================
 
 static PyObject* insertar(
-    PyObject* self,
+    PyObject*,
     PyObject* args
 ){
     const char* tabla;
@@ -153,20 +152,23 @@ static PyObject* insertar(
             return NULL;
         }
 
-        datos.push_back(
-            PyUnicode_AsUTF8(elemento)
-        );
+        Py_ssize_t longitud;
+        const char* texto = PyUnicode_AsUTF8AndSize(elemento, &longitud);
+        if(!texto){
+            return NULL;
+        }
+        datos.push_back(std::string(texto, static_cast<std::size_t>(longitud)));
     }
 
     try{
 
-        int id =
-            db.insertarDatos(
+        long long id =
+            baseDatos().insertarDatos(
                 tabla,
                 datos
             );
 
-        return PyLong_FromLong(id);
+        return PyLong_FromLongLong(id);
 
     }
     catch(const std::exception& e){
@@ -221,14 +223,18 @@ static PyMethodDef Metodos[] = {
 
 static struct PyModuleDef modulo = {
     PyModuleDef_HEAD_INIT,
-    "jocarsabbdd",
-    "Conector Python para Jocarsa BBDD",
+    "andreibbdd",
+    "Conector Python para Andrei BBDD",
     -1,
-    Metodos
+    Metodos,
+    NULL,
+    NULL,
+    NULL,
+    NULL
 };
 
 
 PyMODINIT_FUNC
-PyInit_jocarsabbdd(void){
+PyInit_andreibbdd(void){
     return PyModule_Create(&modulo);
 }

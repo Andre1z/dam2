@@ -1,10 +1,10 @@
-# JocarsaBBDD C++ — uso desde terminal
+# AndreiBBDD C++ — uso desde terminal
 
-Conversión directa a C++ del motor `JocarsaBBDD.py`. Mantiene el mismo concepto y formato de almacenamiento: un archivo `.csv` binario de registros de tamaño fijo, un `.idx` con `id,posicion` y un `.esquema` con los nombres de campos.
+Conversión directa a C++ del motor `AndreiBBDD.py`. Mantiene el mismo concepto y formato de almacenamiento: un archivo `.csv` binario de registros de tamaño fijo, un `.idx` con `id,posicion` y un `.esquema` con los nombres de campos.
 
 ## 1. Compilar
 
-Requiere un compilador con C++20. En Ubuntu:
+Requiere un compilador con C++11. En Ubuntu:
 
 ```bash
 sudo apt install g++ make
@@ -14,49 +14,63 @@ make
 Se genera el ejecutable:
 
 ```bash
-./jocarsabbdd
+./andrei
 ```
 
 El programa busca `config.json` en el directorio actual. También se puede indicar otra configuración:
 
 ```bash
-./jocarsabbdd /ruta/a/config.json
+./andrei /ruta/a/config.json
 ```
 
 ## 2. Configuración
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
 
-`instalacion` indica dónde se guardan las bases de datos. `tamanoRegistro` indica el tamaño fijo, en bytes, de cada registro. Si se usa `/var/jocarsa-basededatos/`, el usuario debe tener permisos de escritura.
+`instalacion` indica dónde se guardan las bases de datos. `tamanoRegistro` indica el tamaño fijo, en bytes, de cada registro. Si se usa `/var/andrei-basededatos/`, el usuario debe tener permisos de escritura.
 
 Ejemplo:
 
 ```bash
-sudo mkdir -p /var/jocarsa-basededatos
-sudo chown $USER:$USER /var/jocarsa-basededatos
+sudo mkdir -p /var/andrei-basededatos
+sudo chown $USER:$USER /var/andrei-basededatos
+```
+
+Para compilar la extensión de Python se necesita Python de desarrollo y `python3-config`:
+
+```bash
+make python-extension
+python3 pruebapython.py
+```
+
+En Windows, instala Visual Studio Build Tools con el workload de C++ y ejecuta:
+
+```bat
+compilar_conector.bat
+python pruebapython.py
 ```
 
 ## 3. Arrancar la terminal
 
 ```bash
-./jocarsabbdd
+./andrei
 ```
 
 El prompt inicial es:
 
 ```text
-jocarsa>
+andrei>
 ```
 
 Después de seleccionar una base:
 
 ```text
-jocarsa[empresa]>
+andrei[empresa]>
 ```
 
 ## 4. Comandos
@@ -157,34 +171,34 @@ SALIR
 ## 5. Sesión completa de ejemplo
 
 ```text
-jocarsa> CREAR BASE empresa
+andrei> CREAR BASE empresa
 OK
-jocarsa> USAR empresa
+andrei> USAR empresa
 OK
-jocarsa[empresa]> CREAR TABLA clientes nombre,apellidos,email
+andrei[empresa]> CREAR TABLA clientes nombre,apellidos,email
 OK
-jocarsa[empresa]> INSERTAR clientes Ana,García,ana@empresa.com
+andrei[empresa]> INSERTAR clientes Ana,García,ana@empresa.com
 ID=1
-jocarsa[empresa]> INSERTAR clientes Luis,Pérez,luis@empresa.com
+andrei[empresa]> INSERTAR clientes Luis,Pérez,luis@empresa.com
 ID=2
-jocarsa[empresa]> LISTAR clientes
+andrei[empresa]> LISTAR clientes
 activo=1  apellidos=García  email=ana@empresa.com  id=1  nombre=Ana
 activo=1  apellidos=Pérez  email=luis@empresa.com  id=2  nombre=Luis
-jocarsa[empresa]> BUSCAR clientes nombre Ana
+andrei[empresa]> BUSCAR clientes nombre Ana
 activo=1  apellidos=García  email=ana@empresa.com  id=1  nombre=Ana
-jocarsa[empresa]> ACTUALIZAR clientes 1 Ana,García,ana.nueva@empresa.com
+andrei[empresa]> ACTUALIZAR clientes 1 Ana,García,ana.nueva@empresa.com
 OK
-jocarsa[empresa]> ELIMINAR clientes 2
+andrei[empresa]> ELIMINAR clientes 2
 OK
-jocarsa[empresa]> LISTAR clientes
+andrei[empresa]> LISTAR clientes
 activo=1  apellidos=García  email=ana.nueva@empresa.com  id=1  nombre=Ana
-jocarsa[empresa]> SALIR
+andrei[empresa]> SALIR
 ```
 
 ## 6. Estructura en disco
 
 ```text
-/var/jocarsa-basededatos/
+/var/andrei-basededatos/
 └── empresa/
     ├── clientes.csv
     ├── clientes.esquema
