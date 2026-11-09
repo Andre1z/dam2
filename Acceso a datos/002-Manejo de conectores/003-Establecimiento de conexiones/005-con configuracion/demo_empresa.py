@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from JocarsaBBDD import JocarsaBBDD
+from AndreiBBDD import JocarsaBBDD
 import os
 
 

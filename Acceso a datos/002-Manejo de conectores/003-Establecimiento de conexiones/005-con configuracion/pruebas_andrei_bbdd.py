@@ -5,21 +5,21 @@ from contextlib import redirect_stdout
 from io import StringIO
 
 # Ajusta este import al nombre real del archivo que contiene las clases.
-# Ejemplo: from jocarsa_bbdd import JocarsaSerializador, JocarsaBBDD
+# Ejemplo: from AndreiBBDD import AndreiSerializador, AndreiBBDD
 try:
-  from JocarsaBBDD import JocarsaSerializador, JocarsaBBDD
+  from AndreiBBDD import AndreiSerializador, AndreiBBDD
 except Exception as error:
   print("Se ha producido un error al importar las clases:")
   print(error)
-  print("Edita la línea 'from jocarsa_bbdd import ...' con el nombre de tu módulo.")
+  print("Edita la línea 'from AndreiBBDD import ...' con el nombre de tu módulo.")
   raise
 
 
-class PruebasJocarsaBBDD:
+class PruebasAndreiBBDD:
   def __init__(self):
     self.correctas = 0
     self.incorrectas = 0
-    self.directorio = tempfile.mkdtemp(prefix="jocarsa-bbdd-pruebas-")+"/"
+    self.directorio = tempfile.mkdtemp(prefix="andrei-bbdd-pruebas-")+"/"
 
   def comprobar(self,nombre,condicion):
     try:
@@ -49,11 +49,11 @@ class PruebasJocarsaBBDD:
       print("========================================")
       print("Directorio temporal:",self.directorio)
 
-      serial = JocarsaSerializador()
+      serial = AndreiSerializador()
 
       self.comprobar(
         "serializar lista",
-        serial.serializar(["Jose","Valencia",48]) == "Jose,Valencia,48"
+        serial.serializar(["Andrei","Valencia",20]) == "Andrei,Valencia,20"
       )
 
       self.comprobar(
@@ -63,7 +63,7 @@ class PruebasJocarsaBBDD:
 
       self.comprobar(
         "desserializar cadena",
-        serial.desserializar("Jose,Valencia,48") == ["Jose","Valencia","48"]
+        serial.desserializar("Andrei,Valencia,20") == ["Andrei","Valencia","20"]
       )
 
       self.comprobar(
@@ -71,7 +71,7 @@ class PruebasJocarsaBBDD:
         serial.desserializar("uno|dos|tres","|") == ["uno","dos","tres"]
       )
 
-      bbdd = JocarsaBBDD()
+      bbdd = AndreiBBDD()
       bbdd.instalacion = self.directorio
 
       bbdd.creaBaseDatos("empresa")
@@ -92,7 +92,7 @@ class PruebasJocarsaBBDD:
         bbdd.basededatos == "empresa"
       )
 
-      bbdd2 = JocarsaBBDD()
+      bbdd2 = AndreiBBDD()
       bbdd2.instalacion = self.directorio
       _,salida = self.captura(bbdd2.usaBaseDatos,"inexistente")
       self.comprobar(
@@ -126,7 +126,7 @@ class PruebasJocarsaBBDD:
 
       id1 = bbdd.insertarDatos(
         "clientes",
-        ["Jose Vicente","Carratala","jose@example.com"]
+        ["Andrei","Buga","andrei@example.com"]
       )
       id2 = bbdd.insertarDatos(
         "clientes",
@@ -158,7 +158,7 @@ class PruebasJocarsaBBDD:
       registro = bbdd.leerRegistro("clientes",id1)
       self.comprobar(
         "leer registro",
-        registro == ["1","1","Jose Vicente","Carratala","jose@example.com"]
+        registro == ["1","1","Andrei","Buga","andrei@example.com"]
       )
 
       cliente = bbdd.seleccionar("clientes",id1)
@@ -167,14 +167,14 @@ class PruebasJocarsaBBDD:
         cliente == {
           "id":"1",
           "activo":"1",
-          "nombre":"Jose Vicente",
-          "apellidos":"Carratala",
-          "email":"jose@example.com"
+          "nombre":"Andrei",
+          "apellidos":"Buga",
+          "email":"andrei@example.com"
         }
       )
 
       _,salida = self.captura(bbdd.listarTodo,"clientes")
-      self.comprobar("listarTodo incluye Jose","Jose Vicente" in salida)
+      self.comprobar("listarTodo incluye Andrei","Andrei" in salida)
       self.comprobar("listarTodo incluye Ana","Ana" in salida)
       self.comprobar("listarTodo incluye Luis","Luis" in salida)
 
@@ -276,7 +276,7 @@ class PruebasJocarsaBBDD:
         bbdd.seleccionar("clientes",999999) == None
       )
 
-      bbdd3 = JocarsaBBDD()
+      bbdd3 = AndreiBBDD()
       bbdd3.instalacion = self.directorio
       _,salida = self.captura(bbdd3.creaTabla,"sinbbdd","campo")
       self.comprobar(
@@ -321,5 +321,5 @@ class PruebasJocarsaBBDD:
 
 
 if __name__ == "__main__":
-  pruebas = PruebasJocarsaBBDD()
+  pruebas = PruebasAndreiBBDD()
   pruebas.ejecutar()
