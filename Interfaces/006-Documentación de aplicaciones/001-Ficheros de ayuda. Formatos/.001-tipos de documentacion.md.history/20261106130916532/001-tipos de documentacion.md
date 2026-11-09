@@ -1,1 +1,0 @@
-manual del desarrollador

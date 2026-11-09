@@ -1,1 +1,0 @@
-let datosjocarsa = document.querySelector("#datosjocarsa")

@@ -1,1 +1,0 @@
-Que sistemas operativos móviles hay hoy?

@@ -1,4 +1,0 @@
-documento
-	páginas
-  	secciones
-    	controles

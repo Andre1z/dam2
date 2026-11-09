@@ -1,1 +1,0 @@
-OpenMP es una libreria para C/C++ muy sencilla de usar y que nos ofrece herramientas el calculo multinucleo

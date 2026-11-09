@@ -1,1 +1,0 @@
-Protocolo tipo SQL

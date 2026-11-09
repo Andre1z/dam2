@@ -1,3 +1,0 @@
-archivo = open("009-256 dimensiones informaticas.txt",'r')
-linea = archivo.readline()
-dimensiones = linea.split(", ")
