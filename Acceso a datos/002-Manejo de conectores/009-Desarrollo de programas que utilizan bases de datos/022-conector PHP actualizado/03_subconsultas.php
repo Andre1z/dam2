@@ -1,8 +1,8 @@
 <?php
-jocarsabbdd_configurar(__DIR__ . '/../../config.json');
-jocarsabbdd_usar_base('demo_conectores');
+andreibbdd_configurar(__DIR__ . '/config.json');
+andreibbdd_usar_base('demo_conectores');
 
-$resultado = jocarsabbdd_consultar(
+$resultado = andreibbdd_consultar(
     "SELECCIONAR nombre,precio DE productos " .
     "DONDE precio > (SELECCIONAR MEDIA(precio) DE productos)"
 );
