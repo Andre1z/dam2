@@ -1,6 +1,6 @@
 <?php
-require __DIR__.'/../php/JocarsaORM.php';
-$orm=new JocarsaORM('demo_orm','config.json',__DIR__.'/../libjocarsaorm.so');
+require __DIR__.'/../php/AndreiORM.php';
+$orm=new AndreiORM('demo_orm','config.json',__DIR__.'/../libandreiorm.so');
 $id=$orm->guardar('clientes',['nombre'=>'Ana','edad'=>28]);
 print_r($orm->obtener('clientes',$id));
 print_r($orm->buscar('clientes','nombre','Ana'));

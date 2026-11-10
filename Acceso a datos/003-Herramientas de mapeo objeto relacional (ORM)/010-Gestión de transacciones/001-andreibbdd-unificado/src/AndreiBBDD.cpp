@@ -1,4 +1,4 @@
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <filesystem>
@@ -12,25 +12,25 @@
 
 namespace fs = std::filesystem;
 
-std::string JocarsaSerializador::serializar(const std::vector<std::string>& lista, char delimitador) const {
+std::string AndreiSerializador::serializar(const std::vector<std::string>& lista, char delimitador) const {
     std::ostringstream out;
     for (std::size_t i=0; i<lista.size(); ++i) { if (i) out << delimitador; out << lista[i]; }
     return out.str();
 }
-std::vector<std::string> JocarsaSerializador::desserializar(const std::string& cadena, char delimitador) const {
+std::vector<std::string> AndreiSerializador::desserializar(const std::string& cadena, char delimitador) const {
     std::vector<std::string> r; std::stringstream ss(cadena); std::string x;
     while (std::getline(ss,x,delimitador)) r.push_back(x);
     if (!cadena.empty() && cadena.back()==delimitador) r.push_back("");
     return r;
 }
 
-JocarsaBBDD::JocarsaBBDD(const std::string& config) {
+AndreiBBDD::AndreiBBDD(const std::string& config) {
     // Prioridad: ruta explicita/local -> variable de entorno -> configuracion global.
     std::string rutaConfig = config;
     if (!fs::exists(rutaConfig)) {
-        if (const char* env = std::getenv("JOCARSABBDD_CONFIG"); env && fs::exists(env)) rutaConfig = env;
-        else if (fs::exists("/etc/jocarsabbdd/config.json")) rutaConfig = "/etc/jocarsabbdd/config.json";
-        else throw std::runtime_error("No se ha encontrado config.json ni /etc/jocarsabbdd/config.json");
+        if (const char* env = std::getenv("ANDREIBBDD_CONFIG"); env && fs::exists(env)) rutaConfig = env;
+        else if (fs::exists("/etc/andreibbdd/config.json")) rutaConfig = "/etc/andreibbdd/config.json";
+        else throw std::runtime_error("No se ha encontrado config.json ni /etc/andreibbdd/config.json");
     }
     std::ifstream f(rutaConfig); if (!f) throw std::runtime_error("No se puede abrir la configuracion: " + rutaConfig);
     std::string s((std::istreambuf_iterator<char>(f)), {});
@@ -41,12 +41,12 @@ JocarsaBBDD::JocarsaBBDD(const std::string& config) {
     tamanoRegistro=std::stoull(m[1].str());
     fs::create_directories(instalacion);
 }
-std::string JocarsaBBDD::rutaTabla(const std::string& t,const std::string& e) const { return (fs::path(instalacion)/basededatos/(t+e)).string(); }
-std::string JocarsaBBDD::trimDerecha(std::string s){ while(!s.empty() && (s.back()==' '||s.back()=='\n'||s.back()=='\r'||s.back()=='\t')) s.pop_back(); return s; }
-bool JocarsaBBDD::creaBaseDatos(const std::string& n){ fs::path p=fs::path(instalacion)/n; if(fs::exists(p)){std::cerr<<"La base de datos ya existe\n";return false;} return fs::create_directory(p); }
-bool JocarsaBBDD::usaBaseDatos(const std::string& n){ fs::path p=fs::path(instalacion)/n; if(!fs::exists(p)){std::cerr<<"La base de datos no existe\n";return false;} basededatos=n; return true; }
+std::string AndreiBBDD::rutaTabla(const std::string& t,const std::string& e) const { return (fs::path(instalacion)/basededatos/(t+e)).string(); }
+std::string AndreiBBDD::trimDerecha(std::string s){ while(!s.empty() && (s.back()==' '||s.back()=='\n'||s.back()=='\r'||s.back()=='\t')) s.pop_back(); return s; }
+bool AndreiBBDD::creaBaseDatos(const std::string& n){ fs::path p=fs::path(instalacion)/n; if(fs::exists(p)){std::cerr<<"La base de datos ya existe\n";return false;} return fs::create_directory(p); }
+bool AndreiBBDD::usaBaseDatos(const std::string& n){ fs::path p=fs::path(instalacion)/n; if(!fs::exists(p)){std::cerr<<"La base de datos no existe\n";return false;} basededatos=n; return true; }
 
-std::vector<std::string> JocarsaBBDD::listarBases() const {
+std::vector<std::string> AndreiBBDD::listarBases() const {
     std::vector<std::string> out;
     fs::path raiz(instalacion);
     if(!fs::exists(raiz)) return out;
@@ -60,7 +60,7 @@ std::vector<std::string> JocarsaBBDD::listarBases() const {
     return out;
 }
 
-std::vector<std::string> JocarsaBBDD::listarTablas() const {
+std::vector<std::string> AndreiBBDD::listarTablas() const {
     std::vector<std::string> out;
     if(basededatos.empty()) return out;
     fs::path dir = fs::path(instalacion) / basededatos;
@@ -86,8 +86,8 @@ static TipoDato tipoDesdeNombre(std::string s){
     if(s=="DECIMAL"||s=="NUMERICO") return TipoDato::DECIMAL;
     return TipoDato::TEXTO;
 }
-bool JocarsaBBDD::validarTipo(TipoDato t,const std::string& v) const{
-    if(v.empty()||v=="__JOCARSA_NULL__") return true;
+bool AndreiBBDD::validarTipo(TipoDato t,const std::string& v) const{
+    if(v.empty()||v=="__ANDREI_NULL__") return true;
     try{
         size_t n=0;
         if(t==TipoDato::ENTERO){std::stoll(v,&n);return n==v.size();}
@@ -97,52 +97,52 @@ bool JocarsaBBDD::validarTipo(TipoDato t,const std::string& v) const{
         return true;
     }catch(...){return false;}
 }
-std::string JocarsaBBDD::normalizarTipo(TipoDato t,const std::string& v) const{
+std::string AndreiBBDD::normalizarTipo(TipoDato t,const std::string& v) const{
     std::string up=v;std::transform(up.begin(),up.end(),up.begin(),[](unsigned char c){return std::toupper(c);});
-    if(up=="NULL") return "__JOCARSA_NULL__";
+    if(up=="NULL") return "__ANDREI_NULL__";
     if(t!=TipoDato::BOOLEANO||v.empty()) return v;
     std::string x=v;std::transform(x.begin(),x.end(),x.begin(),[](unsigned char c){return std::toupper(c);});
     return (x=="1"||x=="VERDADERO"||x=="TRUE")?"1":"0";
 }
-std::map<std::string,TipoDato> JocarsaBBDD::obtenerTipos(const std::string& t) const{
+std::map<std::string,TipoDato> AndreiBBDD::obtenerTipos(const std::string& t) const{
     std::map<std::string,TipoDato> r; for(const auto& c:obtenerEsquema(t)) r[c]=TipoDato::TEXTO;
     r["id"]=TipoDato::ENTERO; r["activo"]=TipoDato::BOOLEANO;
     std::ifstream f(rutaTabla(t,".tipos")); std::string l;
     while(std::getline(f,l)){auto q=l.find(',');if(q!=std::string::npos)r[l.substr(0,q)]=tipoDesdeNombre(l.substr(q+1));}
     return r;
 }
-bool JocarsaBBDD::creaTablaTipada(const std::string& n,const std::vector<DefinicionColumna>& cols){
+bool AndreiBBDD::creaTablaTipada(const std::string& n,const std::vector<DefinicionColumna>& cols){
     std::string e;for(size_t i=0;i<cols.size();++i){if(i)e+=",";e+=cols[i].nombre;}
     if(!creaTabla(n,e))return false;
     std::ofstream f(rutaTabla(n,".tipos"),std::ios::trunc);f<<"id,ENTERO\nactivo,BOOLEANO\n";for(const auto&c:cols)f<<c.nombre<<","<<tipoNombre(c.tipo)<<"\n";return bool(f);
 }
-bool JocarsaBBDD::esVista(const std::string& n) const{return !basededatos.empty()&&fs::exists(fs::path(instalacion)/basededatos/(n+".vista"));}
-std::string JocarsaBBDD::consultaVista(const std::string& n) const{std::ifstream f(fs::path(instalacion)/basededatos/(n+".vista"));return std::string((std::istreambuf_iterator<char>(f)),{});}
-bool JocarsaBBDD::crearVista(const std::string& n,const std::string& q){
+bool AndreiBBDD::esVista(const std::string& n) const{return !basededatos.empty()&&fs::exists(fs::path(instalacion)/basededatos/(n+".vista"));}
+std::string AndreiBBDD::consultaVista(const std::string& n) const{std::ifstream f(fs::path(instalacion)/basededatos/(n+".vista"));return std::string((std::istreambuf_iterator<char>(f)),{});}
+bool AndreiBBDD::crearVista(const std::string& n,const std::string& q){
     if(basededatos.empty()||n.empty()||q.empty())return false;try{(void)consultar(q);}catch(const std::exception&e){std::cerr<<"Vista invalida: "<<e.what()<<"\n";return false;}
     std::ofstream f(fs::path(instalacion)/basededatos/(n+".vista"),std::ios::trunc);f<<q;return bool(f);
 }
-bool JocarsaBBDD::eliminarVista(const std::string& n){auto p=fs::path(instalacion)/basededatos/(n+".vista");return fs::exists(p)&&fs::remove(p);}
-std::vector<std::string> JocarsaBBDD::listarVistas() const{std::vector<std::string>r;if(basededatos.empty())return r;for(auto&e:fs::directory_iterator(fs::path(instalacion)/basededatos))if(e.path().extension()==".vista")r.push_back(e.path().stem().string());std::sort(r.begin(),r.end());return r;}
+bool AndreiBBDD::eliminarVista(const std::string& n){auto p=fs::path(instalacion)/basededatos/(n+".vista");return fs::exists(p)&&fs::remove(p);}
+std::vector<std::string> AndreiBBDD::listarVistas() const{std::vector<std::string>r;if(basededatos.empty())return r;for(auto&e:fs::directory_iterator(fs::path(instalacion)/basededatos))if(e.path().extension()==".vista")r.push_back(e.path().stem().string());std::sort(r.begin(),r.end());return r;}
 
-std::vector<IndiceSecundario> JocarsaBBDD::listarIndices(const std::string&t) const{
+std::vector<IndiceSecundario> AndreiBBDD::listarIndices(const std::string&t) const{
     std::vector<IndiceSecundario> r;std::ifstream f(rutaTabla(t,".indices"));std::string l;while(std::getline(f,l)){auto q=l.find(',');if(q!=std::string::npos)r.push_back({l.substr(0,q),l.substr(q+1)});}return r;
 }
-void JocarsaBBDD::reconstruirIndices(const std::string&t) const{
+void AndreiBBDD::reconstruirIndices(const std::string&t) const{
     for(const auto&i:listarIndices(t)){std::ofstream f(rutaTabla(t,".sidx_"+i.nombre),std::ios::trunc);for(const auto&r:listarTodo(t)){auto it=r.find(i.columna);if(it!=r.end())f<<std::quoted(it->second)<<","<<r.at("id")<<"\n";}}
 }
-bool JocarsaBBDD::crearIndice(const std::string&n,const std::string&t,const std::string&c){
+bool AndreiBBDD::crearIndice(const std::string&n,const std::string&t,const std::string&c){
     auto es=obtenerEsquema(t);if(std::find(es.begin(),es.end(),c)==es.end())return false;for(const auto&i:listarIndices(t))if(i.nombre==n)return false;
     std::ofstream(rutaTabla(t,".indices"),std::ios::app)<<n<<","<<c<<"\n";reconstruirIndices(t);return true;
 }
-bool JocarsaBBDD::eliminarIndice(const std::string&n,const std::string&t){
+bool AndreiBBDD::eliminarIndice(const std::string&n,const std::string&t){
     auto is=listarIndices(t);bool ok=false;std::ofstream f(rutaTabla(t,".indices"),std::ios::trunc);for(const auto&i:is)if(i.nombre==n)ok=true;else f<<i.nombre<<","<<i.columna<<"\n";
     std::error_code ec;fs::remove(rutaTabla(t,".sidx_"+n),ec);return ok;
 }
-std::vector<long long> JocarsaBBDD::buscarIdsIndice(const std::string&t,const std::string&c,const std::string&v) const{
+std::vector<long long> AndreiBBDD::buscarIdsIndice(const std::string&t,const std::string&c,const std::string&v) const{
     for(const auto&i:listarIndices(t))if(i.columna==c){std::vector<long long> ids;std::ifstream f(rutaTabla(t,".sidx_"+i.nombre));std::string val;char coma;long long id;while(f>>std::quoted(val)>>coma>>id)if(val==v)ids.push_back(id);return ids;}return {};
 }
-std::string JocarsaBBDD::explicar(const std::string&q) const{
+std::string AndreiBBDD::explicar(const std::string&q) const{
     std::string up=q;std::transform(up.begin(),up.end(),up.begin(),[](unsigned char c){return std::toupper(c);});
     std::string tabla,col,op;auto de=up.find(" DE ");if(de!=std::string::npos){size_t a=de+4,b=q.find_first_of(" \t\r\n",a);tabla=q.substr(a,b==std::string::npos?q.size()-a:b-a);}
     auto dw=up.find(" DONDE ");if(dw!=std::string::npos){size_t a=dw+7,b=q.find_first_of(" =<>!\t\r\n",a);col=q.substr(a,b-a);if(b!=std::string::npos){while(b<q.size()&&std::isspace((unsigned char)q[b]))++b;if(b<q.size())op=std::string(1,q[b]);}}
@@ -152,89 +152,89 @@ std::string JocarsaBBDD::explicar(const std::string&q) const{
     if(esVista(tabla))o<<"FUENTE TIPO: VISTA\n";else o<<"FUENTE TIPO: TABLA\n";return o.str();
 }
 
-bool JocarsaBBDD::iniciarTransaccion(){
+bool AndreiBBDD::iniciarTransaccion(){
     if(transaccionActiva||basededatos.empty())return false;baseTransaccion=basededatos;rutaSnapshot=fs::path(instalacion)/(".txn_"+basededatos);
     std::error_code ec;fs::remove_all(rutaSnapshot,ec);fs::create_directories(rutaSnapshot);
     auto src=fs::path(instalacion)/basededatos;for(auto&e:fs::directory_iterator(src))if(e.is_regular_file())fs::copy_file(e.path(),rutaSnapshot/e.path().filename(),fs::copy_options::overwrite_existing);
     transaccionActiva=true;return true;
 }
-bool JocarsaBBDD::confirmarTransaccion(){if(!transaccionActiva)return false;std::error_code ec;fs::remove_all(rutaSnapshot,ec);transaccionActiva=false;baseTransaccion.clear();return true;}
-bool JocarsaBBDD::deshacerTransaccion(){
+bool AndreiBBDD::confirmarTransaccion(){if(!transaccionActiva)return false;std::error_code ec;fs::remove_all(rutaSnapshot,ec);transaccionActiva=false;baseTransaccion.clear();return true;}
+bool AndreiBBDD::deshacerTransaccion(){
     if(!transaccionActiva)return false;auto dst=fs::path(instalacion)/baseTransaccion;std::error_code ec;
     for(auto&e:fs::directory_iterator(dst))if(e.is_regular_file())fs::remove(e.path(),ec);
     for(auto&e:fs::directory_iterator(rutaSnapshot))if(e.is_regular_file())fs::copy_file(e.path(),dst/e.path().filename(),fs::copy_options::overwrite_existing);
     fs::remove_all(rutaSnapshot,ec);basededatos=baseTransaccion;transaccionActiva=false;baseTransaccion.clear();return true;
 }
 
-bool JocarsaBBDD::creaTabla(const std::string& n,const std::string& e){ if(basededatos.empty()){std::cerr<<"No hay base seleccionada\n";return false;} auto csv=rutaTabla(n,".csv"); if(fs::exists(csv)){std::cerr<<"La tabla ya existe\n";return false;} std::ofstream(csv,std::ios::binary); std::ofstream(rutaTabla(n,".esquema"))<<"id,activo,"<<e; std::ofstream(rutaTabla(n,".idx")); std::ofstream(rutaTabla(n,".rel"))<<"PK,id\n"; std::ofstream tf(rutaTabla(n,".tipos")); tf<<"id,ENTERO\nactivo,BOOLEANO\n"; for(const auto&c:JocarsaSerializador().desserializar(e)) if(!c.empty()) tf<<c<<",TEXTO\n"; return true; }
+bool AndreiBBDD::creaTabla(const std::string& n,const std::string& e){ if(basededatos.empty()){std::cerr<<"No hay base seleccionada\n";return false;} auto csv=rutaTabla(n,".csv"); if(fs::exists(csv)){std::cerr<<"La tabla ya existe\n";return false;} std::ofstream(csv,std::ios::binary); std::ofstream(rutaTabla(n,".esquema"))<<"id,activo,"<<e; std::ofstream(rutaTabla(n,".idx")); std::ofstream(rutaTabla(n,".rel"))<<"PK,id\n"; std::ofstream tf(rutaTabla(n,".tipos")); tf<<"id,ENTERO\nactivo,BOOLEANO\n"; for(const auto&c:AndreiSerializador().desserializar(e)) if(!c.empty()) tf<<c<<",TEXTO\n"; return true; }
 
-bool JocarsaBBDD::alteraTablaAnadir(const std::string& t,const std::string& col){
+bool AndreiBBDD::alteraTablaAnadir(const std::string& t,const std::string& col){
     auto es=obtenerEsquema(t); if(es.empty()||col.empty()) return false;
     if(std::find(es.begin(),es.end(),col)!=es.end()){std::cerr<<"La columna ya existe\n";return false;}
     auto filas=listarTodo(t); es.push_back(col);
-    std::ofstream(rutaTabla(t,".esquema"),std::ios::trunc)<<JocarsaSerializador().serializar(es);
+    std::ofstream(rutaTabla(t,".esquema"),std::ios::trunc)<<AndreiSerializador().serializar(es);
     std::ofstream csv(rutaTabla(t,".csv"),std::ios::binary|std::ios::trunc); std::ofstream idx(rutaTabla(t,".idx"),std::ios::trunc);
     for(const auto&r:filas){ std::vector<std::string> e; for(size_t i=0;i<es.size()-1;++i)e.push_back(r.at(es[i])); e.push_back(""); auto pos=csv.tellp(); auto reg=prepararRegistro(e); csv.write(reg.data(),reg.size()); idx<<e[0]<<","<<pos<<"\n"; }
     return bool(csv)&&bool(idx);
 }
 
-bool JocarsaBBDD::alteraTablaEliminarColumna(const std::string& t,const std::string& col){
+bool AndreiBBDD::alteraTablaEliminarColumna(const std::string& t,const std::string& col){
     if(col=="id"||col=="activo"){std::cerr<<"No se puede eliminar una columna interna\n";return false;}
     auto es=obtenerEsquema(t); auto it=std::find(es.begin(),es.end(),col); if(it==es.end()) return false;
     auto filas=listarTodo(t); es.erase(it);
-    std::ofstream(rutaTabla(t,".esquema"),std::ios::trunc)<<JocarsaSerializador().serializar(es);
+    std::ofstream(rutaTabla(t,".esquema"),std::ios::trunc)<<AndreiSerializador().serializar(es);
     std::ofstream csv(rutaTabla(t,".csv"),std::ios::binary|std::ios::trunc); std::ofstream idx(rutaTabla(t,".idx"),std::ios::trunc);
     for(const auto&r:filas){ std::vector<std::string> e; for(const auto&c:es)e.push_back(r.at(c)); auto pos=csv.tellp(); auto reg=prepararRegistro(e); csv.write(reg.data(),reg.size()); idx<<e[0]<<","<<pos<<"\n"; }
     return bool(csv)&&bool(idx);
 }
 
-bool JocarsaBBDD::alteraTablaRenombrarColumna(const std::string& t,const std::string& antigua,const std::string& nueva){
+bool AndreiBBDD::alteraTablaRenombrarColumna(const std::string& t,const std::string& antigua,const std::string& nueva){
     if(antigua=="id"||antigua=="activo"||nueva.empty()) return false;
     auto es=obtenerEsquema(t); auto it=std::find(es.begin(),es.end(),antigua); if(it==es.end()) return false;
     if(std::find(es.begin(),es.end(),nueva)!=es.end()){std::cerr<<"La columna destino ya existe\n";return false;}
-    *it=nueva; std::ofstream f(rutaTabla(t,".esquema"),std::ios::trunc); f<<JocarsaSerializador().serializar(es); return bool(f);
+    *it=nueva; std::ofstream f(rutaTabla(t,".esquema"),std::ios::trunc); f<<AndreiSerializador().serializar(es); return bool(f);
 }
 
-bool JocarsaBBDD::alteraTablaModificarColumna(const std::string& t,const std::string& antigua,const std::string& nueva){
+bool AndreiBBDD::alteraTablaModificarColumna(const std::string& t,const std::string& antigua,const std::string& nueva){
     return alteraTablaRenombrarColumna(t,antigua,nueva);
 }
 
-bool JocarsaBBDD::truncarTabla(const std::string& t){
+bool AndreiBBDD::truncarTabla(const std::string& t){
     if(basededatos.empty()||!fs::exists(rutaTabla(t,".csv"))) return false;
     std::ofstream csv(rutaTabla(t,".csv"),std::ios::binary|std::ios::trunc); std::ofstream idx(rutaTabla(t,".idx"),std::ios::trunc); return bool(csv)&&bool(idx);
 }
 
-bool JocarsaBBDD::eliminarTabla(const std::string& t){
+bool AndreiBBDD::eliminarTabla(const std::string& t){
     if(basededatos.empty()) return false; bool habia=false;
     for(const auto&e:{".csv",".esquema",".idx",".rel",".tipos",".indices"}){auto p=rutaTabla(t,e);if(fs::exists(p)){fs::remove(p);habia=true;}}
     return habia;
 }
 
-bool JocarsaBBDD::eliminarBaseDatos(const std::string& n){
+bool AndreiBBDD::eliminarBaseDatos(const std::string& n){
     if(n.empty()) return false; fs::path p=fs::path(instalacion)/n; if(!fs::exists(p)||!fs::is_directory(p)) return false;
     fs::remove_all(p); if(basededatos==n) basededatos.clear(); return true;
 }
-std::string JocarsaBBDD::obtenerClavePrimaria(const std::string& t) const {
-    // Compatibilidad: toda tabla JocarsaBBDD tiene id como PK implicita.
+std::string AndreiBBDD::obtenerClavePrimaria(const std::string& t) const {
+    // Compatibilidad: toda tabla AndreiBBDD tiene id como PK implicita.
     auto es=obtenerEsquema(t);
     return es.empty() ? "" : "id";
 }
 
-std::vector<ClaveForanea> JocarsaBBDD::obtenerClavesForaneas(const std::string& t) const {
+std::vector<ClaveForanea> AndreiBBDD::obtenerClavesForaneas(const std::string& t) const {
     std::vector<ClaveForanea> out;
     std::ifstream f(rutaTabla(t,".rel"));
     std::string linea;
     while(std::getline(f,linea)){
-        auto v=JocarsaSerializador().desserializar(linea);
+        auto v=AndreiSerializador().desserializar(linea);
         if(v.size()==4 && v[0]=="FK") out.push_back({v[1],v[2],v[3]});
     }
     return out;
 }
 
-RestriccionColumna JocarsaBBDD::obtenerRestricciones(const std::string& t,const std::string& col) const {
+RestriccionColumna AndreiBBDD::obtenerRestricciones(const std::string& t,const std::string& col) const {
     RestriccionColumna r; std::ifstream f(rutaTabla(t,".rel")); std::string linea;
     while(std::getline(f,linea)){
-        auto v=JocarsaSerializador().desserializar(linea);
+        auto v=AndreiSerializador().desserializar(linea);
         if(v.size()>=2 && v[1]==col){
             if(v[0]=="NN") r.noNulo=true;
             else if(v[0]=="UQ") r.unico=true;
@@ -244,29 +244,29 @@ RestriccionColumna JocarsaBBDD::obtenerRestricciones(const std::string& t,const 
     return r;
 }
 
-bool JocarsaBBDD::establecerNoNulo(const std::string& t,const std::string& col){
+bool AndreiBBDD::establecerNoNulo(const std::string& t,const std::string& col){
     auto es=obtenerEsquema(t); if(std::find(es.begin(),es.end(),col)==es.end()||col=="activo") return false;
     for(const auto&r:listarTodo(t)) if(r.at(col).empty()){std::cerr<<"No se puede aplicar NO NULO: existen valores vacios\n";return false;}
     if(obtenerRestricciones(t,col).noNulo) return true;
     std::ofstream(rutaTabla(t,".rel"),std::ios::app)<<"NN,"<<col<<"\n"; return true;
 }
 
-bool JocarsaBBDD::establecerUnico(const std::string& t,const std::string& col){
+bool AndreiBBDD::establecerUnico(const std::string& t,const std::string& col){
     auto es=obtenerEsquema(t); if(std::find(es.begin(),es.end(),col)==es.end()||col=="activo") return false;
     std::set<std::string> vistos; for(const auto&r:listarTodo(t)){auto v=r.at(col);if(!v.empty()&&!vistos.insert(v).second){std::cerr<<"No se puede aplicar UNICO: hay valores duplicados\n";return false;}}
     if(obtenerRestricciones(t,col).unico) return true;
     std::ofstream(rutaTabla(t,".rel"),std::ios::app)<<"UQ,"<<col<<"\n"; return true;
 }
 
-bool JocarsaBBDD::establecerPorDefecto(const std::string& t,const std::string& col,const std::string& valor){
+bool AndreiBBDD::establecerPorDefecto(const std::string& t,const std::string& col,const std::string& valor){
     auto es=obtenerEsquema(t); if(std::find(es.begin(),es.end(),col)==es.end()||col=="id"||col=="activo") return false;
     // Reescribe solo la entrada DF de esta columna, conservando el resto de metadatos.
     std::vector<std::string> lineas; std::ifstream in(rutaTabla(t,".rel")); std::string l;
-    while(std::getline(in,l)){auto v=JocarsaSerializador().desserializar(l);if(!(v.size()>=2&&v[0]=="DF"&&v[1]==col))lineas.push_back(l);}
+    while(std::getline(in,l)){auto v=AndreiSerializador().desserializar(l);if(!(v.size()>=2&&v[0]=="DF"&&v[1]==col))lineas.push_back(l);}
     std::ofstream out(rutaTabla(t,".rel"),std::ios::trunc);for(const auto&x:lineas)out<<x<<"\n";out<<"DF,"<<col<<","<<valor<<"\n";return bool(out);
 }
 
-bool JocarsaBBDD::prepararYValidarRestricciones(const std::string& t,std::vector<std::string>& datos,long long idIgnorar) const {
+bool AndreiBBDD::prepararYValidarRestricciones(const std::string& t,std::vector<std::string>& datos,long long idIgnorar) const {
     auto es=obtenerEsquema(t); if(es.size()<2||datos.size()!=es.size()-2) return false;
     for(size_t i=2;i<es.size();++i){
         auto rc=obtenerRestricciones(t,es[i]); auto& valor=datos[i-2];
@@ -277,7 +277,7 @@ bool JocarsaBBDD::prepararYValidarRestricciones(const std::string& t,std::vector
     return true;
 }
 
-bool JocarsaBBDD::anadirClaveForanea(const std::string& t,const std::string& col,const std::string& tr,const std::string& cr){
+bool AndreiBBDD::anadirClaveForanea(const std::string& t,const std::string& col,const std::string& tr,const std::string& cr){
     if(basededatos.empty()) return false;
     auto es=obtenerEsquema(t), er=obtenerEsquema(tr);
     if(es.empty()||er.empty()){std::cerr<<"Tabla local o referenciada no encontrada\n";return false;}
@@ -296,7 +296,7 @@ bool JocarsaBBDD::anadirClaveForanea(const std::string& t,const std::string& col
     return bool(f);
 }
 
-bool JocarsaBBDD::registroReferenciado(const std::string& t,const std::string& col,const std::string& valor) const {
+bool AndreiBBDD::registroReferenciado(const std::string& t,const std::string& col,const std::string& valor) const {
     if(valor.empty()) return true; // cadena vacia equivale a FK no informada en esta version
     if(col=="id"){
         try { return !seleccionar(t,std::stoll(valor)).empty(); } catch(...) { return false; }
@@ -304,7 +304,7 @@ bool JocarsaBBDD::registroReferenciado(const std::string& t,const std::string& c
     return !buscarColumna(t,col,valor).empty();
 }
 
-bool JocarsaBBDD::validarClavesForaneas(const std::string& t,const std::vector<std::string>& datos) const {
+bool AndreiBBDD::validarClavesForaneas(const std::string& t,const std::vector<std::string>& datos) const {
     auto es=obtenerEsquema(t);
     if(es.size()<2||datos.size()!=es.size()-2) return false;
     for(const auto& fk:obtenerClavesForaneas(t)){
@@ -321,7 +321,7 @@ bool JocarsaBBDD::validarClavesForaneas(const std::string& t,const std::vector<s
     return true;
 }
 
-bool JocarsaBBDD::puedeEliminarRegistro(const std::string& t,const std::map<std::string,std::string>& registro) const {
+bool AndreiBBDD::puedeEliminarRegistro(const std::string& t,const std::map<std::string,std::string>& registro) const {
     if(basededatos.empty()) return false;
     fs::path dir=fs::path(instalacion)/basededatos;
     if(!fs::exists(dir)) return false;
@@ -341,10 +341,10 @@ bool JocarsaBBDD::puedeEliminarRegistro(const std::string& t,const std::map<std:
     return true;
 }
 
-std::vector<std::string> JocarsaBBDD::obtenerEsquema(const std::string& t) const { std::ifstream f(rutaTabla(t,".esquema")); if(!f) return {}; std::string s((std::istreambuf_iterator<char>(f)),{}); return JocarsaSerializador().desserializar(s); }
-long long JocarsaBBDD::siguienteId(const std::string& t) const { std::ifstream f(rutaTabla(t,".idx")); long long ultimo=0,id,pos; char c; while(f>>id>>c>>pos) ultimo=id; return ultimo+1; }
-std::string JocarsaBBDD::prepararRegistro(const std::vector<std::string>& e) const { auto s=JocarsaSerializador().serializar(e); if(s.size()>tamanoRegistro-1) throw std::runtime_error("Registro demasiado grande"); s.append(tamanoRegistro-1-s.size(),' '); s.push_back('\n'); return s; }
-long long JocarsaBBDD::insertarDatos(const std::string& t,const std::vector<std::string>& entrada){
+std::vector<std::string> AndreiBBDD::obtenerEsquema(const std::string& t) const { std::ifstream f(rutaTabla(t,".esquema")); if(!f) return {}; std::string s((std::istreambuf_iterator<char>(f)),{}); return AndreiSerializador().desserializar(s); }
+long long AndreiBBDD::siguienteId(const std::string& t) const { std::ifstream f(rutaTabla(t,".idx")); long long ultimo=0,id,pos; char c; while(f>>id>>c>>pos) ultimo=id; return ultimo+1; }
+std::string AndreiBBDD::prepararRegistro(const std::vector<std::string>& e) const { auto s=AndreiSerializador().serializar(e); if(s.size()>tamanoRegistro-1) throw std::runtime_error("Registro demasiado grande"); s.append(tamanoRegistro-1-s.size(),' '); s.push_back('\n'); return s; }
+long long AndreiBBDD::insertarDatos(const std::string& t,const std::vector<std::string>& entrada){
     if(basededatos.empty()||!fs::exists(rutaTabla(t,".csv"))) return -1;
     auto es=obtenerEsquema(t); std::vector<std::string> datos=entrada;
     if(es.size()<2||datos.size()!=es.size()-2){std::cerr<<"Numero de valores incorrecto\n";return -1;}
@@ -353,12 +353,12 @@ long long JocarsaBBDD::insertarDatos(const std::string& t,const std::vector<std:
     auto reg=prepararRegistro(e); std::ofstream f(rutaTabla(t,".csv"),std::ios::binary|std::ios::app); auto pos=fs::file_size(rutaTabla(t,".csv"));
     f.write(reg.data(),reg.size()); if(!f) return -1; std::ofstream(rutaTabla(t,".idx"),std::ios::app)<<id<<","<<pos<<"\n"; reconstruirIndices(t); return id;
 }
-std::int64_t JocarsaBBDD::buscarPosicion(const std::string& t,long long buscado) const { std::ifstream f(rutaTabla(t,".idx")); long long id,pos; char c; while(f>>id>>c>>pos) if(id==buscado) return pos; return -1; }
-std::vector<std::string> JocarsaBBDD::leerRegistro(const std::string& t,long long id) const { auto pos=buscarPosicion(t,id); if(pos<0)return{}; std::ifstream f(rutaTabla(t,".csv"),std::ios::binary); f.seekg(pos); std::string b(tamanoRegistro,'\0'); f.read(b.data(),tamanoRegistro); b.resize(f.gcount()); auto e=JocarsaSerializador().desserializar(trimDerecha(b)); if(e.size()<2||e[1]=="0")return{}; return e; }
-std::map<std::string,std::string> JocarsaBBDD::seleccionar(const std::string& t,long long id) const { auto e=leerRegistro(t,id), es=obtenerEsquema(t); std::map<std::string,std::string> r; if(e.size()!=es.size())return r; for(size_t i=0;i<es.size();++i)r[es[i]]=e[i]; return r; }
-std::vector<std::map<std::string,std::string>> JocarsaBBDD::listarTodo(const std::string& t) const { std::vector<std::map<std::string,std::string>> out; auto es=obtenerEsquema(t); std::ifstream f(rutaTabla(t,".csv"),std::ios::binary); while(f){std::string b(tamanoRegistro,'\0');f.read(b.data(),tamanoRegistro);if(f.gcount()==0)break;b.resize(f.gcount());auto e=JocarsaSerializador().desserializar(trimDerecha(b));if(e.size()==es.size()&&e.size()>1&&e[1]=="1"){std::map<std::string,std::string> r;for(size_t i=0;i<es.size();++i)r[es[i]]=e[i];out.push_back(r);}}return out; }
-std::vector<std::map<std::string,std::string>> JocarsaBBDD::buscarColumna(const std::string& t,const std::string& col,const std::string& val) const { auto es=obtenerEsquema(t); auto it=std::find(es.begin(),es.end(),col); if(it==es.end())return{}; std::vector<std::map<std::string,std::string>> out;for(const auto&i:listarIndices(t))if(i.columna==col){for(auto id:buscarIdsIndice(t,col,val)){auto r=seleccionar(t,id);if(!r.empty())out.push_back(r);}return out;}size_t p=it-es.begin();for(auto&r:listarTodo(t)) if(r.at(es[p])==val) out.push_back(r); return out; }
-bool JocarsaBBDD::actualizar(const std::string& t,long long id,const std::vector<std::string>& datos){
+std::int64_t AndreiBBDD::buscarPosicion(const std::string& t,long long buscado) const { std::ifstream f(rutaTabla(t,".idx")); long long id,pos; char c; while(f>>id>>c>>pos) if(id==buscado) return pos; return -1; }
+std::vector<std::string> AndreiBBDD::leerRegistro(const std::string& t,long long id) const { auto pos=buscarPosicion(t,id); if(pos<0)return{}; std::ifstream f(rutaTabla(t,".csv"),std::ios::binary); f.seekg(pos); std::string b(tamanoRegistro,'\0'); f.read(b.data(),tamanoRegistro); b.resize(f.gcount()); auto e=AndreiSerializador().desserializar(trimDerecha(b)); if(e.size()<2||e[1]=="0")return{}; return e; }
+std::map<std::string,std::string> AndreiBBDD::seleccionar(const std::string& t,long long id) const { auto e=leerRegistro(t,id), es=obtenerEsquema(t); std::map<std::string,std::string> r; if(e.size()!=es.size())return r; for(size_t i=0;i<es.size();++i)r[es[i]]=e[i]; return r; }
+std::vector<std::map<std::string,std::string>> AndreiBBDD::listarTodo(const std::string& t) const { std::vector<std::map<std::string,std::string>> out; auto es=obtenerEsquema(t); std::ifstream f(rutaTabla(t,".csv"),std::ios::binary); while(f){std::string b(tamanoRegistro,'\0');f.read(b.data(),tamanoRegistro);if(f.gcount()==0)break;b.resize(f.gcount());auto e=AndreiSerializador().desserializar(trimDerecha(b));if(e.size()==es.size()&&e.size()>1&&e[1]=="1"){std::map<std::string,std::string> r;for(size_t i=0;i<es.size();++i)r[es[i]]=e[i];out.push_back(r);}}return out; }
+std::vector<std::map<std::string,std::string>> AndreiBBDD::buscarColumna(const std::string& t,const std::string& col,const std::string& val) const { auto es=obtenerEsquema(t); auto it=std::find(es.begin(),es.end(),col); if(it==es.end())return{}; std::vector<std::map<std::string,std::string>> out;for(const auto&i:listarIndices(t))if(i.columna==col){for(auto id:buscarIdsIndice(t,col,val)){auto r=seleccionar(t,id);if(!r.empty())out.push_back(r);}return out;}size_t p=it-es.begin();for(auto&r:listarTodo(t)) if(r.at(es[p])==val) out.push_back(r); return out; }
+bool AndreiBBDD::actualizar(const std::string& t,long long id,const std::vector<std::string>& datos){
     auto pos=buscarPosicion(t,id); auto es=obtenerEsquema(t);
     if(pos<0||leerRegistro(t,id).empty()||datos.size()!=es.size()-2) return false;
     std::vector<std::string> validados=datos; auto tipos=obtenerTipos(t);for(size_t i=0;i<validados.size();++i){auto tipo=tipos[es[i+2]];validados[i]=normalizarTipo(tipo,validados[i]);if(!validarTipo(tipo,validados[i])){std::cerr<<"Tipo invalido para "<<es[i+2]<<"\n";return false;}} if(!prepararYValidarRestricciones(t,validados,id)||!validarClavesForaneas(t,validados)) return false;
@@ -371,13 +371,13 @@ bool JocarsaBBDD::actualizar(const std::string& t,long long id,const std::vector
     std::fstream f(rutaTabla(t,".csv"),std::ios::binary|std::ios::in|std::ios::out); f.seekp(pos); f.write(reg.data(),reg.size()); return bool(f);
 }
 #endif
-bool JocarsaBBDD::eliminar(const std::string& t,long long id){
+bool AndreiBBDD::eliminar(const std::string& t,long long id){
     auto pos=buscarPosicion(t,id); auto e=leerRegistro(t,id); if(pos<0||e.empty()) return false;
     auto registro=seleccionar(t,id); if(!puedeEliminarRegistro(t,registro)) return false;
     e[1]="0"; auto reg=prepararRegistro(e); std::fstream f(rutaTabla(t,".csv"),std::ios::binary|std::ios::in|std::ios::out); f.seekp(pos); f.write(reg.data(),reg.size()); return bool(f);
 }
 
-long long JocarsaBBDD::insertarConColumnas(const std::string& t,const std::vector<std::string>& columnas,const std::vector<std::string>& valores){
+long long AndreiBBDD::insertarConColumnas(const std::string& t,const std::vector<std::string>& columnas,const std::vector<std::string>& valores){
     auto es=obtenerEsquema(t); if(es.size()<2||columnas.size()!=valores.size()) return -1;
     std::vector<std::string> datos(es.size()-2,"");
     for(size_t i=0;i<columnas.size();++i){
@@ -388,7 +388,7 @@ long long JocarsaBBDD::insertarConColumnas(const std::string& t,const std::vecto
     return insertarDatos(t,datos);
 }
 
-long long JocarsaBBDD::insertarDesdeSeleccion(const std::string& destino,const std::string& origen){
+long long AndreiBBDD::insertarDesdeSeleccion(const std::string& destino,const std::string& origen){
     auto ed=obtenerEsquema(destino), eo=obtenerEsquema(origen);
     if(ed.size()<2||eo.size()<2||ed.size()!=eo.size()){std::cerr<<"Los esquemas no son compatibles\n";return -1;}
     long long n=0;
@@ -401,7 +401,7 @@ long long JocarsaBBDD::insertarDesdeSeleccion(const std::string& destino,const s
     return n;
 }
 
-long long JocarsaBBDD::actualizarDonde(const std::string& t,const std::map<std::string,std::string>& cambios,const std::string& colDonde,const std::string& valDonde){
+long long AndreiBBDD::actualizarDonde(const std::string& t,const std::map<std::string,std::string>& cambios,const std::string& colDonde,const std::string& valDonde){
     auto es=obtenerEsquema(t); if(es.size()<2||cambios.empty()) return -1;
     for(const auto&[c,v]:cambios){(void)v;if(c=="id"||c=="activo"||std::find(es.begin(),es.end(),c)==es.end()){std::cerr<<"Columna no modificable: "<<c<<"\n";return -1;}}
     if(!colDonde.empty()&&std::find(es.begin(),es.end(),colDonde)==es.end()){std::cerr<<"Columna WHERE/DONDE no encontrada\n";return -1;}
@@ -416,7 +416,7 @@ long long JocarsaBBDD::actualizarDonde(const std::string& t,const std::map<std::
     return n;
 }
 
-long long JocarsaBBDD::eliminarDonde(const std::string& t,const std::string& colDonde,const std::string& valDonde){
+long long AndreiBBDD::eliminarDonde(const std::string& t,const std::string& colDonde,const std::string& valDonde){
     auto es=obtenerEsquema(t); if(es.size()<2) return -1;
     if(!colDonde.empty()&&std::find(es.begin(),es.end(),colDonde)==es.end()){std::cerr<<"Columna WHERE/DONDE no encontrada\n";return -1;}
     long long n=0;
@@ -481,7 +481,7 @@ static std::string dqlNumeroTexto(double v){
 }
 }
 
-ResultadoConsulta JocarsaBBDD::consultarInterno(const std::string& consulta, int profundidad) const {
+ResultadoConsulta AndreiBBDD::consultarInterno(const std::string& consulta, int profundidad) const {
     auto t=dqlTokens(consulta); size_t p=0;
     auto kw=[&](const std::string&x){return p<t.size()&&!t[p].literal&&dqlMayus(t[p].texto)==x;};
     auto toma=[&](const std::string&x){if(kw(x)){++p;return true;}return false;};
@@ -542,9 +542,9 @@ ResultadoConsulta JocarsaBBDD::consultarInterno(const std::string& consulta, int
                 bool coincide=j.tipo=="CROSS";if(!coincide){auto vi=comb.find(j.izq),vd=comb.find(j.der);if(vi==comb.end()||vd==comb.end())throw std::runtime_error("Columna JOIN no encontrada");coincide=vi->second==vd->second;}
                 if(coincide){nuevas.push_back(std::move(comb));encontrado=true;usados[ri]=true;}
             }
-            if((j.tipo=="LEFT"||j.tipo=="FULL")&&!encontrado){auto comb=acum;for(const auto&c:ej){comb[j.alias+"."+c]="__JOCARSA_NULL__";if(!comb.count(c))comb[c]="__JOCARSA_NULL__";}nuevas.push_back(std::move(comb));}
+            if((j.tipo=="LEFT"||j.tipo=="FULL")&&!encontrado){auto comb=acum;for(const auto&c:ej){comb[j.alias+"."+c]="__ANDREI_NULL__";if(!comb.count(c))comb[c]="__ANDREI_NULL__";}nuevas.push_back(std::move(comb));}
         }
-        if(j.tipo=="RIGHT"||j.tipo=="FULL")for(size_t ri=0;ri<derechas.size();++ri)if(!usados[ri]){std::map<std::string,std::string> comb;for(const auto&c:esquemaBase){comb[aliasBase+"."+c]="__JOCARSA_NULL__";comb[c]="__JOCARSA_NULL__";}auto q=cualificar(j.alias,derechas[ri]);for(const auto&[k,v]:q)if(k.find('.')!=std::string::npos||!comb.count(k))comb[k]=v;nuevas.push_back(std::move(comb));}
+        if(j.tipo=="RIGHT"||j.tipo=="FULL")for(size_t ri=0;ri<derechas.size();++ri)if(!usados[ri]){std::map<std::string,std::string> comb;for(const auto&c:esquemaBase){comb[aliasBase+"."+c]="__ANDREI_NULL__";comb[c]="__ANDREI_NULL__";}auto q=cualificar(j.alias,derechas[ri]);for(const auto&[k,v]:q)if(k.find('.')!=std::string::npos||!comb.count(k))comb[k]=v;nuevas.push_back(std::move(comb));}
         filas=std::move(nuevas);
     }
     if(estrella){for(const auto&c:esquemaSalida)campos.push_back({c,c,""});}
@@ -607,7 +607,7 @@ ResultadoConsulta JocarsaBBDD::consultarInterno(const std::string& consulta, int
 
 
 
-ResultadoConsulta JocarsaBBDD::consultar(const std::string& consulta) const{
+ResultadoConsulta AndreiBBDD::consultar(const std::string& consulta) const{
     std::string q=consulta;
     // Subconsultas no correlacionadas. Se resuelven de dentro hacia fuera.
     for(int guard=0;guard<16;++guard){

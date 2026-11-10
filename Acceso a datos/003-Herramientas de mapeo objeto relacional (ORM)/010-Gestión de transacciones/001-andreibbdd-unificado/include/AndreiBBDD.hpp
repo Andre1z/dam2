@@ -5,7 +5,7 @@
 #include <vector>
 #include <filesystem>
 
-class JocarsaSerializador {
+class AndreiSerializador {
 public:
     std::string serializar(const std::vector<std::string>& lista, char delimitador = ',') const;
     std::vector<std::string> desserializar(const std::string& cadena, char delimitador = ',') const;
@@ -24,8 +24,6 @@ struct RestriccionColumna {
     std::string valorDefecto;
 };
 
-
-
 enum class TipoDato { TEXTO, ENTERO, REAL, BOOLEANO, FECHA, DECIMAL };
 
 struct DefinicionColumna {
@@ -43,13 +41,13 @@ struct ResultadoConsulta {
     std::vector<std::vector<std::string>> filas;
 };
 
-class JocarsaBBDD {
+class AndreiBBDD {
 public:
     std::string instalacion;
     std::string basededatos;
     std::size_t tamanoRegistro = 512;
 
-    explicit JocarsaBBDD(const std::string& config = "config.json");
+    explicit AndreiBBDD(const std::string& config = "config.json");
     bool creaBaseDatos(const std::string& nombre);
     bool usaBaseDatos(const std::string& nombre);
     std::vector<std::string> listarBases() const;
