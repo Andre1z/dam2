@@ -1,17 +1,13 @@
 import sqlite3
+from pathlib import Path
 
-conexion = sqlite3.connect("curriculum1.db")
-conexion.row_factory = sqlite3.Row
-cursor = conexion.cursor()
 
-peticion = "SELECT * FROM curriculums"
-cursor.execute(peticion)
+ruta_base_datos = Path(__file__).resolve().with_name("curriculum1.db")
 
-fila = cursor.fetchone()
+with sqlite3.connect(ruta_base_datos) as conexion:
+    conexion.row_factory = sqlite3.Row
+    filas = conexion.execute("SELECT * FROM curriculums").fetchall()
 
-while fila is not None:
+for fila in filas:
     diccionario = dict(fila)
     print(diccionario)
-    fila = cursor.fetchone()
-
-conexion.close()

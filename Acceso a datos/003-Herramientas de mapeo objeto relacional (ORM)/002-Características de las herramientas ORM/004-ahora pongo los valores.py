@@ -1,42 +1,40 @@
 import json
 import sqlite3
-
-archivo = open("curriculum1.json", 'r')
-contenido_json = json.load(archivo)
-
-conexion = sqlite3.connect("curriculum1.db")
-cursor = conexion.cursor()
-
-claves = []
-valores = []
-
-for clave, valor in contenido_json.items():
-    claves.append(clave)
-    valores.append(valor)
-    
-peticion = """CREATE TABLE IF NOT EXISTS curriculums(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-"""
-for clave in claves:
-  peticion += clave+" TEXT,"
-peticion = peticion[:-1] # Le quita la ultima coma
-peticion += """);"""
+from pathlib import Path
 
 
-cursor.execute(peticion)
+carpeta = Path(__file__).resolve().parent
+ruta_json = carpeta / "curriculum1.json"
+ruta_base_datos = carpeta / "curriculum1.db"
+
+with ruta_json.open("r", encoding="utf-8") as archivo:
+    contenido_json = json.load(archivo)
+
+def citar_identificador(identificador):
+    return '"' + identificador.replace('"', '""') + '"'
 
 
-peticion = "INSERT INTO curriculums VALUES(NULL,"
-for valor in valores:
-  peticion += "'"+valor+"',"
-peticion = peticion[:-1] # Le quita la ultima coma
-peticion += ")"
-print(peticion)
+columnas = list(contenido_json)
+definiciones_columnas = [
+    f"{citar_identificador(clave)} TEXT"
+    for clave in columnas
+]
+crear_tabla = (
+    "CREATE TABLE IF NOT EXISTS curriculums (\n"
+    "id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+    + ",\n".join(definiciones_columnas)
+    + "\n)"
+)
+columnas_sql = ", ".join(citar_identificador(clave) for clave in columnas)
+marcadores = ", ".join("?" for _ in columnas)
+peticion = (
+    f"INSERT INTO curriculums ({columnas_sql}) "
+    f"VALUES ({marcadores})"
+)
+valores = [contenido_json[clave] for clave in columnas]
 
-cursor.execute(peticion)
-# Guardar cambios
-conexion.commit()
+with sqlite3.connect(ruta_base_datos) as conexion:
+    conexion.execute(crear_tabla)
+    conexion.execute(peticion, valores)
 
-# Cerrar conexión
-conexion.close()
-archivo.close()
+print("Curriculum guardado en la base de datos.")
