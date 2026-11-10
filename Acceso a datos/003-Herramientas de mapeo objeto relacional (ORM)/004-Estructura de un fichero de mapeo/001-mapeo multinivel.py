@@ -1,15 +1,14 @@
 
 import json
 import sqlite3
-import os
+from pathlib import Path
 
-nombre_del_archivo = "curriculum.json"
-nombre_de_la_tabla = os.path.splitext(
-    os.path.basename(nombre_del_archivo)
-)[0]
-nombre_de_la_base_de_datos = nombre_de_la_tabla + ".db"
+directorio = Path(__file__).resolve().parent
+ruta_archivo = directorio / "curriculum.json"
+nombre_de_la_tabla = ruta_archivo.stem
+nombre_de_la_base_de_datos = ruta_archivo.with_suffix(".db")
 
-with open(nombre_del_archivo, "r", encoding="utf-8") as archivo:
+with ruta_archivo.open("r", encoding="utf-8") as archivo:
     contenido_json = json.load(archivo)
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
@@ -24,11 +23,7 @@ def identificador(nombre):
 
 # Convertir valores JSON a SQLite
 def convertir_valor(valor):
-    if isinstance(valor, bool):
-        return int(valor)
-    if isinstance(valor, (dict, list)):
-        return json.dumps(valor, ensure_ascii=False)
-    return valor
+    return json.dumps(valor, ensure_ascii=False)
 
 
 # Consultar columnas existentes
@@ -202,6 +197,13 @@ def procesar_json(nombre_tabla, datos, tabla_padre=None,
             )
 
         elif isinstance(valor, list):
+            nombre_tabla_hija = nombre_tabla + "_" + clave
+            preparar_tabla(
+                nombre_tabla_hija,
+                [],
+                nombre_tabla,
+                tiene_posicion=True
+            )
 
             for indice, elemento in enumerate(valor):
 
@@ -218,6 +220,16 @@ def procesar_json(nombre_tabla, datos, tabla_padre=None,
 
 # Importación
 try:
+
+    # La base se deriva del JSON, así que se reconstruye en cada importación.
+    cursor.execute("PRAGMA foreign_keys = OFF")
+    tablas_existentes = cursor.execute(
+        "SELECT name FROM sqlite_master "
+        "WHERE type = 'table' AND name NOT LIKE 'sqlite_%'"
+    ).fetchall()
+    for (tabla,) in tablas_existentes:
+        cursor.execute("DROP TABLE " + identificador(tabla))
+    cursor.execute("PRAGMA foreign_keys = ON")
 
     if isinstance(contenido_json, list):
 

@@ -1,26 +1,22 @@
 import json
+from pathlib import Path
 
-nombre_del_archivo = "curriculum2.json"
-nombre_de_la_tabla = nombre_del_archivo.split(".")[-1]
-nombre_de_la_base_de_datos = nombre_del_archivo.split(".")[-1]
-archivo = open(nombre_del_archivo, 'r')
-contenido_json = json.load(archivo)
+ruta_archivo = Path(__file__).resolve().parent / "curriculum2.json"
+nombre_de_la_tabla = ruta_archivo.stem
+nombre_de_la_base_de_datos = ruta_archivo.with_suffix(".db")
 
-claves = []
-valores = []
+with ruta_archivo.open("r", encoding="utf-8") as archivo:
+    contenido_json = json.load(archivo)
+
+print("Tabla:", nombre_de_la_tabla)
+print("Base de datos:", nombre_de_la_base_de_datos.name)
 
 for clave, valor in contenido_json.items():
-    claves.append(clave)
-    valores.append(valor)
-
-for valor in valores:
     print(type(valor))
-    if type(valor) == list:
+    if isinstance(valor, list):
         print("Esto es un array y va a otra tabla")
-        print("Voy a crear una tabla adicional llamada: ",clave)
+        print("Voy a crear una tabla adicional llamada:", clave)
         for dato in valor:
             print(dato)
     else:
         print("Esto es un dato y va como valor")
-
-archivo.close()

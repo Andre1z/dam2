@@ -1,20 +1,10 @@
 {
-  "nombre": "José Vicente Carratalá",
-  "marca": "JOCARSA",
-  "nacimiento": "1978-04-14",
+  "nombre": "Andrei Buga Mihailescu",
+  "marca": "Andrei",
+  "nacimiento": "2006-02-01",
   "ciudad": "Valencia",
-  "email": "info@jocarsa.com",
-  "web": "https://jocarsa.com",
-  "profesion": "Profesor de informática y desarrollador de software",
-  "experiencia": "Más de 25 años",
-  "lenguajes": [
-    "Python",
-    "PHP",
-    "JavaScript",
-    "Java",
-    "C++",
-    "SQL",
-    "HTML",
-    "CSS"
-  ]
+  "email": "bugaandrei1@gmail.com",
+  "web": "https://nuvantishop.es",
+  "profesion": "Técnico en sistemas informáticos y estudiante de Desarrollo de Aplicaciones Multiplataforma",
+  "experiencia": "En desarrollo de software desde 2022"
 }

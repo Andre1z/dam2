@@ -1,102 +1,138 @@
 import json
 import sqlite3
+from pathlib import Path
 
-nombre_del_archivo = "curriculum2.json"
-nombre_de_la_tabla = nombre_del_archivo.split(".")[0]
-nombre_de_la_base_de_datos = nombre_de_la_tabla + ".db"
 
-archivo = open(nombre_del_archivo, 'r', encoding="utf-8")
-contenido_json = json.load(archivo)
+def identificador_sql(nombre):
+    return '"' + nombre.replace('"', '""') + '"'
+
+
+directorio = Path(__file__).resolve().parent
+ruta_archivo = directorio / "curriculum2.json"
+nombre_de_la_tabla = ruta_archivo.stem
+nombre_de_la_base_de_datos = ruta_archivo.with_suffix(".db")
+
+with ruta_archivo.open("r", encoding="utf-8") as archivo:
+    contenido_json = json.load(archivo)
+
+if not isinstance(contenido_json, dict):
+    raise TypeError("El archivo JSON debe contener un objeto.")
+
+valores_simples = {
+    clave: valor
+    for clave, valor in contenido_json.items()
+    if not isinstance(valor, list)
+}
+listas = {
+    clave: valor
+    for clave, valor in contenido_json.items()
+    if isinstance(valor, list)
+}
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
+conexion.row_factory = sqlite3.Row
 conexion.execute("PRAGMA foreign_keys = ON")
-cursor = conexion.cursor()
 
-claves = []
-valores = []
+try:
+    with conexion:
+        columnas_sql = ", ".join(
+            f"{identificador_sql(clave)} TEXT" for clave in valores_simples
+        )
+        if columnas_sql:
+            columnas_sql = ", " + columnas_sql
 
-# Separar claves y valores simples
-for clave, valor in contenido_json.items():
-    if type(valor) != list:
-        claves.append(clave)
-        valores.append(valor)
+        conexion.execute(
+            f"CREATE TABLE IF NOT EXISTS {identificador_sql(nombre_de_la_tabla)} "
+            f"(id INTEGER PRIMARY KEY AUTOINCREMENT{columnas_sql})"
+        )
 
-# Crear tabla principal
-peticion = f"""
-CREATE TABLE IF NOT EXISTS "{nombre_de_la_tabla}"(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-"""
+        columnas_existentes = {
+            fila["name"]
+            for fila in conexion.execute(
+                f"PRAGMA table_info({identificador_sql(nombre_de_la_tabla)})"
+            ).fetchall()
+        }
+        for clave in valores_simples:
+            if clave not in columnas_existentes:
+                conexion.execute(
+                    f"ALTER TABLE {identificador_sql(nombre_de_la_tabla)} "
+                    f"ADD COLUMN {identificador_sql(clave)} TEXT"
+                )
 
-for clave in claves:
-    peticion += '"' + clave + '" TEXT,'
+        tablas_existentes = conexion.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table'"
+        ).fetchall()
+        for (tabla,) in tablas_existentes:
+            if tabla in (nombre_de_la_tabla, "sqlite_sequence"):
+                continue
+            claves_foraneas = conexion.execute(
+                f"PRAGMA foreign_key_list({identificador_sql(tabla)})"
+            ).fetchall()
+            depende_de_curriculum = any(
+                clave_foranea["table"] == nombre_de_la_tabla
+                for clave_foranea in claves_foraneas
+            )
+            if depende_de_curriculum and tabla not in listas:
+                conexion.execute(f"DROP TABLE {identificador_sql(tabla)}")
 
-peticion = peticion[:-1]
-peticion += ");"
+        fila = conexion.execute(
+            f"SELECT id FROM {identificador_sql(nombre_de_la_tabla)} "
+            "ORDER BY id LIMIT 1"
+        ).fetchone()
+        if fila is None:
+            columnas = list(valores_simples)
+            if columnas:
+                nombres_columnas = ", ".join(
+                    identificador_sql(clave) for clave in columnas
+                )
+                marcadores = ", ".join("?" for _ in columnas)
+                cursor = conexion.execute(
+                    f"INSERT INTO {identificador_sql(nombre_de_la_tabla)} "
+                    f"({nombres_columnas}) VALUES ({marcadores})",
+                    [valores_simples[clave] for clave in columnas],
+                )
+            else:
+                cursor = conexion.execute(
+                    f"INSERT INTO {identificador_sql(nombre_de_la_tabla)} "
+                    "DEFAULT VALUES"
+                )
+            id_principal = cursor.lastrowid
+        else:
+            id_principal = fila["id"]
+            for clave, valor in valores_simples.items():
+                conexion.execute(
+                    f"UPDATE {identificador_sql(nombre_de_la_tabla)} "
+                    f"SET {identificador_sql(clave)} = ? WHERE id = ?",
+                    (valor, id_principal),
+                )
 
-print(peticion)
-cursor.execute(peticion)
-
-# Insertar datos en tabla principal
-columnas = ",".join('"' + clave + '"' for clave in claves)
-marcadores = ",".join("?" for valor in valores)
-
-peticion = f"""
-INSERT INTO "{nombre_de_la_tabla}" ({columnas})
-VALUES ({marcadores})
-"""
-
-cursor.execute(peticion, valores)
-
-# Recuperar ID del registro insertado
-id_principal = cursor.lastrowid
-
-# Crear tablas adicionales para los arrays
-for clave, valor in contenido_json.items():
-
-    if type(valor) == list:
-
-        print("Esto es un array y va a otra tabla")
-        print("Voy a crear una tabla adicional llamada:", clave)
-
-        nombre_tabla_secundaria = clave
         nombre_clave_foranea = nombre_de_la_tabla + "_id"
+        for clave, valores in listas.items():
+            nombre_tabla_secundaria = identificador_sql(clave)
+            clave_foranea_sql = identificador_sql(nombre_clave_foranea)
+            conexion.execute(
+                f"CREATE TABLE IF NOT EXISTS {nombre_tabla_secundaria} ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                f"{clave_foranea_sql} INTEGER, valor, "
+                f"FOREIGN KEY ({clave_foranea_sql}) "
+                f"REFERENCES {identificador_sql(nombre_de_la_tabla)}(id))"
+            )
+            conexion.execute(
+                f"DELETE FROM {nombre_tabla_secundaria} "
+                f"WHERE {clave_foranea_sql} = ?",
+                (id_principal,),
+            )
 
-        # Crear tabla relacionada
-        peticion = f"""
-        CREATE TABLE IF NOT EXISTS "{nombre_tabla_secundaria}"(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            "{nombre_clave_foranea}" INTEGER,
-            valor TEXT,
-            FOREIGN KEY ("{nombre_clave_foranea}")
-                REFERENCES "{nombre_de_la_tabla}"(id)
-        );
-        """
+            for dato in valores:
+                if isinstance(dato, (dict, list)):
+                    dato = json.dumps(dato, ensure_ascii=False)
+                conexion.execute(
+                    f"INSERT INTO {nombre_tabla_secundaria} "
+                    f"({clave_foranea_sql}, valor) VALUES (?, ?)",
+                    (id_principal, dato),
+                )
+                print(dato)
 
-        print(peticion)
-        cursor.execute(peticion)
-
-        # Insertar elementos del array
-        for dato in valor:
-
-            if type(dato) == dict or type(dato) == list:
-                dato = json.dumps(dato, ensure_ascii=False)
-
-            peticion = f"""
-            INSERT INTO "{nombre_tabla_secundaria}"
-            ("{nombre_clave_foranea}", valor)
-            VALUES (?, ?)
-            """
-
-            cursor.execute(peticion, (id_principal, dato))
-
-            print(dato)
-
-    else:
-        print("Esto es un dato y va como valor")
-
-# Guardar cambios
-conexion.commit()
-
-# Cerrar conexión
-conexion.close()
-archivo.close()
+    print("Datos guardados en:", nombre_de_la_base_de_datos)
+finally:
+    conexion.close()

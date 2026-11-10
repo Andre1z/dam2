@@ -1,8 +1,9 @@
 import json
+from pathlib import Path
 
-archivo = open("curriculum2.json",'r')
-contenido_json = json.load(archivo)
+ruta_archivo = Path(__file__).resolve().parent / "curriculum2.json"
+
+with ruta_archivo.open("r", encoding="utf-8") as archivo:
+    contenido_json = json.load(archivo)
 
 print(contenido_json)
-
-archivo.close()

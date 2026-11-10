@@ -1,18 +1,24 @@
 
 import sqlite3
 import json
-import os
+from pathlib import Path
 
 # CONFIGURACIÓN
-nombre_de_la_base_de_datos = "curriculums.db"
+directorio = Path(__file__).resolve().parent
+nombre_de_la_base_de_datos = directorio / "curriculums.db"
 nombre_de_la_tabla = "curriculum"
-carpeta_salida = "curriculums_recuperados"
+carpeta_salida = directorio / "curriculums_recuperados"
 
-os.makedirs(carpeta_salida, exist_ok=True)
+if not nombre_de_la_base_de_datos.is_file():
+    raise FileNotFoundError(
+        "No existe la base de datos: " + str(nombre_de_la_base_de_datos)
+    )
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
 conexion.row_factory = sqlite3.Row
 cursor = conexion.cursor()
+
+carpeta_salida.mkdir(exist_ok=True)
 
 
 # Proteger identificadores SQL
@@ -209,16 +215,9 @@ try:
                 "_" + str(id_registro) + ".json"
             )
 
-            ruta_salida = os.path.join(
-                carpeta_salida,
-                nombre_archivo
-            )
+            ruta_salida = carpeta_salida / nombre_archivo
 
-            with open(
-                ruta_salida,
-                "w",
-                encoding="utf-8"
-            ) as archivo:
+            with ruta_salida.open("w", encoding="utf-8") as archivo:
 
                 json.dump(
                     contenido_json,
@@ -244,6 +243,11 @@ try:
     print("Errores:", errores)
     print("Carpeta:", carpeta_salida)
     print("=" * 60)
+
+    if errores:
+        raise RuntimeError(
+            str(errores) + " registro(s) no se pudieron exportar."
+        )
 
 finally:
 

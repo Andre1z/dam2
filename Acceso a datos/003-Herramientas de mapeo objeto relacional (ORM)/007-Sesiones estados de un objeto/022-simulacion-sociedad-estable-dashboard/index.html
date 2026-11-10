@@ -6,100 +6,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vida artificial - Evolución genética</title>
 <style>
+  :root {
+    --andrei-orange: #d97218;
+    --andrei-orange-dark: #c86a14;
+    --andrei-blue: hsl(200, 50%, 70%);
+    --andrei-blue-soft: hsl(200, 50%, 90%);
+    --andrei-ink: #34445a;
+    --andrei-muted: #718096;
+    --andrei-border: #dce4ec;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--andrei-ink);
+    background: #f7f8fb;
+  }
   * { box-sizing: border-box; }
+  body { min-height: 100vh; margin: 0; padding: 24px; background: linear-gradient(180deg, #f7f8fb 0%, #fff 100%); }
+  h2 { margin: 0 0 16px; padding: 18px 22px; border-radius: 12px; background: linear-gradient(180deg, var(--andrei-orange), var(--andrei-orange-dark)); box-shadow: 0 10px 28px rgba(13,13,13,.14); color: #fff; font-size: 22px; letter-spacing: .2px; }
+  .barra-acciones { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 14px; }
+  .barra-acciones button { padding: 9px 14px; border: 1px solid var(--andrei-border); border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgba(29,44,64,.08); color: var(--andrei-ink); cursor: pointer; font: inherit; font-size: 13px; transition: background .15s ease, transform .15s ease; }
+  .barra-acciones button:hover { background: #f0f4f8; }
+  .barra-acciones button:active { transform: translateY(1px); }
+  #guardar { border-color: var(--andrei-blue); background: var(--andrei-blue); color: #182a36; font-weight: 700; }
+  #guardar:hover { background: #a5c9e0; }
+  #guardar:disabled { opacity: .6; cursor: wait; }
+  .barra-acciones button:focus-visible { outline: 2px solid #648ba5; outline-offset: 2px; }
+  #estadoGuardado { color: var(--andrei-muted); font-size: 13px; }
+  #estadisticas { margin-bottom: 15px; padding: 12px 14px; border: 1px solid var(--andrei-border); border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(36,58,86,.06); font-size: 13px; line-height: 1.7; }
+  .layout { display: grid; grid-template-columns: minmax(0,800px) minmax(300px,1fr); gap: 16px; align-items: start; }
+  #escenario { display: block; width: 100%; height: auto; border: 1px solid var(--andrei-border); border-radius: 12px; background: #fff; box-shadow: 0 8px 24px rgba(36,58,86,.1); }
+  .panel { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .grafica, .grupo-estadisticas { min-width: 0; padding: 14px; border: 1px solid var(--andrei-border); border-radius: 12px; background: #fff; box-shadow: 0 6px 20px rgba(36,58,86,.07); }
+  .grafica h3, .grupo-estadisticas h3 { margin: 0 0 12px; color: var(--andrei-ink); font-size: 15px; }
+  .grafica canvas, .grupo-estadisticas canvas { display: block; width: 100%; height: 240px; }
+  .grupo-estadisticas { margin-bottom: 14px; }
+  .grupo-estadisticas small { color: var(--andrei-muted); }
+  .reloj-panel { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 12px; border: 1px solid var(--andrei-border); border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(36,58,86,.06); font-size: 13px; }
+  #horaActual { min-width: 60px; color: var(--andrei-ink); font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .reloj-pista { flex: 1; height: 13px; overflow: hidden; border-radius: 20px; background: linear-gradient(to right,#dce4ec 0%,#a5c9e0 29%,#d97218 79%,#e8c99e 88%,#dce4ec 100%); }
+  #barraDia { width: 0%; height: 100%; border-right: 4px solid var(--andrei-orange-dark); box-shadow: 0 0 3px #34445a; }
+  #estadoDia { min-width: 140px; color: var(--andrei-muted); text-align: right; }
+  @media (max-width: 1150px) { body { padding: 18px; } .layout { grid-template-columns: minmax(0,1fr); } }
+  @media (max-width: 600px) { body { padding: 12px; } h2 { padding: 15px 17px; font-size: 19px; } .grafica, .grupo-estadisticas { padding: 11px; } .reloj-panel { gap: 8px; padding: 10px; } #estadoDia { min-width: 0; } }
 
-  body {
-    margin: 0;
-    padding: 20px;
-    background: #eee;
-    font-family: Arial, sans-serif;
-    color: #222;
+  body { padding: 10px; overflow: hidden; }
+  h2 { margin: 0 0 6px; padding: 12px 16px; font-size: 18px; }
+  .barra-acciones { margin-bottom: 6px; }
+  #guardar, #reiniciar { padding: 7px 13px; }
+  .reloj-panel { padding: 6px 10px; margin-bottom: 6px; }
+  #estadisticas { padding: 5px 9px; margin-bottom: 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+  .layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; align-items: start; height: calc(100vh - 185px); }
+  .panel { grid-column: 1; grid-row: 1; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); grid-template-rows: repeat(5,minmax(0,1fr)); gap: 6px; height: 100%; min-height: 0; }
+  #escenario { grid-column: 2; grid-row: 1; width: 100%; height: auto; max-height: 100%; object-fit: contain; align-self: start; }
+  #panelEstadisticasAmpliadas { display: contents; }
+  .grafica, .grupo-estadisticas { min-width: 0; min-height: 0; margin: 0; padding: 6px; display: flex; flex-direction: column; overflow: hidden; }
+  .grafica h3, .grupo-estadisticas h3 { margin: 0 0 3px; font-size: 11px; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .grafica canvas, .grupo-estadisticas canvas { width: 100%; height: calc(100% - 17px); flex: 1; min-height: 0; }
+  @media (max-width: 1100px) {
+    body { overflow: auto; }
+    .layout { height: auto; grid-template-columns: minmax(0,1fr); }
+    .panel { grid-column: 1; grid-row: 2; height: 850px; }
+    #escenario { grid-column: 1; grid-row: 1; max-height: 650px; }
   }
-
-  h2 { margin: 0 0 12px; }
-
-  .barra-acciones { display:flex; align-items:center; gap:12px; margin:0 0 14px; flex-wrap:wrap; }
-  #guardar { background:#2563eb; color:white; border:0; padding:10px 18px; border-radius:6px; cursor:pointer; font-weight:bold; }
-  #guardar:disabled { opacity:.6; cursor:wait; }
-  #estadoGuardado { font-size:13px; }
-  #estadisticas {
-    margin-bottom: 15px;
-    padding: 12px;
-    background: white;
-    border: 1px solid #ddd;
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .layout {
-    display: grid;
-    grid-template-columns: 800px minmax(300px, 1fr);
-    gap: 16px;
-    align-items: start;
-  }
-
-  #escenario {
-    background: white;
-    border: 1px solid #ccc;
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .panel {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 0;
-  }
-
-  .grafica {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 14px;
-  }
-
-  .grafica h3 {
-    margin: 0 0 12px;
-    font-size: 15px;
-  }
-
-  .grafica canvas {
-    display: block;
-    width: 100%;
-    height: 240px;
-  }
-
-  @media(max-width: 1150px) {
-    .layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  .reloj-panel{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #ddd;padding:12px;margin-bottom:12px;font-size:13px}
-  #horaActual{font-weight:bold;font-size:19px;font-variant-numeric:tabular-nums;min-width:60px}
-  .reloj-pista{flex:1;height:13px;border-radius:20px;overflow:hidden;background:linear-gradient(to right,#14213d 0%,#f9d976 29%,#f5bd55 79%,#182443 88%,#14213d 100%)}
-  #barraDia{height:100%;width:0%;border-right:4px solid #ef4444;box-shadow:0 0 3px #111}
-  #estadoDia{min-width:140px;text-align:right}
-  .grupo-estadisticas{background:white;border:1px solid #ddd;padding:14px;margin-bottom:15px}
-  .grupo-estadisticas h3{margin:0 0 10px;font-size:15px}
-  .grupo-estadisticas canvas{width:100%;height:170px;display:block}
-  .grupo-estadisticas small{color:#666}
-
-/* Panel 1920 × 1080: gráficas izquierda, escenario derecha */
-body{padding:10px;overflow:hidden}
-h2{font-size:18px;margin:0 0 6px}
-.barra-acciones{margin-bottom:6px}
-#guardar{padding:7px 13px}
-.reloj-panel{padding:6px 10px;margin-bottom:6px}
-#estadisticas{padding:5px 9px;margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
-.layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start;height:calc(100vh - 155px)}
-.panel{grid-column:1;grid-row:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));gap:6px;height:100%;min-height:0}
-#escenario{grid-column:2;grid-row:1;width:100%;height:auto;max-height:100%;object-fit:contain;align-self:start}
-#panelEstadisticasAmpliadas{display:contents}
-.grafica,.grupo-estadisticas{min-width:0;min-height:0;margin:0;padding:6px;display:flex;flex-direction:column;overflow:hidden}
-.grafica h3,.grupo-estadisticas h3{font-size:11px;line-height:1.1;margin:0 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.grafica canvas,.grupo-estadisticas canvas{width:100%;height:calc(100% - 17px);flex:1;min-height:0}
-@media(max-width:1100px){body{overflow:auto}.layout{height:auto;grid-template-columns:1fr}.panel{grid-column:1;grid-row:2;height:850px}#escenario{grid-column:1;grid-row:1;max-height:650px}}
 </style>
 </head>
 <body>

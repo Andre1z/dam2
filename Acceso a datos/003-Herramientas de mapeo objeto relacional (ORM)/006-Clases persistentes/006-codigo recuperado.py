@@ -4,12 +4,12 @@ import cv2
 import numpy as np
 import math
 import sqlite3
-import os
+from pathlib import Path
 
 ANCHO = 500
 ALTO = 500
 
-BASE_DATOS = "simulacion.db"
+BASE_DATOS = Path(__file__).resolve().parent / "simulacion.db"
 TABLA_PRINCIPAL = "simulacion"
 
 
@@ -420,7 +420,7 @@ def guardar_partida(seres, recogibles):
 # ==========================================
 
 def cargar_partida():
-    if not os.path.exists(BASE_DATOS):
+    if not BASE_DATOS.is_file():
         return None
 
     conexion = sqlite3.connect(BASE_DATOS)

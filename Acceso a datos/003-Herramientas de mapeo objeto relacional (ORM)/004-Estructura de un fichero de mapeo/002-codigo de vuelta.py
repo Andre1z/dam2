@@ -1,10 +1,12 @@
 
 import sqlite3
 import json
+from pathlib import Path
 
-nombre_de_la_base_de_datos = "curriculum.db"
+directorio = Path(__file__).resolve().parent
+nombre_de_la_base_de_datos = directorio / "curriculum.db"
 nombre_de_la_tabla = "curriculum"
-nombre_del_archivo = "curriculum_recuperado.json"
+nombre_del_archivo = directorio / "curriculum_recuperado.json"
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
 conexion.row_factory = sqlite3.Row
@@ -69,6 +71,16 @@ def reconstruir_registro(nombre_tabla, fila):
 
     for fk in cursor.fetchall():
         diccionario.pop(fk["from"], None)
+
+    for clave, valor in list(diccionario.items()):
+        if valor is None:
+            del diccionario[clave]
+            continue
+        if clave != "id" and isinstance(valor, str):
+            try:
+                diccionario[clave] = json.loads(valor)
+            except json.JSONDecodeError:
+                pass
 
     # Buscar tablas hijas
     for relacion in relaciones.get(nombre_tabla, []):
@@ -197,11 +209,7 @@ conexion.close()
 
 
 # Guardar JSON reconstruido
-with open(
-    nombre_del_archivo,
-    "w",
-    encoding="utf-8"
-) as archivo:
+with nombre_del_archivo.open("w", encoding="utf-8") as archivo:
 
     json.dump(
         resultado_final,

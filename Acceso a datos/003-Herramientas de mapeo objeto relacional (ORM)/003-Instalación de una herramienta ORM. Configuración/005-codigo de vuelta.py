@@ -1,101 +1,86 @@
-import sqlite3
 import json
+import sqlite3
+from pathlib import Path
 
-nombre_de_la_base_de_datos = "curriculum2.db"
+
+def identificador_sql(nombre):
+    return '"' + nombre.replace('"', '""') + '"'
+
+
+directorio = Path(__file__).resolve().parent
+nombre_de_la_base_de_datos = directorio / "curriculum2.db"
 nombre_de_la_tabla = "curriculum2"
-nombre_del_archivo = "curriculum2_recuperado.json"
+nombre_del_archivo = directorio / "curriculum2_recuperado.json"
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
 conexion.row_factory = sqlite3.Row
-cursor = conexion.cursor()
-
-# Obtener las tablas existentes
-cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-tablas = [fila["name"] for fila in cursor.fetchall()]
-
-# Leer tabla principal
-peticion = f'SELECT * FROM "{nombre_de_la_tabla}"'
-cursor.execute(peticion)
-
-fila = cursor.fetchone()
-
 resultados = []
 
-while fila is not None:
+try:
+    tablas = [
+        fila["name"]
+        for fila in conexion.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table'"
+        ).fetchall()
+        if fila["name"] not in (nombre_de_la_tabla, "sqlite_sequence")
+    ]
 
-    diccionario = dict(fila)
-    id_principal = diccionario["id"]
-
-    # Eliminar el ID interno de SQLite
-    del diccionario["id"]
-
-    # Recorrer las tablas secundarias
+    relaciones = []
     for tabla in tablas:
+        identificador_tabla = identificador_sql(tabla)
+        columnas = {
+            fila["name"]
+            for fila in conexion.execute(
+                f"PRAGMA table_info({identificador_tabla})"
+            ).fetchall()
+        }
+        if "valor" not in columnas:
+            continue
 
-        if tabla != nombre_de_la_tabla and tabla != "sqlite_sequence":
+        claves_foraneas = conexion.execute(
+            f"PRAGMA foreign_key_list({identificador_tabla})"
+        ).fetchall()
+        for clave_foranea in claves_foraneas:
+            if clave_foranea["table"] == nombre_de_la_tabla:
+                relaciones.append((tabla, clave_foranea["from"]))
 
-            # Comprobar si la tabla tiene una FK hacia la principal
-            cursor.execute(f'PRAGMA foreign_key_list("{tabla}")')
-            claves_foraneas = cursor.fetchall()
+    filas = conexion.execute(
+        f"SELECT * FROM {identificador_sql(nombre_de_la_tabla)} ORDER BY id"
+    ).fetchall()
 
-            for fk in claves_foraneas:
+    for fila in filas:
+        diccionario = dict(fila)
+        id_principal = diccionario.pop("id")
 
-                if fk["table"] == nombre_de_la_tabla:
+        for tabla, nombre_fk in relaciones:
+            valores = conexion.execute(
+                f"SELECT valor FROM {identificador_sql(tabla)} "
+                f"WHERE {identificador_sql(nombre_fk)} = ? ORDER BY id",
+                (id_principal,),
+            ).fetchall()
 
-                    nombre_fk = fk["from"]
+            datos = []
+            for dato in valores:
+                valor = dato["valor"]
+                if isinstance(valor, str) and valor[:1] in ("{", "["):
+                    try:
+                        valor = json.loads(valor)
+                    except json.JSONDecodeError:
+                        pass
+                datos.append(valor)
 
-                    peticion = f'''
-                    SELECT valor
-                    FROM "{tabla}"
-                    WHERE "{nombre_fk}" = ?
-                    ORDER BY id
-                    '''
+            diccionario[tabla] = datos
 
-                    cursor.execute(peticion, (id_principal,))
+        resultados.append(diccionario)
+finally:
+    conexion.close()
 
-                    valores = []
-
-                    dato = cursor.fetchone()
-
-                    while dato is not None:
-
-                        valor = dato["valor"]
-
-                        # Recuperar objetos JSON guardados como texto
-                        if valor is not None:
-                            try:
-                                if valor.startswith("{") or valor.startswith("["):
-                                    valor = json.loads(valor)
-                            except (json.JSONDecodeError, AttributeError):
-                                pass
-
-                        valores.append(valor)
-
-                        dato = cursor.fetchone()
-
-                    diccionario[tabla] = valores
-
-    resultados.append(diccionario)
-
-    # Volver a consultar la tabla principal para avanzar
-    cursor.execute(
-        f'SELECT * FROM "{nombre_de_la_tabla}" WHERE id > ? ORDER BY id LIMIT 1',
-        (id_principal,)
-    )
-
-    fila = cursor.fetchone()
-
-conexion.close()
-
-# Si hay un solo registro, devolver un objeto JSON
-# Si hay varios registros, devolver un array
 if len(resultados) == 1:
     resultado_final = resultados[0]
 else:
     resultado_final = resultados
 
-# Guardar JSON
-with open(nombre_del_archivo, "w", encoding="utf-8") as archivo:
+with nombre_del_archivo.open("w", encoding="utf-8") as archivo:
     json.dump(resultado_final, archivo, indent=4, ensure_ascii=False)
 
 print(json.dumps(resultado_final, indent=4, ensure_ascii=False))

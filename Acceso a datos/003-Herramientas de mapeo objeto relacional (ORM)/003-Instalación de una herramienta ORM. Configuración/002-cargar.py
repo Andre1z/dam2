@@ -1,23 +1,17 @@
 import json
+from pathlib import Path
 
-archivo = open("curriculum2.json", 'r')
-contenido_json = json.load(archivo)
+ruta_archivo = Path(__file__).resolve().parent / "curriculum2.json"
 
-claves = []
-valores = []
+with ruta_archivo.open("r", encoding="utf-8") as archivo:
+    contenido_json = json.load(archivo)
 
 for clave, valor in contenido_json.items():
-    claves.append(clave)
-    valores.append(valor)
-
-for valor in valores:
     print(type(valor))
-    if type(valor) == list:
+    if isinstance(valor, list):
         print("Esto es un array y va a otra tabla")
-        print("Voy a crear una tabla adicional llamada: ",clave)
+        print("Voy a crear una tabla adicional llamada:", clave)
         for dato in valor:
             print(dato)
     else:
         print("Esto es un dato y va como valor")
-
-archivo.close()

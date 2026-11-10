@@ -5,15 +5,35 @@
   <meta charset="UTF-8">
   <title>Simulación de personas con sensores</title>
   <style>
+    :root {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #34445a;
+      background: #f7f8fb;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      background: #eee;
-      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0;
+      padding: 24px;
+      background: linear-gradient(180deg, #f7f8fb 0%, #fff 100%);
     }
 
     canvas {
-      background: white;
-      border: 1px solid #ccc;
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #dce4ec;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(13, 13, 13, .12);
     }
+
+    @media (max-width: 600px) { body { padding: 12px; } }
   </style>
 </head>
 <body>

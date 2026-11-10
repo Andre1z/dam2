@@ -1,12 +1,28 @@
 
 import json
 import sqlite3
-import os
+from pathlib import Path
 
 # CONFIGURACIÓN
-carpeta_json = "curriculums"
+directorio = Path(__file__).resolve().parent
+carpeta_json = directorio / "curriculums"
 nombre_de_la_tabla = "curriculum"
-nombre_de_la_base_de_datos = "curriculums.db"
+nombre_de_la_base_de_datos = directorio / "curriculums.db"
+
+if not carpeta_json.is_dir():
+    raise FileNotFoundError(
+        "No existe la carpeta de entrada: " + str(carpeta_json)
+    )
+
+archivos_json = sorted(
+    archivo for archivo in carpeta_json.glob("*.json")
+    if archivo.is_file()
+)
+
+if not archivos_json:
+    raise FileNotFoundError(
+        "No hay archivos JSON para importar en: " + str(carpeta_json)
+    )
 
 conexion = sqlite3.connect(nombre_de_la_base_de_datos)
 conexion.execute("PRAGMA foreign_keys = ON")
@@ -204,12 +220,6 @@ def procesar_json(nombre_tabla, datos, tabla_padre=None,
 
 
 # IMPORTACIÓN MASIVA
-archivos_json = sorted(
-    archivo for archivo in os.listdir(carpeta_json)
-    if archivo.lower().endswith(".json")
-    and os.path.isfile(os.path.join(carpeta_json, archivo))
-)
-
 total_archivos = len(archivos_json)
 correctos = 0
 errores = 0
@@ -222,20 +232,22 @@ try:
 
     for numero, nombre_archivo in enumerate(archivos_json, 1):
 
-        ruta = os.path.join(carpeta_json, nombre_archivo)
+        ruta = nombre_archivo
 
         print(
             "\n[" + str(numero) + "/" + str(total_archivos) + "]",
-            "PROCESANDO:", nombre_archivo
+            "PROCESANDO:", nombre_archivo.name
         )
 
+        savepoint_activo = False
         try:
 
-            with open(ruta, "r", encoding="utf-8") as archivo:
+            with ruta.open("r", encoding="utf-8") as archivo:
                 contenido_json = json.load(archivo)
 
             # Transacción independiente por archivo
             conexion.execute("SAVEPOINT archivo_actual")
+            savepoint_activo = True
 
             if isinstance(contenido_json, list):
 
@@ -255,24 +267,24 @@ try:
                 )
 
             conexion.execute("RELEASE SAVEPOINT archivo_actual")
+            savepoint_activo = False
             conexion.commit()
 
             correctos += 1
 
-            print("OK:", nombre_archivo)
+            print("OK:", nombre_archivo.name)
 
         except Exception as error:
 
-            conexion.execute("ROLLBACK TO SAVEPOINT archivo_actual") if conexion.in_transaction else None
-
-            if conexion.in_transaction:
+            if savepoint_activo:
+                conexion.execute("ROLLBACK TO SAVEPOINT archivo_actual")
                 conexion.execute("RELEASE SAVEPOINT archivo_actual")
 
             conexion.rollback()
 
             errores += 1
 
-            print("ERROR EN:", nombre_archivo)
+            print("ERROR EN:", nombre_archivo.name)
             print("MOTIVO:", error)
 
     print("\n" + "=" * 60)
@@ -282,6 +294,11 @@ try:
     print("Archivos con errores:", errores)
     print("Base de datos:", nombre_de_la_base_de_datos)
     print("=" * 60)
+
+    if errores:
+        raise RuntimeError(
+            str(errores) + " archivo(s) JSON no se pudieron importar."
+        )
 
 finally:
 
