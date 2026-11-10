@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 class MotorDocumental:
-    def __init__(self, raiz='jocarsa-documental'):
+    def __init__(self, raiz='andrei-documental'):
         self.raiz = Path(raiz).expanduser().resolve()
         self.raiz.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(self.raiz / 'documental.db')
@@ -162,7 +162,7 @@ def pedir_multilinea():
 
 def ejecutar():
     motor=MotorDocumental()
-    opciones='''\n=== JOCARSA | DOCUMENTAL ===
+    opciones='''\n=== ANDREI | DOCUMENTAL ===
 1. Crear carpeta
 2. Crear documento JSON, Markdown o HTML
 3. Importar archivo externo

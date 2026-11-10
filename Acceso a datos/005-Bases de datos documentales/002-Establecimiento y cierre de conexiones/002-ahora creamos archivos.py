@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 
 # Carpeta principal
-raiz = Path("jocarsa-documental")
+raiz = Path("andrei-documental")
 raiz.mkdir(exist_ok=True)
 
 
@@ -325,7 +325,7 @@ def main():
     while True:
 
         print("\n================================")
-        print("       JOCARSA DOCUMENTAL")
+        print("       ANDREI DOCUMENTAL")
         print("================================")
         print("1. Crear carpeta")
         print("2. Crear documento")
