@@ -1,4 +1,4 @@
-# Ejemplos de conectores JocarsaBBDD
+# Ejemplos de conectores AndreiBBDD
 
 La carpeta contiene ejemplos equivalentes para los conectores nativos de Python y PHP.
 
@@ -35,9 +35,9 @@ Compilar:
 No es necesario instalar la extensión para probarla:
 
 ```bash
-php -d extension=./jocarsabbdd.so doc/php/01_basico.php
-php -d extension=./jocarsabbdd.so doc/php/02_transacciones_vistas.php
-php -d extension=./jocarsabbdd.so doc/php/03_subconsultas.php
+php -d extension=./andreibbdd.so doc/php/01_basico.php
+php -d extension=./andreibbdd.so doc/php/02_transacciones_vistas.php
+php -d extension=./andreibbdd.so doc/php/03_subconsultas.php
 ```
 
 Instalación opcional del módulo:
@@ -46,17 +46,17 @@ Instalación opcional del módulo:
 ./instalar_php.sh
 ```
 
-Después de habilitar `extension=jocarsabbdd.so`, los scripts pueden ejecutarse simplemente con `php archivo.php`.
+Después de habilitar `extension=andreibbdd.so`, los scripts pueden ejecutarse simplemente con `php archivo.php`.
 
 ## Correspondencia básica
 
 | Python | PHP |
 |---|---|
-| `jocarsabbdd.crear_base()` | `jocarsabbdd_crear_base()` |
-| `jocarsabbdd.usar_base()` | `jocarsabbdd_usar_base()` |
-| `jocarsabbdd.insertar()` | `jocarsabbdd_insertar()` |
-| `jocarsabbdd.consultar()` | `jocarsabbdd_consultar()` |
-| `jocarsabbdd.iniciar_transaccion()` | `jocarsabbdd_iniciar_transaccion()` |
-| `jocarsabbdd.confirmar()` | `jocarsabbdd_confirmar()` |
-| `jocarsabbdd.deshacer()` | `jocarsabbdd_deshacer()` |
-| `jocarsabbdd.crear_vista()` | `jocarsabbdd_crear_vista()` |
+| `andreibbdd.crear_base()` | `andreibbdd_crear_base()` |
+| `andreibbdd.usar_base()` | `andreibbdd_usar_base()` |
+| `andreibbdd.insertar()` | `andreibbdd_insertar()` |
+| `andreibbdd.consultar()` | `andreibbdd_consultar()` |
+| `andreibbdd.iniciar_transaccion()` | `andreibbdd_iniciar_transaccion()` |
+| `andreibbdd.confirmar()` | `andreibbdd_confirmar()` |
+| `andreibbdd.deshacer()` | `andreibbdd_deshacer()` |
+| `andreibbdd.crear_vista()` | `andreibbdd_crear_vista()` |

@@ -1,7 +1,7 @@
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.usar_base("demo_conectores_python")
-print(jocarsabbdd.consultar(
+andreibbdd.usar_base("demo_conectores_python")
+print(andreibbdd.consultar(
     "SELECCIONAR nombre,precio DE productos "
     "DONDE precio > (SELECCIONAR MEDIA(precio) DE productos)"
 ))

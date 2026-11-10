@@ -1,14 +1,14 @@
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.usar_base("demo_conectores_python")
+andreibbdd.usar_base("demo_conectores_python")
 
-jocarsabbdd.iniciar_transaccion()
-jocarsabbdd.insertar("productos", ["Temporal", "1", "999", "FALSO"])
-print(jocarsabbdd.consultar("SELECCIONAR CONTAR(*) COMO total DE productos"))
-jocarsabbdd.deshacer()
+andreibbdd.iniciar_transaccion()
+andreibbdd.insertar("productos", ["Temporal", "1", "999", "FALSO"])
+print(andreibbdd.consultar("SELECCIONAR CONTAR(*) COMO total DE productos"))
+andreibbdd.deshacer()
 
-jocarsabbdd.crear_vista(
+andreibbdd.crear_vista(
     "productos_caros",
     "SELECCIONAR nombre,precio DE productos DONDE precio > 20",
 )
-print(jocarsabbdd.consultar("SELECCIONAR * DE productos_caros"))
+print(andreibbdd.consultar("SELECCIONAR * DE productos_caros"))

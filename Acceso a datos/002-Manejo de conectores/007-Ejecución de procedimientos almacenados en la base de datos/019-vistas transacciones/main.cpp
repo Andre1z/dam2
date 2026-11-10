@@ -1,9 +1,16 @@
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
 #include <map>
 #include <sstream>
+#include <stdexcept>
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
 
 static std::string trim(std::string s){while(!s.empty()&&std::isspace((unsigned char)s.front()))s.erase(s.begin());while(!s.empty()&&std::isspace((unsigned char)s.back()))s.pop_back();return s;}
 static std::string mayus(std::string s){std::transform(s.begin(),s.end(),s.begin(),[](unsigned char c){return std::toupper(c);});return s;}
@@ -12,6 +19,28 @@ static std::vector<std::string> lista(std::string s){s=trim(s);if(s.size()>=2&&s
 static bool condicion(std::string s,std::string& c,std::string& v){auto p=s.find('=');if(p==std::string::npos)return false;c=trim(s.substr(0,p));v=sinComillas(s.substr(p+1));return !c.empty();}
 static std::map<std::string,std::string> asignaciones(std::string s){std::map<std::string,std::string> r;for(auto&x:lista(s)){std::string c,v;if(condicion(x,c,v))r[c]=v;}return r;}
 static void imprimir(const std::map<std::string,std::string>& r){for(auto const&[k,v]:r)std::cout<<k<<"="<<v<<"  ";std::cout<<"\n";}
+static std::string configJuntoAlEjecutable(const char* ejecutable) {
+#ifdef _WIN32
+    (void)ejecutable;
+    std::wstring ruta(32768, L'\0');
+    const DWORD longitud = GetModuleFileNameW(nullptr, ruta.data(), static_cast<DWORD>(ruta.size()));
+    if (longitud == 0 || longitud >= ruta.size()) throw std::runtime_error("No se pudo determinar la ruta del ejecutable.");
+    ruta.resize(longitud);
+    const std::size_t separador = ruta.find_last_of(L"/\\");
+    ruta = (separador == std::wstring::npos ? std::wstring{} : ruta.substr(0, separador + 1)) + L"config.json";
+    const int bytes = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, ruta.data(), static_cast<int>(ruta.size()), nullptr, 0, nullptr, nullptr);
+    if (bytes == 0) throw std::runtime_error("No se pudo convertir la ruta del ejecutable a UTF-8.");
+    std::string utf8(static_cast<std::size_t>(bytes), '\0');
+    if (WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, ruta.data(), static_cast<int>(ruta.size()), utf8.data(), bytes, nullptr, nullptr) != bytes) {
+        throw std::runtime_error("No se pudo convertir la ruta del ejecutable a UTF-8.");
+    }
+    return utf8;
+#else
+    const std::string ruta = ejecutable ? ejecutable : "";
+    const std::size_t separador = ruta.find_last_of("/\\");
+    return separador == std::string::npos ? "config.json" : ruta.substr(0, separador + 1) + "config.json";
+#endif
+}
 static void ayuda(){std::cout<<R"(
 Comandos DDL:
   CREAR BASE nombre
@@ -75,8 +104,8 @@ Compatibilidad con comandos anteriores:
 )";}
 int main(int argc,char**argv){
  try{
-  std::string cfg=argc>1?argv[1]:"config.json"; JocarsaBBDD db(cfg); std::cout<<"JocarsaBBDD C++ - terminal\n"; ayuda(); std::string linea;
-  while(std::cout<<(db.basededatos.empty()?"jocarsa> ":("jocarsa["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
+  std::string cfg=argc>1?argv[1]:configJuntoAlEjecutable(argv[0]); AndreiBBDD db(cfg); std::cout<<"AndreiBBDD C++ - terminal\n"; ayuda(); std::string linea;
+  while(std::cout<<(db.basededatos.empty()?"andrei> ":("andrei["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
    linea=trim(linea);if(linea.empty())continue;std::istringstream ss(linea);std::string a,b,c;ss>>a;auto A=mayus(a);
    if(A=="SALIR")break;if(A=="AYUDA"){ayuda();continue;}
    if(A=="INICIAR"){ss>>b;std::cout<<((mayus(b)=="TRANSACCION"&&db.iniciarTransaccion())?"OK TRANSACCION INICIADA\n":"ERROR\n");continue;}

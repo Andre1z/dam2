@@ -4,30 +4,30 @@ PYTHON=python3
 PY_INCLUDES=$(shell $(PYTHON)-config --includes)
 PY_SUFFIX=$(shell $(PYTHON)-config --extension-suffix)
 PY_PLATLIB=$(shell $(PYTHON) -c "import sysconfig; print(sysconfig.get_path('platlib'))")
-MODULE=jocarsabbdd$(PY_SUFFIX)
+MODULE=andreibbdd$(PY_SUFFIX)
 
-all: jocarsabbdd $(MODULE)
+all: andreibbdd $(MODULE)
 
-jocarsabbdd: main.cpp JocarsaBBDD.cpp JocarsaBBDD.hpp
-	$(CXX) $(CXXFLAGS) main.cpp JocarsaBBDD.cpp -o jocarsabbdd
+andreibbdd: main.cpp AndreiBBDD.cpp AndreiBBDD.hpp
+	$(CXX) $(CXXFLAGS) main.cpp AndreiBBDD.cpp -o andreibbdd
 
-$(MODULE): conector_python.cpp JocarsaBBDD.cpp JocarsaBBDD.hpp
-	$(CXX) $(CXXFLAGS) -shared $(PY_INCLUDES) conector_python.cpp JocarsaBBDD.cpp -o $(MODULE)
+$(MODULE): conector_python.cpp AndreiBBDD.cpp AndreiBBDD.hpp
+	$(CXX) $(CXXFLAGS) -shared $(PY_INCLUDES) conector_python.cpp AndreiBBDD.cpp -o $(MODULE)
 
 install: all
-	install -d /etc/jocarsabbdd
-	install -m 644 config.json /etc/jocarsabbdd/config.json
-	install -d /var/jocarsa-basededatos
-	@if [ -n "$$SUDO_USER" ]; then chown $$SUDO_USER:$$SUDO_USER /var/jocarsa-basededatos; fi
-	install -m 755 jocarsabbdd /usr/local/bin/jocarsabbdd
+	install -d /etc/andreibbdd
+	install -m 644 config.json /etc/andreibbdd/config.json
+	install -d /var/andrei-basededatos
+	@if [ -n "$$SUDO_USER" ]; then chown $$SUDO_USER:$$SUDO_USER /var/andrei-basededatos; fi
+	install -m 755 andreibbdd /usr/local/bin/andreibbdd
 	install -m 755 $(MODULE) $(PY_PLATLIB)/$(MODULE)
-	@echo "Instalado. Prueba: cd /tmp && python3 -c 'import jocarsabbdd; print(jocarsabbdd.configuracion())'"
+	@echo "Instalado. Prueba: cd /tmp && python3 -c 'import andreibbdd; print(andreibbdd.configuracion())'"
 
 uninstall:
-	rm -f /usr/local/bin/jocarsabbdd
-	rm -f $(PY_PLATLIB)/jocarsabbdd*.so
-	rm -rf /etc/jocarsabbdd
-	@echo "Datos conservados en /var/jocarsa-basededatos"
+	rm -f /usr/local/bin/andreibbdd
+	rm -f $(PY_PLATLIB)/andreibbdd*.so
+	rm -rf /etc/andreibbdd
+	@echo "Datos conservados en /var/andrei-basededatos"
 
 clean:
-	rm -f jocarsabbdd jocarsabbdd*.so
+	rm -f andreibbdd andreibbdd*.so jocarsabbdd jocarsabbdd*.so

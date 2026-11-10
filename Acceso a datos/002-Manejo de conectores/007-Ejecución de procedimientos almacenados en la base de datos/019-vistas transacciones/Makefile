@@ -4,28 +4,29 @@ PYTHON := python3
 PY_INCLUDES := $(shell $(PYTHON)-config --includes)
 PY_EXT := $(shell $(PYTHON)-config --extension-suffix)
 PREFIX ?= /usr/local
+DATA_DIR ?= /var/andrei-basededatos
 PY_SITE := $(shell $(PYTHON) -c "import sysconfig; print(sysconfig.get_paths()['platlib'])")
 
-all: jocarsabbdd jocarsabbdd$(PY_EXT)
+all: andreibbdd andreibbdd$(PY_EXT)
 
-jocarsabbdd: main.cpp JocarsaBBDD.cpp JocarsaBBDD.hpp
-	$(CXX) $(CXXFLAGS) main.cpp JocarsaBBDD.cpp -o $@
+andreibbdd: main.cpp AndreiBBDD.cpp AndreiBBDD.hpp
+	$(CXX) $(CXXFLAGS) main.cpp AndreiBBDD.cpp -o $@
 
-jocarsabbdd$(PY_EXT): conector_python.cpp JocarsaBBDD.cpp JocarsaBBDD.hpp
-	$(CXX) $(CXXFLAGS) -shared $(PY_INCLUDES) conector_python.cpp JocarsaBBDD.cpp -o $@
+andreibbdd$(PY_EXT): conector_python.cpp AndreiBBDD.cpp AndreiBBDD.hpp
+	$(CXX) $(CXXFLAGS) -shared $(PY_INCLUDES) conector_python.cpp AndreiBBDD.cpp -o $@
 
 install: all
-	install -Dm755 jocarsabbdd $(PREFIX)/bin/jocarsabbdd
-	install -Dm755 jocarsabbdd$(PY_EXT) $(PY_SITE)/jocarsabbdd$(PY_EXT)
-	install -d /etc/jocarsabbdd
-	@test -f /etc/jocarsabbdd/config.json || install -m644 config.json /etc/jocarsabbdd/config.json
-	install -d /var/jocarsa-basededatos
+	install -Dm755 andreibbdd $(PREFIX)/bin/andreibbdd
+	install -Dm755 andreibbdd$(PY_EXT) $(PY_SITE)/andreibbdd$(PY_EXT)
+	install -d /etc/andreibbdd
+	@test -f /etc/andreibbdd/config.json || sed 's|"instalacion": "andrei-basededatos"|"instalacion": "$(DATA_DIR)"|' config.json > /etc/andreibbdd/config.json
+	install -d "$(DATA_DIR)"
 
 uninstall:
-	rm -f $(PREFIX)/bin/jocarsabbdd
-	rm -f $(PY_SITE)/jocarsabbdd*.so
+	rm -f $(PREFIX)/bin/andreibbdd
+	rm -f $(PY_SITE)/andreibbdd*.so
 
 clean:
-	rm -f jocarsabbdd jocarsabbdd*.so *.o
+	rm -f andreibbdd andreibbdd.exe andreibbdd*.so jocarsabbdd jocarsabbdd.exe jocarsabbdd*.so *.o
 
 .PHONY: all install uninstall clean

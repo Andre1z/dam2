@@ -1,4 +1,4 @@
-# Jocarsa BBDD C++ + conector Python
+# Andrei BBDD C++ + conector Python
 
 Motor de base de datos en C++20 con ejecutable de terminal y módulo nativo para Python 3.
 
@@ -18,8 +18,8 @@ make
 
 Se generan:
 
-- `jocarsabbdd`: cliente de terminal.
-- `jocarsabbdd.cpython-312-...so`: módulo nativo de Python (el sufijo depende de tu Python).
+- `andreibbdd`: cliente de terminal.
+- `andreibbdd.cpython-312-...so`: módulo nativo de Python (el sufijo depende de tu Python).
 
 ## 3. Instalar a nivel de sistema
 
@@ -29,10 +29,10 @@ sudo make install
 
 Instala:
 
-- `/usr/local/bin/jocarsabbdd`
-- `/usr/local/lib/python3.12/dist-packages/jocarsabbdd....so` (ruta detectada automáticamente)
-- `/etc/jocarsabbdd/config.json`
-- datos en `/var/jocarsa-basededatos/`
+- `/usr/local/bin/andreibbdd`
+- `/usr/local/lib/python3.12/dist-packages/andreibbdd....so` (ruta detectada automáticamente)
+- `/etc/andreibbdd/config.json`
+- datos en `/var/andrei-basededatos/`
 
 El instalador asigna la carpeta de datos al usuario que ejecutó `sudo make install`, para que pueda crear bases sin ejecutar Python como root.
 
@@ -40,8 +40,8 @@ El instalador asigna la carpeta de datos al usuario que ejecutó `sudo make inst
 
 ```bash
 cd /tmp
-python3 -c "import jocarsabbdd; print(jocarsabbdd.__file__)"
-python3 -c "import jocarsabbdd; print(jocarsabbdd.configuracion())"
+python3 -c "import andreibbdd; print(andreibbdd.__file__)"
+python3 -c "import andreibbdd; print(andreibbdd.configuracion())"
 ```
 
 El `import` ya no construye el motor inmediatamente. El motor se crea en la primera operación y cualquier excepción C++ se transforma en `RuntimeError` de Python, en lugar de abortar el intérprete.
@@ -49,29 +49,29 @@ El `import` ya no construye el motor inmediatamente. El motor se crea en la prim
 ## 5. Uso desde Python
 
 ```python
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.crear_base("empresa")
-jocarsabbdd.usar_base("empresa")
-jocarsabbdd.crear_tabla("clientes", "nombre,apellidos,email")
+andreibbdd.crear_base("empresa")
+andreibbdd.usar_base("empresa")
+andreibbdd.crear_tabla("clientes", "nombre,apellidos,email")
 
-id_cliente = jocarsabbdd.insertar(
+id_cliente = andreibbdd.insertar(
     "clientes",
     ["Ana", "Garcia", "ana@empresa.com"]
 )
 
 print(id_cliente)
-print(jocarsabbdd.seleccionar("clientes", id_cliente))
-print(jocarsabbdd.listar("clientes"))
-print(jocarsabbdd.buscar("clientes", "nombre", "Ana"))
+print(andreibbdd.seleccionar("clientes", id_cliente))
+print(andreibbdd.listar("clientes"))
+print(andreibbdd.buscar("clientes", "nombre", "Ana"))
 
-jocarsabbdd.actualizar(
+andreibbdd.actualizar(
     "clientes",
     id_cliente,
     ["Ana", "Garcia", "nuevo@empresa.com"]
 )
 
-jocarsabbdd.eliminar("clientes", id_cliente)
+andreibbdd.eliminar("clientes", id_cliente)
 ```
 
 Funciones disponibles:
@@ -94,7 +94,7 @@ configuracion()
 Tras instalar:
 
 ```bash
-jocarsabbdd
+andreibbdd
 ```
 
 Comandos principales:
@@ -117,14 +117,14 @@ SALIR
 Configuración global:
 
 ```text
-/etc/jocarsabbdd/config.json
+/etc/andreibbdd/config.json
 ```
 
 Contenido por defecto:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "/var/andrei-basededatos/",
   "tamanoRegistro": 512
 }
 ```
@@ -132,13 +132,13 @@ Contenido por defecto:
 Orden de búsqueda de configuración:
 
 1. `config.json` del directorio actual (útil durante desarrollo).
-2. Variable de entorno `JOCARSABBDD_CONFIG` si apunta a un archivo existente.
-3. `/etc/jocarsabbdd/config.json`.
+2. Variable de entorno `ANDREIBBDD_CONFIG` si apunta a un archivo existente.
+3. `/etc/andreibbdd/config.json`.
 
 Ejemplo con configuración personalizada:
 
 ```bash
-export JOCARSABBDD_CONFIG=/home/josevicente/mi-config.json
+export ANDREIBBDD_CONFIG=/home/andrei/mi-config.json
 python3 programa.py
 ```
 
@@ -154,7 +154,7 @@ Comprueba desde fuera del proyecto:
 
 ```bash
 cd /tmp
-python3 -c "import jocarsabbdd; print(jocarsabbdd.configuracion())"
+python3 -c "import andreibbdd; print(andreibbdd.configuracion())"
 ```
 
 ## 9. Desinstalar
@@ -163,14 +163,14 @@ python3 -c "import jocarsabbdd; print(jocarsabbdd.configuracion())"
 sudo make uninstall
 ```
 
-La desinstalación conserva deliberadamente `/var/jocarsa-basededatos` para no borrar bases de datos.
+La desinstalación conserva deliberadamente `/var/andrei-basededatos` para no borrar bases de datos.
 
 ## 10. Instrucciones DDL adicionales en español
 
 El terminal incorpora estas equivalencias:
 
 ```text
-SQL                                      JocarsaBBDD
+SQL                                      AndreiBBDD
 ALTER TABLE clientes ADD telefono        ALTERAR TABLA clientes ANADIR telefono
 ALTER TABLE clientes DROP COLUMN telefono ALTERAR TABLA clientes ELIMINAR COLUMNA telefono
 ALTER TABLE clientes RENAME COLUMN a TO b ALTERAR TABLA clientes RENOMBRAR COLUMNA a b
@@ -185,13 +185,13 @@ DROP DATABASE empresa                     ELIMINAR BASE empresa
 Desde Python están disponibles además:
 
 ```python
-jocarsabbdd.alterar_anadir("clientes", "telefono")
-jocarsabbdd.alterar_eliminar_columna("clientes", "telefono")
-jocarsabbdd.alterar_renombrar_columna("clientes", "email", "correo")
-jocarsabbdd.alterar_modificar_columna("clientes", "correo", "email")
-jocarsabbdd.truncar_tabla("clientes")
-jocarsabbdd.eliminar_tabla("clientes")
-jocarsabbdd.eliminar_base("empresa")
+andreibbdd.alterar_anadir("clientes", "telefono")
+andreibbdd.alterar_eliminar_columna("clientes", "telefono")
+andreibbdd.alterar_renombrar_columna("clientes", "email", "correo")
+andreibbdd.alterar_modificar_columna("clientes", "correo", "email")
+andreibbdd.truncar_tabla("clientes")
+andreibbdd.eliminar_tabla("clientes")
+andreibbdd.eliminar_base("empresa")
 ```
 
 ## DML v0.3 - INSERTAR, ACTUALIZAR y ELIMINAR
@@ -217,16 +217,16 @@ ELIMINAR DE clientes DONDE id='1'
 ### Python
 
 ```python
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.usar_base("empresa")
-jocarsabbdd.insertar("clientes", ["Ana", "30"])
-jocarsabbdd.insertar_columnas("clientes", ["nombre"], ["Luis"])
-jocarsabbdd.insertar_desde("copia", "clientes")
-jocarsabbdd.actualizar_donde("clientes", {"edad": "31"}, "nombre", "Ana")
-jocarsabbdd.eliminar_donde("clientes", "nombre", "Luis")
+andreibbdd.usar_base("empresa")
+andreibbdd.insertar("clientes", ["Ana", "30"])
+andreibbdd.insertar_columnas("clientes", ["nombre"], ["Luis"])
+andreibbdd.insertar_desde("copia", "clientes")
+andreibbdd.actualizar_donde("clientes", {"edad": "31"}, "nombre", "Ana")
+andreibbdd.eliminar_donde("clientes", "nombre", "Luis")
 # Sin condición elimina lógicamente todos los registros:
-jocarsabbdd.eliminar_donde("clientes")
+andreibbdd.eliminar_donde("clientes")
 ```
 
 ### Actualizar una instalación anterior
@@ -237,7 +237,7 @@ make -j$(nproc)
 sudo make install
 ```
 
-`make install` sobrescribe el ejecutable y el módulo Python instalados, manteniendo las bases de datos de `/var/jocarsa-basededatos`.
+`make install` sobrescribe el ejecutable y el módulo Python instalados, manteniendo las bases de datos de `/var/andrei-basededatos`.
 
 ## DQL - consultas (version actual)
 
@@ -268,8 +268,8 @@ Los operadores logicos respetan precedencia: `NO`, despues `Y`, despues `O`. Se 
 Desde Python se puede ejecutar la misma consulta:
 
 ```python
-import jocarsabbdd
-jocarsabbdd.usar_base("empresa")
-filas = jocarsabbdd.consultar("SELECCIONAR nombre,edad DE clientes DONDE edad >= 18 ORDENAR POR edad DESCENDENTE LIMITE 10")
+import andreibbdd
+andreibbdd.usar_base("empresa")
+filas = andreibbdd.consultar("SELECCIONAR nombre,edad DE clientes DONDE edad >= 18 ORDENAR POR edad DESCENDENTE LIMITE 10")
 print(filas)
 ```

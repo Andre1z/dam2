@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")"
-echo "[JocarsaBBDD] make clean"
+echo "[AndreiBBDD] make clean"
 make clean

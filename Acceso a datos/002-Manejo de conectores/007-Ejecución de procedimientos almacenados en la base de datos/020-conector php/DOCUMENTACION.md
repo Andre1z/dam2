@@ -1,8 +1,8 @@
-# JocarsaBBDD — documentación completa
+# AndreiBBDD — documentación completa
 
 ## 1. Descripción
 
-JocarsaBBDD es un SGBD didáctico escrito en C++20. Incluye un intérprete de comandos en terminal y un conector nativo para Python. Su objetivo es mostrar de forma transparente cómo pueden construirse las piezas fundamentales de un gestor de bases de datos: almacenamiento físico, esquema, índices, CRUD, consultas, integridad referencial, JOIN y agregaciones.
+AndreiBBDD es un SGBD didáctico escrito en C++20. Incluye un intérprete de comandos en terminal y conectores nativos para Python y PHP. Su objetivo es mostrar de forma transparente cómo pueden construirse las piezas fundamentales de un gestor de bases de datos: almacenamiento físico, esquema, índices, CRUD, consultas, integridad referencial, JOIN y agregaciones.
 
 Esta versión incorpora:
 
@@ -26,10 +26,12 @@ Esta versión incorpora:
 
 ## 2. Archivos del proyecto
 
-- `JocarsaBBDD.hpp`: interfaz pública del motor.
-- `JocarsaBBDD.cpp`: implementación del almacenamiento, restricciones y DQL.
+- `AndreiBBDD.hpp`: interfaz pública del motor.
+- `AndreiBBDD.cpp`: implementación del almacenamiento, restricciones y DQL.
 - `main.cpp`: terminal interactiva y parser de comandos DDL/DML.
 - `conector_python.cpp`: extensión nativa CPython.
+- `conector_php.cpp`: extensión nativa PHP.
+- `compilar.bat`: compilación del terminal para Windows 11.
 - `Makefile`: compilación e instalación.
 - `config.json`: configuración del directorio de datos y tamaño de registro.
 - `PRUEBA_PK_FK_JOIN.txt`: prueba del hito relacional.
@@ -38,6 +40,12 @@ Esta versión incorpora:
 ---
 
 ## 3. Compilación
+
+### Windows 11 (terminal C++)
+
+Instala GCC con soporte para C++20 (por ejemplo, WinLibs) y asegúrate de que `g++` esté en `PATH`. Ejecuta `compilar.bat` desde esta carpeta; genera `AndreiBBDD.exe` aquí mismo. El terminal carga `config.json` junto al ejecutable aunque se inicie desde otro directorio.
+
+La extensión PHP se compila por separado en Linux con `compilar_php.sh` y las cabeceras correspondientes a la versión y ABI de PHP instalada. El script no compila extensiones PHP para Windows.
 
 Dependencias habituales en Ubuntu/Debian:
 
@@ -62,13 +70,13 @@ sudo make install
 Ejecutar:
 
 ```bash
-jocarsabbdd
+andreibbdd
 ```
 
 También puede ejecutarse el binario local:
 
 ```bash
-./jocarsabbdd
+./andreibbdd
 ```
 
 ---
@@ -79,14 +87,14 @@ Ejemplo de `config.json`:
 
 ```json
 {
-  "instalacion": "/var/jocarsa-basededatos/",
+  "instalacion": "andrei-basededatos",
   "tamanoRegistro": 512
 }
 ```
 
-`instalacion` indica dónde se guardan las bases. `tamanoRegistro` define el tamaño físico fijo de cada registro.
+`instalacion` indica dónde se guardan las bases. Si es relativa, se resuelve desde la carpeta de `config.json`. `tamanoRegistro` define el tamaño físico fijo de cada registro.
 
-La configuración se busca en la ruta indicada al constructor/ejecutable, en `JOCARSABBDD_CONFIG` y finalmente en `/etc/jocarsabbdd/config.json`.
+La configuración se busca junto al ejecutable (o en la ruta indicada al constructor), en `ANDREIBBDD_CONFIG` y finalmente en `/etc/andreibbdd/config.json`. En Linux, `make install` instala la configuración global con la ruta absoluta `/var/andrei-basededatos/`.
 
 ---
 
@@ -614,11 +622,11 @@ Ana  | 2 | 195
 Ejemplo:
 
 ```python
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.usar_base("comercio_demo")
+andreibbdd.usar_base("comercio_demo")
 
-filas = jocarsabbdd.consultar(
+filas = andreibbdd.consultar(
     "SELECCIONAR clientes.nombre COMO cliente,"
     "CONTAR(pedidos.id) COMO pedidos,"
     "SUMA(pedidos.total) COMO facturacion "
@@ -836,9 +844,9 @@ El orden de validación de una escritura es:
 Las consultas `LEFT JOIN` se ejecutan mediante la misma función DQL:
 
 ```python
-import jocarsabbdd
-jocarsabbdd.usar_base("comercio")
-filas = jocarsabbdd.consultar(
+import andreibbdd
+andreibbdd.usar_base("comercio")
+filas = andreibbdd.consultar(
     "SELECCIONAR clientes.nombre,pedidos.total "
     "DE clientes LEFT JOIN pedidos "
     "EN clientes.id = pedidos.id_cliente"
@@ -849,9 +857,9 @@ print(filas)
 Las nuevas restricciones también están expuestas directamente:
 
 ```python
-jocarsabbdd.establecer_no_nulo("clientes", "email")
-jocarsabbdd.establecer_unico("clientes", "email")
-jocarsabbdd.establecer_por_defecto("clientes", "ciudad", "Valencia")
+andreibbdd.establecer_no_nulo("clientes", "email")
+andreibbdd.establecer_unico("clientes", "email")
+andreibbdd.establecer_por_defecto("clientes", "ciudad", "Valencia")
 ```
 
 # Scripts de construcción e instalación
@@ -935,7 +943,7 @@ Luis            |
 
 ## 1. Transacciones
 
-JocarsaBBDD incorpora transacciones explícitas:
+AndreiBBDD incorpora transacciones explícitas:
 
 ```text
 INICIAR TRANSACCION
@@ -958,7 +966,7 @@ Esta primera implementación utiliza un **snapshot físico de la base activa**. 
 
 Es una implementación deliberadamente pedagógica y fácil de inspeccionar. Proporciona atomicidad para una única instancia del motor, pero todavía **no es un WAL**, no implementa MVCC, niveles de aislamiento ni control de concurrencia entre procesos. Esos conceptos quedan como evolución posterior.
 
-Solo puede existir una transacción activa por instancia de `JocarsaBBDD`.
+Solo puede existir una transacción activa por instancia de `AndreiBBDD`.
 
 ## 2. Subconsultas
 
@@ -1120,9 +1128,9 @@ DONDE total > (
 Además de `consultar()`, que automáticamente entiende subconsultas y vistas:
 
 ```python
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.crear_tabla_tipada(
+andreibbdd.crear_tabla_tipada(
     "productos",
     {
         "nombre": "TEXTO",
@@ -1132,23 +1140,23 @@ jocarsabbdd.crear_tabla_tipada(
     }
 )
 
-print(jocarsabbdd.tipos("productos"))
+print(andreibbdd.tipos("productos"))
 
-jocarsabbdd.crear_vista(
+andreibbdd.crear_vista(
     "caros",
     "SELECCIONAR nombre,precio DE productos DONDE precio > 100"
 )
 
-print(jocarsabbdd.listar_vistas())
-print(jocarsabbdd.consultar("SELECCIONAR * DE caros"))
+print(andreibbdd.listar_vistas())
+print(andreibbdd.consultar("SELECCIONAR * DE caros"))
 
-jocarsabbdd.iniciar_transaccion()
+andreibbdd.iniciar_transaccion()
 # operaciones...
-jocarsabbdd.confirmar()
+andreibbdd.confirmar()
 
-jocarsabbdd.iniciar_transaccion()
+andreibbdd.iniciar_transaccion()
 # operaciones...
-jocarsabbdd.deshacer()
+andreibbdd.deshacer()
 ```
 
 ## 7. Scripts de compilación e instalación
@@ -1207,7 +1215,7 @@ Con esta versión ya tiene sentido abordar:
 
 # Conector nativo PHP
 
-Además del conector Python, el proyecto incluye `conector_php.cpp`, una extensión nativa PHP que enlaza directamente el mismo motor `JocarsaBBDD.cpp`.
+Además del conector Python, el proyecto incluye `conector_php.cpp`, una extensión nativa PHP que enlaza directamente el mismo motor `AndreiBBDD.cpp`.
 
 ## Compilación
 
@@ -1223,7 +1231,7 @@ El script usa `php-config --includes` y `php-config --extension-dir`, por lo que
 Para probar sin instalar globalmente:
 
 ```bash
-php -d extension=./jocarsabbdd.so demo_php.php
+php -d extension=./andreibbdd.so demo_php.php
 ```
 
 Instalación opcional:
@@ -1235,17 +1243,17 @@ Instalación opcional:
 ## API PHP principal
 
 ```php
-jocarsabbdd_configurar('/ruta/config.json');
-jocarsabbdd_crear_base('empresa');
-jocarsabbdd_usar_base('empresa');
-jocarsabbdd_crear_tabla('clientes', 'nombre,email');
-jocarsabbdd_crear_tabla_tipada('productos', [
+andreibbdd_configurar('/ruta/config.json');
+andreibbdd_crear_base('empresa');
+andreibbdd_usar_base('empresa');
+andreibbdd_crear_tabla('clientes', 'nombre,email');
+andreibbdd_crear_tabla_tipada('productos', [
     'nombre' => 'TEXTO',
     'stock' => 'ENTERO',
     'precio' => 'REAL',
 ]);
-$id = jocarsabbdd_insertar('productos', ['Teclado', '10', '25.5']);
-$filas = jocarsabbdd_consultar('SELECCIONAR * DE productos');
+$id = andreibbdd_insertar('productos', ['Teclado', '10', '25.5']);
+$filas = andreibbdd_consultar('SELECCIONAR * DE productos');
 ```
 
 También se exponen actualización y eliminación condicional, claves foráneas, restricciones `NO NULO`, `UNICO` y `POR DEFECTO`, vistas y transacciones.
@@ -1253,16 +1261,16 @@ También se exponen actualización y eliminación condicional, claves foráneas,
 ## Transacciones desde PHP
 
 ```php
-jocarsabbdd_iniciar_transaccion();
-jocarsabbdd_insertar('productos', ['Temporal', '1', '5']);
+andreibbdd_iniciar_transaccion();
+andreibbdd_insertar('productos', ['Temporal', '1', '5']);
 
 // Confirmar:
-jocarsabbdd_confirmar();
+andreibbdd_confirmar();
 
 // O, en otra transacción, cancelar:
-jocarsabbdd_iniciar_transaccion();
-jocarsabbdd_eliminar_donde('productos', 'id', '1');
-jocarsabbdd_deshacer();
+andreibbdd_iniciar_transaccion();
+andreibbdd_eliminar_donde('productos', 'id', '1');
+andreibbdd_deshacer();
 ```
 
 ## Documentación ejecutable

@@ -1,9 +1,17 @@
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
 #include <map>
 #include <sstream>
+
+static std::string configJuntoAlEjecutable(const char* ejecutable) {
+    const std::string ruta = ejecutable ? ejecutable : "";
+    const std::size_t separador = ruta.find_last_of("/\\");
+    return separador == std::string::npos
+        ? "config.json"
+        : ruta.substr(0, separador + 1) + "config.json";
+}
 
 static std::string trim(std::string s){while(!s.empty()&&std::isspace((unsigned char)s.front()))s.erase(s.begin());while(!s.empty()&&std::isspace((unsigned char)s.back()))s.pop_back();return s;}
 static std::string mayus(std::string s){std::transform(s.begin(),s.end(),s.begin(),[](unsigned char c){return std::toupper(c);});return s;}
@@ -53,8 +61,8 @@ Compatibilidad con comandos anteriores:
 )";}
 int main(int argc,char**argv){
  try{
-  std::string cfg=argc>1?argv[1]:"config.json"; JocarsaBBDD db(cfg); std::cout<<"JocarsaBBDD C++ - terminal\n"; ayuda(); std::string linea;
-  while(std::cout<<(db.basededatos.empty()?"jocarsa> ":("jocarsa["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
+  std::string cfg=argc>1?argv[1]:configJuntoAlEjecutable(argc>0?argv[0]:nullptr); AndreiBBDD db(cfg); std::cout<<"AndreiBBDD C++ - terminal\n"; ayuda(); std::string linea;
+  while(std::cout<<(db.basededatos.empty()?"andrei> ":("andrei["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
    linea=trim(linea);if(linea.empty())continue;std::istringstream ss(linea);std::string a,b,c;ss>>a;auto A=mayus(a);
    if(A=="SALIR")break;if(A=="AYUDA"){ayuda();continue;}
    if(A=="CREAR"){ss>>b;if(mayus(b)=="BASE"){ss>>c;std::cout<<(db.creaBaseDatos(c)?"OK\n":"ERROR\n");}else if(mayus(b)=="TABLA"){ss>>c;std::string e;std::getline(ss,e);std::cout<<(db.creaTabla(c,trim(e))?"OK\n":"ERROR\n");}continue;}
