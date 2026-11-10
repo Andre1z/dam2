@@ -1,9 +1,9 @@
-Datetime: 2026-10-22T11:08:19.830Z
+Datetime: 2026-10-22T11:08:22.076Z
 Working directory: /var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL
-Command: ./jocarsa
+Command: ./andrei
 
 Result:
-ID: 2
+ID: 3
 {
     "activo": true,
     "direccion": {
@@ -14,7 +14,7 @@ ID: 2
     "experiencia": [
         {
             "años": 3,
-            "empresa": "Jocarsa"
+            "empresa": "Andrei"
         },
         {
             "años": 2,
@@ -39,7 +39,7 @@ ID: 2
         "experiencia": [
             {
                 "años": 3,
-                "empresa": "Jocarsa"
+                "empresa": "Andrei"
             },
             {
                 "años": 2,
@@ -63,7 +63,31 @@ ID: 2
         "experiencia": [
             {
                 "años": 3,
-                "empresa": "Jocarsa"
+                "empresa": "Andrei"
+            },
+            {
+                "años": 2,
+                "empresa": "Empresa B"
+            }
+        ],
+        "habilidades": [
+            "Python",
+            "C++",
+            "SQL"
+        ],
+        "nombre": "Ana García"
+    },
+    {
+        "activo": false,
+        "direccion": {
+            "ciudad": "Valencia",
+            "pais": "España"
+        },
+        "edad": 29,
+        "experiencia": [
+            {
+                "años": 3,
+                "empresa": "Andrei"
             },
             {
                 "años": 2,
@@ -78,6 +102,6 @@ ID: 2
         "nombre": "Ana García"
     }
 ]
-Total: 2
+Total: 3
 ERROR: No existe la carpeta: curriculums
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL$ 
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL$ 

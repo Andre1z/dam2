@@ -5,14 +5,15 @@
 #include <vector>
 #include <cstdint>
 #include <functional>
+#include <utility>
 
-class JocarsaORM {
+class AndreiORM {
 public:
     using json = nlohmann::json;
-    explicit JocarsaORM(const std::string& ruta);
-    ~JocarsaORM();
-    JocarsaORM(const JocarsaORM&) = delete;
-    JocarsaORM& operator=(const JocarsaORM&) = delete;
+    explicit AndreiORM(const std::string& ruta);
+    ~AndreiORM();
+    AndreiORM(const AndreiORM&) = delete;
+    AndreiORM& operator=(const AndreiORM&) = delete;
     int64_t guardar(const std::string& coleccion, const json& dato);
     json obtener(const std::string& coleccion, int64_t id);
     json todos(const std::string& coleccion);
@@ -25,6 +26,8 @@ public:
 private:
     sqlite3* db_ = nullptr;
     void ejecutar(const std::string& sql);
+    bool tablaExiste(const std::string& nombre);
+    void migrarTablas();
     void insertarNodo(int64_t registro, const json& dato, int64_t padre = 0, const std::string& clave = "", int64_t posicion = -1);
     json reconstruirNodo(int64_t nodo);
     bool existe(const std::string& coleccion, int64_t id);

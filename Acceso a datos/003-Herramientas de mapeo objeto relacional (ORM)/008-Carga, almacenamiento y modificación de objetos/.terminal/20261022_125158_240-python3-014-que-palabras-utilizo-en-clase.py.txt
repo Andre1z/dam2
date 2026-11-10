@@ -105,5 +105,5 @@ sino                      834
 veréis                    810
 mucho                     796
 mirad                     782
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a 
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a 
 datos/003-Herramientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

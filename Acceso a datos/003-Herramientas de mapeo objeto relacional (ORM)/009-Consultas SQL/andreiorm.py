@@ -4,12 +4,41 @@ import json
 from pathlib import Path
 
 
-class JocarsaORM:
+class AndreiORM:
 
-    def __init__(self, base_datos="jocarsa.db"):
+    def __init__(self, base_datos="andrei.db"):
         self.conexion = sqlite3.connect(base_datos)
         self.conexion.row_factory = sqlite3.Row
         self.conexion.execute("PRAGMA foreign_keys = ON")
+        self._migrar_metadatos()
+
+    def _migrar_metadatos(self):
+        tablas = self.conexion.execute(
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+        ).fetchall()
+        with self.conexion:
+            for fila in tablas:
+                tabla = fila["name"]
+                columnas = self._columnas(tabla)
+                for antigua, nueva in (
+                    ("__jocarsa_tipo", "__andrei_tipo"),
+                    ("__jocarsa_padre", "__andrei_padre"),
+                    ("__jocarsa_posicion", "__andrei_posicion"),
+                ):
+                    if antigua in columnas and nueva in columnas:
+                        raise RuntimeError(
+                            f"Metadatos antiguos y nuevos en {tabla}: "
+                            f"{antigua}, {nueva}"
+                        )
+                    if antigua in columnas:
+                        self.conexion.execute(
+                            f"ALTER TABLE {self._id(tabla)} "
+                            f"RENAME COLUMN {self._id(antigua)} "
+                            f"TO {self._id(nueva)}"
+                        )
+                        columnas.remove(antigua)
+                        columnas.add(nueva)
 
     def _id(self, nombre):
         return '"' + str(nombre).replace('"', '""') + '"'
@@ -51,17 +80,17 @@ class JocarsaORM:
         columnas = self._columnas(tabla)
 
         necesarias = {
-            "__jocarsa_tipo": "TEXT"
+            "__andrei_tipo": "TEXT"
         }
 
         if padre:
-            necesarias["__jocarsa_padre"] = "INTEGER"
-            necesarias["__jocarsa_posicion"] = "INTEGER"
+            necesarias["__andrei_padre"] = "INTEGER"
+            necesarias["__andrei_posicion"] = "INTEGER"
 
         for clave, valor in campos.items():
-            if clave in ("id", "__jocarsa_tipo",
-                         "__jocarsa_padre",
-                         "__jocarsa_posicion"):
+            if clave in ("id", "__andrei_tipo",
+                         "__andrei_padre",
+                         "__andrei_posicion"):
                 raise ValueError(
                     f"Nombre de campo reservado: {clave}"
                 )
@@ -87,13 +116,13 @@ class JocarsaORM:
 
         self._preparar(tabla, campos, padre)
 
-        columnas = ["__jocarsa_tipo"]
+        columnas = ["__andrei_tipo"]
         valores = [tipo]
 
         if padre:
             columnas.extend([
-                "__jocarsa_padre",
-                "__jocarsa_posicion"
+                "__andrei_padre",
+                "__andrei_posicion"
             ])
             valores.extend([id_padre, posicion])
 
@@ -179,9 +208,9 @@ class JocarsaORM:
         datos = dict(fila)
         id_actual = datos.pop("id")
 
-        tipo = datos.pop("__jocarsa_tipo", "dict")
-        datos.pop("__jocarsa_padre", None)
-        datos.pop("__jocarsa_posicion", None)
+        tipo = datos.pop("__andrei_tipo", "dict")
+        datos.pop("__andrei_padre", None)
+        datos.pop("__andrei_posicion", None)
 
         resultado = {
             clave: self._decodificar(valor)
@@ -197,8 +226,8 @@ class JocarsaORM:
 
             filas = self.conexion.execute(
                 f"SELECT * FROM {self._id(hija)} "
-                'WHERE "__jocarsa_padre"=? '
-                'ORDER BY "__jocarsa_posicion", "id"',
+                'WHERE "__andrei_padre"=? '
+                'ORDER BY "__andrei_posicion", "id"',
                 (id_actual,)
             ).fetchall()
 
@@ -214,8 +243,8 @@ class JocarsaORM:
                 elementos = self.conexion.execute(
                     f"SELECT * FROM "
                     f"{self._id(elementos_tabla)} "
-                    'WHERE "__jocarsa_padre"=? '
-                    'ORDER BY "__jocarsa_posicion", "id"',
+                    'WHERE "__andrei_padre"=? '
+                    'ORDER BY "__andrei_posicion", "id"',
                     (primera["id"],)
                 ).fetchall()
 
@@ -264,7 +293,7 @@ class JocarsaORM:
         for clave, hija in self._hijas(tabla):
             filas = self.conexion.execute(
                 f"SELECT id FROM {self._id(hija)} "
-                'WHERE "__jocarsa_padre"=?',
+                'WHERE "__andrei_padre"=?',
                 (id,)
             ).fetchall()
 

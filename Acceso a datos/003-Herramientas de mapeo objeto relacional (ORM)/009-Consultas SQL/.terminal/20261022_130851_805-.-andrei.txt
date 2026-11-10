@@ -1,9 +1,9 @@
-Datetime: 2026-10-22T11:09:35.296Z
+Datetime: 2026-10-22T11:08:51.805Z
 Working directory: /var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL
-Command: ./jocarsa
+Command: ./andrei
 
 Result:
-ID: 1
+ID: 4
 {
     "activo": true,
     "direccion": {
@@ -14,7 +14,7 @@ ID: 1
     "experiencia": [
         {
             "años": 3,
-            "empresa": "Jocarsa"
+            "empresa": "Andrei"
         },
         {
             "años": 2,
@@ -39,7 +39,79 @@ ID: 1
         "experiencia": [
             {
                 "años": 3,
-                "empresa": "Jocarsa"
+                "empresa": "Andrei"
+            },
+            {
+                "años": 2,
+                "empresa": "Empresa B"
+            }
+        ],
+        "habilidades": [
+            "Python",
+            "C++",
+            "SQL"
+        ],
+        "nombre": "Ana García"
+    },
+    {
+        "activo": false,
+        "direccion": {
+            "ciudad": "Valencia",
+            "pais": "España"
+        },
+        "edad": 29,
+        "experiencia": [
+            {
+                "años": 3,
+                "empresa": "Andrei"
+            },
+            {
+                "años": 2,
+                "empresa": "Empresa B"
+            }
+        ],
+        "habilidades": [
+            "Python",
+            "C++",
+            "SQL"
+        ],
+        "nombre": "Ana García"
+    },
+    {
+        "activo": false,
+        "direccion": {
+            "ciudad": "Valencia",
+            "pais": "España"
+        },
+        "edad": 29,
+        "experiencia": [
+            {
+                "años": 3,
+                "empresa": "Andrei"
+            },
+            {
+                "años": 2,
+                "empresa": "Empresa B"
+            }
+        ],
+        "habilidades": [
+            "Python",
+            "C++",
+            "SQL"
+        ],
+        "nombre": "Ana García"
+    },
+    {
+        "activo": false,
+        "direccion": {
+            "ciudad": "Valencia",
+            "pais": "España"
+        },
+        "edad": 29,
+        "experiencia": [
+            {
+                "años": 3,
+                "empresa": "Andrei"
             },
             {
                 "años": 2,
@@ -54,7 +126,7 @@ ID: 1
         "nombre": "Ana García"
     }
 ]
-Total: 1
+Total: 4
 OK: curriculum_001.json
 OK: curriculum_002.json
 OK: curriculum_003.json
@@ -155,4 +227,4 @@ OK: curriculum_097.json
 OK: curriculum_098.json
 OK: curriculum_099.json
 OK: curriculum_100.json
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL$ 
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL$ 

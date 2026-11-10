@@ -1,6 +1,6 @@
-from jocarsaorm import JocarsaORM
+from andreiorm import AndreiORM
 
-orm = JocarsaORM("curriculums.db")
+orm = AndreiORM("curriculums.db")
 
 # Guardar un objeto
 id = orm.guardar("curriculum", {

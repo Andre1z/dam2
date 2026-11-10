@@ -22,5 +22,5 @@ Traceback (most recent call last):
   File "/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos/011-dimensiones.py", line 55, in <module>
     raise ValueError(
 ValueError: Se esperaban 256 dimensiones, pero se recibieron 0
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herr
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herr
 amientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

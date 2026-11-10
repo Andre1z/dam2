@@ -776,5 +776,5 @@ Result:
 /var/www/html/jocarsa-formacion/recursos/apuntes/ceac2627dam1/001-Bases de datos/004-Tratamiento de datos/002-Integridad referencial/2026-10-05_10-17-29.md
 /var/www/html/jocarsa-formacion/recursos/apuntes/ceac2627dam1/001-Bases de datos/004-Tratamiento de datos/001-Inserción, borrado y modificación de registros/2026-09-30_10-14-21.md
 /var/www/html/jocarsa-formacion/recursos/apuntes/ceac2627dam1/001-Bases de datos/004-Tratamiento de datos/005-Políticas de bloqueo. Concurrencia/2026-10-13_10-26-32.md
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-H
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-H
 erramientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

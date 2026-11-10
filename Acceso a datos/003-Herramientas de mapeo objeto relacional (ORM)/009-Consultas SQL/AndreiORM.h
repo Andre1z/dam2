@@ -1,6 +1,6 @@
 
-#ifndef JOCARSA_ORM_H
-#define JOCARSA_ORM_H
+#ifndef ANDREI_ORM_H
+#define ANDREI_ORM_H
 
 #include <sqlite3.h>
 #include <nlohmann/json.hpp>
@@ -12,12 +12,13 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace fs = std::filesystem;
 using json = nlohmann::json;
 
-class JocarsaORM {
+class AndreiORM {
 private:
     sqlite3* db = nullptr;
 
@@ -77,6 +78,47 @@ private:
         }
     };
 
+    bool tablaExiste(const std::string& nombre) {
+        Statement statement(
+            db,
+            "SELECT 1 FROM sqlite_master "
+            "WHERE type='table' AND name=?"
+        );
+        statement.texto(1, nombre);
+        return statement.paso() == SQLITE_ROW;
+    }
+
+    void migrarTablas() {
+        ejecutar("BEGIN IMMEDIATE");
+        try {
+            for (const auto& tablas : {
+                     std::pair{"jocarsa_registros", "andrei_registros"},
+                     std::pair{"jocarsa_nodos", "andrei_nodos"}}) {
+                const bool antigua = tablaExiste(tablas.first);
+                const bool nueva = tablaExiste(tablas.second);
+                if (antigua && nueva) {
+                    throw std::runtime_error(
+                        "Esquema Jocarsa y Andrei coexistente; "
+                        "resuelva la migración antes de abrir la base de datos"
+                    );
+                }
+                if (antigua) {
+                    ejecutar(
+                        "ALTER TABLE " + std::string(tablas.first) +
+                        " RENAME TO " + tablas.second
+                    );
+                }
+            }
+            ejecutar("DROP INDEX IF EXISTS idx_jocarsa_nodos_registro");
+            ejecutar("DROP INDEX IF EXISTS idx_jocarsa_nodos_padre");
+            ejecutar("DROP INDEX IF EXISTS idx_jocarsa_registros_coleccion");
+            ejecutar("COMMIT");
+        } catch (...) {
+            try { ejecutar("ROLLBACK"); } catch (...) {}
+            throw;
+        }
+    }
+
     void ejecutar(const std::string& sql) {
         char* error = nullptr;
         int rc = sqlite3_exec(
@@ -92,9 +134,10 @@ private:
 
     void iniciar() {
         ejecutar("PRAGMA foreign_keys=ON");
+        migrarTablas();
 
         ejecutar(R"SQL(
-            CREATE TABLE IF NOT EXISTS jocarsa_registros (
+            CREATE TABLE IF NOT EXISTS andrei_registros (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 coleccion TEXT NOT NULL,
                 UNIQUE(coleccion, id)
@@ -102,7 +145,7 @@ private:
         )SQL");
 
         ejecutar(R"SQL(
-            CREATE TABLE IF NOT EXISTS jocarsa_nodos (
+            CREATE TABLE IF NOT EXISTS andrei_nodos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 registro_id INTEGER NOT NULL,
                 padre_id INTEGER,
@@ -111,27 +154,27 @@ private:
                 tipo TEXT NOT NULL,
                 valor TEXT,
                 FOREIGN KEY(registro_id)
-                    REFERENCES jocarsa_registros(id)
+                    REFERENCES andrei_registros(id)
                     ON DELETE CASCADE,
                 FOREIGN KEY(padre_id)
-                    REFERENCES jocarsa_nodos(id)
+                    REFERENCES andrei_nodos(id)
                     ON DELETE CASCADE
             )
         )SQL");
 
         ejecutar(R"SQL(
-            CREATE INDEX IF NOT EXISTS idx_jocarsa_nodos_registro
-            ON jocarsa_nodos(registro_id)
+            CREATE INDEX IF NOT EXISTS idx_andrei_nodos_registro
+            ON andrei_nodos(registro_id)
         )SQL");
 
         ejecutar(R"SQL(
-            CREATE INDEX IF NOT EXISTS idx_jocarsa_nodos_padre
-            ON jocarsa_nodos(padre_id)
+            CREATE INDEX IF NOT EXISTS idx_andrei_nodos_padre
+            ON andrei_nodos(padre_id)
         )SQL");
 
         ejecutar(R"SQL(
-            CREATE INDEX IF NOT EXISTS idx_jocarsa_registros_coleccion
-            ON jocarsa_registros(coleccion)
+            CREATE INDEX IF NOT EXISTS idx_andrei_registros_coleccion
+            ON andrei_registros(coleccion)
         )SQL");
     }
 
@@ -156,7 +199,7 @@ private:
         }
 
         Statement s(db, R"SQL(
-            INSERT INTO jocarsa_nodos
+            INSERT INTO andrei_nodos
             (registro_id, padre_id, clave, posicion, tipo, valor)
             VALUES (?, ?, ?, ?, ?, ?)
         )SQL");
@@ -214,7 +257,7 @@ private:
 
         {
             Statement s(db,
-                "SELECT tipo, valor FROM jocarsa_nodos WHERE id=?"
+                "SELECT tipo, valor FROM andrei_nodos WHERE id=?"
             );
             s.entero(1, id);
 
@@ -257,7 +300,7 @@ private:
         {
             Statement s(db, R"SQL(
                 SELECT id, clave
-                FROM jocarsa_nodos
+                FROM andrei_nodos
                 WHERE padre_id=?
                 ORDER BY posicion, id
             )SQL");
@@ -296,7 +339,7 @@ private:
     bool existe(const std::string& coleccion,
                 sqlite3_int64 id) {
         Statement s(db, R"SQL(
-            SELECT 1 FROM jocarsa_registros
+            SELECT 1 FROM andrei_registros
             WHERE coleccion=? AND id=?
         )SQL");
 
@@ -311,7 +354,7 @@ private:
         const json& datos
     ) {
         Statement s(db,
-            "INSERT INTO jocarsa_registros(coleccion) VALUES (?)"
+            "INSERT INTO andrei_registros(coleccion) VALUES (?)"
         );
         s.texto(1, coleccion);
         s.paso();
@@ -330,7 +373,7 @@ private:
             return nullptr;
 
         Statement s(db, R"SQL(
-            SELECT id FROM jocarsa_nodos
+            SELECT id FROM andrei_nodos
             WHERE registro_id=? AND padre_id IS NULL
         )SQL");
 
@@ -347,7 +390,7 @@ private:
         const std::string& coleccion
     ) {
         Statement s(db, R"SQL(
-            SELECT id FROM jocarsa_registros
+            SELECT id FROM andrei_registros
             WHERE coleccion=?
             ORDER BY id
         )SQL");
@@ -375,7 +418,7 @@ private:
     }
 
 public:
-    explicit JocarsaORM(const std::string& archivo) {
+    explicit AndreiORM(const std::string& archivo) {
         int rc = sqlite3_open(archivo.c_str(), &db);
 
         if (rc != SQLITE_OK) {
@@ -393,21 +436,21 @@ public:
         iniciar();
     }
 
-    ~JocarsaORM() {
+    ~AndreiORM() {
         if (db)
             sqlite3_close(db);
     }
 
-    JocarsaORM(const JocarsaORM&) = delete;
-    JocarsaORM& operator=(const JocarsaORM&) = delete;
+    AndreiORM(const AndreiORM&) = delete;
+    AndreiORM& operator=(const AndreiORM&) = delete;
 
     class Coleccion {
     private:
-        JocarsaORM& orm;
+        AndreiORM& orm;
         std::string nombre;
 
     public:
-        Coleccion(JocarsaORM& orm, std::string nombre)
+        Coleccion(AndreiORM& orm, std::string nombre)
             : orm(orm), nombre(std::move(nombre)) {}
 
         sqlite3_int64 guardar(const json& datos) {
@@ -480,7 +523,7 @@ public:
 
             try {
                 orm.ejecutar(
-                    "DELETE FROM jocarsa_nodos "
+                    "DELETE FROM andrei_nodos "
                     "WHERE registro_id=" + std::to_string(id)
                 );
 
@@ -502,7 +545,7 @@ public:
 
             try {
                 Statement s(orm.db, R"SQL(
-                    DELETE FROM jocarsa_registros
+                    DELETE FROM andrei_registros
                     WHERE coleccion=? AND id=?
                 )SQL");
 
@@ -521,7 +564,7 @@ public:
 
         size_t contar() {
             Statement s(orm.db, R"SQL(
-                SELECT COUNT(*) FROM jocarsa_registros
+                SELECT COUNT(*) FROM andrei_registros
                 WHERE coleccion=?
             )SQL");
 

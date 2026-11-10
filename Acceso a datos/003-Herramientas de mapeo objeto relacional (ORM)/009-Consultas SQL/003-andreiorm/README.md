@@ -1,9 +1,9 @@
-# JocarsaORM 1.0 — motor nativo C++ / SQLite
+# AndreiORM 1.0 — motor nativo C++ / SQLite
 
 ## Instalar en Ubuntu
 
 ```bash
-cd jocarsaorm
+cd andreiorm
 ./install.sh
 ```
 
@@ -12,36 +12,36 @@ Dependencias: `build-essential`, `libsqlite3-dev`, `nlohmann-json3-dev`.
 ## Terminal
 
 ```bash
-jocarsaorm demo.db crear
-jocarsaorm demo.db guardar clientes '{"nombre":"Ana","habilidades":["C++","Python"]}'
-jocarsaorm demo.db todos clientes
-jocarsaorm demo.db obtener clientes 1
-jocarsaorm demo.db buscar clientes nombre '"Ana"'
-jocarsaorm demo.db actualizar clientes 1 '{"edad":29}'
-jocarsaorm demo.db contar clientes
-jocarsaorm demo.db exportar clientes ./salida
-jocarsaorm demo.db importar clientes ./entrada
-jocarsaorm demo.db eliminar clientes 1
+andreiorm demo.db crear
+andreiorm demo.db guardar clientes '{"nombre":"Ana","habilidades":["C++","Python"]}'
+andreiorm demo.db todos clientes
+andreiorm demo.db obtener clientes 1
+andreiorm demo.db buscar clientes nombre '"Ana"'
+andreiorm demo.db actualizar clientes 1 '{"edad":29}'
+andreiorm demo.db contar clientes
+andreiorm demo.db exportar clientes ./salida
+andreiorm demo.db importar clientes ./entrada
+andreiorm demo.db eliminar clientes 1
 ```
 
 ## C++
 
 ```cpp
-#include <JocarsaORM.h>
+#include <AndreiORM.h>
 int main() {
-    JocarsaORM orm("demo.db");
+    AndreiORM orm("demo.db");
     auto id = orm.guardar("clientes", {{"nombre", "Ana"}});
     auto dato = orm.obtener("clientes", id);
 }
 ```
 
-Compilar: `g++ -std=c++17 main.cpp -ljocarsaorm -lsqlite3 -o demo`
+Compilar: `g++ -std=c++17 main.cpp -landreiorm -lsqlite3 -o demo`
 
 ## API C para Python y PHP
 
-`include/jocarsaorm_c.h` expone funciones `jocarsa_open`, `jocarsa_guardar`, `jocarsa_obtener`, `jocarsa_todos`, `jocarsa_buscar`, `jocarsa_actualizar`, `jocarsa_eliminar`, `jocarsa_contar`, `jocarsa_importar`, `jocarsa_exportar`, `jocarsa_error`, `jocarsa_free` y `jocarsa_close`.
+`include/andreiorm_c.h` expone funciones `andrei_open`, `andrei_guardar`, `andrei_obtener`, `andrei_todos`, `andrei_buscar`, `andrei_actualizar`, `andrei_eliminar`, `andrei_contar`, `andrei_importar`, `andrei_exportar`, `andrei_error`, `andrei_free` y `andrei_close`.
 
-La memoria devuelta como `char*` debe liberarse con `jocarsa_free`.
+La memoria devuelta como `char*` debe liberarse con `andrei_free`.
 
 ## Notas
 

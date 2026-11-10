@@ -1,12 +1,12 @@
-#include "JocarsaORM.h"
+#include "AndreiORM.h"
 #include <iostream>
 #include <filesystem>
 #include <cstdlib>
 using json=nlohmann::json;
 int main(int argc,char** argv){
  try{
-  if(argc<3){std::cerr<<"Uso: jocarsaorm <archivo.db> <comando> [coleccion] [argumentos]\nComandos: crear, guardar, obtener, todos, buscar, actualizar, eliminar, contar, importar, exportar\n";return 2;}
-  JocarsaORM orm(argv[1]);std::string cmd=argv[2];
+  if(argc<3){std::cerr<<"Uso: andreiorm <archivo.db> <comando> [coleccion] [argumentos]\nComandos: crear, guardar, obtener, todos, buscar, actualizar, eliminar, contar, importar, exportar\n";return 2;}
+  AndreiORM orm(argv[1]);std::string cmd=argv[2];
   if(cmd=="crear"){std::cout<<"Base preparada: "<<argv[1]<<"\n";return 0;}
   if(argc<4)throw std::runtime_error("Falta colección");std::string c=argv[3];
   if(cmd=="guardar"&&argc>=5)std::cout<<orm.guardar(c,json::parse(argv[4]))<<"\n";

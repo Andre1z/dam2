@@ -18,5 +18,5 @@ PROCESO FINALIZADO
 Guardadas en esta ejecución: 0
 Errores: 2
 Tiempo: 0:01:07
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a 
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a 
 datos/003-Herramientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

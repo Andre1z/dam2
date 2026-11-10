@@ -29,5 +29,5 @@ Nuevas guardadas: 3
 Errores en esta ejecución: 0
 Tiempo total: 00h 01m 53s
 Base de datos: embeddings.db
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a 
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a 
 datos/003-Herramientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

@@ -24,5 +24,5 @@ Traceback (most recent call last):
     archivo = open("009-256 dimensiones informaticas.txt",'r')
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory: '009-256 dimensiones informaticas.txt'
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herr
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herr
 amientas de mapeo objeto relacional (ORM)/008-Carga, almacenamiento y modificación de objetos$ 

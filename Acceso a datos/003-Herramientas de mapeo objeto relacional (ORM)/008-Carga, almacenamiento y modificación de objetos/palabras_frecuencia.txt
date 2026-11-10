@@ -432,7 +432,7 @@ asignaturas,226
 prácticas,226
 bucle,226
 memoria,225
-josevicente,225
+andrei,225
 ubuntu,225
 hablando,225
 diréis,225
@@ -607,6 +607,7 @@ media,162
 consola,162
 sabe,162
 quieras,162
+buga,160
 modo,159
 evaluación,159
 int,159
@@ -1002,7 +1003,6 @@ tendremos,91
 trimestre,91
 enter,91
 ejecuta,91
-carratala,91
 preguntar,91
 formularios,91
 queryselector,91
@@ -1230,7 +1230,6 @@ casos,69
 niño,69
 administración,69
 servicio,69
-carratalá,69
 system,69
 privilegios,69
 conversión,69
@@ -4760,6 +4759,7 @@ ximena,10
 apunto,10
 fluye,10
 elton,10
+bugasanchis,10
 locales,9
 une,9
 montan,9
@@ -4852,7 +4852,6 @@ registrar,9
 adquirir,9
 escribáis,9
 cuidar,9
-carratalasanchis,9
 alternativo,9
 caché,9
 publicada,9
@@ -7618,7 +7617,7 @@ variantes,4
 mantienes,4
 gep,4
 obligatorios,4
-carratalao,4
+bugao,4
 ahi,4
 mas,4
 organismo,4
@@ -8406,6 +8405,7 @@ superpredictor,4
 comprometemos,4
 empresadam,4
 pétalos,4
+andreibuga,4
 planificando,3
 elaborar,3
 ofimática,3
@@ -8883,7 +8883,6 @@ defectos,3
 controlarlo,3
 carnets,3
 muchísima,3
-josevicentecarratala,3
 liar,3
 referías,3
 equivocarse,3
@@ -11254,7 +11253,7 @@ multiprocessing,2
 paralelizable,2
 tamedan,2
 readpixel,2
-josevicenterrecortado,2
+andreirrecortado,2
 libjpg,2
 ljpeg,2
 ljpg,2
@@ -11459,7 +11458,7 @@ atravesar,2
 bebido,2
 perfectos,2
 queryselectorp,2
-carratalasansis,2
+bugasansis,2
 comunicarme,2
 logdatos,2
 queryselectorresultado,2
@@ -13708,9 +13707,9 @@ descargarnos,1
 connecting,1
 people,1
 convendrá,1
-ievcarratala,1
+ievbuga,1
 too,1
-emailvcarratala,1
+emailvbuga,1
 country,1
 account,1
 satisfactoriamente,1
@@ -14284,7 +14283,6 @@ borraré,1
 xmlbasico,1
 encoding,1
 submarcas,1
-josevicentecarratalá,1
 pondrían,1
 subetiqueta,1
 prefiere,1
@@ -14325,7 +14323,7 @@ frenarlo,1
 invirtáis,1
 subjson,1
 variosemails,1
-josevicentecaradala,1
+andreicaradala,1
 quitarlas,1
 lavar,1
 llamadlo,1
@@ -15023,7 +15021,7 @@ productosdeprueba,1
 métemelos,1
 darprivilegios,1
 abusos,1
-josevicentetame,1
+andreitame,1
 administrará,1
 refrescaremos,1
 varchar,1
@@ -15916,7 +15914,7 @@ adelantéis,1
 implementemos,1
 psutil,1
 almacenarlos,1
-homejosévicentelog,1
+homeandreilog,1
 userpin,1
 pasadita,1
 gauches,1
@@ -15983,7 +15981,7 @@ cip,1
 definida,1
 notara,1
 gestionemos,1
-carratalada,1
+bugada,1
 violation,1
 confección,1
 ponlos,1
@@ -15994,7 +15992,7 @@ personalicéis,1
 percibamos,1
 desbarajuste,1
 tapgpt,1
-homejosevicente,1
+homeandrei,1
 bddd,1
 expone,1
 descubrimiento,1
@@ -16481,7 +16479,7 @@ sobrescribo,1
 céntramelo,1
 redimensionamelo,1
 sobrescríbemelo,1
-josevicentecaratala,1
+andreicaratala,1
 mislata,1
 fundiría,1
 quitaremos,1
@@ -17853,7 +17851,7 @@ cómelo,1
 desactive,1
 religiosa,1
 coordinado,1
-carratalasantis,1
+bugasantis,1
 scalascript,1
 saras,1
 súbeme,1
@@ -20820,7 +20818,7 @@ cerrara,1
 banderas,1
 spl,1
 contrable,1
-carratalab,1
+bugab,1
 viajen,1
 falsos,1
 trocear,1
@@ -21164,7 +21162,6 @@ beneficiosa,1
 reducen,1
 juzga,1
 typing,1
-carratalásanchis,1
 inserir,1
 comedia,1
 robert,1

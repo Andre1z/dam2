@@ -1,10 +1,10 @@
 
 #include <iostream>
-#include "JocarsaORM.h"
+#include "AndreiORM.h"
 
 int main() {
     try {
-        JocarsaORM orm("curriculums.db");
+        AndreiORM orm("curriculums.db");
 
         json curriculum = {
             {"nombre", "Ana García"},
@@ -19,7 +19,7 @@ int main() {
             }},
             {"experiencia", {
                 {
-                    {"empresa", "Jocarsa"},
+                    {"empresa", "Andrei"},
                     {"años", 3}
                 },
                 {

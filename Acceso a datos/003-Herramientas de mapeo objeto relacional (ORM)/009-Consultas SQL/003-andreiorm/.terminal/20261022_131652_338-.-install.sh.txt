@@ -1,5 +1,5 @@
 Datetime: 2026-10-22T11:16:52.338Z
-Working directory: /var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL/003-jocarsaorm
+Working directory: /var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL/003-andreiorm
 Command: ./install.sh
 
 Result:
@@ -54,8 +54,8 @@ build-essential ya está en su versión más reciente (12.10ubuntu1).
 libsqlite3-dev ya está en su versión más reciente (3.45.1-1ubuntu2.8).
 nlohmann-json3-dev ya está en su versión más reciente (3.11.3-1).
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 247 no actualizados.
-g++ -std=c++17 -O2 -Wall -Wextra -fPIC -Iinclude -shared src/JocarsaORM.cpp src/jocarsaorm_c.cpp -o libjocarsaorm.so -lsqlite3
-g++ -std=c++17 -O2 -Wall -Wextra -fPIC -Iinclude src/main.cpp -L. -ljocarsaorm -Wl,-rpath,'$ORIGIN/../lib' -o jocarsaorm
+g++ -std=c++17 -O2 -Wall -Wextra -fPIC -Iinclude -shared src/AndreiORM.cpp src/andreiorm_c.cpp -o libandreiorm.so -lsqlite3
+g++ -std=c++17 -O2 -Wall -Wextra -fPIC -Iinclude src/main.cpp -L. -landreiorm -Wl,-rpath,'$ORIGIN/../lib' -o andreiorm
 src/main.cpp: In function ‘int main(int, char**)’:
 src/main.cpp:11:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
    11 |   if(argc<4)throw std::runtime_error("Falta colección");std::string c=argv[3];
@@ -64,9 +64,9 @@ src/main.cpp:11:57: note: ...this statement, but the latter is misleadingly inde
    11 |   if(argc<4)throw std::runtime_error("Falta colección");std::string c=argv[3];
       |                                                         ^~~
 install -d /usr/local/lib /usr/local/bin /usr/local/include
-install -m 755 libjocarsaorm.so /usr/local/lib/
-install -m 755 jocarsaorm /usr/local/bin/
-install -m 644 include/JocarsaORM.h include/jocarsaorm_c.h /usr/local/include/
+install -m 755 libandreiorm.so /usr/local/lib/
+install -m 755 andreiorm /usr/local/bin/
+install -m 644 include/AndreiORM.h include/andreiorm_c.h /usr/local/include/
 
-Instalado. Prueba: jocarsaorm prueba.db crear
-josevicente@josevicenteportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL/003-jocarsaorm$ 
+Instalado. Prueba: andreiorm prueba.db crear
+andrei@andreiportatil:/var/www/html/tame2627dam2/001-Acceso a datos/003-Herramientas de mapeo objeto relacional (ORM)/009-Consultas SQL/003-andreiorm$ 

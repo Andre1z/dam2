@@ -432,7 +432,7 @@ asignaturas
 prácticas
 bucle
 memoria
-josevicente
+andrei
 ubuntu
 hablando
 diréis
@@ -607,6 +607,7 @@ media
 consola
 sabe
 quieras
+buga
 modo
 evaluación
 int
@@ -1002,7 +1003,6 @@ tendremos
 trimestre
 enter
 ejecuta
-carratala
 preguntar
 formularios
 queryselector
@@ -1230,7 +1230,6 @@ casos
 niño
 administración
 servicio
-carratalá
 system
 privilegios
 conversión
@@ -4760,6 +4759,7 @@ ximena
 apunto
 fluye
 elton
+bugasanchis
 locales
 une
 montan
@@ -4852,7 +4852,6 @@ registrar
 adquirir
 escribáis
 cuidar
-carratalasanchis
 alternativo
 caché
 publicada
@@ -7618,7 +7617,7 @@ variantes
 mantienes
 gep
 obligatorios
-carratalao
+bugao
 ahi
 mas
 organismo
@@ -8406,6 +8405,7 @@ superpredictor
 comprometemos
 empresadam
 pétalos
+andreibuga
 planificando
 elaborar
 ofimática
@@ -8883,7 +8883,6 @@ defectos
 controlarlo
 carnets
 muchísima
-josevicentecarratala
 liar
 referías
 equivocarse
@@ -11254,7 +11253,7 @@ multiprocessing
 paralelizable
 tamedan
 readpixel
-josevicenterrecortado
+andreirrecortado
 libjpg
 ljpeg
 ljpg
@@ -11459,7 +11458,7 @@ atravesar
 bebido
 perfectos
 queryselectorp
-carratalasansis
+bugasansis
 comunicarme
 logdatos
 queryselectorresultado
@@ -13708,9 +13707,9 @@ descargarnos
 connecting
 people
 convendrá
-ievcarratala
+ievbuga
 too
-emailvcarratala
+emailvbuga
 country
 account
 satisfactoriamente
@@ -14284,7 +14283,6 @@ borraré
 xmlbasico
 encoding
 submarcas
-josevicentecarratalá
 pondrían
 subetiqueta
 prefiere
@@ -14325,7 +14323,7 @@ frenarlo
 invirtáis
 subjson
 variosemails
-josevicentecaradala
+andreicaradala
 quitarlas
 lavar
 llamadlo
@@ -15023,7 +15021,7 @@ productosdeprueba
 métemelos
 darprivilegios
 abusos
-josevicentetame
+andreitame
 administrará
 refrescaremos
 varchar
@@ -15916,7 +15914,7 @@ adelantéis
 implementemos
 psutil
 almacenarlos
-homejosévicentelog
+homeandreilog
 userpin
 pasadita
 gauches
@@ -15983,7 +15981,7 @@ cip
 definida
 notara
 gestionemos
-carratalada
+bugada
 violation
 confección
 ponlos
@@ -15994,7 +15992,7 @@ personalicéis
 percibamos
 desbarajuste
 tapgpt
-homejosevicente
+homeandrei
 bddd
 expone
 descubrimiento
@@ -16481,7 +16479,7 @@ sobrescribo
 céntramelo
 redimensionamelo
 sobrescríbemelo
-josevicentecaratala
+andreicaratala
 mislata
 fundiría
 quitaremos
@@ -17853,7 +17851,7 @@ cómelo
 desactive
 religiosa
 coordinado
-carratalasantis
+bugasantis
 scalascript
 saras
 súbeme
@@ -20820,7 +20818,7 @@ cerrara
 banderas
 spl
 contrable
-carratalab
+bugab
 viajen
 falsos
 trocear
@@ -21164,7 +21162,6 @@ beneficiosa
 reducen
 juzga
 typing
-carratalásanchis
 inserir
 comedia
 robert
