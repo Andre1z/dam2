@@ -7,6 +7,14 @@
 
 namespace {
 
+std::string configJuntoAlEjecutable(const char* ejecutable) {
+    const std::string ruta = ejecutable ? ejecutable : "";
+    const std::size_t separador = ruta.find_last_of("/\\");
+    return separador == std::string::npos
+        ? "config.json"
+        : ruta.substr(0, separador + 1) + "config.json";
+}
+
 std::vector<std::string> separar(const std::string& texto) {
     return AndreiSerializador().desserializar(texto);
 }
@@ -50,7 +58,9 @@ Comandos:
 
 int main(int argc, char** argv) {
     try {
-        const std::string config = argc > 1 ? argv[1] : "config.json";
+        const std::string config = argc > 1
+            ? argv[1]
+            : configJuntoAlEjecutable(argc > 0 ? argv[0] : nullptr);
         AndreiBBDD db(config);
         std::cout << "Andrei BBDD C++ - terminal\n";
         ayuda();

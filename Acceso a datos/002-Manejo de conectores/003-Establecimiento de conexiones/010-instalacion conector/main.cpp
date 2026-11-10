@@ -2,6 +2,14 @@
 #include <iostream>
 #include <sstream>
 
+static std::string configJuntoAlEjecutable(const char* ejecutable) {
+    const std::string ruta = ejecutable ? ejecutable : "";
+    const std::size_t separador = ruta.find_last_of("/\\");
+    return separador == std::string::npos
+        ? "config.json"
+        : ruta.substr(0, separador + 1) + "config.json";
+}
+
 static std::vector<std::string> separar(const std::string&s){return AndreiSerializador().desserializar(s);}
 static void imprimir(const std::map<std::string,std::string>& r){for(auto const&[k,v]:r)std::cout<<k<<"="<<v<<"  ";std::cout<<"\n";}
 static void ayuda(){std::cout<<R"(
@@ -21,7 +29,7 @@ Comandos:
 )";}
 int main(int argc,char**argv){
  try{
-  std::string cfg=argc>1?argv[1]:"config.json"; AndreiBBDD db(cfg);
+  std::string cfg=argc>1?argv[1]:configJuntoAlEjecutable(argc>0?argv[0]:nullptr); AndreiBBDD db(cfg);
   std::cout<<"AndreiBBDD C++ - terminal\n"; ayuda(); std::string linea;
   while(std::cout<<(db.basededatos.empty()?"andrei> ":("andrei["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
    std::istringstream ss(linea);std::string a,b,c;ss>>a;if(a.empty())continue;

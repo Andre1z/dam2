@@ -26,8 +26,8 @@ AndreiBBDD::AndreiBBDD(const std::string& config) {
     std::string rutaConfig = config;
     if (!fs::exists(rutaConfig)) {
         if (const char* env = std::getenv("ANDREIBBDD_CONFIG"); env && fs::exists(env)) rutaConfig = env;
-        else if (fs::exists("/etc/andreibbdd/config.json")) rutaConfig = "/etc/andreibbdd/config.json";
-        else throw std::runtime_error("No se ha encontrado config.json, ANDREIBBDD_CONFIG ni /etc/andreibbdd/config.json");
+        else if (fs::exists("C:/htdocs/andrei-basededatos/config.json")) rutaConfig = "C:/htdocs/andrei-basededatos/config.json";
+        else throw std::runtime_error("No se ha encontrado config.json, ANDREIBBDD_CONFIG ni C:/htdocs/andrei-basededatos/config.json");
     }
     std::ifstream f(rutaConfig); if (!f) throw std::runtime_error("No se puede abrir la configuracion: " + rutaConfig);
     std::string s((std::istreambuf_iterator<char>(f)), {});
