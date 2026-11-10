@@ -1,15 +1,15 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cctype>
 #include <memory>
 #include <stdexcept>
 
-static std::unique_ptr<JocarsaBBDD> db;
+static std::unique_ptr<AndreiBBDD> db;
 
-static JocarsaBBDD& motor() {
-    if (!db) db = std::make_unique<JocarsaBBDD>();
+static AndreiBBDD& motor() {
+    if (!db) db = std::make_unique<AndreiBBDD>();
     return *db;
 }
 
@@ -136,7 +136,7 @@ static PyObject* consultar_dql(PyObject*, PyObject* args) {
     const char* q; if(!PyArg_ParseTuple(args,"s",&q)) return nullptr;
     try {
         auto r=motor().consultar(q); PyObject* lista=PyList_New(0);
-        for(const auto& fila:r.filas){ PyObject* d=PyDict_New(); for(size_t i=0;i<r.columnas.size();++i){PyObject* v=fila[i]=="__JOCARSA_NULL__"?Py_NewRef(Py_None):PyUnicode_FromString(fila[i].c_str());PyDict_SetItemString(d,r.columnas[i].c_str(),v);Py_DECREF(v);}PyList_Append(lista,d);Py_DECREF(d);}
+        for(const auto& fila:r.filas){ PyObject* d=PyDict_New(); for(size_t i=0;i<r.columnas.size();++i){PyObject* v=fila[i]=="__ANDREI_NULL__"?Py_NewRef(Py_None):PyUnicode_FromString(fila[i].c_str());PyDict_SetItemString(d,r.columnas[i].c_str(),v);Py_DECREF(v);}PyList_Append(lista,d);Py_DECREF(d);}
         return lista;
     } catch(const std::exception& e){ return error_cpp(e); }
 }
@@ -243,5 +243,5 @@ static PyMethodDef Metodos[] = {
     {"configuracion",configuracion,METH_NOARGS,"Devuelve la configuracion activa"},
     {nullptr,nullptr,0,nullptr}
 };
-static PyModuleDef modulo={PyModuleDef_HEAD_INIT,"jocarsabbdd","Conector nativo Python para Jocarsa BBDD",-1,Metodos};
-PyMODINIT_FUNC PyInit_jocarsabbdd(void){ return PyModule_Create(&modulo); }
+static PyModuleDef modulo={PyModuleDef_HEAD_INIT,"andreibbdd","Conector nativo Python para Andrei BBDD",-1,Metodos};
+PyMODINIT_FUNC PyInit_andreibbdd(void){ return PyModule_Create(&modulo); }

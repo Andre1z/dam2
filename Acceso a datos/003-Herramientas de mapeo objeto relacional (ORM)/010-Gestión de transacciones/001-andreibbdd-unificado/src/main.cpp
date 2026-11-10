@@ -1,4 +1,4 @@
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cctype>
 #include <iostream>
@@ -82,8 +82,8 @@ Compatibilidad con comandos anteriores:
 )";}
 int main(int argc,char**argv){
  try{
-  std::string cfg=argc>1?argv[1]:"config.json"; JocarsaBBDD db(cfg); std::cout<<"JocarsaBBDD C++ - terminal\n"; ayuda(); std::string linea;
-  while(std::cout<<(db.basededatos.empty()?"jocarsa> ":("jocarsa["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
+  std::string cfg=argc>1?argv[1]:"config.json"; Andreibbdd db(cfg); std::cout<<"Andreibbdd C++ - terminal\n"; ayuda(); std::string linea;
+  while(std::cout<<(db.basededatos.empty()?"andreibbdd> ":("andreibbdd["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
    linea=trim(linea);if(linea.empty())continue;std::istringstream ss(linea);std::string a,b,c;ss>>a;auto A=mayus(a);
    if(A=="SALIR")break;if(A=="AYUDA"){ayuda();continue;}
    if(A=="INICIAR"){ss>>b;std::cout<<((mayus(b)=="TRANSACCION"&&db.iniciarTransaccion())?"OK TRANSACCION INICIADA\n":"ERROR\n");continue;}
