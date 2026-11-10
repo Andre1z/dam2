@@ -1,9 +1,9 @@
 #pragma once
-#include "JocarsaBBDD.hpp"
+#include "AndreiBBDD.hpp"
 #include <string>
-class JocarsaORM {
+class AndreiORM {
 public:
- explicit JocarsaORM(JocarsaBBDD& motor):db(motor){}
+ explicit AndreiORM(AndreiBBDD& motor):db(motor){}
  long long guardar(const std::string&,const std::string&);
  std::string obtener(const std::string&,long long) const;
  std::string todos(const std::string&) const;
@@ -12,7 +12,7 @@ public:
  bool eliminar(const std::string&,long long);
  long long contar(const std::string&) const;
 private:
- JocarsaBBDD& db;
+ AndreiBBDD& db;
  std::string tabla(const std::string&) const;
  void asegurar(const std::string&);
 };

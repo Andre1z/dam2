@@ -3,7 +3,7 @@
 ## Compilación comprobada
 
 ```bash
-g++ -std=c++17 -O2 -Iinclude src/JocarsaBBDD.cpp src/main.cpp -ljson-c -o jocarsabbdd
+g++ -std=c++17 -O2 -Iinclude src/AndreiBBDD.cpp src/main.cpp -ljson-c -o andreibbdd
 ```
 
 ## CLI

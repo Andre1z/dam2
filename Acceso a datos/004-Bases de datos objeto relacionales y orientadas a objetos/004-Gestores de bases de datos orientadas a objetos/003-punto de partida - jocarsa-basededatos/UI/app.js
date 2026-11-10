@@ -226,7 +226,7 @@ function collectProperties(){const rows=[...document.querySelectorAll('#property
 function edit(id){editing=id;const n=find(id);document.querySelector('#formTitle').textContent=n?'Editar entidad':'Nueva entidad';document.querySelector('#title').value=n?.title||'';renderEntityMemberships(n?.categories||[]);document.querySelector('#propertyRows').replaceChildren();(n?.properties||[]).forEach(appendPropertyRow);document.querySelector('#deleteEntity').hidden=!n;dialog.showModal();document.querySelector('#title').focus();}
 document.querySelector('#add').onclick=()=>edit(null);document.querySelector('#cancel').onclick=()=>dialog.close();
 document.querySelector('#entityForm').onsubmit=e=>{e.preventDefault();const title=document.querySelector('#title').value.trim();if(!title)return;let properties;try{properties=collectProperties();}catch(err){alert(err.message);return;}if(editing){const n=find(editing);const old=n.properties;const used=new Set();n.title=title;n.categories=selectedEntityMemberships();n.properties=properties;const valid=new Set(n.properties.map(p=>p.id));data.links=data.links.filter(l=>(l.from!==n.id||valid.has(l.fromProp))&&(l.to!==n.id||valid.has(l.toProp)));}else{const r=viewport.getBoundingClientRect(),p=pos({clientX:r.left+r.width/2,clientY:r.top+r.height/2});const n={id:uid(),title,categories:selectedEntityMemberships(),properties,x:p.x-130,y:p.y-65};data.entities.push(n);selected=n.id;}save();render();dialog.close();};
-document.querySelector('#deleteEntity').onclick=()=>{if(!editing)return;if(!confirm('¿Eliminar definitivamente esta tabla y TODOS sus registros de Jocarsa BBDD?'))return;pendingDeletion=true;data.entities=data.entities.filter(n=>n.id!==editing);data.links=data.links.filter(l=>l.from!==editing&&l.to!==editing);selected=null;save();render();dialog.close();};
+document.querySelector('#deleteEntity').onclick=()=>{if(!editing)return;if(!confirm('¿Eliminar definitivamente esta tabla y TODOS sus registros de Andrei BBDD?'))return;pendingDeletion=true;data.entities=data.entities.filter(n=>n.id!==editing);data.links=data.links.filter(l=>l.from!==editing&&l.to!==editing);selected=null;save();render();dialog.close();};
 
 nodes.addEventListener('click',e=>{const b=e.target.closest('.records-btn');if(b){e.stopPropagation();openRecords(b.dataset.records);}});
 viewport.addEventListener('pointerdown',e=>{if(e.target.closest('.records-btn'))return;if(e.button!==0&&e.button!==1)return;const groupLabel=e.target.closest('.group-drag-handle');
@@ -332,7 +332,7 @@ document.querySelector('#exportSql').onclick=()=>{if(!data.entities.length){aler
 document.querySelector('#import').onchange=async e=>{
  const file=e.target.files?.[0];if(!file)return;
  try{
-  const backup=JSON.parse(await file.text()),diagram=backup.format==='jocarsa-bbdd-backup'?backup.data:backup;
+  const backup=JSON.parse(await file.text()),diagram=backup.format==='andrei-bbdd-backup'?backup.data:backup;
   if(!Array.isArray(diagram?.entities)||!Array.isArray(diagram?.links))throw Error('Formato inválido');
   const count=backup.tables?Object.values(backup.tables).reduce((n,rows)=>n+(Array.isArray(rows)?rows.length:0),0):0;
   const answer=prompt(`Importar ${diagram.entities.length} entidades y ${count} registros.\n\nEscribe una opción:\n1 = Reemplazar registros\n2 = Fusionar registros por ID\n3 = Solo estructura`,'3');

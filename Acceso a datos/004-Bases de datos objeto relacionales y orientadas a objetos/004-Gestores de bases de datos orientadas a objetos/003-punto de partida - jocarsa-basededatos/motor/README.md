@@ -1,6 +1,9 @@
-# Jocarsa BBDD: colecciones transversales
+# Andrei BBDD: colecciones transversales
 
 Proyecto reconstruido a partir del código aportado. Conserva motor CSV/SQL, ORM de documentos JSON y conectores PHP/Python.
+## Cambio de nombre
+
+Los símbolos C++, módulos, extensiones y ejecutables usan ahora el prefijo `Andrei`/`andrei`; el cambio rompe compatibilidad con binarios y código que use los nombres anteriores. Recompila todo con `make clean && make all python php` antes de instalar. El instalador conserva la configuración anterior copiando `/etc/jocarsa/config.json` a `/etc/andrei/config.json` cuando aún no existe; la ruta de datos configurada no se altera.
 
 ## Compilar (Ubuntu)
 
@@ -14,7 +17,7 @@ mkdir -p datos
 Desde la raíz del proyecto:
 
 ```bash
-./jocarsabbdd
+./andreibbdd
 # CREAR BASE erp
 # USAR erp
 # CREAR TABLA productos nombre:TEXTO,precio:REAL
@@ -32,7 +35,7 @@ Desde la raíz del proyecto:
 ORM Python:
 
 ```bash
-PYTHONPATH=python JOCARSAORM_LIB="$PWD/libjocarsaorm.so" python3 examples/colecciones.py
+PYTHONPATH=python ANDREIORM_LIB="$PWD/libandreiorm.so" python3 examples/colecciones.py
 ```
 
 PHP FFI:

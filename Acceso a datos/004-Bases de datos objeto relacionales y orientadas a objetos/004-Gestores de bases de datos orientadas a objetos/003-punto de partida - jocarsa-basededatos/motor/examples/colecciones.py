@@ -1,5 +1,5 @@
-from jocarsaorm import JocarsaORM
-with JocarsaORM('erp','config.json') as db:
+from andreiorm import AndreiORM
+with AndreiORM('erp','config.json') as db:
     for nombre in ['marketing','produccion','administracion','soporte']:
         db.crear_coleccion(nombre)
     print('Colecciones:',db.listar_colecciones())

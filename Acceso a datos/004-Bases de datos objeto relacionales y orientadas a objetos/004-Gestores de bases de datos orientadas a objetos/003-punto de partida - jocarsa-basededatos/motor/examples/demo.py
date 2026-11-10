@@ -1,5 +1,5 @@
-from jocarsaorm import JocarsaORM
-with JocarsaORM('demo_orm', 'config.json') as orm:
+from andreiorm import AndreiORM
+with AndreiORM('demo_orm', 'config.json') as orm:
     id = orm.guardar('clientes', {'nombre':'Ana','edad':28,'tags':['vip','web']})
     print('ID:', id)
     print('Obtener:', orm.obtener('clientes', id))

@@ -1,9 +1,20 @@
 #include "GestorYAML.h"
-#include <uuid/uuid.h>
 #include <algorithm>
+#include <array>
 #include <fstream>
+#include <iomanip>
+#include <random>
 #include <regex>
+#include <sstream>
 #include <stdexcept>
+#include <system_error>
+
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#endif
 
 namespace fs = std::filesystem;
 
@@ -39,11 +50,23 @@ void GestorYAML::crearColeccion(const std::string& bd, const std::string& colecc
     fs::create_directories(rutaColeccion(bd, coleccion));
 }
 std::string GestorYAML::nuevoUUID() {
-    uuid_t u;
-    uuid_generate_random(u);
-    char texto[37];
-    uuid_unparse_lower(u, texto);
-    return texto;
+    std::array<unsigned char, 16> bytes{};
+    std::random_device fuente;
+    std::uniform_int_distribution<unsigned int> distribucion(0, 255);
+    for (auto& byte : bytes)
+        byte = static_cast<unsigned char>(distribucion(fuente));
+
+    bytes[6] = static_cast<unsigned char>((bytes[6] & 0x0F) | 0x40);
+    bytes[8] = static_cast<unsigned char>((bytes[8] & 0x3F) | 0x80);
+
+    std::ostringstream texto;
+    texto << std::hex << std::setfill('0');
+    for (std::size_t i = 0; i < bytes.size(); ++i) {
+        if (i == 4 || i == 6 || i == 8 || i == 10)
+            texto << '-';
+        texto << std::setw(2) << static_cast<unsigned int>(bytes[i]);
+    }
+    return texto.str();
 }
 void GestorYAML::escribirAtomico(const fs::path& destino, const YAML::Node& nodo) {
     fs::create_directories(destino.parent_path());
@@ -60,7 +83,21 @@ void GestorYAML::escribirAtomico(const fs::path& destino, const YAML::Node& nodo
             salida.flush();
             if (!salida) throw std::runtime_error("Error escribiendo " + temporal.string());
         }
+#ifdef _WIN32
+        if (!MoveFileExW(
+                temporal.c_str(),
+                destino.c_str(),
+                MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH
+            )) {
+            throw std::system_error(
+                static_cast<int>(GetLastError()),
+                std::system_category(),
+                "No se pudo reemplazar " + destino.string()
+            );
+        }
+#else
         fs::rename(temporal, destino);
+#endif
     } catch (...) {
         std::error_code ec;
         fs::remove(temporal, ec);

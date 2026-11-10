@@ -1,95 +1,100 @@
 #include "GestorYAML.h"
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 
+namespace {
+std::string buscarId(
+    const GestorYAML& db,
+    const std::string& baseDatos,
+    const std::string& coleccion,
+    const std::string& campo,
+    const std::string& valor
+) {
+    for (const auto& documento : db.listar(baseDatos, coleccion)) {
+        const YAML::Node campoDocumento = documento[campo];
+        if (campoDocumento.IsScalar() && campoDocumento.as<std::string>() == valor)
+            return documento["_id"].as<std::string>();
+    }
+    return {};
+}
+}
+
 int main() {
     try {
-        GestorYAML db("datos");
+        GestorYAML db{std::filesystem::path(GESTOR_YAML_DATA_DIR)};
         db.crearBaseDatos("empresa");
         db.crearColeccion("empresa", "clientes");
         db.crearColeccion("empresa", "productos");
         db.crearColeccion("empresa", "pedidos");
         db.crearColeccion("instituto", "alumnos");
 
-        // Escritura de objeto complejo con mapas, listas, booleanos y numeros
-        YAML::Node ana;
-        ana["nombre"] = "Ana Garcia";
-        ana["edad"] = 28;
-        ana["activo"] = true;
-        ana["direccion"]["ciudad"] = "Valencia";
-        ana["direccion"]["cp"] = "46001";
-        ana["telefonos"].push_back("600111222");
-        ana["telefonos"].push_back("600333444");
-        ana["habilidades"].push_back("C++");
-        ana["habilidades"].push_back("Python");
-        YAML::Node proyecto;
-        proyecto["nombre"] = "ERP";
-        proyecto["horas"] = 120;
-        ana["proyectos"].push_back(proyecto);
-        const std::string idAna = db.guardar("empresa", "clientes", ana);
-        std::cout << "Cliente insertado: " << idAna << "\n";
+        // JSON es un subconjunto de YAML; se carga el objeto de referencia del proyecto.
+        const YAML::Node persona = YAML::LoadFile(GESTOR_YAML_PERSONA_JSON);
+        if (!persona.IsMap() || !persona["email"].IsScalar())
+            throw std::runtime_error("El objeto JSON debe incluir un email");
 
-        // Alternativa: construir el documento leyendo una cadena YAML
-        YAML::Node luis = YAML::Load(R"(
-nombre: Luis
-edad: 35
-activo: false
-preferencias:
-  idioma: es
-  temas: [C++, SQL]
-)");
-        const std::string idLuis = db.guardar("empresa", "clientes", luis);
+        const std::string email = persona["email"].as<std::string>();
+        std::string idCliente = buscarId(db, "empresa", "clientes", "email", email);
+        if (idCliente.empty()) {
+            idCliente = db.guardar("empresa", "clientes", persona);
+            std::cout << "Cliente insertado: " << idCliente << "\n";
+        } else if (db.actualizar("empresa", "clientes", idCliente, persona)) {
+            std::cout << "Cliente actualizado: " << idCliente << "\n";
+        } else {
+            throw std::runtime_error("No se pudo actualizar el cliente existente");
+        }
+
+        const std::string idAlumno = buscarId(db, "instituto", "alumnos", "email", email);
+        if (idAlumno.empty())
+            db.guardar("instituto", "alumnos", persona);
+        else if (!db.actualizar("instituto", "alumnos", idAlumno, persona))
+            throw std::runtime_error("No se pudo actualizar el alumno existente");
 
         YAML::Node producto;
         producto["nombre"] = "Portatil";
         producto["precio"] = 899.99;
         producto["stock"] = 12;
-        const std::string idProducto = db.guardar("empresa", "productos", producto);
+        std::string idProducto = buscarId(
+            db, "empresa", "productos", "nombre", "Portatil"
+        );
+        if (idProducto.empty())
+            idProducto = db.guardar("empresa", "productos", producto);
+        else if (!db.actualizar("empresa", "productos", idProducto, producto))
+            throw std::runtime_error("No se pudo actualizar el producto existente");
 
         // Relacion documental mediante identificadores
         YAML::Node pedido;
-        pedido["cliente_id"] = idAna;
+        pedido["cliente_id"] = idCliente;
         YAML::Node linea;
         linea["producto_id"] = idProducto;
         linea["cantidad"] = 2;
         pedido["lineas"].push_back(linea);
         pedido["estado"] = "pendiente";
-        const std::string idPedido = db.guardar("empresa", "pedidos", pedido);
-
-        YAML::Node alumno;
-        alumno["nombre"] = "Marta";
-        alumno["curso"] = "DAM";
-        alumno["notas"]["programacion"] = 9.5;
-        alumno["notas"]["bases_datos"] = 8;
-        db.guardar("instituto", "alumnos", alumno);
+        std::string idPedido = buscarId(
+            db, "empresa", "pedidos", "cliente_id", idCliente
+        );
+        if (idPedido.empty())
+            idPedido = db.guardar("empresa", "pedidos", pedido);
+        else if (!db.actualizar("empresa", "pedidos", idPedido, pedido))
+            throw std::runtime_error("No se pudo actualizar el pedido existente");
 
         // Lectura por ID y acceso tipado
-        YAML::Node recuperado = db.leer("empresa", "clientes", idAna);
+        YAML::Node recuperado = db.leer("empresa", "clientes", idCliente);
         if (recuperado.IsDefined()) {
             std::cout << "Nombre: " << recuperado["nombre"].as<std::string>() << "\n";
-            std::cout << "Edad: " << recuperado["edad"].as<int>() << "\n";
-            std::cout << "Ciudad: " << recuperado["direccion"]["ciudad"].as<std::string>() << "\n";
-            for (const auto& telefono : recuperado["telefonos"])
-                std::cout << "Telefono: " << telefono.as<std::string>() << "\n";
+            std::cout << "Email: " << recuperado["email"].as<std::string>() << "\n";
         }
 
         // Listado y lectura de todos los documentos
         for (const auto& doc : db.listar("empresa", "clientes"))
             std::cout << "Documento:\n" << YAML::Dump(doc) << "\n";
 
-        // Filtro por igualdad y campos anidados
+        // Filtro por igualdad
         YAML::Node condiciones;
-        condiciones["activo"] = true;
-        condiciones["direccion"]["ciudad"] = "Valencia";
+        condiciones["email"] = email;
         for (const auto& doc : db.filtrar("empresa", "clientes", condiciones))
             std::cout << "Encontrado: " << doc["nombre"].as<std::string>() << "\n";
-
-        // Actualizar sin perder el ID
-        recuperado["edad"] = 29;
-        recuperado["direccion"]["ciudad"] = "Madrid";
-        recuperado["telefonos"].push_back("611222333");
-        if (db.actualizar("empresa", "clientes", idAna, recuperado))
-            std::cout << "Cliente actualizado\n";
 
         // Metadatos
         std::cout << "Total clientes: " << db.contar("empresa", "clientes") << "\n";
@@ -99,9 +104,16 @@ preferencias:
                 std::cout << "  Coleccion: " << col << "\n";
         }
 
-        // Eliminacion de ejemplo (mantener Ana y pedido)
-        if (db.eliminar("empresa", "clientes", idLuis))
-            std::cout << "Luis eliminado\n";
+        // Crear, actualizar y eliminar un registro temporal de demostración.
+        YAML::Node prueba;
+        prueba["nombre"] = "Cliente de prueba";
+        prueba["email"] = "prueba@example.invalid";
+        const std::string idPrueba = db.guardar("empresa", "clientes", prueba);
+        prueba["nombre"] = "Cliente de prueba actualizado";
+        db.actualizar("empresa", "clientes", idPrueba, prueba);
+        if (db.eliminar("empresa", "clientes", idPrueba))
+            std::cout << "Cliente de prueba eliminado\n";
+
         std::cout << "Pedido almacenado: " << idPedido << "\n";
         std::cout << "Producto almacenado: " << idProducto << "\n";
     } catch (const std::exception& e) {

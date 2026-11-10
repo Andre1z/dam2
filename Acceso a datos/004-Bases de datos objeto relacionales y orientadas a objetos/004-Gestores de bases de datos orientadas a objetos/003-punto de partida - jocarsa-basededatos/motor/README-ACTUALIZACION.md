@@ -1,4 +1,4 @@
-# Jocarsa BBDD: subconjuntos y CSV seguro
+# Andrei BBDD: subconjuntos y CSV seguro
 
 ## Cambios
 - Jerarquías ilimitadas con un padre por conjunto y varias pertenencias por tabla.
@@ -16,10 +16,10 @@ make all python php
 ```
 
 ## Instalación global
-1. Detén las aplicaciones que escriben en el motor y haz una copia de seguridad consistente de los datos y de `/etc/jocarsa/config.json`.
-2. Revisa la ruta de datos de la configuración. El instalador conserva `/etc/jocarsa/config.json` existente.
+1. Detén las aplicaciones que escriben en el motor y haz una copia de seguridad consistente de los datos y de `/etc/andrei/config.json`.
+2. Revisa la ruta de datos de la configuración. El instalador conserva `/etc/andrei/config.json` existente.
 3. Ejecuta `sudo ./install-system.sh`. Instala el ejecutable, bibliotecas y módulos Python/PHP y reinicia Apache si está activo.
-4. Comprueba `which jocarsabbdd`, `php -m | grep jocarsabbdd` y `python3 -c 'import jocarsabbdd,jocarsaorm;print("OK")'`.
+4. Comprueba `which andreibbdd`, `php -m | grep andreibbdd` y `python3 -c 'import andreibbdd,andreiorm;print("OK")'`.
 5. Asegúrate de que los usuarios de aplicaciones tienen permisos adecuados sobre el directorio de datos.
 
 ## CLI (tras CREAR BASE / USAR)
@@ -39,7 +39,7 @@ Los nombres de colecciones son identificadores únicos en toda la base, no rutas
 
 ## Python nativo
 ```python
-import jocarsabbdd as db
+import andreibbdd as db
 db.usar_base('erp')
 db.crear_coleccion('negocio')
 db.crear_subcoleccion('negocio','ventas')
@@ -49,7 +49,7 @@ print(db.arbol_colecciones()) # JSON string
 ```
 
 ## PHP nativo
-`jocarsabbdd_crear_subcoleccion($padre,$nombre)`, `jocarsabbdd_mover_coleccion($nombre,$padre)`, `jocarsabbdd_subcolecciones_de($nombre)`, `jocarsabbdd_tablas_coleccion_recursiva($nombre)`, `jocarsabbdd_arbol_colecciones()` (JSON string).
+`andreibbdd_crear_subcoleccion($padre,$nombre)`, `andreibbdd_mover_coleccion($nombre,$padre)`, `andreibbdd_subcolecciones_de($nombre)`, `andreibbdd_tablas_coleccion_recursiva($nombre)`, `andreibbdd_arbol_colecciones()` (JSON string).
 
 ## ORM Python/PHP
 `crear_subcoleccion`, `mover_coleccion`, `subcolecciones_de`, `tablas_de_coleccion_recursiva`, `arbol_colecciones` (Python); equivalentes camelCase en PHP.
