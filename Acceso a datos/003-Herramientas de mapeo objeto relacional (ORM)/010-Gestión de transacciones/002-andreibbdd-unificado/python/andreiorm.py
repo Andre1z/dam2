@@ -4,14 +4,14 @@ import os
 
 class AndreiORM:
     def __init__(self, base, config='config.json', biblioteca=None):
-        ruta = biblioteca or os.environ.get('ANDREIBDDD_LIB', 'libandreibbdd.so')
+        ruta = biblioteca or os.environ.get('ANDREIORM_LIB', 'libandreiorm.so')
         self.lib = ctypes.CDLL(ruta)
         L = self.lib
-        L.andreibbdd_orm_abrir.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
-        L.andreibbdd_orm_abrir.restype = ctypes.c_void_p
-        L.andreibbdd_orm_cerrar.argtypes = [ctypes.c_void_p]
-        L.andreibbdd_orm_error.restype = ctypes.c_char_p
-        L.andreibbdd_orm_liberar.argtypes = [ctypes.c_void_p]
+        L.andrei_orm_abrir.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
+        L.andrei_orm_abrir.restype = ctypes.c_void_p
+        L.andrei_orm_cerrar.argtypes = [ctypes.c_void_p]
+        L.andrei_orm_error.restype = ctypes.c_char_p
+        L.andrei_orm_liberar.argtypes = [ctypes.c_void_p]
         for nombre, tipos, retorno in [
             ('guardar',[ctypes.c_char_p,ctypes.c_char_p],ctypes.c_longlong),
             ('obtener',[ctypes.c_char_p,ctypes.c_longlong],ctypes.c_void_p),
@@ -21,19 +21,19 @@ class AndreiORM:
             ('eliminar',[ctypes.c_char_p,ctypes.c_longlong],ctypes.c_int),
             ('contar',[ctypes.c_char_p],ctypes.c_longlong),
         ]:
-            f=getattr(L,'andreibbdd_orm_'+nombre)
+            f=getattr(L,'andrei_orm_'+nombre)
             f.argtypes=[ctypes.c_void_p]+tipos
             f.restype=retorno
-        self.handle=L.andreibbdd_orm_abrir(config.encode(),base.encode())
+        self.handle=L.andrei_orm_abrir(config.encode(),base.encode())
         if not self.handle: raise RuntimeError(self.error())
 
-    def error(self): return self.lib.andreibbdd_orm_error().decode()
+    def error(self): return self.lib.andrei_orm_error().decode()
     def _call(self,nombre,*args,resultado_json=False):
-        result=getattr(self.lib,'andreibbdd_orm_'+nombre)(self.handle,*args)
+        result=getattr(self.lib,'andrei_orm_'+nombre)(self.handle,*args)
         if result is None or (isinstance(result,int) and result == -1): raise RuntimeError(self.error())
         if resultado_json:
             try: return json.loads(ctypes.string_at(result).decode())
-            finally: self.lib.andreibbdd_orm_liberar(result)
+            finally: self.lib.andrei_orm_liberar(result)
         return result
     @staticmethod
     def _s(v): return v.encode('utf-8')
@@ -47,6 +47,6 @@ class AndreiORM:
     def eliminar(self,c,id): return bool(self._call('eliminar',self._s(c),id))
     def contar(self,c): return self._call('contar',self._s(c))
     def cerrar(self):
-        if self.handle: self.lib.andreibbdd_orm_cerrar(self.handle); self.handle=None
+        if self.handle: self.lib.andrei_orm_cerrar(self.handle); self.handle=None
     def __enter__(self): return self
     def __exit__(self,*args): self.cerrar()

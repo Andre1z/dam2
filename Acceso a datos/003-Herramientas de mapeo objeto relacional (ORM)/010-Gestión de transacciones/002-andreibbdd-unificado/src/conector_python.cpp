@@ -136,7 +136,7 @@ static PyObject* consultar_dql(PyObject*, PyObject* args) {
     const char* q; if(!PyArg_ParseTuple(args,"s",&q)) return nullptr;
     try {
         auto r=motor().consultar(q); PyObject* lista=PyList_New(0);
-        for(const auto& fila:r.filas){ PyObject* d=PyDict_New(); for(size_t i=0;i<r.columnas.size();++i){PyObject* v=fila[i]=="__Andrei_NULL__"?Py_NewRef(Py_None):PyUnicode_FromString(fila[i].c_str());PyDict_SetItemString(d,r.columnas[i].c_str(),v);Py_DECREF(v);}PyList_Append(lista,d);Py_DECREF(d);}
+        for(const auto& fila:r.filas){ PyObject* d=PyDict_New(); for(size_t i=0;i<r.columnas.size();++i){PyObject* v=fila[i]=="__ANDREI_NULL__"?Py_NewRef(Py_None):PyUnicode_FromString(fila[i].c_str());PyDict_SetItemString(d,r.columnas[i].c_str(),v);Py_DECREF(v);}PyList_Append(lista,d);Py_DECREF(d);}
         return lista;
     } catch(const std::exception& e){ return error_cpp(e); }
 }

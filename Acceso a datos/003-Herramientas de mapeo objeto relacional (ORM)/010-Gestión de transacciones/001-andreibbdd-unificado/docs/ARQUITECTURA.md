@@ -1,16 +1,16 @@
 # Arquitectura
 
-Python (ctypes) -> libjocarsaorm.so -> JocarsaORM.cpp -> JocarsaBBDD.cpp -> almacenamiento JocarsaBBDD
+Python (ctypes) -> libandreiorm.so -> AndreiORM.cpp -> AndreiBBDD.cpp -> almacenamiento AndreiBBDD
 
-PHP (FFI) -> libjocarsaorm.so -> JocarsaORM.cpp -> JocarsaBBDD.cpp -> almacenamiento JocarsaBBDD
+PHP (FFI) -> libandreiorm.so -> AndreiORM.cpp -> AndreiBBDD.cpp -> almacenamiento AndreiBBDD
 
-Python (extensión SQL original) -> JocarsaBBDD.cpp
+Python (extensión SQL original) -> AndreiBBDD.cpp
 
-PHP (extensión SQL original) -> JocarsaBBDD.cpp
+PHP (extensión SQL original) -> AndreiBBDD.cpp
 
 ## Compatibilidad
 
-Se conservan los archivos originales `JocarsaBBDD.cpp`, `JocarsaBBDD.hpp`, `conector_python.cpp`, `conector_php.cpp` y `main.cpp` extraídos de la documentación proporcionada. La versión ORM anterior basada en SQLite no se instala ni se sobrescribe.
+Se conservan los archivos originales `AndreiBBDD.cpp`, `AndreiBBDD.hpp`, `conector_python.cpp`, `conector_php.cpp` y `main.cpp` extraídos de la documentación proporcionada. La versión ORM anterior basada en SQLite no se instala ni se sobrescribe.
 
 ## Pendientes para una integración definitiva
 

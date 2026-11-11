@@ -161,7 +161,7 @@ int main(int argc,char**argv){
    if(A=="SELECCIONAR"){
     auto U=mayus(linea);
     if(U.find(" DE ")!=std::string::npos){
-      try{auto r=db.consultar(linea);for(size_t i=0;i<r.columnas.size();++i)std::cout<<(i?" | ":"")<<r.columnas[i];std::cout<<"\n";for(const auto&fila:r.filas){for(size_t i=0;i<fila.size();++i)std::cout<<(i?" | ":"")<<(fila[i]=="__Andrei_NULL__"?"NULL":fila[i]);std::cout<<"\n";}std::cout<<r.filas.size()<<" fila(s)\n";}catch(const std::exception&e){std::cout<<"ERROR: "<<e.what()<<"\n";}continue;
+      try{auto r=db.consultar(linea);for(size_t i=0;i<r.columnas.size();++i)std::cout<<(i?" | ":"")<<r.columnas[i];std::cout<<"\n";for(const auto&fila:r.filas){for(size_t i=0;i<fila.size();++i)std::cout<<(i?" | ":"")<<(fila[i]=="__ANDREI_NULL__"?"NULL":fila[i]);std::cout<<"\n";}std::cout<<r.filas.size()<<" fila(s)\n";}catch(const std::exception&e){std::cout<<"ERROR: "<<e.what()<<"\n";}continue;
     }
     long long id;ss>>b>>id;auto r=db.seleccionar(b,id);if(r.empty())std::cout<<"No encontrado\n";else imprimir(r);continue;
    }

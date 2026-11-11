@@ -3,7 +3,7 @@ extern "C" {
 #include <ext/standard/info.h>
 #include <Zend/zend_exceptions.h>
 }
-#include "andreibbdd.hpp"
+#include "AndreiBBDD.hpp"
 #include <algorithm>
 #include <cctype>
 #include <map>
@@ -24,7 +24,7 @@ static bool php_array_strings(zval* arr,std::vector<std::string>& out){
     if(Z_TYPE_P(arr)!=IS_ARRAY) return false;
     zval* v;
     ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(arr),v){
-        if(Z_TYPE_P(v)==IS_NULL){ out.emplace_back("__JOCARSA_NULL__"); continue; }
+        if(Z_TYPE_P(v)==IS_NULL){ out.emplace_back("__ANDREI_NULL__"); continue; }
         zend_string* zs=zval_get_string(v);
         out.emplace_back(ZSTR_VAL(zs),ZSTR_LEN(zs));
         zend_string_release(zs);
@@ -36,7 +36,7 @@ static bool php_assoc_strings(zval* arr,std::map<std::string,std::string>& out){
     zend_string* key; zend_ulong idx; zval* v;
     ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(arr),idx,key,v){
         if(!key) continue;
-        if(Z_TYPE_P(v)==IS_NULL){ out[ZSTR_VAL(key)]="__JOCARSA_NULL__"; continue; }
+        if(Z_TYPE_P(v)==IS_NULL){ out[ZSTR_VAL(key)]="__ANDREI_NULL__"; continue; }
         zend_string* zs=zval_get_string(v);
         out[ZSTR_VAL(key)]=std::string(ZSTR_VAL(zs),ZSTR_LEN(zs));
         zend_string_release(zs);
@@ -61,13 +61,13 @@ static const char* nombre_tipo(TipoDato t){
            t==TipoDato::DECIMAL?"DECIMAL":"TEXTO";
 }
 static void valor_php(zval* z,const std::string& v){
-    if(v=="__JOCARSA_NULL__") ZVAL_NULL(z);
+    if(v=="__ANDREI_NULL__") ZVAL_NULL(z);
     else ZVAL_STRINGL(z,v.c_str(),v.size());
 }
 static void mapa_a_array(const std::map<std::string,std::string>& m,zval* out){
     array_init(out);
     for(const auto&[k,v]:m){
-        if(v=="__JOCARSA_NULL__") add_assoc_null(out,k.c_str());
+        if(v=="__ANDREI_NULL__") add_assoc_null(out,k.c_str());
         else add_assoc_stringl(out,k.c_str(),v.c_str(),v.size());
     }
 }
@@ -128,7 +128,7 @@ PHP_FUNCTION(andreibbdd_establecer_unico){char*t,*c;size_t tl,cl;ZEND_PARSE_PARA
 PHP_FUNCTION(andreibbdd_establecer_por_defecto){char*t,*c,*v;size_t tl,cl,vl;ZEND_PARSE_PARAMETERS_START(3,3) Z_PARAM_STRING(t,tl) Z_PARAM_STRING(c,cl) Z_PARAM_STRING(v,vl) ZEND_PARSE_PARAMETERS_END();try{RETURN_BOOL(motor().establecerPorDefecto(std::string(t,tl),std::string(c,cl),std::string(v,vl)));}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}
 
 /* Consultas */
-PHP_FUNCTION(andreibbdd_consultar){char*q;size_t ql;ZEND_PARSE_PARAMETERS_START(1,1) Z_PARAM_STRING(q,ql) ZEND_PARSE_PARAMETERS_END();try{auto r=motor().consultar(std::string(q,ql));array_init(return_value);for(const auto&f:r.filas){zval row;array_init(&row);for(size_t i=0;i<r.columnas.size();++i){if(f[i]=="__JOCARSA_NULL__")add_assoc_null(&row,r.columnas[i].c_str());else add_assoc_stringl(&row,r.columnas[i].c_str(),f[i].c_str(),f[i].size());}add_next_index_zval(return_value,&row);}}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}
+PHP_FUNCTION(andreibbdd_consultar){char*q;size_t ql;ZEND_PARSE_PARAMETERS_START(1,1) Z_PARAM_STRING(q,ql) ZEND_PARSE_PARAMETERS_END();try{auto r=motor().consultar(std::string(q,ql));array_init(return_value);for(const auto&f:r.filas){zval row;array_init(&row);for(size_t i=0;i<r.columnas.size();++i){if(f[i]=="__ANDREI_NULL__")add_assoc_null(&row,r.columnas[i].c_str());else add_assoc_stringl(&row,r.columnas[i].c_str(),f[i].c_str(),f[i].size());}add_next_index_zval(return_value,&row);}}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}
 PHP_FUNCTION(andreibbdd_explicar){char*q;size_t ql;ZEND_PARSE_PARAMETERS_START(1,1) Z_PARAM_STRING(q,ql) ZEND_PARSE_PARAMETERS_END();try{auto r=motor().explicar(std::string(q,ql));RETURN_STRINGL(r.c_str(),r.size());}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}
 
 /* Índices */
@@ -234,6 +234,6 @@ zend_module_entry andreibbdd_module_entry={
     "1.1",
     STANDARD_MODULE_PROPERTIES
 };
-#ifdef COMPILE_DL_andreibbdd
+#ifdef COMPILE_DL_ANDREIBBDD
 extern "C" { ZEND_GET_MODULE(andreibbdd) }
 #endif

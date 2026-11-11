@@ -82,7 +82,7 @@ Compatibilidad con comandos anteriores:
 )";}
 int main(int argc,char**argv){
  try{
-  std::string cfg=argc>1?argv[1]:"config.json"; Andreibbdd db(cfg); std::cout<<"Andreibbdd C++ - terminal\n"; ayuda(); std::string linea;
+  std::string cfg=argc>1?argv[1]:"config.json"; AndreiBBDD db(cfg); std::cout<<"AndreiBBDD C++ - terminal\n"; ayuda(); std::string linea;
   while(std::cout<<(db.basededatos.empty()?"andreibbdd> ":("andreibbdd["+db.basededatos+"]> "))&&std::getline(std::cin,linea)){
    linea=trim(linea);if(linea.empty())continue;std::istringstream ss(linea);std::string a,b,c;ss>>a;auto A=mayus(a);
    if(A=="SALIR")break;if(A=="AYUDA"){ayuda();continue;}
@@ -161,7 +161,7 @@ int main(int argc,char**argv){
    if(A=="SELECCIONAR"){
     auto U=mayus(linea);
     if(U.find(" DE ")!=std::string::npos){
-      try{auto r=db.consultar(linea);for(size_t i=0;i<r.columnas.size();++i)std::cout<<(i?" | ":"")<<r.columnas[i];std::cout<<"\n";for(const auto&fila:r.filas){for(size_t i=0;i<fila.size();++i)std::cout<<(i?" | ":"")<<(fila[i]=="__JOCARSA_NULL__"?"NULL":fila[i]);std::cout<<"\n";}std::cout<<r.filas.size()<<" fila(s)\n";}catch(const std::exception&e){std::cout<<"ERROR: "<<e.what()<<"\n";}continue;
+      try{auto r=db.consultar(linea);for(size_t i=0;i<r.columnas.size();++i)std::cout<<(i?" | ":"")<<r.columnas[i];std::cout<<"\n";for(const auto&fila:r.filas){for(size_t i=0;i<fila.size();++i)std::cout<<(i?" | ":"")<<(fila[i]=="__ANDREI_NULL__"?"NULL":fila[i]);std::cout<<"\n";}std::cout<<r.filas.size()<<" fila(s)\n";}catch(const std::exception&e){std::cout<<"ERROR: "<<e.what()<<"\n";}continue;
     }
     long long id;ss>>b>>id;auto r=db.seleccionar(b,id);if(r.empty())std::cout<<"No encontrado\n";else imprimir(r);continue;
    }
