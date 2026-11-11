@@ -1,6 +1,6 @@
 /**
- * jocarsa | iu · demostraciones
- * Namespace técnico: jocarsa.iu
+ * Andrei | iu · demostraciones
+ * Namespace técnico: andrei.iu
  */
 window.jocarsa = window.jocarsa || {};
 window.jocarsa.iu = window.jocarsa.iu || {};
