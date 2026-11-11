@@ -17,9 +17,17 @@ try {
  if($authAction==='logout'){$_SESSION=[];session_destroy();echo json_encode(['ok'=>true,'result'=>true]);exit;}
  if($authAction==='auth_status'){echo json_encode(['ok'=>true,'result'=>!empty($_SESSION['switches_auth'])]);exit;}
  if(empty($_SESSION['switches_auth'])){http_response_code(401);echo json_encode(['ok'=>false,'error'=>'No autorizado']);exit;}
- if (!extension_loaded('andreibbdd')) throw new RuntimeException('Falta la extensión PHP andreibbdd. Instala el motor y reinicia Apache.');
- if (!is_file('/etc/andrei/config.json')) throw new RuntimeException('No existe /etc/andrei/config.json');
- andreibbdd_configurar('/etc/andrei/config.json');
+ // Linux: extensión nativa + /etc/andrei/config.json.
+ // Windows (XAMPP): motor/andreibbdd.dll cargada con FFI + motor/config.windows.json.
+ define('ANDREI_CONFIG', getenv('ANDREIBBDD_CONFIG') ?: (PHP_OS_FAMILY === 'Windows'
+  ? dirname(__DIR__) . '/motor/config.windows.json'
+  : '/etc/andrei/config.json'));
+ if (!extension_loaded('andreibbdd')) {
+  if (PHP_OS_FAMILY !== 'Windows') throw new RuntimeException('Falta la extensión PHP andreibbdd. Instala el motor y reinicia Apache.');
+  require_once __DIR__ . '/andreibbdd_ffi.php';
+ }
+ if (!is_file(ANDREI_CONFIG)) throw new RuntimeException('No existe ' . ANDREI_CONFIG);
+ andreibbdd_configurar(ANDREI_CONFIG);
  $input=json_decode(file_get_contents('php://input'),true,512,JSON_THROW_ON_ERROR);
  if (!is_array($input)) throw new RuntimeException('JSON inválido');
  $root=__DIR__.'/private';if(!is_dir($root)&&!mkdir($root,0770,true))throw new RuntimeException('No se puede crear private/');
@@ -37,9 +45,10 @@ try {
  }
  function renameDatabase($old,$new){
   if($old===$new)return;
-  $cfg=json_decode(file_get_contents('/etc/andrei/config.json'),true);
+  $cfg=json_decode(file_get_contents(ANDREI_CONFIG),true);
   $root=$cfg['instalacion']??null;
-  if(!is_string($root)||!str_starts_with($root,'/'))throw new RuntimeException('Para renombrar bases, configura una ruta absoluta en /etc/andrei/config.json (instalacion).');
+  // Ruta absoluta: /... en Linux, C:/... o C:\... en Windows.
+  if(!is_string($root)||!preg_match('#^(/|[A-Za-z]:[\\\\/])#',$root))throw new RuntimeException('Para renombrar bases, configura una ruta absoluta en '.ANDREI_CONFIG.' (instalacion).');
   $root=realpath($root);
   if(!$root||!is_dir($root))throw new RuntimeException('Directorio de bases no disponible');
   foreach([$old,$new] as $v)if(!preg_match('/^[a-z0-9_-]+$/',$v))throw new RuntimeException('Identificador de base inválido');
@@ -58,7 +67,14 @@ try {
  function collectionKey($label){
   $label=trim((string)$label);
   if($label==='')throw new RuntimeException('Colección sin nombre');
-  $map=['ñ'=>'n','Ñ'=>'N','ß'=>'ss','æ'=>'ae','Æ'=>'AE','ø'=>'o','Ø'=>'O'];
+  // Vocales acentuadas incluidas: sin intl, el iconv de Windows translitera
+  // "í" como "'i" (Log'istica) en vez de "i" como en Linux.
+  $map=['ñ'=>'n','Ñ'=>'N','ß'=>'ss','æ'=>'ae','Æ'=>'AE','ø'=>'o','Ø'=>'O','ç'=>'c','Ç'=>'C',
+   'á'=>'a','à'=>'a','ä'=>'a','â'=>'a','ã'=>'a','å'=>'a','Á'=>'A','À'=>'A','Ä'=>'A','Â'=>'A','Ã'=>'A','Å'=>'A',
+   'é'=>'e','è'=>'e','ë'=>'e','ê'=>'e','É'=>'E','È'=>'E','Ë'=>'E','Ê'=>'E',
+   'í'=>'i','ì'=>'i','ï'=>'i','î'=>'i','Í'=>'I','Ì'=>'I','Ï'=>'I','Î'=>'I',
+   'ó'=>'o','ò'=>'o','ö'=>'o','ô'=>'o','õ'=>'o','Ó'=>'O','Ò'=>'O','Ö'=>'O','Ô'=>'O','Õ'=>'O',
+   'ú'=>'u','ù'=>'u','ü'=>'u','û'=>'u','Ú'=>'U','Ù'=>'U','Ü'=>'U','Û'=>'U'];
   $ascii=strtr($label,$map);
   if(function_exists('transliterator_transliterate'))$ascii=transliterator_transliterate('Any-Latin; Latin-ASCII',$ascii);
   elseif(function_exists('iconv')){$converted=@iconv('UTF-8','ASCII//TRANSLIT//IGNORE',$ascii);if($converted!==false)$ascii=$converted;}
