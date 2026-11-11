@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Interfaces Naturales de Usuario
+    </title>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/navegacion.css">
+    <link rel="stylesheet" href="css/panel-control.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/realidad-aumentada.css">
+    <link rel="icon" type="image/png" href="recursos/imagenes/logo.png">
+
+    <!-- MEDIAPIPE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+
+</head>
+
+<body>
+
+    <!-- CABECERA -->
+
+    <header class="cabecera">
+
+        <div class="logo">
+
+            <img
+                src="recursos/imagenes/logo-horizontal.png"
+                alt="Logo">
+
+        </div>
+
+        <div class="estado-aplicacion">
+
+            <span id="estado-sistema">
+                Iniciando sistema...
+            </span>
+
+        </div>
+
+    </header>
+
+    <!-- CONTENIDO -->
+
+    <main class="contenedor-principal">
+
+        <!-- MENÚ -->
+
+        <nav class="navegacion">
+
+            <h2>Interfaces NUI</h2>
+
+            <button id="btn-voz">
+                🎤 Voz
+            </button>
+
+            <button id="btn-manos">
+                ✋ Manos
+            </button>
+
+            <button id="btn-pose">
+                👤 Movimiento
+            </button>
+
+            <button id="btn-ar">
+                📱 Realidad aumentada
+            </button>
+
+            <button id="btn-sistema">
+                ⚙ Sistema
+            </button>
+
+            <hr>
+
+            <section class="acciones-rapidas">
+
+                <h3>Acciones</h3>
+
+                <button id="modo-claro">
+                    🌞 Modo claro
+                </button>
+
+                <button id="modo-oscuro">
+                    🌙 Modo oscuro
+                </button>
+
+            </section>
+
+        </nav>
+
+        <!-- CENTRO -->
+
+        <section class="contenido-principal">
+
+            <!-- TARJETAS -->
+
+            <section class="panel-informacion">
+
+                <!-- VOZ -->
+
+                <div class="tarjeta">
+
+                    <h3>
+                        Reconocimiento de voz
+                    </h3>
+
+                    <div class="estado-audio">
+
+                        <img
+                            id="icono-microfono"
+                            src="recursos/iconos/mic_off.svg"
+                            alt="Micrófono">
+
+                        <p id="texto-voz">
+                            Esperando comandos...
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- MANOS -->
+
+                <div class="tarjeta">
+
+                    <h3>
+                        Detección de manos
+                    </h3>
+
+                    <p id="estado-manos">
+                        Esperando gestos
+                    </p>
+
+                </div>
+
+                <!-- POSE -->
+
+                <div class="tarjeta">
+
+                    <h3>
+                        Movimiento corporal
+                    </h3>
+
+                    <p id="estado-pose">
+                        Esperando movimiento
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- CAMARA -->
+
+            <section class="contenedor-camara">
+
+                <h2>
+                    Cámara e Inteligencia Artificial
+                </h2>
+
+                <div class="estado-camara">
+
+                    <img
+                        id="icono-camara"
+                        src="recursos/iconos/cam_off.svg"
+                        alt="Cámara">
+
+                    <span id="estado-camara">
+                        Iniciando cámara...
+                    </span>
+
+                </div>
+
+                <video
+                    id="camara"
+                    autoplay
+                    muted
+                    playsinline>
+                </video>
+
+                <canvas id="lienzo"></canvas>
+
+            </section>
+
+            <!-- REALIDAD AUMENTADA -->
+
+            <section class="contenedor-ar">
+
+                <h2>
+                    Realidad Aumentada
+                </h2>
+
+                <div class="visor-ar">
+
+                    <div class="panel-ar">
+
+                        <div class="indicador-ar">
+
+                            📱 Esperando activación
+
+                        </div>
+
+                        <div id="escena-ar">
+
+                            <p>
+                                Pulsa "Realidad aumentada"
+                                o utiliza tu voz para activarla.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+        <!-- EVENTOS -->
+
+        <aside class="panel-lateral">
+
+            <h2>
+                Eventos
+            </h2>
+
+            <div id="registro-eventos">
+
+                <div class="evento">
+
+                    <strong>Sistema</strong>
+
+                    Aplicación iniciada
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- PIE -->
+
+    <footer class="pie">
+
+        <p>
+            Proyecto de Interfaces Naturales de Usuario ·
+            Voz · Manos · Movimiento Corporal ·
+            Realidad Aumentada
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/principal.js"></script>
+
+    <!-- VOZ -->
+
+    <script src="js/voz/reconocimiento-voz.js"></script>
+    <script src="js/voz/comandos-voz.js"></script>
+
+    <!-- MANOS -->
+
+    <script src="js/manos/deteccion-manos.js"></script>
+    <script src="js/manos/gestos.js"></script>
+    <script src="js/manos/acciones-manos.js"></script>
+
+    <!-- MOVIMIENTO -->
+
+    <script src="js/movimiento/deteccion-pose.js"></script>
+    <script src="js/movimiento/acciones-pose.js"></script>
+    <script src="js/movimiento/estados-pose.js"></script>
+
+    <!-- REALIDAD AUMENTADA -->
+
+    <script src="js/realidad-aumentada/ar.js"></script>
+    <script src="js/realidad-aumentada/escena-ar.js"></script>
+    <script src="js/realidad-aumentada/objetos-ar.js"></script>
+
+    <!-- INTERFAZ -->
+
+    <script src="js/interfaz/notificaciones.js"></script>
+    <script src="js/interfaz/indicadores.js"></script>
+    <script src="js/interfaz/panel-control.js"></script>
+
+</body>
+
+</html>

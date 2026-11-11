@@ -1,0 +1,398 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediaPipe Face Mesh</title>
+
+  <style>
+    body{
+      background:#222;
+      color:white;
+      font-family:monospace;
+    }
+
+    #contenedor{
+      position:relative;
+      width:640px;
+      height:480px;
+    }
+
+    video,
+    canvas{
+      position:absolute;
+      left:0;
+      top:0;
+      width:640px;
+      height:480px;
+    }
+
+    video{
+      opacity:0;
+    }
+
+    canvas{
+      z-index:2;
+    }
+
+    :root{
+      color-scheme:light;
+      --naranja:#f97316;
+      --azul:#1d4ed8;
+      --azul-claro:#eff6ff;
+      --blanco:#fff;
+      --negro:#111827;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      padding:32px 18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      background:var(--azul-claro);
+      color:var(--negro);
+      font-family:Arial,sans-serif;
+    }
+
+    h1{
+      width:min(100%,800px);
+      margin:0;
+      padding:18px 22px;
+      border-top:5px solid var(--naranja);
+      border-radius:12px;
+      background:var(--blanco);
+      color:var(--azul);
+      font-size:clamp(1.4rem,4vw,2rem);
+      box-shadow:0 10px 30px #11182714;
+    }
+
+    #contenedor{
+      width:min(100%,800px);
+      height:auto;
+      aspect-ratio:4/3;
+      overflow:hidden;
+      border:3px solid var(--azul);
+      border-radius:12px;
+      background:var(--negro);
+      box-shadow:0 16px 36px #11182724;
+    }
+
+    video,canvas{
+      width:100%;
+      height:100%;
+    }
+
+    @media(max-width:520px){
+      body{padding:18px 12px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>MediaPipe Face Mesh</h1>
+
+  <div id="contenedor">
+
+    <video
+      id="video"
+      width="640"
+      height="480"
+      autoplay
+      muted
+      playsinline>
+    </video>
+
+    <canvas
+      id="canvas"
+      width="640"
+      height="480">
+    </canvas>
+
+  </div>
+
+
+  <script type="module">
+
+    import {
+      FaceLandmarker,
+      FilesetResolver,
+      DrawingUtils
+    } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest";
+
+
+    const video = document.querySelector("#video");
+    const canvas = document.querySelector("#canvas");
+    const ctx = canvas.getContext("2d");
+
+
+    // ============================================
+    // 1. WEBCAM
+    // ============================================
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video:{
+        width:640,
+        height:480
+      }
+    });
+
+    video.srcObject = stream;
+
+    await video.play();
+
+    console.log("Webcam funcionando");
+
+    console.log(
+      "Resolución:",
+      video.videoWidth,
+      video.videoHeight
+    );
+
+
+    // ============================================
+    // 2. MEDIAPIPE
+    // ============================================
+
+    const vision = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+    );
+
+
+    const detector = await FaceLandmarker.createFromOptions(
+      vision,
+      {
+        baseOptions:{
+          modelAssetPath:
+          "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
+        },
+
+        runningMode:"VIDEO",
+
+        numFaces:1,
+
+        minFaceDetectionConfidence:0.5,
+        minFacePresenceConfidence:0.5,
+        minTrackingConfidence:0.5
+      }
+    );
+
+
+    console.log("MediaPipe Face Landmarker cargado");
+
+
+    // ============================================
+    // 3. DRAWING UTILS
+    // ============================================
+
+    const dibujo = new DrawingUtils(ctx);
+
+
+    // ============================================
+    // 4. LOOP
+    // ============================================
+
+    function detectar(){
+
+      // ------------------------------------------
+      // Webcam
+      // ------------------------------------------
+
+      ctx.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      // ------------------------------------------
+      // Detectar
+      // ------------------------------------------
+
+      const resultado = detector.detectForVideo(
+        video,
+        performance.now()
+      );
+
+
+      // ==========================================
+      // DEBUG
+      // ==========================================
+
+      ctx.fillStyle = "rgba(0,0,0,0.7)";
+      ctx.fillRect(10,10,180,55);
+
+      ctx.fillStyle = "white";
+      ctx.font = "14px monospace";
+
+      ctx.fillText(
+        "Faces: " + resultado.faceLandmarks.length,
+        20,
+        32
+      );
+
+      ctx.fillText(
+        "Video: " + video.readyState,
+        20,
+        52
+      );
+
+
+      // ==========================================
+      // CADA CARA
+      // ==========================================
+
+      for(const puntos of resultado.faceLandmarks){
+
+
+        // ========================================
+        // MALLA COMPLETA
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_TESSELATION,
+          {
+            color:"rgba(0,255,0,0.35)",
+            lineWidth:1
+          }
+        );
+
+
+        // ========================================
+        // CONTORNO
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
+          {
+            color:"lime",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // OJO IZQUIERDO
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
+          {
+            color:"yellow",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // OJO DERECHO
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+          {
+            color:"yellow",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // CEJA IZQUIERDA
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW,
+          {
+            color:"cyan",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // CEJA DERECHA
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW,
+          {
+            color:"cyan",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // LABIOS
+        // ========================================
+
+        dibujo.drawConnectors(
+          puntos,
+          FaceLandmarker.FACE_LANDMARKS_LIPS,
+          {
+            color:"red",
+            lineWidth:2
+          }
+        );
+
+
+        // ========================================
+        // LANDMARKS
+        // ========================================
+
+        for(
+          let i = 0;
+          i < puntos.length;
+          i++
+        ){
+
+          const punto = puntos[i];
+
+          const x = punto.x * canvas.width;
+          const y = punto.y * canvas.height;
+
+          ctx.fillStyle = "white";
+
+          ctx.beginPath();
+
+          ctx.arc(
+            x,
+            y,
+            1.5,
+            0,
+            Math.PI*2
+          );
+
+          ctx.fill();
+
+        }
+
+      }
+
+
+      requestAnimationFrame(detectar);
+    }
+
+
+    // ============================================
+    // 5. START
+    // ============================================
+
+    detectar();
+
+  </script>
+
+</body>
+</html>

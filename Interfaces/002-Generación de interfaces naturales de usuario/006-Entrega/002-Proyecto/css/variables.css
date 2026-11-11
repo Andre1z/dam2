@@ -1,0 +1,151 @@
+:root{
+
+    /* =====================================
+       COLORES PRINCIPALES
+    ===================================== */
+
+    --naranja:#f97316;
+
+    --azul:#1d4ed8;
+    --azul-medio:#1e40af;
+    --azul-claro:#eff6ff;
+    --azul-palido:#dbeafe;
+
+    --blanco:#ffffff;
+    --negro:#111827;
+
+    /* =====================================
+       COLORES DEL SISTEMA
+    ===================================== */
+
+    --correcto:#10b981;
+    --aviso:#f59e0b;
+    --error:#ef4444;
+
+    /* =====================================
+       MAPA DE COLORES
+    ===================================== */
+
+    --color0:var(--negro);
+
+    --color:var(--azul);
+    --color2:var(--azul-medio);
+    --color3:var(--azul-claro);
+    --color4:var(--azul-palido);
+
+    /* =====================================
+       COLORES DE INTERFAZ
+    ===================================== */
+
+    --texto-nav:var(--blanco);
+
+    --fondo-web:var(--azul-claro);
+    --fondo-panel:var(--blanco);
+    --fondo-tarjeta:var(--blanco);
+
+    --texto-principal:var(--negro);
+    --texto-secundario:#4b5563;
+
+    /* =====================================
+       DIMENSIONES
+    ===================================== */
+
+    --ancho-nav:210px;
+
+    /* Panel de eventos */
+    --ancho-section:350px;
+
+    --alto-cabecera:60px;
+    --alto-pie:40px;
+
+    --alto-boton:42px;
+
+    /* =====================================
+       ESPACIADOS
+    ===================================== */
+
+    --relleno:12px;
+    --texto:12px;
+    --chaflan:12px;
+
+    --espacio-xs:6px;
+    --espacio-sm:10px;
+    --espacio-md:16px;
+    --espacio-lg:20px;
+    --espacio-xl:30px;
+
+    /* =====================================
+       BORDES
+    ===================================== */
+
+    --borde:
+        1px solid var(--azul-palido);
+
+    --borde-fuerte:
+        2px solid var(--azul);
+
+    /* =====================================
+       SOMBRAS
+    ===================================== */
+
+    --sombra-suave:
+        0 4px 12px rgba(0,0,0,0.08);
+
+    --sombra-media:
+        0 8px 20px rgba(0,0,0,0.12);
+
+    --sombra-fuerte:
+        0 12px 30px rgba(0,0,0,0.20);
+
+    /* =====================================
+       TRANSICIONES
+    ===================================== */
+
+    --transicion:
+        all .25s ease;
+
+    --transicion-lenta:
+        all .4s ease;
+
+    /* =====================================
+       Z-INDEX
+    ===================================== */
+
+    --z-cabecera:100;
+    --z-menu:90;
+    --z-modal:1000;
+
+    /* =====================================
+       REALIDAD AUMENTADA
+    ===================================== */
+
+    --alto-visor-ar:600px;
+
+    /* =====================================
+       CÁMARA
+    ===================================== */
+
+    --alto-camara:500px;
+
+    /* =====================================
+       EVENTOS
+    ===================================== */
+
+    --color-evento-fondo:#111827;
+    --color-evento-texto:#ffffff;
+    --color-evento-fecha:#60a5fa;
+
+    /* =====================================
+       BOTONES
+    ===================================== */
+
+    --color-boton:var(--naranja);
+    --color-boton-hover:#ea580c;
+
+    /* =====================================
+       TARJETAS
+    ===================================== */
+
+    --radio-tarjeta:12px;
+
+}

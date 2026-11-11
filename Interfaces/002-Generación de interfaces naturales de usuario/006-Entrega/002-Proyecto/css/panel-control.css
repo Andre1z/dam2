@@ -1,0 +1,149 @@
+/* =====================================
+   PANEL DERECHO
+===================================== */
+
+.panel-lateral{
+    width:350px;
+    min-width:350px;
+
+    background:#ffffff;
+
+    border-left:2px solid var(--azul-palido);
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+.panel-lateral h2{
+    color:var(--azul);
+
+    margin-bottom:15px;
+
+    font-size:24px;
+
+    font-weight:700;
+}
+
+/* =====================================
+   REGISTRO DE EVENTOS
+===================================== */
+
+#registro-eventos{
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+    overflow-y:auto;
+
+    padding-right:8px;
+}
+
+/* =====================================
+   EVENTOS
+===================================== */
+
+.evento{
+    background:#111827;
+
+    color:#ffffff;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border-left:5px solid var(--naranja);
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.15);
+
+    line-height:1.5;
+
+    font-size:14px;
+
+    word-break:break-word;
+
+    transition:all .3s ease;
+}
+
+.evento:hover{
+    transform:translateY(-2px);
+}
+
+.evento strong{
+    display:block;
+
+    color:#60a5fa;
+
+    margin-bottom:6px;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+/* =====================================
+   SCROLLBAR
+===================================== */
+
+#registro-eventos::-webkit-scrollbar{
+    width:10px;
+}
+
+#registro-eventos::-webkit-scrollbar-track{
+    background:#e5e7eb;
+    border-radius:20px;
+}
+
+#registro-eventos::-webkit-scrollbar-thumb{
+    background:var(--azul);
+    border-radius:20px;
+}
+
+#registro-eventos::-webkit-scrollbar-thumb:hover{
+    background:var(--azul-medio);
+}
+
+/* =====================================
+   CÁMARA
+===================================== */
+
+.contenedor-camara{
+    background:var(--blanco);
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:var(--sombra-suave);
+}
+
+.contenedor-camara h2{
+    color:var(--azul);
+
+    margin-bottom:15px;
+}
+
+#camara{
+    width:100%;
+
+    min-height:500px;
+
+    background:black;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    border:2px solid var(--azul-palido);
+}
+
+#lienzo{
+    display:none;
+}
