@@ -67,7 +67,7 @@ static TipoDato tipoDesdeNombre(std::string s){
     return TipoDato::TEXTO;
 }
 bool AndreiBBDD::validarTipo(TipoDato t,const std::string& v) const{
-    if(v.empty()||v=="__JOCARSA_NULL__") return true;
+    if(v.empty()||v=="__ANDREI_NULL__") return true;
     try{
         size_t n=0;
         if(t==TipoDato::ENTERO){std::stoll(v,&n);return n==v.size();}
@@ -79,7 +79,7 @@ bool AndreiBBDD::validarTipo(TipoDato t,const std::string& v) const{
 }
 std::string AndreiBBDD::normalizarTipo(TipoDato t,const std::string& v) const{
     std::string up=v;std::transform(up.begin(),up.end(),up.begin(),[](unsigned char c){return std::toupper(c);});
-    if(up=="NULL") return "__JOCARSA_NULL__";
+    if(up=="NULL") return "__ANDREI_NULL__";
     if(t!=TipoDato::BOOLEANO||v.empty()) return v;
     std::string x=v;std::transform(x.begin(),x.end(),x.begin(),[](unsigned char c){return std::toupper(c);});
     return (x=="1"||x=="VERDADERO"||x=="TRUE")?"1":"0";
@@ -522,9 +522,9 @@ ResultadoConsulta AndreiBBDD::consultarInterno(const std::string& consulta, int 
                 bool coincide=j.tipo=="CROSS";if(!coincide){auto vi=comb.find(j.izq),vd=comb.find(j.der);if(vi==comb.end()||vd==comb.end())throw std::runtime_error("Columna JOIN no encontrada");coincide=vi->second==vd->second;}
                 if(coincide){nuevas.push_back(std::move(comb));encontrado=true;usados[ri]=true;}
             }
-            if((j.tipo=="LEFT"||j.tipo=="FULL")&&!encontrado){auto comb=acum;for(const auto&c:ej){comb[j.alias+"."+c]="__JOCARSA_NULL__";if(!comb.count(c))comb[c]="__JOCARSA_NULL__";}nuevas.push_back(std::move(comb));}
+            if((j.tipo=="LEFT"||j.tipo=="FULL")&&!encontrado){auto comb=acum;for(const auto&c:ej){comb[j.alias+"."+c]="__ANDREI_NULL__";if(!comb.count(c))comb[c]="__ANDREI_NULL__";}nuevas.push_back(std::move(comb));}
         }
-        if(j.tipo=="RIGHT"||j.tipo=="FULL")for(size_t ri=0;ri<derechas.size();++ri)if(!usados[ri]){std::map<std::string,std::string> comb;for(const auto&c:esquemaBase){comb[aliasBase+"."+c]="__JOCARSA_NULL__";comb[c]="__JOCARSA_NULL__";}auto q=cualificar(j.alias,derechas[ri]);for(const auto&[k,v]:q)if(k.find('.')!=std::string::npos||!comb.count(k))comb[k]=v;nuevas.push_back(std::move(comb));}
+        if(j.tipo=="RIGHT"||j.tipo=="FULL")for(size_t ri=0;ri<derechas.size();++ri)if(!usados[ri]){std::map<std::string,std::string> comb;for(const auto&c:esquemaBase){comb[aliasBase+"."+c]="__ANDREI_NULL__";comb[c]="__ANDREI_NULL__";}auto q=cualificar(j.alias,derechas[ri]);for(const auto&[k,v]:q)if(k.find('.')!=std::string::npos||!comb.count(k))comb[k]=v;nuevas.push_back(std::move(comb));}
         filas=std::move(nuevas);
     }
     if(estrella){for(const auto&c:esquemaSalida)campos.push_back({c,c,""});}

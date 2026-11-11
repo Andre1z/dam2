@@ -40,7 +40,7 @@ static TipoDato tipo_desde_php(const std::string& n){
     return TipoDato::TEXTO;
 }
 static const char* nombre_tipo(TipoDato t){return t==TipoDato::ENTERO?"ENTERO":t==TipoDato::REAL?"REAL":t==TipoDato::BOOLEANO?"BOOLEANO":t==TipoDato::FECHA?"FECHA":t==TipoDato::DECIMAL?"DECIMAL":"TEXTO";}
-static void mapa_a_array(const std::map<std::string,std::string>& m,zval* out){array_init(out);for(const auto&[k,v]:m){if(v=="__JOCARSA_NULL__")add_assoc_null(out,k.c_str());else add_assoc_stringl(out,k.c_str(),v.c_str(),v.size());}}
+static void mapa_a_array(const std::map<std::string,std::string>& m,zval* out){array_init(out);for(const auto&[k,v]:m){if(v=="__ANDREI_NULL__")add_assoc_null(out,k.c_str());else add_assoc_stringl(out,k.c_str(),v.c_str(),v.size());}}
 
 PHP_FUNCTION(andreibbdd_configurar){char* c;size_t n;ZEND_PARSE_PARAMETERS_START(1,1) Z_PARAM_STRING(c,n) ZEND_PARSE_PARAMETERS_END();try{g_config.assign(c,n);g_motor=std::make_unique<AndreiBBDD>(g_config);RETURN_TRUE;}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}
 PHP_FUNCTION(andreibbdd_crear_base){char*n;size_t l;ZEND_PARSE_PARAMETERS_START(1,1) Z_PARAM_STRING(n,l) ZEND_PARSE_PARAMETERS_END();try{RETURN_BOOL(motor().creaBaseDatos(std::string(n,l)));}catch(const std::exception&e){lanzar(e);RETURN_THROWS();}}

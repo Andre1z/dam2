@@ -1350,7 +1350,7 @@ INSERTAR EN clientes VALORES ('Luis',NULL,'50.50')
 
 `FECHA` valida el formato `AAAA-MM-DD`. `DECIMAL` valida un valor decimal. En esta versión `DECIMAL` sigue usando conversión numérica de punto flotante y no es todavía un decimal exacto financiero.
 
-`NULL` ya se diferencia internamente de `""`. Su representación física reservada es `__JOCARSA_NULL__`; terminal y conectores lo presentan como `NULL`/`None`/`null`. Queda pendiente completar la lógica SQL ternaria y operadores `ES NULO` / `NO ES NULO`.
+`NULL` ya se diferencia internamente de `""`. Su representación física reservada es `__ANDREI_NULL__`; terminal y conectores lo presentan como `NULL`/`None`/`null`. Queda pendiente completar la lógica SQL ternaria y operadores `ES NULO` / `NO ES NULO`.
 
 ## Fase 4 — Alias y JOIN ampliado
 
