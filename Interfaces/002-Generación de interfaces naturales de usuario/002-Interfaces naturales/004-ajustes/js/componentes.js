@@ -1,13 +1,13 @@
 /**
- * jocarsa | iu
+ * andrei | iu
  * Control principal de la interfaz mediante programación orientada a objetos.
  *
  * Nota sobre el namespace:
  * JavaScript no admite "|" dentro de un identificador. Por ello el namespace
- * técnico equivalente es `jocarsa.iu`.
+ * técnico equivalente es `andrei.iu`.
  */
-window.jocarsa = window.jocarsa || {};
-window.jocarsa.iu = window.jocarsa.iu || {};
+window.andrei = window.andrei || {};
+window.andrei.iu = window.andrei.iu || {};
 
 (() => {
   "use strict";
