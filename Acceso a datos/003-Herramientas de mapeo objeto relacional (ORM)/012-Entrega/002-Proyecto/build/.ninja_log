@@ -1,0 +1,12 @@
+# ninja log v7
+23	5173	8161009204877183	CMakeFiles/sqlite3.dir/C_/xampp/perl/vendor/lib/auto/share/dist/DBD-SQLite/sqlite3.c.obj	b3756cfbf33ba4a2
+31	5921	8161009204957188	CMakeFiles/crm.dir/src/main.cpp.obj	3729fff840066212
+29	358	8161009600195872	libsqlite3.a	463319fe63afae31
+76	5331	8161009600661164	CMakeFiles/crm.dir/repositorios/usuariorepositorio.cpp.obj	50b05dc2cd605b39
+52	5385	8161009600425909	CMakeFiles/crm.dir/repositorios/contactorepositorio.cpp.obj	c29942fd142258ac
+67	5531	8161009600575971	CMakeFiles/crm.dir/repositorios/actividadrepositorio.cpp.obj	6d5bede362cecabd
+83	5552	8161009600731192	CMakeFiles/crm.dir/repositorios/tarearepositorio.cpp.obj	dcd36fbaf93b4674
+59	5705	8161009600495996	CMakeFiles/crm.dir/repositorios/oportunidadrepositorio.cpp.obj	cf1d543239c43a28
+32	4011	8161009853349248	CMakeFiles/crm.dir/repositorios/empresarepositorio.cpp.obj	13e42fa4fe5e7182
+25	4053	8161009853269239	CMakeFiles/crm.dir/repositorios/clienterepositorio.cpp.obj	8a07eef77c1dbca6
+4053	5019	8161009893558777	crm.exe	3f7510a4ad585c8
