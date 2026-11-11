@@ -1,0 +1,146 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "tipo": "curriculum_vitae",
+    "version": "1.0",
+    "actualizado": "2026-10-08",
+    "datos_personales": {
+        "nombre": "Andrei",
+        "apellidos": "Buga Mihailescu",
+        "nombre_profesional": "Andrei Buga",
+        "marca_profesional": "Andrei",
+        "fecha_nacimiento": "2006-02-01",
+        "nacionalidad": "Española",
+        "ubicacion": "Valencia, España",
+        "telefono": "+34 643 435 455",
+        "email": "bugaandrei1@gmail.com",
+        "web_empresa": "https://nuvantishop.es",
+        "linkedin": "https://www.linkedin.com/in/andrei-buga-mihailescu-a0719a441/",
+        "github": "https://github.com/Andre1z?tab=repositories"
+    },
+    "perfil_profesional": {
+        "titulo": "Tecnico en sistemas informaticos y programacion",
+        "experiencia_desde": 2022,
+        "especialidades": [
+            "Desarrollo de software full-stack",
+            "Inteligencia artificial generativa",
+            "LLM, RAG y agentes de IA",
+            "Ingeniería y administración de bases de datos",
+            "Arquitectura de aplicaciones empresariales",
+            "Automatización de procesos",
+            "Administración de sistemas Linux",
+            "Diseño industrial y visualización 3D"
+        ]
+    },
+    "formacion_academica": [
+        {
+            "titulo": "Tecnico en Sistemas Informaticos y redes",
+            "institucion": "Ilerna Lleida",
+            "inicio": "2022",
+            "fin": "2024",
+            "tipo": "Formacion profesional de grado medio"
+        },
+        {
+            "titulo": "Tecnico de Desarrollo de Aplicaciones Multiplataforma",
+            "institucion": "TAME Formación",
+            "inicio": 2024,
+            "fin": "Actualidad",
+            "tipo": "Formacion profesional de grado superior"
+        }
+    ],
+    "proyectos_destacados": [
+        {
+            "nombre": "Easy Convert",
+            "categoria": "Aplicación de escritorio",
+            "descripcion": "Conversor de imágenes con selección y arrastre de archivos, compatible con formatos como JPEG, PNG, BMP, GIF, WEBP y TIFF.",
+            "url": "https://github.com/Andre1z/andrei-converter",
+            "tecnologias": [
+                "Python",
+                "Tkinter",
+                "Pillow",
+                "tkinterdnd2"
+            ]
+        },
+        {
+            "nombre": "Peggle Nights Recreation",
+            "categoria": "Videojuego",
+            "descripcion": "Recreación de Peggle con física de bola, colisiones, generación de niveles y sistema de puntuación.",
+            "url": "https://github.com/Andre1z/peggle",
+            "tecnologias": [
+                "Python",
+                "Pygame"
+            ]
+        },
+        {
+            "nombre": "VistaHub",
+            "categoria": "Aplicación web",
+            "descripcion": "Plataforma web con panel interactivo, gestión de datos, informes y control de usuarios y permisos.",
+            "url": "https://github.com/Andre1z/VistaHub-Andrei",
+            "tecnologias": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "PHP",
+                "MySQL"
+            ]
+        },
+        {
+            "nombre": "PyIDE",
+            "categoria": "Herramienta de desarrollo",
+            "descripcion": "Entorno de desarrollo en Python con explorador de proyectos, editor con resaltado, gestión de archivos y ejecución y depuración de código.",
+            "url": "https://github.com/Andre1z/IDE",
+            "tecnologias": [
+                "Python",
+                "PySide6"
+            ]
+        }
+    ],
+    "publicaciones_y_contenidos": {
+        "nota": "La bibliografía completa y los datos editoriales están pendientes de consolidación.",
+        "tipos": [
+            "Libros técnicos",
+            "Documentación técnica"
+        ],
+        "tematicas": [
+            "Python",
+            "C++",
+            "SQL",
+            "Java",
+            "Linux",
+            "Desarrollo web",
+            "Bases de datos",
+            "Inteligencia artificial"
+        ],
+        "publicaciones_conocidas": []
+    },
+    "idiomas": [
+        {
+            "idioma": "Rumano",
+            "nivel": "Nativo"
+        },
+        {
+            "idioma": "Español / Ingles",
+            "nivel": "Profesional / técnico",
+            "certificacion": null
+        },
+        {
+            "idioma": "Italiano",
+            "nivel": "Básico",
+            "certificacion": null
+        }
+    ],
+    "competencias_profesionales": [
+        "Programación de aplicaciones y contenidos multimedia",
+        "Diseño de interfaces y experiencias interactivas",
+        "Edición y producción de imagen, audio y vídeo",
+        "Gestión de bases de datos y servicios web",
+        "Instalación y administración de sistemas operativos",
+        "Gestión de usuarios, redes y permisos",
+        "Seguridad, copias de respaldo y virtualización",
+        "Diagnóstico y resolución de incidencias técnicas"
+    ],
+    "datos_pendientes_de_verificacion": [
+        "Denominación oficial de algunas titulaciones",
+        "Listado individual de cursos y certificaciones",
+        "Bibliografía completa y referencias editoriales"
+    ]
+}
