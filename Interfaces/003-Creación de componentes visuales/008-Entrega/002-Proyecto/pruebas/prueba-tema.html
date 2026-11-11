@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Prueba Tema
+    </title>
+
+</head>
+
+<body>
+
+    <h1>
+        Prueba de Modos
+    </h1>
+
+    <button onclick="probarClaro()">
+        Modo Claro
+    </button>
+
+    <button onclick="probarOscuro()">
+        Modo Oscuro
+    </button>
+
+    <script>
+
+        const sistema = {
+
+            modoOscuro:false
+
+        };
+
+        function activarModoClaro(){
+
+            sistema.modoOscuro =
+            false;
+
+        }
+
+        function activarModoOscuro(){
+
+            sistema.modoOscuro =
+            true;
+
+        }
+
+        function probarClaro(){
+
+            activarModoClaro();
+
+            console.assert(
+                sistema.modoOscuro ===
+                false
+            );
+
+            alert(
+                "✅ Modo claro correcto"
+            );
+
+        }
+
+        function probarOscuro(){
+
+            activarModoOscuro();
+
+            console.assert(
+                sistema.modoOscuro ===
+                true
+            );
+
+            alert(
+                "✅ Modo oscuro correcto"
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

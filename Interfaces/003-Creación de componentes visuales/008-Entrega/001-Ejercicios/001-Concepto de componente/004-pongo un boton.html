@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formato de texto | Componente visual</title>
+    <style>
+      :root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827}
+      *{box-sizing:border-box}
+      body{min-height:100vh;margin:0;padding:clamp(16px,5vw,48px);display:grid;place-items:start center;background:#f3f6fb;color:var(--negro);font-family:Arial,sans-serif}
+      .jocarsa-texto{width:min(100%,680px);overflow:hidden;border:1px solid #d5deed;border-radius:14px;background:var(--blanco);box-shadow:0 12px 32px #11182714;font-family:Arial,sans-serif}
+      .jocarsa-texto .barra{display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:#f3f6fb;border-bottom:1px solid #d5deed}
+      .jocarsa-texto button{min-width:36px;height:36px;cursor:pointer;border:1px solid #cbd5e1;background:var(--blanco);color:var(--negro);border-radius:8px;font-weight:600;transition:background .15s ease,border-color .15s ease,color .15s ease}
+      .jocarsa-texto button:hover{border-color:var(--azul);background:var(--azul);color:var(--blanco)}
+      .jocarsa-texto article{width:100%;min-height:min(65vh,480px);padding:18px;overflow:auto;outline:none;color:var(--negro);font:16px/1.6 Arial,sans-serif}
+      .jocarsa-texto article:focus{outline:3px solid #1d4ed833}
+      .jocarsa-texto textarea{width:100%;min-height:200px;padding:14px;border:0;border-top:1px solid #d5deed;color:var(--negro);font:14px/1.5 Consolas,monospace}
+      @media(max-width:600px){body{padding:16px}.jocarsa-texto article{min-height:60vh;padding:14px;font-size:15px}.jocarsa-texto .barra{gap:5px;padding:8px}.jocarsa-texto button{min-width:34px;height:36px}}
+    </style>
+  </head>
+  <body>
+    <jocarsa-texto></jocarsa-texto>
+    <script>
+      let elementos = document.querySelectorAll("jocarsa-texto");
+      elementos.forEach(function(elemento){
+        let elementoenmemoria = elemento;
+        let contenedor = document.createElement("div");
+        contenedor.classList.add("jocarsa-texto");
+        elementoenmemoria.after(contenedor);
+        elemento.remove();
+        let boton_negrita = document.createElement("button");
+        boton_negrita.type = "button";
+        boton_negrita.textContent = "B";
+        boton_negrita.setAttribute("aria-label","Aplicar negrita");
+        contenedor.appendChild(boton_negrita);
+        boton_negrita.onclick = function(){
+          console.log("Te pongo el texto seleccionado en negrita");
+        };
+        let contenedor_rico = document.createElement("article");
+        let contenedor_pobre = document.createElement("textarea");
+        contenedor.appendChild(contenedor_rico);
+        contenedor.appendChild(contenedor_pobre);
+        contenedor_pobre.style.display = "none";
+        contenedor_rico.setAttribute("contenteditable",true);
+        contenedor_rico.setAttribute("role","textbox");
+        contenedor_rico.setAttribute("aria-label","Editor de texto");
+        contenedor_rico.setAttribute("aria-multiline","true");
+        contenedor_rico.oninput = function(){
+          contenedor_pobre.value = contenedor_rico.innerHTML;
+        };
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Andrei Buga | Componentes visuales</title>
+  <style>
+    :root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827}
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;padding:clamp(16px,5vw,48px);background:#f3f6fb;color:var(--negro);font:16px/1.6 Arial,sans-serif}
+    form{width:min(100%,1080px);margin:0 auto;padding:clamp(18px,4vw,36px);border:1px solid #d5deed;border-top:6px solid var(--naranja);border-radius:18px;background:var(--blanco);box-shadow:0 16px 44px #11182714}
+    h1{margin:0;color:var(--negro);font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.2}
+    .introduccion{margin:8px 0 26px;color:#475569}
+    label{display:block;margin:0 0 6px;font-weight:700}
+    input[type=text]{width:100%;max-width:720px;min-height:46px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:9px;color:var(--negro);font:inherit}
+    input[type=text]:focus{outline:3px solid #1d4ed833;border-color:var(--azul)}
+    h2{margin:30px 0 10px;padding-left:12px;border-left:4px solid var(--naranja);color:var(--azul);font-size:1.2rem;line-height:1.3}
+    form>p:last-child{margin:28px 0 0}
+    button[type=submit]{min-height:46px;padding:0 22px;border:0;border-radius:9px;background:var(--naranja);color:var(--blanco);font:700 15px Arial,sans-serif;cursor:pointer;transition:background .15s ease,transform .15s ease}
+    button[type=submit]:hover{background:#ea580c;transform:translateY(-1px)}
+    button:focus-visible{outline:3px solid #1d4ed855;outline-offset:3px}
+    @media(max-width:600px){body{padding:12px}form{padding:18px 14px;border-radius:14px}.introduccion{margin-bottom:20px}h2{margin-top:24px}}
+  </style>
+</head>
+<body>
+<form action="procesa.php" method="POST">
+  <h1>Andrei Buga</h1>
+  <p class="introduccion">Demostración de componentes visuales interactivos.</p>
+  <label for="nombre">Nombre</label>
+  <p><input id="nombre" type="text" name="nombre" placeholder="Andrei Buga" autocomplete="name"></p>
+  <h2>Editor rico</h2><jocarsa-texto name="mensaje"><p>Hola <b>mundo</b></p></jocarsa-texto>
+  <h2>Markdown</h2><jocarsa-markdown name="documentacion"># Título
+
+Texto con **negrita** y *cursiva*.</jocarsa-markdown>
+  <h2>Editor de código</h2><jocarsa-editor name="codigo" language="javascript">function hola(){
+  console.log("Hola mundo");
+}</jocarsa-editor>
+  <h2>Firma</h2><jocarsa-firma name="firma"></jocarsa-firma>
+  <h2>DataTable</h2><jocarsa-tabla><table><thead><tr><th>Nombre</th><th>Apellidos</th><th>Edad</th><th>Ciudad</th></tr></thead><tbody>
+    <tr><td>Ana</td><td>García</td><td>28</td><td>Valencia</td></tr><tr><td>Juan</td><td>Martínez</td><td>35</td><td>Madrid</td></tr><tr><td>Laura</td><td>Sánchez</td><td>22</td><td>Sevilla</td></tr><tr><td>Carlos</td><td>López</td><td>41</td><td>Valencia</td></tr><tr><td>Marta</td><td>Ruiz</td><td>31</td><td>Alicante</td></tr>
+  </tbody></table></jocarsa-tabla>
+  <h2>TreeView</h2><jocarsa-arbol name="seleccion_arbol"><ul><li>Documentos<ul><li>factura.pdf</li><li>informe.pdf</li></ul></li><li>Proyectos<ul><li>andrei-buga<ul><li>index.html</li><li>app.js</li></ul></li></ul></li></ul></jocarsa-arbol>
+  <h2>Calendario mensual</h2><jocarsa-calendario name="fecha" value="2026-10-02"></jocarsa-calendario>
+  <h2>Calendario semanal con slots</h2><jocarsa-semana name="cita" value="2026-10-02 18:30" inicio="08:00" fin="21:00" intervalo="30"></jocarsa-semana>
+  <h2>Selector de hora circular</h2><jocarsa-hora name="hora" value="18:35:20"></jocarsa-hora>
+  <p><button type="submit">Enviar formulario</button></p>
+</form>
+<script src="andrei-ui.js"></script>
+</body></html>

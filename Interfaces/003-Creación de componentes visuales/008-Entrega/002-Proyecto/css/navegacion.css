@@ -1,0 +1,140 @@
+/* ==========================
+   NAVEGACIÓN LATERAL
+========================== */
+
+.navegacion{
+    width:var(--ancho-nav);
+
+    background:var(--azul);
+
+    color:var(--texto-nav);
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    overflow-y:auto;
+}
+
+.navegacion h2{
+    margin-bottom:10px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    color:var(--blanco);
+}
+
+.navegacion h3{
+    font-size:14px;
+
+    margin-bottom:8px;
+}
+
+/* ==========================
+   BOTONES MENÚ
+========================== */
+
+.navegacion button{
+    width:100%;
+    height:var(--alto-boton);
+
+    border:none;
+
+    border-radius:var(--chaflan);
+
+    background:rgba(255,255,255,0.15);
+
+    color:var(--blanco);
+
+    cursor:pointer;
+
+    text-align:left;
+
+    padding-left:12px;
+
+    transition:var(--transicion);
+
+    font-size:14px;
+}
+
+.navegacion button:hover{
+    background:var(--azul-medio);
+
+    transform:translateX(4px);
+}
+
+.navegacion button:active{
+    transform:scale(0.98);
+}
+
+/* ==========================
+   SEPARADOR
+========================== */
+
+.navegacion hr{
+    border:none;
+
+    height:1px;
+
+    background:rgba(255,255,255,0.20);
+
+    margin:10px 0;
+}
+
+/* ==========================
+   ACCIONES RÁPIDAS
+========================== */
+
+.acciones-rapidas{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+/* ==========================
+   BOTONES DE ACCIÓN
+========================== */
+
+#encender-luz,
+#apagar-luz,
+#abrir-puerta,
+#cerrar-puerta{
+    background:var(--naranja);
+
+    color:var(--blanco);
+
+    font-weight:600;
+}
+
+#encender-luz:hover,
+#apagar-luz:hover,
+#abrir-puerta:hover,
+#cerrar-puerta:hover{
+    background:#ea580c;
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+.navegacion::-webkit-scrollbar{
+    width:8px;
+}
+
+.navegacion::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.navegacion::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,0.25);
+
+    border-radius:20px;
+}
+
+.navegacion::-webkit-scrollbar-thumb:hover{
+    background:rgba(255,255,255,0.45);
+}

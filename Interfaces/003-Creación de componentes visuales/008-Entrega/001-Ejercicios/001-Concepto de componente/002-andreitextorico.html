@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor de texto | Componente visual</title>
+    <style>
+      :root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827}
+      *{box-sizing:border-box}
+      body{min-height:100vh;margin:0;padding:clamp(16px,5vw,48px);display:grid;place-items:start center;background:#f3f6fb;color:var(--negro);font-family:Arial,sans-serif}
+      .jocarsa-texto{width:min(100%,680px)}
+      .jocarsa-texto article{
+        width:100%;
+        min-height:min(65vh,480px);
+        padding:18px;
+        border:2px solid #d5deed;
+        border-top:5px solid var(--naranja);
+        border-radius:14px;
+        background:var(--blanco);
+        color:var(--negro);
+        font:16px/1.6 Arial,sans-serif;
+        overflow:auto;
+        box-shadow:0 12px 32px #11182714;
+      }
+      .jocarsa-texto article:focus{outline:3px solid #1d4ed833;border-color:var(--azul)}
+      @media(max-width:600px){body{padding:16px}.jocarsa-texto article{min-height:60vh;padding:14px;font-size:15px}}
+    </style>
+  </head>
+  <body>
+    <jocarsa-texto></jocarsa-texto>
+  </body>
+  <script>
+    let elementos = document.querySelectorAll("jocarsa-texto");
+		elementos.forEach(function(elemento){
+    	let elementoenmemoria = elemento
+      let contenedor = document.createElement("div")
+      contenedor.classList.add("jocarsa-texto")
+      elementoenmemoria.after(contenedor);
+      elemento.remove()
+      let contenedor_rico = document.createElement("article")
+      let contenedor_pobre = document.createElement("textarea")
+      contenedor.appendChild(contenedor_rico)
+      contenedor.appendChild(contenedor_pobre)
+      contenedor_pobre.style.display = "none"
+      contenedor_rico.setAttribute("contenteditable",true)
+      contenedor_rico.setAttribute("role","textbox")
+      contenedor_rico.setAttribute("aria-label","Editor de texto")
+      contenedor_rico.setAttribute("aria-multiline","true")
+    })
+  </script>
+</html>

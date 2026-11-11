@@ -1,0 +1,388 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
+/* =====================================
+   BODY
+===================================== */
+
+body{
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    background:var(--azul-claro);
+
+    color:var(--negro);
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    transition:
+        background .4s ease,
+        color .4s ease;
+}
+
+/* =====================================
+   CABECERA
+===================================== */
+
+.cabecera{
+    height:var(--alto-cabecera);
+
+    background:var(--azul);
+
+    color:var(--blanco);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 20px;
+
+    box-shadow:var(--sombra-suave);
+
+    transition:.4s;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    height:40px;
+    width:auto;
+    display:block;
+}
+
+.estado-aplicacion{
+    font-size:14px;
+    font-weight:600;
+}
+
+/* =====================================
+   CONTENEDOR PRINCIPAL
+===================================== */
+
+.contenedor-principal{
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:
+        var(--ancho-nav)
+        1fr
+        var(--ancho-section);
+
+    overflow:hidden;
+}
+
+/* =====================================
+   CONTENIDO CENTRAL
+===================================== */
+
+.contenido-principal{
+    padding:20px;
+
+    overflow-y:auto;
+
+    background:var(--azul-claro);
+
+    transition:.4s;
+}
+
+/* =====================================
+   PANEL INFORMACIÓN
+===================================== */
+
+.panel-informacion{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+
+    gap:16px;
+
+    margin-bottom:20px;
+}
+
+/* =====================================
+   TARJETAS
+===================================== */
+
+.tarjeta{
+    background:var(--blanco);
+
+    border-radius:var(--chaflan);
+
+    border:1px solid var(--azul-palido);
+
+    padding:16px;
+
+    box-shadow:var(--sombra-suave);
+
+    transition:.4s;
+}
+
+.tarjeta h3{
+    color:var(--azul);
+
+    margin-bottom:12px;
+}
+
+/* =====================================
+   MICRÓFONO
+===================================== */
+
+.estado-audio{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.estado-audio img{
+    width:30px;
+    height:30px;
+}
+
+/* =====================================
+   CÁMARA
+===================================== */
+
+.contenedor-camara{
+    width:100%;
+
+    background:var(--blanco);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:var(--sombra-suave);
+
+    transition:.4s;
+}
+
+.contenedor-camara h2{
+    color:var(--azul);
+
+    margin-bottom:15px;
+}
+
+/* Estado cámara */
+
+.estado-camara{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-bottom:15px;
+}
+
+.estado-camara img{
+    width:30px;
+    height:30px;
+}
+
+#estado-camara{
+    font-size:14px;
+    font-weight:600;
+}
+
+/* Video */
+
+#camara{
+    width:100%;
+
+    max-width:960px;
+
+    display:block;
+
+    margin:auto;
+
+    aspect-ratio:16/9;
+
+    object-fit:cover;
+
+    background:black;
+
+    border-radius:16px;
+
+    border:3px solid var(--azul-palido);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.15);
+}
+
+#lienzo{
+    display:none;
+}
+
+/* =====================================
+   REALIDAD AUMENTADA
+===================================== */
+
+.contenedor-ar{
+    margin-top:20px;
+
+    background:var(--blanco);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:var(--sombra-suave);
+
+    transition:.4s;
+}
+
+.contenedor-ar h2{
+    color:var(--azul);
+
+    margin-bottom:15px;
+}
+
+/* =====================================
+   PIE
+===================================== */
+
+.pie{
+    height:var(--alto-pie);
+
+    background:var(--blanco);
+
+    border-top:1px solid var(--azul-palido);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:12px;
+
+    transition:.4s;
+}
+
+/* =====================================
+   MODO OSCURO
+===================================== */
+
+body.modo-oscuro{
+    background:#0f172a;
+    color:#ffffff;
+}
+
+body.modo-oscuro .contenido-principal{
+    background:#0f172a;
+}
+
+body.modo-oscuro .cabecera{
+    background:#020617;
+}
+
+body.modo-oscuro .tarjeta{
+    background:#1e293b;
+
+    color:white;
+
+    border-color:#334155;
+}
+
+body.modo-oscuro .contenedor-camara{
+    background:#1e293b;
+}
+
+body.modo-oscuro .contenedor-ar{
+    background:#1e293b;
+}
+
+body.modo-oscuro .panel-lateral{
+    background:#1e293b;
+}
+
+body.modo-oscuro .pie{
+    background:#020617;
+
+    color:white;
+
+    border-top-color:#334155;
+}
+
+body.modo-oscuro h1,
+body.modo-oscuro h2,
+body.modo-oscuro h3{
+    color:#93c5fd;
+}
+
+body.modo-oscuro #estado-camara{
+    color:white;
+}
+
+/* =====================================
+   SCROLL
+===================================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#e5e7eb;
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--azul);
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:var(--azul-medio);
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width:1200px){
+
+    .contenedor-principal{
+        grid-template-columns:
+            var(--ancho-nav)
+            1fr;
+    }
+
+    .panel-lateral{
+        display:none;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .contenedor-principal{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .contenido-principal{
+        padding:12px;
+    }
+
+    #camara{
+        max-width:100%;
+    }
+
+}

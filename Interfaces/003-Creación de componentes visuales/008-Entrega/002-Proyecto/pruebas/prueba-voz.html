@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Prueba Voz
+    </title>
+
+</head>
+
+<body>
+
+    <h1>
+        Prueba de Comandos de Voz
+    </h1>
+
+    <script>
+
+        function procesarComandoVoz(
+            texto
+        ){
+
+            if(
+                texto ===
+                "modo oscuro"
+            ){
+
+                return true;
+
+            }
+
+            return false;
+
+        }
+
+        console.assert(
+
+            procesarComandoVoz(
+                "modo oscuro"
+            ) === true,
+
+            "Error comando voz"
+
+        );
+
+        document.write(
+            "✅ Comando de voz validado"
+        );
+
+    </script>
+
+</body>
+
+</html>
