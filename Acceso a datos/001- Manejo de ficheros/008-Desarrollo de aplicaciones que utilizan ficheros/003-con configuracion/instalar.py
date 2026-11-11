@@ -24,7 +24,7 @@ class Colores:
     FONDO_VERDE = "\033[42m"
 
 
-class InstaladorJocarsaBBDD:
+class InstaladorAndreiBBDD:
 
     def __init__(self):
         self.directorioInstalador = os.path.dirname(os.path.abspath(__file__))
@@ -66,7 +66,7 @@ class InstaladorJocarsaBBDD:
             + (
                 Colores.NEGRITA
                 + Colores.BLANCO
-                + "JOCARSA BBDD".center(self.ancho - 2)
+                + "Andrei BBDD".center(self.ancho - 2)
                 + Colores.RESET
             )
             + Colores.CYAN
@@ -264,7 +264,7 @@ class InstaladorJocarsaBBDD:
 
         instalacionDefecto = configuracionAnterior.get(
             "instalacion",
-            "/var/jocarsa-basededatos/"
+            "/var/andrei-basededatos/"
         )
 
         tamanoDefecto = configuracionAnterior.get(
@@ -273,7 +273,7 @@ class InstaladorJocarsaBBDD:
         )
 
         print()
-        self.info("Vamos a configurar JocarsaBBDD.")
+        self.info("Vamos a configurar AndreiBBDD.")
         print()
 
         instalacion = self.preguntarTexto(
@@ -404,15 +404,15 @@ class InstaladorJocarsaBBDD:
     def comprobarBiblioteca(self):
         ruta = os.path.join(
             self.directorioInstalador,
-            "JocarsaBBDD.py"
+            "AndreiBBDD.py"
         )
 
         if os.path.isfile(ruta):
-            self.exito("Biblioteca JocarsaBBDD.py encontrada.")
+            self.exito("Biblioteca AndreiBBDD.py encontrada.")
             return True
 
         self.error(
-            "No se encuentra JocarsaBBDD.py junto al instalador."
+            "No se encuentra AndreiBBDD.py junto al instalador."
         )
         return False
 
@@ -538,7 +538,7 @@ class InstaladorJocarsaBBDD:
             print()
 
             self.centrar(
-                "JocarsaBBDD está preparada para utilizarse.",
+                "AndreiBBDD está preparada para utilizarse.",
                 Colores.BLANCO
             )
 
@@ -563,5 +563,5 @@ class InstaladorJocarsaBBDD:
 
 
 if __name__ == "__main__":
-    instalador = InstaladorJocarsaBBDD()
+    instalador = InstaladorAndreiBBDD()
     instalador.ejecutar()

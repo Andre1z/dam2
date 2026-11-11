@@ -174,7 +174,7 @@ class PruebasAndreiBBDD:
       )
 
       _,salida = self.captura(bbdd.listarTodo,"clientes")
-      self.comprobar("listarTodo incluye Andrei","Andrei" in salida)
+      self.comprobar("listarTodo incluye Jose","Jose Vicente" in salida)
       self.comprobar("listarTodo incluye Ana","Ana" in salida)
       self.comprobar("listarTodo incluye Luis","Luis" in salida)
 

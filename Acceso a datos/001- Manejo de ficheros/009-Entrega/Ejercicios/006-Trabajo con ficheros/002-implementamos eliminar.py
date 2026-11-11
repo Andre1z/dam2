@@ -13,8 +13,8 @@ class AndreiBBDD:
       print(linea)
     archivo.close()
     
-  def buscarColumna(self,columna,valor):
-    archivo = open(self.instalacion+self.basededatos, mode='r', newline='')
+  def buscarColumna(self,tabla,columna,valor):
+    archivo = open(self.instalacion+self.basededatos+"/"+tabla+".csv", mode='r', newline='')
     lector = csv.DictReader(archivo)
     for linea in lector:
       if linea[columna] == valor:
@@ -66,6 +66,7 @@ conexion.usaBaseDatos("empresa")
 #conexion.creaTabla("clientes","nombre,apellidos,telefono")
 #conexion.insertarDatos("clientes",["Andrei","Buga Mihailescu",682713])
 
-conexion.eliminar("clientes","nombre","Andrei")
+# Cuidado: borra de verdad las filas del CSV de la carpeta 003
+#conexion.eliminar("clientes","nombre","Andrei")
 
 conexion.listarTodo("clientes")

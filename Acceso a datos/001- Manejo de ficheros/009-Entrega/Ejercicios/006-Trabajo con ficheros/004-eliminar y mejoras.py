@@ -275,14 +275,16 @@ class AndreiBBDD:
 
 conexion = AndreiBBDD()
 
-# conexion.creaBaseDatos("empresa")
-conexion.usaBaseDatos("empresa")
+# Usamos una base de datos propia: "empresa" contiene un CSV normal (de la
+# carpeta 003) sin .esquema ni .idx, y no sirve para registros de tamaño fijo.
+conexion.creaBaseDatos("empresa_registros")
+conexion.usaBaseDatos("empresa_registros")
 
-# conexion.creaTabla("clientes","nombre,apellidos,telefono")
-
-# id1 = conexion.insertarDatos("clientes",["Andrei","Buga Mihailescu",682713])
-# id2 = conexion.insertarDatos("clientes",["Ana","Garcia",666666666])
-# id3 = conexion.insertarDatos("clientes",["Juan","Lopez",777777777])
+if not os.path.exists(conexion.instalacion+"empresa_registros/clientes.esquema"):
+  conexion.creaTabla("clientes","nombre,apellidos,telefono")
+  id1 = conexion.insertarDatos("clientes",["Andrei","Buga Mihailescu",682713])
+  id2 = conexion.insertarDatos("clientes",["Ana","Garcia",666666666])
+  id3 = conexion.insertarDatos("clientes",["Juan","Lopez",777777777])
 
 # conexion.actualizar( "clientes",2,["Ana","Garcia Martinez",999999999] )
 
