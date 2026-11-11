@@ -1,8 +1,8 @@
-/* jocarsa-ui.js - Jocarsa Components Library */
+/* andrei-ui.js - andrei Components Library */
 (function(){
   "use strict";
 
-  class JocarsaControl {
+  class andreiControl {
     static estilosInstalados = false;
 
     constructor(elemento, tipo){
@@ -16,41 +16,41 @@
       this.instalarEstilos();
 
       this.raiz = document.createElement("div");
-      this.raiz.className = `jocarsa-control jocarsa-${tipo}`;
+      this.raiz.className = `andrei-control andrei-${tipo}`;
       elemento.after(this.raiz);
       elemento.remove();
     }
 
     instalarEstilos(){
-      if(JocarsaControl.estilosInstalados) return;
-      JocarsaControl.estilosInstalados = true;
+      if(andreiControl.estilosInstalados) return;
+      andreiControl.estilosInstalados = true;
       const style = document.createElement("style");
       style.textContent = `
-        .jocarsa-control{width:100%;max-width:720px;font-family:Arial,sans-serif;border:1px solid #aaa;border-radius:6px;overflow:hidden;background:#fff;box-sizing:border-box;margin:8px 0}
-        .jocarsa-barra{display:flex;gap:4px;flex-wrap:wrap;padding:6px;background:#eee;border-bottom:1px solid #aaa}
-        .jocarsa-barra button{min-width:32px;height:30px;padding:0 8px;border:1px solid #aaa;border-radius:3px;background:#fff;cursor:pointer}
-        .jocarsa-barra button:hover{background:#ddd}.jocarsa-barra button.activo{background:#333;color:#fff}
-        .jocarsa-area{min-height:240px;padding:12px;box-sizing:border-box;outline:none;overflow:auto}
-        .jocarsa-codigo,.jocarsa-markdown textarea,.jocarsa-texto textarea{display:block;width:100%;min-height:240px;padding:12px;border:0;outline:none;resize:vertical;box-sizing:border-box;font:14px/1.5 monospace;tab-size:2}
-        .jocarsa-markdown .jocarsa-preview{min-height:240px;padding:12px;box-sizing:border-box;outline:none;overflow:auto}
-        .jocarsa-editor .jocarsa-codigo{margin:0;background:#181818;color:#eee;white-space:pre;overflow:auto}.jocarsa-editor-cuerpo{display:grid;grid-template-columns:auto 1fr;min-height:320px;background:#181818}.jocarsa-editor-lineas{margin:0;padding:12px 10px;min-width:42px;box-sizing:border-box;background:#222;color:#777;border-right:1px solid #333;text-align:right;user-select:none;overflow:hidden;font:14px/1.5 monospace;white-space:pre}.jocarsa-editor .jocarsa-codigo{min-height:320px;resize:vertical;line-height:1.5}.jocarsa-editor-linea-actual{position:absolute;left:0;right:0;pointer-events:none;background:rgba(255,255,255,.045)}.jocarsa-editor-estado{margin-left:auto;padding:6px 8px;color:#666;font:12px monospace}.jocarsa-editor-cuerpo-wrap{position:relative;display:contents}
-        .jocarsa-editor textarea.jocarsa-hidden-input,.jocarsa-hidden-input{display:none!important}
-        .jocarsa-firma canvas{display:block;width:100%;height:260px;background:#fff;touch-action:none;cursor:crosshair}
-        .jocarsa-firma .jocarsa-firma-info{padding:6px 10px;font-size:12px;color:#666;border-top:1px solid #ddd}
-        .jocarsa-tabla{max-width:1000px}.jocarsa-tabla-controles{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px;background:#f5f5f5;border-bottom:1px solid #ddd}.jocarsa-tabla-controles input{flex:1;min-width:180px;padding:7px;border:1px solid #bbb;border-radius:3px}.jocarsa-tabla-controles select{padding:7px}.jocarsa-tabla-scroll{overflow:auto}.jocarsa-tabla table{width:100%;border-collapse:collapse}.jocarsa-tabla th,.jocarsa-tabla td{padding:9px 10px;border-bottom:1px solid #ddd;text-align:left;white-space:nowrap}.jocarsa-tabla th{background:#eee;cursor:pointer;user-select:none}.jocarsa-tabla th:hover{background:#ddd}.jocarsa-tabla th[data-dir=asc]::after{content:" ▲"}.jocarsa-tabla th[data-dir=desc]::after{content:" ▼"}.jocarsa-tabla-pie{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px;font-size:13px}.jocarsa-tabla-paginacion{display:flex;gap:4px}.jocarsa-tabla-paginacion button{padding:5px 9px;border:1px solid #bbb;background:#fff;border-radius:3px;cursor:pointer}.jocarsa-tabla-paginacion button:disabled{opacity:.45;cursor:default}
-        .jocarsa-arbol{max-width:720px;padding:8px}.jocarsa-arbol ul{list-style:none;margin:0;padding-left:20px}.jocarsa-arbol>ul{padding-left:0}.jocarsa-arbol li{position:relative}.jocarsa-arbol-nodo{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:4px;cursor:pointer;user-select:none}.jocarsa-arbol-nodo:hover{background:#eee}.jocarsa-arbol-nodo.seleccionado{background:#ddd}.jocarsa-arbol-toggle{width:18px;text-align:center;font-family:monospace}.jocarsa-arbol li.cerrado>ul{display:none}.jocarsa-arbol-icono{width:18px;text-align:center}
-        .jocarsa-calendario{max-width:520px}.jocarsa-cal-cabecera{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;padding:10px;background:#f5f5f5;border-bottom:1px solid #ddd}.jocarsa-cal-cabecera button{height:34px;border:1px solid #bbb;border-radius:4px;background:#fff;cursor:pointer;font-size:20px}.jocarsa-cal-titulo{text-align:center;font-weight:bold;text-transform:capitalize}.jocarsa-cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:8px;gap:3px}.jocarsa-cal-dia-semana{text-align:center;font-weight:bold;font-size:12px;color:#666;padding:5px}.jocarsa-cal-dia{aspect-ratio:1;min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:5px;cursor:pointer;user-select:none;border:1px solid transparent}.jocarsa-cal-dia:hover{background:#eee;border-color:#ddd}.jocarsa-cal-dia.otro-mes{color:#aaa}.jocarsa-cal-dia.hoy{border-color:#555;font-weight:bold}.jocarsa-cal-dia.seleccionado{background:#333;color:#fff}.jocarsa-cal-dia.seleccionado.otro-mes{color:#fff}.jocarsa-cal-valor{padding:8px 12px;border-top:1px solid #ddd;font:13px monospace;color:#555}
-        .jocarsa-semana{max-width:1000px}.jocarsa-semana-cabecera{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:9px;background:#f5f5f5;border-bottom:1px solid #ddd}.jocarsa-semana-cabecera strong{text-align:center}.jocarsa-semana-cabecera button{padding:7px 10px;border:1px solid #bbb;border-radius:4px;background:#fff;cursor:pointer}.jocarsa-semana-scroll{overflow:auto;max-height:620px}.jocarsa-semana-grid{display:grid;grid-template-columns:72px repeat(7,minmax(105px,1fr));min-width:820px}.jocarsa-semana-dia{position:sticky;top:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:48px;padding:5px;background:#eee;border-right:1px solid #ccc;border-bottom:1px solid #ccc;box-sizing:border-box}.jocarsa-semana-esquina{left:0;z-index:4}.jocarsa-semana-hora{position:sticky;left:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;min-height:34px;padding:6px 4px;background:#f7f7f7;border-right:1px solid #ccc;border-bottom:1px solid #e5e5e5;box-sizing:border-box;font:12px monospace;color:#555}.jocarsa-semana-slot{min-height:34px;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;box-sizing:border-box;cursor:pointer}.jocarsa-semana-slot:hover{background:#eee}.jocarsa-semana-slot.seleccionado{background:#333;box-shadow:inset 0 0 0 2px #111}.jocarsa-semana-valor{padding:8px 12px;border-top:1px solid #ddd;font:13px monospace;color:#555}
+        .andrei-control{width:100%;max-width:720px;font-family:Arial,sans-serif;border:1px solid #aaa;border-radius:6px;overflow:hidden;background:#fff;box-sizing:border-box;margin:8px 0}
+        .andrei-barra{display:flex;gap:4px;flex-wrap:wrap;padding:6px;background:#eee;border-bottom:1px solid #aaa}
+        .andrei-barra button{min-width:32px;height:30px;padding:0 8px;border:1px solid #aaa;border-radius:3px;background:#fff;cursor:pointer}
+        .andrei-barra button:hover{background:#ddd}.andrei-barra button.activo{background:#333;color:#fff}
+        .andrei-area{min-height:240px;padding:12px;box-sizing:border-box;outline:none;overflow:auto}
+        .andrei-codigo,.andrei-markdown textarea,.andrei-texto textarea{display:block;width:100%;min-height:240px;padding:12px;border:0;outline:none;resize:vertical;box-sizing:border-box;font:14px/1.5 monospace;tab-size:2}
+        .andrei-markdown .andrei-preview{min-height:240px;padding:12px;box-sizing:border-box;outline:none;overflow:auto}
+        .andrei-editor .andrei-codigo{margin:0;background:#181818;color:#eee;white-space:pre;overflow:auto}.andrei-editor-cuerpo{display:grid;grid-template-columns:auto 1fr;min-height:320px;background:#181818}.andrei-editor-lineas{margin:0;padding:12px 10px;min-width:42px;box-sizing:border-box;background:#222;color:#777;border-right:1px solid #333;text-align:right;user-select:none;overflow:hidden;font:14px/1.5 monospace;white-space:pre}.andrei-editor .andrei-codigo{min-height:320px;resize:vertical;line-height:1.5}.andrei-editor-linea-actual{position:absolute;left:0;right:0;pointer-events:none;background:rgba(255,255,255,.045)}.andrei-editor-estado{margin-left:auto;padding:6px 8px;color:#666;font:12px monospace}.andrei-editor-cuerpo-wrap{position:relative;display:contents}
+        .andrei-editor textarea.andrei-hidden-input,.andrei-hidden-input{display:none!important}
+        .andrei-firma canvas{display:block;width:100%;height:260px;background:#fff;touch-action:none;cursor:crosshair}
+        .andrei-firma .andrei-firma-info{padding:6px 10px;font-size:12px;color:#666;border-top:1px solid #ddd}
+        .andrei-tabla{max-width:1000px}.andrei-tabla-controles{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px;background:#f5f5f5;border-bottom:1px solid #ddd}.andrei-tabla-controles input{flex:1;min-width:180px;padding:7px;border:1px solid #bbb;border-radius:3px}.andrei-tabla-controles select{padding:7px}.andrei-tabla-scroll{overflow:auto}.andrei-tabla table{width:100%;border-collapse:collapse}.andrei-tabla th,.andrei-tabla td{padding:9px 10px;border-bottom:1px solid #ddd;text-align:left;white-space:nowrap}.andrei-tabla th{background:#eee;cursor:pointer;user-select:none}.andrei-tabla th:hover{background:#ddd}.andrei-tabla th[data-dir=asc]::after{content:" ▲"}.andrei-tabla th[data-dir=desc]::after{content:" ▼"}.andrei-tabla-pie{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px;font-size:13px}.andrei-tabla-paginacion{display:flex;gap:4px}.andrei-tabla-paginacion button{padding:5px 9px;border:1px solid #bbb;background:#fff;border-radius:3px;cursor:pointer}.andrei-tabla-paginacion button:disabled{opacity:.45;cursor:default}
+        .andrei-arbol{max-width:720px;padding:8px}.andrei-arbol ul{list-style:none;margin:0;padding-left:20px}.andrei-arbol>ul{padding-left:0}.andrei-arbol li{position:relative}.andrei-arbol-nodo{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:4px;cursor:pointer;user-select:none}.andrei-arbol-nodo:hover{background:#eee}.andrei-arbol-nodo.seleccionado{background:#ddd}.andrei-arbol-toggle{width:18px;text-align:center;font-family:monospace}.andrei-arbol li.cerrado>ul{display:none}.andrei-arbol-icono{width:18px;text-align:center}
+        .andrei-calendario{max-width:520px}.andrei-cal-cabecera{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;padding:10px;background:#f5f5f5;border-bottom:1px solid #ddd}.andrei-cal-cabecera button{height:34px;border:1px solid #bbb;border-radius:4px;background:#fff;cursor:pointer;font-size:20px}.andrei-cal-titulo{text-align:center;font-weight:bold;text-transform:capitalize}.andrei-cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:8px;gap:3px}.andrei-cal-dia-semana{text-align:center;font-weight:bold;font-size:12px;color:#666;padding:5px}.andrei-cal-dia{aspect-ratio:1;min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:5px;cursor:pointer;user-select:none;border:1px solid transparent}.andrei-cal-dia:hover{background:#eee;border-color:#ddd}.andrei-cal-dia.otro-mes{color:#aaa}.andrei-cal-dia.hoy{border-color:#555;font-weight:bold}.andrei-cal-dia.seleccionado{background:#333;color:#fff}.andrei-cal-dia.seleccionado.otro-mes{color:#fff}.andrei-cal-valor{padding:8px 12px;border-top:1px solid #ddd;font:13px monospace;color:#555}
+        .andrei-semana{max-width:1000px}.andrei-semana-cabecera{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:9px;background:#f5f5f5;border-bottom:1px solid #ddd}.andrei-semana-cabecera strong{text-align:center}.andrei-semana-cabecera button{padding:7px 10px;border:1px solid #bbb;border-radius:4px;background:#fff;cursor:pointer}.andrei-semana-scroll{overflow:auto;max-height:620px}.andrei-semana-grid{display:grid;grid-template-columns:72px repeat(7,minmax(105px,1fr));min-width:820px}.andrei-semana-dia{position:sticky;top:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:48px;padding:5px;background:#eee;border-right:1px solid #ccc;border-bottom:1px solid #ccc;box-sizing:border-box}.andrei-semana-esquina{left:0;z-index:4}.andrei-semana-hora{position:sticky;left:0;z-index:1;display:flex;align-items:flex-start;justify-content:center;min-height:34px;padding:6px 4px;background:#f7f7f7;border-right:1px solid #ccc;border-bottom:1px solid #e5e5e5;box-sizing:border-box;font:12px monospace;color:#555}.andrei-semana-slot{min-height:34px;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;box-sizing:border-box;cursor:pointer}.andrei-semana-slot:hover{background:#eee}.andrei-semana-slot.seleccionado{background:#333;box-shadow:inset 0 0 0 2px #111}.andrei-semana-valor{padding:8px 12px;border-top:1px solid #ddd;font:13px monospace;color:#555}
 
-        .jocarsa-input{max-width:520px;overflow:visible;border:0;background:transparent;margin:8px 0}.jocarsa-input-envoltura{display:flex;align-items:stretch;width:100%;min-height:44px;border:1px solid #aaa;border-radius:6px;background:#fff;overflow:hidden;box-sizing:border-box;transition:border-color .15s,box-shadow .15s}.jocarsa-input-envoltura:focus-within{border-color:#333;box-shadow:0 0 0 2px rgba(0,0,0,.08)}.jocarsa-input-icono{width:46px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;background:#f2f2f2;border-right:1px solid #ddd;font:700 18px/1 Arial,sans-serif;color:#333;user-select:none;filter:grayscale(1)}.jocarsa-input-campo{flex:1;min-width:0;border:0!important;outline:0!important;background:transparent!important;padding:10px 12px!important;margin:0!important;box-shadow:none!important;font:15px Arial,sans-serif;color:#222}.jocarsa-input-campo::placeholder{color:#999}.jocarsa-input-tipo{display:flex;align-items:center;padding:0 10px;color:#888;font-size:10px;text-transform:uppercase;letter-spacing:.06em;user-select:none}.jocarsa-input-envoltura.invalido{border-color:#a00}.jocarsa-input-envoltura.invalido .jocarsa-input-icono{background:#fff0f0}.jocarsa-input-envoltura.valido:not(.vacio) .jocarsa-input-icono{background:#f3f7f3}.jocarsa-input[aria-disabled=true]{opacity:.55}.jocarsa-input .jocarsa-input-campo[type=color]{height:44px;padding:7px!important;cursor:pointer}.jocarsa-input .jocarsa-input-campo[type=range]{padding:0 12px!important}.jocarsa-input-ayuda{padding:4px 2px 0 48px;font-size:11px;color:#777}
-        .jocarsa-hora{max-width:520px}.jocarsa-reloj-wrap{display:flex;align-items:center;justify-content:center;padding:18px}.jocarsa-reloj{display:block;width:min(420px,100%);height:auto;aspect-ratio:1;touch-action:none;cursor:crosshair}.jocarsa-hora-valor{text-align:center;padding:8px;font:bold 22px monospace;border-top:1px solid #eee}.jocarsa-hora-leyenda{display:flex;justify-content:center;gap:20px;padding:0 10px 12px;color:#666;font-size:12px}.jocarsa-hora-leyenda span::before{content:"";display:inline-block;width:9px;height:9px;margin-right:5px;border-radius:50%;background:#333}
+        .andrei-input{max-width:520px;overflow:visible;border:0;background:transparent;margin:8px 0}.andrei-input-envoltura{display:flex;align-items:stretch;width:100%;min-height:44px;border:1px solid #aaa;border-radius:6px;background:#fff;overflow:hidden;box-sizing:border-box;transition:border-color .15s,box-shadow .15s}.andrei-input-envoltura:focus-within{border-color:#333;box-shadow:0 0 0 2px rgba(0,0,0,.08)}.andrei-input-icono{width:46px;flex:0 0 46px;display:flex;align-items:center;justify-content:center;background:#f2f2f2;border-right:1px solid #ddd;font:700 18px/1 Arial,sans-serif;color:#333;user-select:none;filter:grayscale(1)}.andrei-input-campo{flex:1;min-width:0;border:0!important;outline:0!important;background:transparent!important;padding:10px 12px!important;margin:0!important;box-shadow:none!important;font:15px Arial,sans-serif;color:#222}.andrei-input-campo::placeholder{color:#999}.andrei-input-tipo{display:flex;align-items:center;padding:0 10px;color:#888;font-size:10px;text-transform:uppercase;letter-spacing:.06em;user-select:none}.andrei-input-envoltura.invalido{border-color:#a00}.andrei-input-envoltura.invalido .andrei-input-icono{background:#fff0f0}.andrei-input-envoltura.valido:not(.vacio) .andrei-input-icono{background:#f3f7f3}.andrei-input[aria-disabled=true]{opacity:.55}.andrei-input .andrei-input-campo[type=color]{height:44px;padding:7px!important;cursor:pointer}.andrei-input .andrei-input-campo[type=range]{padding:0 12px!important}.andrei-input-ayuda{padding:4px 2px 0 48px;font-size:11px;color:#777}
+        .andrei-hora{max-width:520px}.andrei-reloj-wrap{display:flex;align-items:center;justify-content:center;padding:18px}.andrei-reloj{display:block;width:min(420px,100%);height:auto;aspect-ratio:1;touch-action:none;cursor:crosshair}.andrei-hora-valor{text-align:center;padding:8px;font:bold 22px monospace;border-top:1px solid #eee}.andrei-hora-leyenda{display:flex;justify-content:center;gap:20px;padding:0 10px 12px;color:#666;font-size:12px}.andrei-hora-leyenda span::before{content:"";display:inline-block;width:9px;height:9px;margin-right:5px;border-radius:50%;background:#333}
       `;
       document.head.appendChild(style);
     }
 
     barra(){
       const barra = document.createElement("div");
-      barra.className = "jocarsa-barra";
+      barra.className = "andrei-barra";
       this.raiz.appendChild(barra);
       return barra;
     }
@@ -67,7 +67,7 @@
 
     campoOculto(tipo="textarea"){
       const campo = document.createElement(tipo);
-      campo.className = "jocarsa-hidden-input";
+      campo.className = "andrei-hidden-input";
       if(this.name) campo.name = this.name;
       if(this.required) campo.required = true;
       if(this.disabled) campo.disabled = true;
@@ -80,16 +80,16 @@
     setValue(valor){
       this.value = valor;
       if(this.campo) this.campo.value = valor;
-      this.raiz.dispatchEvent(new CustomEvent("jocarsa-change", {detail:{value:valor}}));
+      this.raiz.dispatchEvent(new CustomEvent("andrei-change", {detail:{value:valor}}));
     }
   }
 
-  class JocarsaTexto extends JocarsaControl {
+  class andreiTexto extends andreiControl {
     constructor(elemento){
       super(elemento,"texto");
       const barra = this.barra();
       const editor = document.createElement("article");
-      editor.className = "jocarsa-area";
+      editor.className = "andrei-area";
       editor.contentEditable = !this.disabled;
       editor.innerHTML = this.value;
       if(this.placeholder) editor.dataset.placeholder = this.placeholder;
@@ -123,12 +123,12 @@
     }
   }
 
-  class JocarsaMarkdown extends JocarsaControl {
+  class andreiMarkdown extends andreiControl {
     constructor(elemento){
       super(elemento,"markdown");
       const barra=this.barra();
       const preview=document.createElement("div");
-      preview.className="jocarsa-preview";
+      preview.className="andrei-preview";
       preview.contentEditable=!this.disabled;
       const codigo=document.createElement("textarea");
       codigo.value=this.value;
@@ -171,20 +171,20 @@
     }
   }
 
-  class JocarsaEditor extends JocarsaControl {
+  class andreiEditor extends andreiControl {
     constructor(elemento){
       super(elemento,"editor");
       const barra=this.barra();
       const lenguaje=elemento.getAttribute("language")||elemento.getAttribute("lenguaje")||"texto";
       const tabSize=Math.max(1,Number(elemento.getAttribute("tab-size")||2));
       const etiqueta=document.createElement("span"); etiqueta.textContent=lenguaje; etiqueta.style.padding="6px"; barra.appendChild(etiqueta);
-      const estado=document.createElement("span"); estado.className="jocarsa-editor-estado"; barra.appendChild(estado);
+      const estado=document.createElement("span"); estado.className="andrei-editor-estado"; barra.appendChild(estado);
       this.boton(barra,"Copiar",()=>navigator.clipboard?.writeText(codigo.value));
 
-      const cuerpo=document.createElement("div"); cuerpo.className="jocarsa-editor-cuerpo";
-      const lineas=document.createElement("pre"); lineas.className="jocarsa-editor-lineas";
+      const cuerpo=document.createElement("div"); cuerpo.className="andrei-editor-cuerpo";
+      const lineas=document.createElement("pre"); lineas.className="andrei-editor-lineas";
       const codigo=document.createElement("textarea");
-      codigo.className="jocarsa-codigo"; codigo.spellcheck=false; codigo.value=this.value; codigo.placeholder=this.placeholder; codigo.style.tabSize=tabSize;
+      codigo.className="andrei-codigo"; codigo.spellcheck=false; codigo.value=this.value; codigo.placeholder=this.placeholder; codigo.style.tabSize=tabSize;
       if(this.name) codigo.name=this.name; if(this.required) codigo.required=true; if(this.disabled) codigo.disabled=true;
       cuerpo.append(lineas,codigo); this.raiz.appendChild(cuerpo); this.campo=codigo;
 
@@ -217,12 +217,12 @@
     }
   }
 
-  class JocarsaFirma extends JocarsaControl {
+  class andreiFirma extends andreiControl {
     constructor(elemento){
       super(elemento,"firma");
       const barra=this.barra();
       const canvas=document.createElement("canvas");
-      const info=document.createElement("div"); info.className="jocarsa-firma-info"; info.textContent="Firma dentro del recuadro";
+      const info=document.createElement("div"); info.className="andrei-firma-info"; info.textContent="Firma dentro del recuadro";
       this.raiz.append(canvas,info);
       const campo=this.campoOculto("textarea");
       const ctx=canvas.getContext("2d"); let dibujando=false, ultimo=null;
@@ -237,7 +237,7 @@
     }
   }
 
-  class JocarsaTabla extends JocarsaControl {
+  class andreiTabla extends andreiControl {
     constructor(elemento){
       const tablaOriginal=elemento.querySelector("table");
       const html=tablaOriginal ? tablaOriginal.outerHTML : elemento.innerHTML;
@@ -246,13 +246,13 @@
       const tabla=this.raiz.querySelector("table");
       if(!tabla) return;
       const filas=[...tabla.tBodies].flatMap(tb=>[...tb.rows]);
-      const controles=document.createElement("div"); controles.className="jocarsa-tabla-controles";
+      const controles=document.createElement("div"); controles.className="andrei-tabla-controles";
       const buscar=document.createElement("input"); buscar.type="search"; buscar.placeholder="Buscar...";
       const etiqueta=document.createElement("span"); etiqueta.textContent="Filas:";
       const cantidad=document.createElement("select"); [5,10,25,50,100].forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;if(n===10)o.selected=true;cantidad.appendChild(o)});
       controles.append(buscar,etiqueta,cantidad); this.raiz.insertBefore(controles,tabla);
-      const scroll=document.createElement("div"); scroll.className="jocarsa-tabla-scroll"; tabla.before(scroll); scroll.appendChild(tabla);
-      const pie=document.createElement("div"); pie.className="jocarsa-tabla-pie"; const info=document.createElement("span"), pag=document.createElement("div"); pag.className="jocarsa-tabla-paginacion"; pie.append(info,pag); this.raiz.appendChild(pie);
+      const scroll=document.createElement("div"); scroll.className="andrei-tabla-scroll"; tabla.before(scroll); scroll.appendChild(tabla);
+      const pie=document.createElement("div"); pie.className="andrei-tabla-pie"; const info=document.createElement("span"), pag=document.createElement("div"); pag.className="andrei-tabla-paginacion"; pie.append(info,pag); this.raiz.appendChild(pie);
       let pagina=1,orden=-1,direccion=1;
       const valor=v=>{const t=v.trim().replace(",",".");return t!==""&&!isNaN(t)?Number(t):v.trim().toLocaleLowerCase("es")};
       const pintar=()=>{
@@ -267,39 +267,39 @@
     }
   }
 
-  class JocarsaArbol extends JocarsaControl {
+  class andreiArbol extends andreiControl {
     constructor(elemento){
       const html=elemento.innerHTML; super(elemento,"arbol"); this.raiz.innerHTML=html;
       this.raiz.querySelectorAll("li").forEach(li=>{
         const hijos=[...li.children]; const sub=hijos.find(x=>x.tagName==="UL"); const textos=[...li.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(" ").trim();
         [...li.childNodes].filter(n=>n.nodeType===3).forEach(n=>n.remove());
-        const nodo=document.createElement("div");nodo.className="jocarsa-arbol-nodo"; const toggle=document.createElement("span");toggle.className="jocarsa-arbol-toggle";toggle.textContent=sub?"▼":""; const icon=document.createElement("span");icon.className="jocarsa-arbol-icono";icon.textContent=sub?"📁":"📄"; const label=document.createElement("span");label.textContent=textos||li.getAttribute("data-label")||"Nodo"; nodo.append(toggle,icon,label);li.insertBefore(nodo,li.firstChild);
+        const nodo=document.createElement("div");nodo.className="andrei-arbol-nodo"; const toggle=document.createElement("span");toggle.className="andrei-arbol-toggle";toggle.textContent=sub?"▼":""; const icon=document.createElement("span");icon.className="andrei-arbol-icono";icon.textContent=sub?"📁":"📄"; const label=document.createElement("span");label.textContent=textos||li.getAttribute("data-label")||"Nodo"; nodo.append(toggle,icon,label);li.insertBefore(nodo,li.firstChild);
         if(sub){toggle.onclick=e=>{e.stopPropagation();li.classList.toggle("cerrado");toggle.textContent=li.classList.contains("cerrado")?"▶":"▼";icon.textContent=li.classList.contains("cerrado")?"📁":"📂"}}
-        nodo.onclick=()=>{this.raiz.querySelectorAll(".jocarsa-arbol-nodo").forEach(n=>n.classList.remove("seleccionado"));nodo.classList.add("seleccionado");this.setValue(label.textContent)};
+        nodo.onclick=()=>{this.raiz.querySelectorAll(".andrei-arbol-nodo").forEach(n=>n.classList.remove("seleccionado"));nodo.classList.add("seleccionado");this.setValue(label.textContent)};
       });
       if(this.name)this.campoOculto("input");
     }
   }
 
-  class JocarsaCalendario extends JocarsaControl {
+  class andreiCalendario extends andreiControl {
     constructor(elemento){
       super(elemento,"calendario");
       const inicial=this.parseFecha(this.value)||new Date();
       this.seleccion=this.parseFecha(this.value);
       this.vista=new Date(inicial.getFullYear(),inicial.getMonth(),1);
-      const cab=document.createElement("div");cab.className="jocarsa-cal-cabecera";
+      const cab=document.createElement("div");cab.className="andrei-cal-cabecera";
       const ant=document.createElement("button");ant.type="button";ant.textContent="‹";
-      const titulo=document.createElement("span");titulo.className="jocarsa-cal-titulo";
+      const titulo=document.createElement("span");titulo.className="andrei-cal-titulo";
       const sig=document.createElement("button");sig.type="button";sig.textContent="›";cab.append(ant,titulo,sig);this.raiz.appendChild(cab);
-      const grid=document.createElement("div");grid.className="jocarsa-cal-grid";this.raiz.appendChild(grid);
-      const valor=document.createElement("div");valor.className="jocarsa-cal-valor";this.raiz.appendChild(valor);
+      const grid=document.createElement("div");grid.className="andrei-cal-grid";this.raiz.appendChild(grid);
+      const valor=document.createElement("div");valor.className="andrei-cal-valor";this.raiz.appendChild(valor);
       this.campoOculto("input");
       const pintar=()=>{
         titulo.textContent=this.vista.toLocaleDateString("es-ES",{month:"long",year:"numeric"});grid.innerHTML="";
-        ["L","M","X","J","V","S","D"].forEach(x=>{const d=document.createElement("div");d.className="jocarsa-cal-dia-semana";d.textContent=x;grid.appendChild(d)});
+        ["L","M","X","J","V","S","D"].forEach(x=>{const d=document.createElement("div");d.className="andrei-cal-dia-semana";d.textContent=x;grid.appendChild(d)});
         const y=this.vista.getFullYear(),m=this.vista.getMonth(),primero=new Date(y,m,1),offset=(primero.getDay()+6)%7;
         const inicio=new Date(y,m,1-offset),hoy=new Date();
-        for(let i=0;i<42;i++){const f=new Date(inicio);f.setDate(inicio.getDate()+i);const d=document.createElement("div");d.className="jocarsa-cal-dia";d.textContent=f.getDate();if(f.getMonth()!==m)d.classList.add("otro-mes");if(this.igualDia(f,hoy))d.classList.add("hoy");if(this.seleccion&&this.igualDia(f,this.seleccion))d.classList.add("seleccionado");d.onclick=()=>{this.seleccion=new Date(f);this.vista=new Date(f.getFullYear(),f.getMonth(),1);this.setValue(this.formato(f));valor.textContent=this.value;pintar()};grid.appendChild(d)}
+        for(let i=0;i<42;i++){const f=new Date(inicio);f.setDate(inicio.getDate()+i);const d=document.createElement("div");d.className="andrei-cal-dia";d.textContent=f.getDate();if(f.getMonth()!==m)d.classList.add("otro-mes");if(this.igualDia(f,hoy))d.classList.add("hoy");if(this.seleccion&&this.igualDia(f,this.seleccion))d.classList.add("seleccionado");d.onclick=()=>{this.seleccion=new Date(f);this.vista=new Date(f.getFullYear(),f.getMonth(),1);this.setValue(this.formato(f));valor.textContent=this.value;pintar()};grid.appendChild(d)}
         valor.textContent=this.seleccion?this.formato(this.seleccion):"Sin fecha seleccionada";
       };
       ant.onclick=()=>{this.vista.setMonth(this.vista.getMonth()-1);pintar()};sig.onclick=()=>{this.vista.setMonth(this.vista.getMonth()+1);pintar()};pintar();
@@ -309,16 +309,16 @@
     igualDia(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
   }
 
-  class JocarsaSemana extends JocarsaControl {
+  class andreiSemana extends andreiControl {
     constructor(elemento){
       super(elemento,"semana");
       this.inicio=elemento.getAttribute("inicio")||"08:00";this.fin=elemento.getAttribute("fin")||"20:00";this.intervalo=Math.max(5,Number(elemento.getAttribute("intervalo"))||30);
       const base=this.parseValor(this.value)?.fecha||new Date();this.lunes=this.obtenerLunes(base);
-      const cab=document.createElement("div");cab.className="jocarsa-semana-cabecera";const ant=document.createElement("button");ant.type="button";ant.textContent="‹ Semana";const titulo=document.createElement("strong");const sig=document.createElement("button");sig.type="button";sig.textContent="Semana ›";cab.append(ant,titulo,sig);this.raiz.appendChild(cab);
-      const scroll=document.createElement("div");scroll.className="jocarsa-semana-scroll";const grid=document.createElement("div");grid.className="jocarsa-semana-grid";scroll.appendChild(grid);this.raiz.appendChild(scroll);const valor=document.createElement("div");valor.className="jocarsa-semana-valor";this.raiz.appendChild(valor);this.campoOculto("input");
+      const cab=document.createElement("div");cab.className="andrei-semana-cabecera";const ant=document.createElement("button");ant.type="button";ant.textContent="‹ Semana";const titulo=document.createElement("strong");const sig=document.createElement("button");sig.type="button";sig.textContent="Semana ›";cab.append(ant,titulo,sig);this.raiz.appendChild(cab);
+      const scroll=document.createElement("div");scroll.className="andrei-semana-scroll";const grid=document.createElement("div");grid.className="andrei-semana-grid";scroll.appendChild(grid);this.raiz.appendChild(scroll);const valor=document.createElement("div");valor.className="andrei-semana-valor";this.raiz.appendChild(valor);this.campoOculto("input");
       const minutos=s=>{const [h,m]=s.split(":").map(Number);return h*60+m}, fmt=n=>`${String(Math.floor(n/60)).padStart(2,"0")}:${String(n%60).padStart(2,"0")}`;
-      const pintar=()=>{grid.innerHTML="";const finSemana=new Date(this.lunes);finSemana.setDate(finSemana.getDate()+6);titulo.textContent=`${this.fechaCorta(this.lunes)} — ${this.fechaCorta(finSemana)}`;const esquina=document.createElement("div");esquina.className="jocarsa-semana-dia jocarsa-semana-esquina";grid.appendChild(esquina);for(let d=0;d<7;d++){const f=new Date(this.lunes);f.setDate(f.getDate()+d);const c=document.createElement("div");c.className="jocarsa-semana-dia";c.innerHTML=`<strong>${f.toLocaleDateString("es-ES",{weekday:"short"})}</strong>${f.getDate()}/${f.getMonth()+1}`;grid.appendChild(c)}
-        for(let t=minutos(this.inicio);t<minutos(this.fin);t+=this.intervalo){const h=document.createElement("div");h.className="jocarsa-semana-hora";h.textContent=fmt(t);grid.appendChild(h);for(let d=0;d<7;d++){const f=new Date(this.lunes);f.setDate(f.getDate()+d);const v=`${this.formatoFecha(f)} ${fmt(t)}`;const slot=document.createElement("div");slot.className="jocarsa-semana-slot";slot.title=v;if(this.value===v)slot.classList.add("seleccionado");slot.onclick=()=>{this.setValue(v);valor.textContent=v;pintar()};grid.appendChild(slot)}}valor.textContent=this.value||"Sin slot seleccionado";
+      const pintar=()=>{grid.innerHTML="";const finSemana=new Date(this.lunes);finSemana.setDate(finSemana.getDate()+6);titulo.textContent=`${this.fechaCorta(this.lunes)} — ${this.fechaCorta(finSemana)}`;const esquina=document.createElement("div");esquina.className="andrei-semana-dia andrei-semana-esquina";grid.appendChild(esquina);for(let d=0;d<7;d++){const f=new Date(this.lunes);f.setDate(f.getDate()+d);const c=document.createElement("div");c.className="andrei-semana-dia";c.innerHTML=`<strong>${f.toLocaleDateString("es-ES",{weekday:"short"})}</strong>${f.getDate()}/${f.getMonth()+1}`;grid.appendChild(c)}
+        for(let t=minutos(this.inicio);t<minutos(this.fin);t+=this.intervalo){const h=document.createElement("div");h.className="andrei-semana-hora";h.textContent=fmt(t);grid.appendChild(h);for(let d=0;d<7;d++){const f=new Date(this.lunes);f.setDate(f.getDate()+d);const v=`${this.formatoFecha(f)} ${fmt(t)}`;const slot=document.createElement("div");slot.className="andrei-semana-slot";slot.title=v;if(this.value===v)slot.classList.add("seleccionado");slot.onclick=()=>{this.setValue(v);valor.textContent=v;pintar()};grid.appendChild(slot)}}valor.textContent=this.value||"Sin slot seleccionado";
       };
       ant.onclick=()=>{this.lunes.setDate(this.lunes.getDate()-7);pintar()};sig.onclick=()=>{this.lunes.setDate(this.lunes.getDate()+7);pintar()};pintar();
     }
@@ -328,11 +328,11 @@
     fechaCorta(f){return f.toLocaleDateString("es-ES",{day:"2-digit",month:"short",year:"numeric"})}
   }
 
-  class JocarsaHora extends JocarsaControl {
+  class andreiHora extends andreiControl {
     constructor(elemento){
       super(elemento,"hora");
       const m=(this.value||"").match(/^(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/);this.h=m?Math.min(23,+m[1]):0;this.mi=m?Math.min(59,+m[2]):0;this.s=m?Math.min(59,+(m[3]||0)):0;
-      const wrap=document.createElement("div");wrap.className="jocarsa-reloj-wrap";const canvas=document.createElement("canvas");canvas.className="jocarsa-reloj";canvas.width=420;canvas.height=420;wrap.appendChild(canvas);this.raiz.appendChild(wrap);const valor=document.createElement("div");valor.className="jocarsa-hora-valor";const leyenda=document.createElement("div");leyenda.className="jocarsa-hora-leyenda";leyenda.innerHTML="<span>Horas</span><span>Minutos</span><span>Segundos</span>";this.raiz.append(valor,leyenda);this.campoOculto("input");const ctx=canvas.getContext("2d");let arrastrando=false,anillo=null;
+      const wrap=document.createElement("div");wrap.className="andrei-reloj-wrap";const canvas=document.createElement("canvas");canvas.className="andrei-reloj";canvas.width=420;canvas.height=420;wrap.appendChild(canvas);this.raiz.appendChild(wrap);const valor=document.createElement("div");valor.className="andrei-hora-valor";const leyenda=document.createElement("div");leyenda.className="andrei-hora-leyenda";leyenda.innerHTML="<span>Horas</span><span>Minutos</span><span>Segundos</span>";this.raiz.append(valor,leyenda);this.campoOculto("input");const ctx=canvas.getContext("2d");let arrastrando=false,anillo=null;
       const actualizar=()=>{const v=`${String(this.h).padStart(2,"0")}:${String(this.mi).padStart(2,"0")}:${String(this.s).padStart(2,"0")}`;valor.textContent=v;this.setValue(v);dibujar()};
       const punto=e=>{const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}};
       const elegir=p=>{const cx=210,cy=210,dx=p.x-cx,dy=p.y-cy,r=Math.hypot(dx,dy);if(r<42||r>205)return null;const anillos=[{tipo:"h",radio:175,max:24},{tipo:"mi",radio:120,max:60},{tipo:"s",radio:70,max:60}];const elegido=anillos.reduce((a,b)=>Math.abs(r-b.radio)<Math.abs(r-a.radio)?b:a);if(Math.abs(r-elegido.radio)>32)return null;const ang=(Math.atan2(dy,dx)+Math.PI/2+Math.PI*2)%(Math.PI*2),n=Math.round(ang/(Math.PI*2)*elegido.max)%elegido.max;this[elegido.tipo]=n;return elegido.tipo};
@@ -342,7 +342,7 @@
   }
 
 
-  class JocarsaInput extends JocarsaControl {
+  class andreiInput extends andreiControl {
     static tipos = {
       text:     {emoji:"T", native:"text", label:"texto"},
       nombre:   {emoji:"♙", native:"text", label:"nombre", autocomplete:"name"},
@@ -371,13 +371,13 @@
     constructor(elemento){
       super(elemento,"input");
       const solicitado=(elemento.getAttribute("type")||"text").toLowerCase();
-      const cfg=JocarsaInput.tipos[solicitado]||JocarsaInput.tipos.text;
+      const cfg=andreiInput.tipos[solicitado]||andreiInput.tipos.text;
       this.raiz.dataset.type=solicitado;
       this.raiz.setAttribute("aria-disabled",this.disabled?"true":"false");
 
-      const envoltura=document.createElement("div"); envoltura.className="jocarsa-input-envoltura";
-      const icono=document.createElement("span"); icono.className="jocarsa-input-icono"; icono.textContent=elemento.getAttribute("emoji")||cfg.emoji; icono.title=`Tipo esperado: ${cfg.label}`;
-      const campo=document.createElement("input"); campo.className="jocarsa-input-campo"; campo.type=cfg.native;
+      const envoltura=document.createElement("div"); envoltura.className="andrei-input-envoltura";
+      const icono=document.createElement("span"); icono.className="andrei-input-icono"; icono.textContent=elemento.getAttribute("emoji")||cfg.emoji; icono.title=`Tipo esperado: ${cfg.label}`;
+      const campo=document.createElement("input"); campo.className="andrei-input-campo"; campo.type=cfg.native;
       if(this.name) campo.name=this.name;
       campo.value=this.value;
       campo.placeholder=this.placeholder||elemento.getAttribute("label")||`Introduce ${cfg.label}`;
@@ -386,33 +386,33 @@
       if(!elemento.hasAttribute("step")&&cfg.step)campo.step=cfg.step;
       if(!elemento.hasAttribute("autocomplete")&&cfg.autocomplete)campo.autocomplete=cfg.autocomplete;
       if(cfg.inputmode)campo.inputMode=cfg.inputmode;
-      const tipo=document.createElement("span"); tipo.className="jocarsa-input-tipo"; tipo.textContent=elemento.getAttribute("etiqueta-tipo")||cfg.label;
+      const tipo=document.createElement("span"); tipo.className="andrei-input-tipo"; tipo.textContent=elemento.getAttribute("etiqueta-tipo")||cfg.label;
       envoltura.append(icono,campo,tipo); this.raiz.appendChild(envoltura); this.campo=campo;
-      const ayuda=elemento.getAttribute("ayuda"); if(ayuda){const a=document.createElement("div");a.className="jocarsa-input-ayuda";a.textContent=ayuda;this.raiz.appendChild(a);}
-      const estado=()=>{this.value=campo.value;envoltura.classList.toggle("vacio",!campo.value);envoltura.classList.toggle("valido",campo.checkValidity());envoltura.classList.toggle("invalido",!!campo.value&&!campo.checkValidity());this.raiz.dispatchEvent(new CustomEvent("jocarsa-change",{detail:{value:this.value,type:solicitado}}));};
+      const ayuda=elemento.getAttribute("ayuda"); if(ayuda){const a=document.createElement("div");a.className="andrei-input-ayuda";a.textContent=ayuda;this.raiz.appendChild(a);}
+      const estado=()=>{this.value=campo.value;envoltura.classList.toggle("vacio",!campo.value);envoltura.classList.toggle("valido",campo.checkValidity());envoltura.classList.toggle("invalido",!!campo.value&&!campo.checkValidity());this.raiz.dispatchEvent(new CustomEvent("andrei-change",{detail:{value:this.value,type:solicitado}}));};
       campo.addEventListener("input",estado); campo.addEventListener("change",estado); estado();
     }
   }
 
-  class Jocarsa {
+  class andrei {
     static controles={
-      "jocarsa-input":JocarsaInput,
-      "jocarsa-texto":JocarsaTexto,
-      "jocarsa-markdown":JocarsaMarkdown,
-      "jocarsa-editor":JocarsaEditor,
-      "jocarsa-firma":JocarsaFirma,
-      "jocarsa-tabla":JocarsaTabla,
-      "jocarsa-arbol":JocarsaArbol,
-      "jocarsa-calendario":JocarsaCalendario,
-      "jocarsa-semana":JocarsaSemana,
-      "jocarsa-hora":JocarsaHora
+      "andrei-input":andreiInput,
+      "andrei-texto":andreiTexto,
+      "andrei-markdown":andreiMarkdown,
+      "andrei-editor":andreiEditor,
+      "andrei-firma":andreiFirma,
+      "andrei-tabla":andreiTabla,
+      "andrei-arbol":andreiArbol,
+      "andrei-calendario":andreiCalendario,
+      "andrei-semana":andreiSemana,
+      "andrei-hora":andreiHora
     };
     static iniciar(){
       Object.entries(this.controles).forEach(([selector,Clase])=>document.querySelectorAll(selector).forEach(el=>new Clase(el)));
     }
   }
 
-  window.Jocarsa=Jocarsa;
-  window.JocarsaControl=JocarsaControl;
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>Jocarsa.iniciar()); else Jocarsa.iniciar();
+  window.andrei=andrei;
+  window.andreiControl=andreiControl;
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>andrei.iniciar()); else andrei.iniciar();
 })();

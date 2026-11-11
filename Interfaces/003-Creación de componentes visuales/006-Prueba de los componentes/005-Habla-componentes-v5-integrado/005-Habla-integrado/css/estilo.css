@@ -1125,3 +1125,10 @@ body.redimensionando-drawer,body.redimensionando-drawer *{cursor:col-resize!impo
 /* Integración no invasiva: enlaces de acceso a los nuevos módulos */
 .ju-integracion-link{display:inline-flex;align-items:center;padding:9px 12px;background:var(--color2);color:white;text-decoration:none;white-space:nowrap;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%)}
 .ju-integracion-link:hover{filter:brightness(1.12)}
+
+/* Paleta común de la interfaz */
+:root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827;--color0:var(--negro);--color:var(--azul);--color2:var(--naranja);--color3:var(--blanco)}
+body{background:var(--blanco);color:var(--negro)}
+header,.ju-cabecera{background:var(--azul);color:var(--blanco)}
+a,.ju-integracion-link:hover{color:var(--naranja)}
+.ju-integracion-link{background:var(--azul);color:var(--blanco)}

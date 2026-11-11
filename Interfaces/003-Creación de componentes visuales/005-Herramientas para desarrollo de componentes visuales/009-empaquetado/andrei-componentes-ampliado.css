@@ -460,3 +460,10 @@
 .jocarsa-componentes .barra-jocarsa{position:relative;flex:1;min-height:40px;border:1px solid grey;background:white;overflow:hidden;box-sizing:border-box}
 .jocarsa-componentes .barra-jocarsa-relleno{position:absolute;left:0;top:0;bottom:0;background:#ddd}
 .jocarsa-componentes .barra-jocarsa span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:12px}
+
+/* Paleta común de la interfaz */
+:root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827;--color:var(--azul);--color2:var(--naranja);--color3:var(--blanco)}
+.jocarsa-componentes{color:var(--negro)}
+.jocarsa-componentes .campo,.jocarsa-componentes .ojo-password,.jocarsa-componentes .switch,.jocarsa-componentes .radio-jocarsa,.jocarsa-componentes .boton-jocarsa,.jocarsa-componentes .barra-jocarsa{border-color:var(--azul);background:var(--blanco)}
+.jocarsa-componentes .campo:focus,.jocarsa-componentes .clickable:focus{outline-color:var(--naranja);border-color:var(--naranja)}
+.jocarsa-componentes .boton-jocarsa:hover,.jocarsa-componentes .ojo-password:hover{background:var(--naranja);color:var(--blanco)}
