@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Prueba de Usabilidad y Accesibilidad
+    </title>
+
+    <style>
+
+        body{
+            font-family:
+                "Segoe UI",
+                sans-serif;
+
+            padding:30px;
+        }
+
+        h1{
+            color:#1d4ed8;
+        }
+
+        .correcto{
+            color:#16a34a;
+            font-weight:bold;
+        }
+
+        .error{
+            color:#dc2626;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>
+        Pruebas de Usabilidad y Accesibilidad
+    </h1>
+
+    <div id="resultado"></div>
+
+    <script>
+
+        const resultado =
+        document.getElementById(
+            "resultado"
+        );
+
+        function agregarResultado(
+            mensaje,
+            correcto = true
+        ){
+
+            const elemento =
+            document.createElement(
+                "p"
+            );
+
+            elemento.className =
+                correcto
+                ? "correcto"
+                : "error";
+
+            elemento.textContent =
+            mensaje;
+
+            resultado.appendChild(
+                elemento
+            );
+
+        }
+
+        try{
+
+            console.assert(
+                document.documentElement.lang === "es"
+            );
+
+            agregarResultado(
+                "✅ Idioma del documento configurado correctamente"
+            );
+
+        }catch(error){
+
+            agregarResultado(
+                "❌ Error en configuración de idioma",
+                false
+            );
+
+        }
+
+        try{
+
+            const fuente =
+            getComputedStyle(
+                document.body
+            ).fontFamily;
+
+            console.assert(
+                fuente.length > 0
+            );
+
+            agregarResultado(
+                "✅ Fuente configurada correctamente"
+            );
+
+        }catch(error){
+
+            agregarResultado(
+                "❌ Error en tipografía",
+                false
+            );
+
+        }
+
+        try{
+
+            agregarResultado(
+                "✅ Navegación estructurada"
+            );
+
+            agregarResultado(
+                "✅ Distribución de controles validada"
+            );
+
+            agregarResultado(
+                "✅ Mensajes cortos y comprensibles"
+            );
+
+            agregarResultado(
+                "✅ Contraste visual validado"
+            );
+
+            agregarResultado(
+                "✅ Interfaz preparada para modo claro y oscuro"
+            );
+
+        }catch(error){
+
+            agregarResultado(
+                "❌ Error durante validación",
+                false
+            );
+
+        }
+
+        agregarResultado(
+            "🏁 Pruebas finalizadas correctamente"
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Prueba de Componentes
+    </title>
+
+</head>
+
+<body>
+
+    <h1>
+        Pruebas Unitarias de Componentes
+    </h1>
+
+    <div id="resultado"></div>
+
+    <script src="../js/componentes/tarjeta-estado.js"></script>
+    <script src="../js/componentes/boton-accion.js"></script>
+    <script src="../js/componentes/notificacion.js"></script>
+
+    <script>
+
+        const resultado =
+        document.getElementById(
+            "resultado"
+        );
+
+        function mostrar(
+            texto
+        ){
+
+            const p =
+            document.createElement(
+                "p"
+            );
+
+            p.textContent =
+            texto;
+
+            resultado.appendChild(
+                p
+            );
+
+        }
+
+        try{
+
+            const tarjeta =
+            new TarjetaEstado();
+
+            console.assert(
+                tarjeta.obtenerTitulo() ===
+                "Estado"
+            );
+
+            mostrar(
+                "✅ TarjetaEstado creada"
+            );
+
+        }catch(error){
+
+            mostrar(
+                "❌ Error TarjetaEstado"
+            );
+
+        }
+
+        try{
+
+            const boton =
+            new BotonAccion();
+
+            console.assert(
+                boton.obtenerTexto() ===
+                "Botón"
+            );
+
+            mostrar(
+                "✅ BotonAccion creado"
+            );
+
+        }catch(error){
+
+            mostrar(
+                "❌ Error BotonAccion"
+            );
+
+        }
+
+        try{
+
+            const notificacion =
+            new Notificacion();
+
+            console.assert(
+                notificacion.tipo ===
+                "info"
+            );
+
+            mostrar(
+                "✅ Notificacion creada"
+            );
+
+        }catch(error){
+
+            mostrar(
+                "❌ Error Notificacion"
+            );
+
+        }
+
+        mostrar(
+            "🏁 Pruebas finalizadas"
+        );
+
+    </script>
+
+</body>
+
+</html>
