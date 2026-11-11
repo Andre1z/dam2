@@ -23,7 +23,7 @@ html,body {
   height:100%;
   margin:0
 }
-.jocarsa-iu {
+.andrei-iu {
   font-family:Ubuntu,Arial,sans-serif;
   font-size:var(--texto);
   display:flex;
@@ -386,7 +386,7 @@ nav.compacto .minimizar,section.compacto .minimizar {
   flex-wrap:wrap;
   margin-top:16px
 }
-/* LOGIN jocarsa-iu */
+/* LOGIN andrei-iu */
 .ju-login-page {
   min-height:100vh;
   display:flex;
@@ -440,7 +440,7 @@ nav.compacto .minimizar,section.compacto .minimizar {
   font-weight:bold;
   text-decoration:none
 }
-/* TOASTS jocarsa-iu */
+/* TOASTS andrei-iu */
 .ju-toast-stack {
   position:fixed;
   right:22px;
@@ -529,7 +529,7 @@ nav.compacto .minimizar,section.compacto .minimizar {
   }
 }
 /* =========================================================
-   V3 · AJUSTES DE COHERENCIA JOCARSA-IU
+   V3 · AJUSTES DE COHERENCIA andrei-IU
    ========================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 html,body,button,input,select,textarea {
@@ -549,7 +549,7 @@ nav.compacto .contenido-columna,section.compacto .contenido-columna {
   margin-left:auto;
   margin-right:auto
 }
-/* Login: composición centrada y fondo de proyecto. jocarsa.png vive en la raíz. */
+/* Login: composición centrada y fondo de proyecto. andrei.png vive en la raíz. */
 .ju-login-page {
   position:relative;
   isolation:isolate;
@@ -559,7 +559,7 @@ nav.compacto .contenido-columna,section.compacto .contenido-columna {
   align-items:center;
   justify-content:center;
   padding:40px 20px;
-  background-image:linear-gradient(rgba(215,230,227,.72),rgba(215,230,227,.72)),url('../jocarsa.png');
+  background-image:linear-gradient(rgba(215,230,227,.72),rgba(215,230,227,.72)),url('../andrei.png');
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
@@ -666,7 +666,7 @@ nav.compacto .contenido-columna,section.compacto .contenido-columna {
   }
 }
 /* =========================================================
-   V4 · fidelidad jocarsa-iu 010
+   V4 · fidelidad andrei-iu 010
    ========================================================= */
 /* Header completo: corporativo / herramientas / usuario */
 header .corporativo {
@@ -760,7 +760,7 @@ section .contenido-columna {
 nav.compacto .contenido-columna a:hover,nav.compacto .contenido-columna a.activo,section.compacto .contenido-columna article:hover,section.compacto .contenido-columna article.activo {
   width:40px!important
 }
-/* Login realmente centrado + fondo jocarsa.png de la raíz */
+/* Login realmente centrado + fondo andrei.png de la raíz */
 body.ju-login-page {
   width:100%;
   height:100vh;
@@ -770,7 +770,7 @@ body.ju-login-page {
   place-items:center;
   overflow:auto;
   padding:30px;
-  background:linear-gradient(rgba(235,244,243,.72),rgba(235,244,243,.72)),url('../jocarsa.png') center center/cover no-repeat fixed
+  background:linear-gradient(rgba(235,244,243,.72),rgba(235,244,243,.72)),url('../andrei.png') center center/cover no-repeat fixed
 }
 body.ju-login-page main.ju-login-layout {
   flex:none!important;
@@ -859,42 +859,42 @@ body.ju-library-page .library-stage>.ju-card {
 /*
   No usamos un contenedor scrollable alrededor de las fichas: cuando un
   elemento activo es más ancho que su columna, overflow:auto convierte el
-  desbordamiento horizontal en una barra de scroll. En jocarsa-iu el
+  desbordamiento horizontal en una barra de scroll. En andrei-iu el
   destacado debe poder atravesar el límite de la columna y cubrir el
   separador visualmente.
 */
-.jocarsa-iu nav .contenido-columna, .jocarsa-iu section .contenido-columna, body.ju-library-page .library-nav .contenido-columna, body.ju-library-page .library-section .contenido-columna {
+.andrei-iu nav .contenido-columna, .andrei-iu section .contenido-columna, body.ju-library-page .library-nav .contenido-columna, body.ju-library-page .library-section .contenido-columna {
   overflow:visible !important;
   width:100%;
   min-width:0;
   align-items:stretch;
 }
 /* Las fichas normales ocupan siempre todo el ancho útil de su columna. */
-.jocarsa-iu nav .contenido-columna > a, .jocarsa-iu section .contenido-columna > article, body.ju-library-page .library-nav .contenido-columna > a, body.ju-library-page .library-section .contenido-columna > a {
+.andrei-iu nav .contenido-columna > a, .andrei-iu section .contenido-columna > article, body.ju-library-page .library-nav .contenido-columna > a, body.ju-library-page .library-section .contenido-columna > a {
   width:100%;
   max-width:none;
   margin:0;
   flex:0 0 40px;
 }
 /* Hover y selección continúan físicamente hacia la columna siguiente. */
-.jocarsa-iu nav .contenido-columna > a:hover, .jocarsa-iu section .contenido-columna > article:hover, body.ju-library-page .library-nav .contenido-columna > a:hover, body.ju-library-page .library-section .contenido-columna > a:hover {
+.andrei-iu nav .contenido-columna > a:hover, .andrei-iu section .contenido-columna > article:hover, body.ju-library-page .library-nav .contenido-columna > a:hover, body.ju-library-page .library-section .contenido-columna > a:hover {
   width:calc(100% + (var(--relleno) * .9));
   position:relative;
   z-index:9;
 }
-.jocarsa-iu nav .contenido-columna > a.activo, .jocarsa-iu section .contenido-columna > article.activo, body.ju-library-page .library-nav .contenido-columna > a.activo, body.ju-library-page .library-section .contenido-columna > a.activo {
+.andrei-iu nav .contenido-columna > a.activo, .andrei-iu section .contenido-columna > article.activo, body.ju-library-page .library-nav .contenido-columna > a.activo, body.ju-library-page .library-section .contenido-columna > a.activo {
   width:calc(100% + (var(--relleno) * 2));
   position:relative;
   z-index:10;
 }
 /* El separador queda por debajo del destacado, como en 010. */
-.jocarsa-iu main .separador, body.ju-library-page main .separador {
+.andrei-iu main .separador, body.ju-library-page main .separador {
   z-index:4
 }
-.jocarsa-iu nav, body.ju-library-page .library-nav {
+.andrei-iu nav, body.ju-library-page .library-nav {
   z-index:6
 }
-.jocarsa-iu section, body.ju-library-page .library-section {
+.andrei-iu section, body.ju-library-page .library-section {
   z-index:500
 }
 /* La columna central de las demos conserva exactamente la misma geometría
@@ -914,16 +914,16 @@ body.ju-library-page .library-section .contenido-columna > a {
   background:var(--color3);
 }
 /* Contraído: conserva la misma continuidad visual hacia la columna siguiente. */
-.jocarsa-iu nav.compacto .contenido-columna,
-.jocarsa-iu section.compacto .contenido-columna {
+.andrei-iu nav.compacto .contenido-columna,
+.andrei-iu section.compacto .contenido-columna {
   width:40px;
   align-items:center;
   overflow:visible !important;
 }
 
 /* Estado normal: la ficha permanece dentro de los 40px de la columna compacta. */
-.jocarsa-iu nav.compacto .contenido-columna > a,
-.jocarsa-iu section.compacto .contenido-columna > article {
+.andrei-iu nav.compacto .contenido-columna > a,
+.andrei-iu section.compacto .contenido-columna > article {
   width:40px !important;
   min-width:40px;
   max-width:none;
@@ -932,15 +932,15 @@ body.ju-library-page .library-section .contenido-columna > a {
 }
 
 /* Hover: sobresale ligeramente hacia la siguiente sección. */
-.jocarsa-iu nav.compacto .contenido-columna > a:hover,
-.jocarsa-iu section.compacto .contenido-columna > article:hover {
+.andrei-iu nav.compacto .contenido-columna > a:hover,
+.andrei-iu section.compacto .contenido-columna > article:hover {
   width:calc(40px + (var(--relleno) * .9)) !important;
   z-index:9;
 }
 
 /* Activo: atraviesa el separador igual que en el estado desplegado. */
-.jocarsa-iu nav.compacto .contenido-columna > a.activo,
-.jocarsa-iu section.compacto .contenido-columna > article.activo {
+.andrei-iu nav.compacto .contenido-columna > a.activo,
+.andrei-iu section.compacto .contenido-columna > article.activo {
   width:calc(50px + (var(--relleno) * 2)) !important;
   z-index:10;
 }
@@ -986,10 +986,10 @@ body.redimensionando-drawer,body.redimensionando-drawer *{cursor:col-resize!impo
 /* =========================================================
    V7 · compacto: fusionar visualmente con la sección derecha
    ========================================================= */
-.jocarsa-iu nav.compacto .contenido-columna > a:hover,
-.jocarsa-iu section.compacto .contenido-columna > article:hover,
-.jocarsa-iu nav.compacto .contenido-columna > a.activo,
-.jocarsa-iu section.compacto .contenido-columna > article.activo {
+.andrei-iu nav.compacto .contenido-columna > a:hover,
+.andrei-iu section.compacto .contenido-columna > article:hover,
+.andrei-iu nav.compacto .contenido-columna > a.activo,
+.andrei-iu section.compacto .contenido-columna > article.activo {
   transform:translateX(16px) !important;
 }
 /* =========================================================
@@ -1130,3 +1130,18 @@ body.redimensionando-drawer,body.redimensionando-drawer *{cursor:col-resize!impo
 #escenario:has(> .ju-componentes-frame){padding:0!important;overflow:hidden!important;}
 .ju-componentes-frame{display:block;width:100%;height:100%;border:0;background:var(--color3);}
 #entidades .contenido-columna article:has(.etiqueta){cursor:pointer;}
+
+/* Paleta común de la interfaz */
+:root{--naranja:#f97316;--azul:#1d4ed8;--blanco:#fff;--negro:#111827;--color0:var(--negro);--color:var(--azul);--color2:var(--naranja);--color3:var(--blanco)}
+body{background:var(--blanco);color:var(--negro)}
+header,.ju-cabecera{background:var(--azul);color:var(--blanco)}
+a{color:#c2410c} /* naranja oscuro para texto: 5,2:1 sobre blanco (WCAG AA) */
+.ju-componentes-frame{background:var(--blanco)}
+
+/* Contraste accesible (WCAG AA): texto negro sobre naranja, blanco sobre azul */
+nav .contenido-columna a,.library-nav a,header button,header #usuario a,
+.minimizar,.ju-btn.secondary,.ju-integracion-link,body .ju-integrated-menu a,
+.ju-demo-header a,.ju-drawer-close,.ju-modal-close{color:var(--negro)}
+body .ju-integrated-menu a.selected{color:var(--blanco)}
+thead,thead th,.ju-ai-result thead{color:var(--blanco)}
+header a{color:var(--blanco)}
