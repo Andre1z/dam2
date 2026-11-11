@@ -1,4 +1,4 @@
-Sí, ahí está el problema: **la librería se ha instalado correctamente**, pero el constructor de `JocarsaBBDD` intenta abrir:
+Sí, ahí está el problema: **la librería se ha instalado correctamente**, pero el constructor de `AndreiBBDD` intenta abrir:
 
 ```text
 config.json
@@ -19,22 +19,22 @@ Para una librería instalada a nivel de sistema, **no deberíamos depender del d
 Instalemos la configuración del motor en:
 
 ```text
-/etc/jocarsabbdd/config.json
+/etc/andreibbdd/config.json
 ```
 
 Primero:
 
 ```bash
-sudo mkdir -p /etc/jocarsabbdd
+sudo mkdir -p /etc/andreibbdd
 ```
 
 y copia tu configuración:
 
 ```bash
-sudo cp config.json /etc/jocarsabbdd/config.json
+sudo cp config.json /etc/andreibbdd/config.json
 ```
 
-Después, en `JocarsaBBDD.cpp`, donde tengas algo equivalente a:
+Después, en `AndreiBBDD.cpp`, donde tengas algo equivalente a:
 
 ```cpp
 std::string rutaConfig = "config.json";
@@ -43,7 +43,7 @@ std::string rutaConfig = "config.json";
 cámbialo por:
 
 ```cpp
-std::string rutaConfig = "/etc/jocarsabbdd/config.json";
+std::string rutaConfig = "/etc/andreibbdd/config.json";
 ```
 
 Incluso mejor, podemos permitir **configuración local + configuración global**:
@@ -54,8 +54,8 @@ std::string rutaConfig;
 if(std::filesystem::exists("config.json")){
     rutaConfig = "config.json";
 }
-else if(std::filesystem::exists("/etc/jocarsabbdd/config.json")){
-    rutaConfig = "/etc/jocarsabbdd/config.json";
+else if(std::filesystem::exists("/etc/andreibbdd/config.json")){
+    rutaConfig = "/etc/andreibbdd/config.json";
 }
 else{
     throw std::runtime_error(
@@ -73,7 +73,7 @@ Así durante desarrollo:
 tiene prioridad, pero desde cualquier script:
 
 ```text
-/etc/jocarsabbdd/config.json
+/etc/andreibbdd/config.json
 ```
 
 funciona como configuración global.
@@ -90,13 +90,13 @@ Y prueba **desde `/tmp`**, que es una buena prueba de que no depende de tu proye
 
 ```bash
 cd /tmp
-python3 -c "import jocarsabbdd; print(jocarsabbdd.__file__)"
+python3 -c "import andreibbdd; print(andreibbdd.__file__)"
 ```
 
 Debería aparecer:
 
 ```text
-/usr/local/lib/python3.12/dist-packages/jocarsabbdd.cpython-312-x86_64-linux-gnu.so
+/usr/local/lib/python3.12/dist-packages/andreibbdd.cpython-312-x86_64-linux-gnu.so
 ```
 
 Y después:
@@ -106,26 +106,26 @@ python3
 ```
 
 ```python
-import jocarsabbdd
+import andreibbdd
 
-jocarsabbdd.crear_base("empresa")
-jocarsabbdd.usar_base("empresa")
+andreibbdd.crear_base("empresa")
+andreibbdd.usar_base("empresa")
 ```
 
 ### Hay otra mejora importante
 
-Yo corregiría también el constructor para que **un error de configuración nunca provoque un `Abortado (core generado)` al hacer simplemente `import jocarsabbdd`**.
+Yo corregiría también el constructor para que **un error de configuración nunca provoque un `Abortado (core generado)` al hacer simplemente `import andreibbdd`**.
 
 Ahora seguramente tienes algo conceptualmente parecido a:
 
 ```cpp
-static JocarsaBBDD db;
+static AndreiBBDD db;
 ```
 
 Ese objeto se construye durante:
 
 ```python
-import jocarsabbdd
+import andreibbdd
 ```
 
 y si el constructor lanza:
@@ -139,16 +139,16 @@ la excepción C++ atraviesa la frontera Python/C y termina el proceso.
 Eso hay que corregir. El comportamiento correcto debería ser:
 
 ```python
->>> import jocarsabbdd
+>>> import andreibbdd
 ```
 
 funciona siempre, y si hay un problema:
 
 ```python
->>> jocarsabbdd.crear_base("empresa")
+>>> andreibbdd.crear_base("empresa")
 RuntimeError: No se ha encontrado la configuración...
 ```
 
 **no matar Python**.
 
-Yo haría ambas correcciones ahora: **config global en `/etc/jocarsabbdd/` + impedir que una excepción C++ pueda abortar el intérprete Python**. Es importante antes de seguir desarrollando el conector.
+Yo haría ambas correcciones ahora: **config global en `/etc/andreibbdd/` + impedir que una excepción C++ pueda abortar el intérprete Python**. Es importante antes de seguir desarrollando el conector.

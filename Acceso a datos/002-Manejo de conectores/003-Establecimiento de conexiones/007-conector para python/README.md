@@ -112,7 +112,7 @@ id,activo,nombre,apellidos,email
 ### Insertar
 
 ```text
-INSERTAR clientes Jose,Vicente,jose@ejemplo.com
+INSERTAR clientes Andrei,Buga,andrei@ejemplo.com
 ```
 
 Respuesta:
@@ -136,7 +136,7 @@ LISTAR clientes
 ### Buscar por columna
 
 ```text
-BUSCAR clientes nombre Jose
+BUSCAR clientes nombre Andrei
 ```
 
 ### Actualizar
@@ -144,7 +144,7 @@ BUSCAR clientes nombre Jose
 Se suministran todos los campos de usuario, pero no `id` ni `activo`:
 
 ```text
-ACTUALIZAR clientes 1 Jose,Vicente,nuevo@ejemplo.com
+ACTUALIZAR clientes 1 Andrei,Buga,nuevo@ejemplo.com
 ```
 
 ### Eliminar

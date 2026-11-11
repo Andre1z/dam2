@@ -10,13 +10,13 @@
 | Crear una tabla | `creaTabla()` | `bbdd.creaTabla("clientes","nombre,apellidos,email")` |
 | Obtener el esquema | `obtenerEsquema()` | `esquema = bbdd.obtenerEsquema("clientes")` |
 | Obtener el siguiente ID | `siguienteId()` | `id = bbdd.siguienteId("clientes")` |
-| Insertar un registro | `insertarDatos()` | `id = bbdd.insertarDatos("clientes",["Jose","Carratala","jose@example.com"])` |
+| Insertar un registro | `insertarDatos()` | `id = bbdd.insertarDatos("clientes",["Andrei","Buga","andrei@example.com"])` |
 | Buscar la posición física de un ID | `buscarPosicion()` | `posicion = bbdd.buscarPosicion("clientes",1)` |
 | Leer un registro | `leerRegistro()` | `registro = bbdd.leerRegistro("clientes",1)` |
 | Seleccionar un registro como diccionario | `seleccionar()` | `cliente = bbdd.seleccionar("clientes",1)` |
 | Listar todos los registros activos | `listarTodo()` | `bbdd.listarTodo("clientes")` |
-| Buscar por una columna | `buscarColumna()` | `bbdd.buscarColumna("clientes","nombre","Jose")` |
-| Actualizar un registro | `actualizar()` | `bbdd.actualizar("clientes",1,["Jose","Carratala","nuevo@example.com"])` |
+| Buscar por una columna | `buscarColumna()` | `bbdd.buscarColumna("clientes","nombre","Andrei")` |
+| Actualizar un registro | `actualizar()` | `bbdd.actualizar("clientes",1,["Andrei","Buga","nuevo@example.com"])` |
 | Eliminar lógicamente un registro | `eliminar()` | `bbdd.eliminar("clientes",1)` |
 | Serializar una lista | `serializar()` | `cadena = serial.serializar(["uno","dos","tres"])` |
 | Desserializar una cadena | `desserializar()` | `lista = serial.desserializar("uno,dos,tres")` |
@@ -211,7 +211,7 @@ bytes.
 Un registro lógico como:
 
 ```text
-1,1,Andrei,Carratala,jose@example.com
+1,1,Andrei,Buga,andrei@example.com
 ```
 
 se codifica en UTF-8, se rellena con espacios y termina con un salto de línea hasta completar exactamente 512 bytes.
@@ -272,14 +272,14 @@ Convierte una lista en una cadena.
 serial = AndreiSerializador()
 
 cadena = serial.serializar(
-  ["Jose","Valencia",48]
+  ["Andrei","Valencia",48]
 )
 ```
 
 Resultado:
 
 ```text
-Jose,Valencia,48
+Andrei,Valencia,48
 ```
 
 También admite otro delimitador:
@@ -300,14 +300,14 @@ Realiza la operación inversa:
 
 ```python
 serial.desserializar(
-  "Jose,Valencia,48"
+  "Andrei,Valencia,48"
 )
 ```
 
 Resultado:
 
 ```python
-["Jose","Valencia","48"]
+["Andrei","Valencia","48"]
 ```
 
 Todos los valores recuperados son cadenas.
@@ -451,8 +451,8 @@ id = bbdd.insertarDatos(
   "clientes",
   [
     "Andrei",
-    "Carratala",
-    "jose@example.com"
+    "Buga",
+    "andrei@example.com"
   ]
 )
 ```
@@ -519,8 +519,8 @@ Resultado:
   "1",
   "1",
   "Andrei",
-  "Carratala",
-  "jose@example.com"
+  "Buga",
+  "andrei@example.com"
 ]
 ```
 
@@ -546,8 +546,8 @@ Resultado:
   "id":"1",
   "activo":"1",
   "nombre":"Andrei",
-  "apellidos":"Carratala",
-  "email":"jose@example.com"
+  "apellidos":"Buga",
+  "email":"andrei@example.com"
 }
 ```
 
@@ -716,7 +716,7 @@ id = bbdd.insertarDatos(
   [
     "Andrei",
     "Buga",
-    "jose@example.com"
+    "andrei@example.com"
   ]
 )
 

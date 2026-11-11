@@ -45,7 +45,7 @@ class PruebasAndreiBBDD:
   def ejecutar(self):
     try:
       print("========================================")
-      print(" PRUEBAS EXHAUSTIVAS JOCARSA BBDD")
+      print(" PRUEBAS EXHAUSTIVAS ANDREI BBDD")
       print("========================================")
       print("Directorio temporal:",self.directorio)
 

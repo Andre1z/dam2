@@ -168,7 +168,7 @@ Búsqueda de patrones:
 ```sql
 SELECT *
 FROM clientes
-WHERE nombre LIKE 'Jose%';
+WHERE nombre LIKE 'Andrei%';
 ```
 
 Comodines habituales:
