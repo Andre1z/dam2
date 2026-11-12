@@ -1,0 +1,4 @@
+﻿par,fecha,precio,sma200,variacion_sma_pct,senal,motivo,velas
+BILL/EUR,2026-11-11,0.00376,,,DATOS INSUFICIENTES,Se necesitan al menos 220 velas diarias cerradas.,192
+BILLY/EUR,2026-11-11,0.001151,0.00155412,-3.3117,BAJISTA,Precio por debajo de SMA200 y SMA200 descendente.,399
+BTC/EUR,2026-11-11,66653.6,63771.1785,0.9534,ALCISTA,Precio por encima de SMA200 y SMA200 ascendente.,720

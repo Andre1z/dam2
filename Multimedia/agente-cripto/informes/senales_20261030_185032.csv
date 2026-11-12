@@ -1,0 +1,7 @@
+﻿par,fecha,precio,sma200,variacion_sma_pct,senal,motivo,velas
+BTC/EUR,2026-10-29,69587.6,63537.6085,2.1128,ALCISTA,Precio por encima de SMA200 y SMA200 ascendente.,720
+ADA/EUR,2026-10-29,0.170184,0.1823309,-1.0356,BAJISTA,Precio por debajo de SMA200 y SMA200 descendente.,720
+ETH/EUR,2026-10-29,2011.34,1876.62705,1.7314,ALCISTA,Precio por encima de SMA200 y SMA200 ascendente.,720
+DOT/EUR,2026-10-29,0.8113,0.8988855,-1.2254,BAJISTA,Precio por debajo de SMA200 y SMA200 descendente.,720
+SOL/EUR,2026-10-29,85.3,77.1412,2.795,ALCISTA,Precio por encima de SMA200 y SMA200 ascendente.,720
+XRP/EUR,2026-10-29,1.105,1.1101942,0.1901,NEUTRAL,El precio y la tendencia de SMA200 no coinciden en una señal direccional.,720

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agente de señales cripto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">KRAKEN · ANALÍTICA</p>
+        <h1>Agente de señales cripto</h1>
+        <p class="subtitle">Analiza tendencias a largo plazo con velas diarias y la media móvil de 200 días.</p>
+      </div>
+      <span class="pill">Solo lectura</span>
+    </header>
+
+    <section class="notice">
+      <strong>Modo seguro</strong>
+      <p>La aplicación utiliza datos públicos. No accede a tu cuenta de Kraken ni ejecuta operaciones.</p>
+    </section>
+
+    <div class="layout">
+      <section class="panel markets">
+        <h2>Mercados</h2>
+        <p>Selecciona hasta 10 pares EUR. Usa Ctrl para elegir varios.</p>
+        <label for="pairs">Criptomonedas disponibles</label>
+        <select id="pairs" multiple size="12" aria-describedby="pairHelp"></select>
+        <small id="pairHelp">La lista se carga desde la API pública de Kraken.</small>
+        <div class="buttons vertical">
+          <button id="selectMain" class="secondary" type="button">Seleccionar principales</button>
+          <button id="analyze" type="button">Analizar seleccionadas</button>
+          <button id="reload" class="secondary" type="button">Recargar mercados</button>
+        </div>
+      </section>
+
+      <section class="panel results">
+        <div class="section-heading">
+          <h2>Resultados del análisis</h2>
+          <span id="count" class="pill">0 activos</span>
+        </div>
+        <p>Señales calculadas con datos históricos cerrados.</p>
+        <div id="status" class="status" role="status" aria-live="polite">Cargando mercados de Kraken…</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Activo</th><th>Cierre EUR</th><th>Media 200d</th><th>Señal</th><th>Última vela UTC</th></tr>
+            </thead>
+            <tbody id="results">
+              <tr><td colspan="5" class="empty">Todavía no hay resultados.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="buttons downloads">
+          <button id="downloadCsv" class="secondary" type="button" disabled>Descargar CSV</button>
+          <button id="downloadMd" class="secondary" type="button" disabled>Descargar Markdown</button>
+        </div>
+        <p id="updated" class="muted"></p>
+        <p class="disclaimer">Las señales son indicadores técnicos educativos, no recomendaciones de inversión.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
