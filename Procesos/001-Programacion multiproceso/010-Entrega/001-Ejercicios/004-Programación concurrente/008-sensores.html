@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+    <title>Actualización concurrente</title>
+  <meta charset="UTF-8">
+
+  <style>
+:root{ --azul:#1d4ed8; --naranja:#f97316; --blanco:#ffffff; --negro:#111827; }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html,body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:var(--negro);
+    }
+
+    canvas{
+      display:block;
+      width:100%;
+      height:100%;
+    }
+  </style>
+</head>
+
+<body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
+
+<canvas></canvas>
+
+<script>
+
+let canvas = document.querySelector("canvas")
+let contexto = canvas.getContext("2d")
+
+function redimensionar(){
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+}
+
+redimensionar()
+
+window.addEventListener("resize", redimensionar)
+
+
+
+class Ser{
+
+  constructor(){
+
+    this.x = Math.random() * canvas.width
+    this.y = Math.random() * canvas.height
+
+    this.angulo = Math.random() * Math.PI * 2
+
+    this.hambre = Math.random() * 100
+    this.energia = Math.random() * 100
+
+    this.velocidad = 1 + Math.random()
+
+    this.distanciaSensor = 30
+
+    this.anguloSensor = 0.5
+
+    this.radioDeteccion = 12
+
+  }
+
+
+
+  sensor(anguloSensor){
+
+    let angulo = this.angulo + anguloSensor
+
+    let sensorX =
+      this.x +
+      Math.cos(angulo) *
+      this.distanciaSensor
+
+    let sensorY =
+      this.y +
+      Math.sin(angulo) *
+      this.distanciaSensor
+
+
+    let distanciaMinima = Infinity
+
+    for(let otro of seres){
+
+      if(otro === this){
+        continue
+      }
+
+
+      let dx = otro.x - sensorX
+      let dy = otro.y - sensorY
+
+      let distanciaCuadrado =
+        dx * dx +
+        dy * dy
+
+
+      if(
+        distanciaCuadrado <
+        this.radioDeteccion *
+        this.radioDeteccion
+      ){
+
+        let distancia =
+          Math.sqrt(distanciaCuadrado)
+
+
+        if(distancia < distanciaMinima){
+
+          distanciaMinima = distancia
+
+        }
+
+      }
+
+    }
+
+
+    return distanciaMinima
+
+  }
+
+
+
+  pensar(){
+
+    let izquierda =
+      this.sensor(
+        -this.anguloSensor
+      )
+
+    let centro =
+      this.sensor(0)
+
+    let derecha =
+      this.sensor(
+        this.anguloSensor
+      )
+
+    if(centro !== Infinity){
+
+      if(izquierda > derecha){
+
+        this.angulo -= 0.12
+
+      }else{
+
+        this.angulo += 0.12
+
+      }
+
+    }
+
+    if(izquierda !== Infinity){
+
+      this.angulo += 0.05
+
+    }
+
+    if(derecha !== Infinity){
+
+      this.angulo -= 0.05
+
+    }
+
+  }
+
+
+
+  mover(){
+
+    this.x +=
+      Math.cos(this.angulo) *
+      this.velocidad
+
+    this.y +=
+      Math.sin(this.angulo) *
+      this.velocidad
+
+    if(this.x < 0)
+      this.x = canvas.width
+
+    if(this.x > canvas.width)
+      this.x = 0
+
+    if(this.y < 0)
+      this.y = canvas.height
+
+    if(this.y > canvas.height)
+      this.y = 0
+
+  }
+
+
+
+  dibujar(){
+
+    contexto.fillRect(
+      this.x,
+      this.y,
+      2,
+      2
+    )
+
+  }
+
+}
+
+
+
+let seres = []
+
+let numeroSeres = 10000
+
+
+for(let i = 0; i < numeroSeres; i++){
+
+  seres.push(
+    new Ser()
+  )
+
+}
+
+
+
+function bucle(){
+
+  contexto.fillStyle = "#111"
+
+  contexto.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  )
+
+
+  contexto.fillStyle = "white"
+
+
+  for(let ser of seres){
+
+    ser.pensar()
+
+    ser.mover()
+
+    ser.dibujar()
+
+  }
+
+
+  requestAnimationFrame(bucle)
+
+}
+
+
+bucle()
+
+</script>
+  </body>
+</html>
+

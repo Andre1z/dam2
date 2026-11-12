@@ -1,0 +1,86 @@
+[12/11/2026 16:47:41] [INFO] Iniciando simulacion de pedidos.
+[12/11/2026 16:47:41] [INFO] Trabajador 1 procesando pedido 1
+[12/11/2026 16:47:41] [INFO] Trabajador 2 procesando pedido 2
+[12/11/2026 16:47:41] [INFO] Trabajador 3 procesando pedido 3
+[12/11/2026 16:47:43] [INFO] Trabajador 2 finalizo pedido 2
+[12/11/2026 16:47:43] [INFO] Trabajador 2 procesando pedido 4
+[12/11/2026 16:47:43] [INFO] Trabajador 3 finalizo pedido 3
+[12/11/2026 16:47:43] [INFO] Trabajador 1 finalizo pedido 1
+[12/11/2026 16:47:43] [INFO] Trabajador 1 procesando pedido 6
+[12/11/2026 16:47:43] [INFO] Trabajador 3 procesando pedido 5
+[12/11/2026 16:47:45] [INFO] Trabajador 1 finalizo pedido 6
+[12/11/2026 16:47:45] [INFO] Trabajador 1 procesando pedido 7
+[12/11/2026 16:47:45] [INFO] Trabajador 3 finalizo pedido 5
+[12/11/2026 16:47:45] [INFO] Trabajador 3 procesando pedido 8
+[12/11/2026 16:47:45] [INFO] Trabajador 2 finalizo pedido 4
+[12/11/2026 16:47:45] [INFO] Trabajador 2 procesando pedido 9
+[12/11/2026 16:47:47] [INFO] Trabajador 1 finalizo pedido 7
+[12/11/2026 16:47:47] [INFO] Trabajador 2 finalizo pedido 9
+[12/11/2026 16:47:47] [INFO] Trabajador 3 finalizo pedido 8
+[12/11/2026 16:47:47] [INFO] Trabajador 1 procesando pedido 10
+[12/11/2026 16:47:49] [INFO] Trabajador 1 finalizo pedido 10
+[12/11/2026 16:47:49] [INFO] Simulacion finalizada.
+[12/11/2026 16:47:49] [INFO] Informe guardado en: C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/informes/informe_pedidos_20261112_164749.txt
+[12/11/2026 16:47:49] [INFO] Ejecutando prueba de procesos.
+[12/11/2026 16:47:49] [INFO] Proceso padre esperando al hijo (PID 14056).
+[12/11/2026 16:47:49] [INFO] Proceso hijo iniciado.
+[12/11/2026 16:47:52] [INFO] Proceso hijo finalizado.
+[12/11/2026 16:47:52] [INFO] Proceso hijo completado.
+[12/11/2026 16:47:52] [INFO] Informe guardado en: C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/informes/informe_proceso_20261112_164752.txt
+[12/11/2026 16:47:52] [INFO] Aplicacion finalizada.
+[12/11/2026 16:50:41] [INFO] Iniciando simulacion de pedidos.
+[12/11/2026 16:50:41] [INFO] Cargados 12 pedidos desde C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/datos/pedidos.txt
+[12/11/2026 16:50:41] [INFO] Trabajador 3 procesando pedido 1
+[12/11/2026 16:50:41] [INFO] Trabajador 2 procesando pedido 2
+[12/11/2026 16:50:41] [INFO] Trabajador 1 procesando pedido 3
+[12/11/2026 16:50:43] [INFO] Trabajador 1 finalizo pedido 3
+[12/11/2026 16:50:43] [INFO] Trabajador 1 procesando pedido 4
+[12/11/2026 16:50:43] [INFO] Trabajador 3 finalizo pedido 1
+[12/11/2026 16:50:43] [INFO] Trabajador 3 procesando pedido 5
+[12/11/2026 16:50:43] [INFO] Trabajador 2 finalizo pedido 2
+[12/11/2026 16:50:43] [INFO] Trabajador 2 procesando pedido 6
+[12/11/2026 16:50:45] [INFO] Trabajador 3 finalizo pedido 5
+[12/11/2026 16:50:45] [INFO] Trabajador 3 procesando pedido 7
+[12/11/2026 16:50:45] [INFO] Trabajador 1 finalizo pedido 4
+[12/11/2026 16:50:45] [INFO] Trabajador 1 procesando pedido 8
+[12/11/2026 16:50:45] [INFO] Trabajador 2 finalizo pedido 6
+[12/11/2026 16:50:45] [INFO] Trabajador 2 procesando pedido 9
+[12/11/2026 16:50:47] [INFO] Trabajador 3 finalizo pedido 7
+[12/11/2026 16:50:47] [INFO] Trabajador 3 procesando pedido 10
+[12/11/2026 16:50:47] [INFO] Trabajador 1 finalizo pedido 8
+[12/11/2026 16:50:47] [INFO] Trabajador 1 procesando pedido 11
+[12/11/2026 16:50:47] [INFO] Trabajador 2 finalizo pedido 9
+[12/11/2026 16:50:47] [INFO] Trabajador 2 procesando pedido 12
+[12/11/2026 16:50:49] [INFO] Trabajador 1 finalizo pedido 11
+[12/11/2026 16:50:49] [INFO] Trabajador 2 finalizo pedido 12
+[12/11/2026 16:50:49] [INFO] Trabajador 3 finalizo pedido 10
+[12/11/2026 16:50:49] [INFO] Simulacion finalizada.
+[12/11/2026 16:50:49] [INFO] Informe guardado en: C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/informes/informe_pedidos_20261112_165049.txt
+[12/11/2026 16:50:49] [INFO] Aplicacion finalizada.
+[12/11/2026 16:53:18] [ERROR] Opcion no valida.
+[12/11/2026 16:53:18] [INFO] Aplicacion finalizada.
+[12/11/2026 16:55:32] [ERROR] Opcion no valida.
+[12/11/2026 16:55:32] [INFO] Aplicacion finalizada.
+[12/11/2026 16:58:59] [INFO] Iniciando simulacion de pedidos.
+[12/11/2026 16:58:59] [INFO] Cargados 12 pedidos desde C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/datos/pedidos.txt
+[12/11/2026 16:58:59] [INFO] Trabajador 3 procesando pedido 1
+[12/11/2026 16:58:59] [INFO] Trabajador 2 procesando pedido 2
+[12/11/2026 16:58:59] [INFO] Trabajador 1 procesando pedido 3
+[12/11/2026 16:59:01] [INFO] Trabajador 3 finalizo pedido 1
+[12/11/2026 16:59:01] [INFO] Trabajador 1 finalizo pedido 3
+[12/11/2026 16:59:01] [INFO] Trabajador 1 procesando pedido 5
+[12/11/2026 16:59:01] [INFO] Trabajador 3 procesando pedido 4
+[12/11/2026 16:59:01] [INFO] Trabajador 2 finalizo pedido 2
+[12/11/2026 16:59:01] [INFO] Trabajador 2 procesando pedido 6
+[12/11/2026 16:59:03] [INFO] Trabajador 2 finalizo pedido 6
+[12/11/2026 16:59:03] [INFO] Trabajador 2 procesando pedido 7
+[12/11/2026 16:59:03] [INFO] Trabajador 1 finalizo pedido 5
+[12/11/2026 16:59:03] [INFO] Trabajador 1 procesando pedido 8
+[12/11/2026 16:59:03] [INFO] Trabajador 3 finalizo pedido 4
+[12/11/2026 16:59:03] [INFO] Trabajador 3 procesando pedido 9
+[12/11/2026 16:59:05] [INFO] Trabajador 3 finalizo pedido 9
+[12/11/2026 16:59:05] [INFO] Trabajador 3 procesando pedido 10
+[12/11/2026 16:59:05] [INFO] Trabajador 1 finalizo pedido 8
+[12/11/2026 16:59:05] [INFO] Trabajador 1 procesando pedido 11
+[12/11/2026 16:59:05] [INFO] Trabajador 2 finalizo pedido 7
+[12/11/2026 16:59:05] [INFO] Trabajador 2 procesando pedido 12

@@ -1,0 +1,16 @@
+# Pedidos de entrada del Centro Logistico Multihilo
+# Formato: id;descripcion   (una linea por pedido)
+# Las lineas que empiezan por '#' y las lineas vacias se ignoran.
+
+1;Televisor 55 pulgadas
+2;Portatil 15 pulgadas
+3;Lavadora 8 kg
+4;Frigorifico combi
+5;Silla de oficina
+6;Mesa de escritorio
+7;Monitor 27 pulgadas
+8;Impresora laser
+9;Microondas
+10;Aspiradora sin cable
+11;Cafetera expres
+12;Router WiFi

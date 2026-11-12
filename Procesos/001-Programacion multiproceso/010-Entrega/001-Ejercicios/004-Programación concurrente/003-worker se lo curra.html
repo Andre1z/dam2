@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Actualización concurrente</title>
+    <meta charset="UTF-8">
+      <style>:root{ --azul:#1d4ed8; --naranja:#f97316; --blanco:#ffffff; --negro:#111827; } body { background: var(--negro); color: var(--blanco); font-family: Arial, sans-serif; } </style>
+  </head>
+  <body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
+    <script>
+      let trabajador = new Worker("trabajador2.js");
+      trabajador.postMessage("le envÃ­o un  mensaje al trabajador")
+      trabajador.onmessage = function(datos){
+      	console.log(datos)
+      }
+    </script>
+  </body>
+</html>
+

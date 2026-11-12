@@ -1,0 +1,12 @@
+=================================================
+ INFORME DE SIMULACION DE PROCESO HIJO
+ Fecha: 12/11/2026 16:47:52
+=================================================
+
+Mecanismo:        CreateProcess + WaitForSingleObject
+PID proceso padre: 3544
+PID proceso hijo:  14056
+Codigo de salida:  0
+Duracion:          3.02 s
+
+Estado: COMPLETADO - el hijo termino correctamente

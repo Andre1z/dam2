@@ -1,0 +1,60 @@
+{
+    // Tareas para compilar y ejecutar el Centro Logistico con CMake
+    // usando el compilador g++ 16 de WinLibs (no el MinGW 6.3 antiguo).
+    //
+    //   Ctrl+Shift+B                         -> Compilar
+    //   Terminal > Ejecutar tarea > "Centro logistico: ejecutar"
+    //   F5 / Ctrl+F5                         -> Depurar / Ejecutar (launch.json)
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+            "PATH": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin;${env:PATH}"
+        }
+    },
+    "tasks": [
+        {
+            "label": "Centro logistico: configurar",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
+            "args": [
+                "-S", ".",
+                "-B", "build",
+                "-G", "MinGW Makefiles",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Centro logistico: compilar",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
+            "args": [
+                "--build", "build"
+            ],
+            "dependsOn": "Centro logistico: configurar",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Centro logistico: ejecutar",
+            "type": "process",
+            "command": "${workspaceFolder}\\build\\centro_logistico.exe",
+            "dependsOn": "Centro logistico: compilar",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
+            "group": "test"
+        }
+    ]
+}

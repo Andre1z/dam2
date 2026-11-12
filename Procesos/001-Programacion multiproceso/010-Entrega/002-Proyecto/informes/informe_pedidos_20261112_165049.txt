@@ -1,0 +1,35 @@
+=================================================
+ INFORME DE SIMULACION DE PEDIDOS
+ Fecha: 12/11/2026 16:50:49
+=================================================
+
+Origen de los pedidos: Archivo datos/pedidos.txt
+Pedidos cargados:      12
+Pedidos procesados:    12
+Trabajadores (hilos):  3
+Duracion total:        8.02 s
+
+DETALLE DE PEDIDOS
+-------------------------------------------------
+Pedido  Descripcion               Trabajador    Duracion (ms)
+1       Televisor 55 pulgadas     3             2006
+2       Portatil 15 pulgadas      2             2006
+3       Lavadora 8 kg             1             2005
+4       Frigorifico combi         1             2001
+5       Silla de oficina          3             2000
+6       Mesa de escritorio        2             2000
+7       Monitor 27 pulgadas       3             2002
+8       Impresora laser           1             2001
+9       Microondas                2             2001
+10      Aspiradora sin cable      3             2005
+11      Cafetera expres           1             2005
+12      Router WiFi               2             2004
+
+RESUMEN POR TRABAJADOR
+-------------------------------------------------
+Trabajador    Pedidos     Tiempo trabajado (ms)
+1             4           8012
+2             4           8011
+3             4           8013
+
+Estado: COMPLETADO - todos los pedidos procesados

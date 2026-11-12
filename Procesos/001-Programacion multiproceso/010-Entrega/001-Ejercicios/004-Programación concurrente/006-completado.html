@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <title>Actualización concurrente</title>
+    <meta charset="UTF-8">
+  <style>
+    canvas{
+      border:1px solid var(--naranja);
+    }
+  </style>
+    <style>:root{ --azul:#1d4ed8; --naranja:#f97316; --blanco:#ffffff; --negro:#111827; } body { background: var(--negro); color: var(--blanco); font-family: Arial, sans-serif; } </style>
+  </head>
+<body>
+    <div>Actualización general aplicada por Andrei Buga.</div>
+    
+
+<canvas width="512" height="512"></canvas>
+
+<script>
+
+  class Ser{
+    constructor(){
+      this.x = Math.random() * 512
+      this.y = Math.random() * 512
+      this.angulo = Math.random() * Math.PI * 2
+
+      this.hambre = Math.random() * 100
+      this.energia = Math.random() * 100
+    }
+
+    mover(){
+      this.x += Math.cos(this.angulo)
+      this.y += Math.sin(this.angulo)
+      if(this.x < 0 || this.x > 512){
+        this.angulo = Math.PI - this.angulo
+      }
+
+      if(this.y < 0 || this.y > 512){
+        this.angulo = -this.angulo
+      }
+    }
+
+    dibujar(contexto){
+      contexto.beginPath()
+      contexto.arc(this.x, this.y, 2, 0, Math.PI * 2)
+      contexto.fill()
+    }
+  }
+
+
+  let canvas = document.querySelector("canvas")
+  let contexto = canvas.getContext("2d")
+
+  let seres = []
+  for(let i = 0; i < 500; i++){
+    seres.push(new Ser())
+  }
+
+
+  function bucle(){
+
+    contexto.clearRect(0, 0, 512, 512)
+
+    for(let ser of seres){
+      ser.mover()
+      ser.dibujar(contexto)
+    }
+
+    requestAnimationFrame(bucle)
+  }
+
+  bucle()
+
+</script>
+  </body>
+</html>
+

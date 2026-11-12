@@ -1,0 +1,9 @@
+{
+    // Para la extension CMake Tools (boton de play de la barra inferior).
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.environment": {
+        "PATH": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin;${env:PATH}"
+    },
+    "cmake.configureOnOpen": true
+}

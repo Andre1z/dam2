@@ -1,0 +1,3 @@
+C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/build/CMakeFiles/centro_logistico.dir
+C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/build/CMakeFiles/edit_cache.dir
+C:/xampp/htdocs/dam2/Procesos/001-Programacion multiproceso/010-Entrega/002-Proyecto/build/CMakeFiles/rebuild_cache.dir

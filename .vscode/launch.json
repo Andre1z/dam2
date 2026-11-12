@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // F5 -> compila y depura | Ctrl+F5 -> compila y ejecuta sin depurar
+            // Se abre en una consola aparte para poder escribir en el menu.
+            "name": "Centro logistico",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto\\build\\centro_logistico.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Habilitar impresion con formato para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Centro logistico: compilar"
+        }
+    ]
+}

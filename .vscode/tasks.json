@@ -1,6 +1,62 @@
 {
     "tasks": [
         {
+            "label": "Centro logistico: configurar",
+            "detail": "CMake del proyecto Procesos/.../010-Entrega/002-Proyecto (g++ 16 WinLibs)",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
+            "args": [
+                "-S", ".",
+                "-B", "build",
+                "-G", "MinGW Makefiles",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto",
+                "env": {
+                    "PATH": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin;${env:PATH}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Centro logistico: compilar",
+            "detail": "Compila Procesos/.../010-Entrega/002-Proyecto",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
+            "args": [
+                "--build", "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto",
+                "env": {
+                    "PATH": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin;${env:PATH}"
+                }
+            },
+            "dependsOn": "Centro logistico: configurar",
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": "absolute"
+            }
+        },
+        {
+            "label": "Centro logistico: ejecutar",
+            "detail": "Compila y ejecuta Procesos/.../010-Entrega/002-Proyecto",
+            "type": "process",
+            "command": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto\\build\\centro_logistico.exe",
+            "options": {
+                "cwd": "${workspaceFolder}\\Procesos\\001-Programacion multiproceso\\010-Entrega\\002-Proyecto"
+            },
+            "dependsOn": "Centro logistico: compilar",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
             "type": "cppbuild",
             "label": "C/C++: g++.exe compilar Andrei BBDD",
             "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\g++.exe",
