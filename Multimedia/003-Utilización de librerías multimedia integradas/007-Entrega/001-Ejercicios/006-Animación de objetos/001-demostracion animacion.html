@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+	<head>
+	<meta charset="UTF-8">
+    <style>
+      :root{
+        --azul:#1d4ed8;
+        --naranja:#f97316;
+        --blanco:#ffffff;
+        --negro:#111827;
+      }
+      body{
+        background:var(--negro);
+      }
+      #contenedor{
+        width:50px;
+      	height:50px;
+      	background:var(--azul);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contenedor"></div>
+
+    <!-- Cargamos la librería GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      // gsap.to(objetivo, {propiedades}) anima desde el estado actual hasta estos valores
+      gsap.to("#contenedor", {x:100, duration:2})
+    </script>
+	</body>
+</html>

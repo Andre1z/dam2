@@ -1,0 +1,121 @@
+Hola muy buenas a todos, en este vídeo os vamos a explicar unas cuantas cosas sobre
+sistemas informáticos, vamos a empezar primero de todo por las operaciones básicas que sobre
+los comandos que hemos aprendido en la línea de comandos, es decir, como podéis ver aquí en
+pantalla, tenemos diferentes comandos del INUS en este caso y los que los cuandos del INUS
+estos comandos son bastante, bastante los más usados por decirlo a manera que clear, clear
+significa borra pantalla, esto significa ser vais a patch 2, es que inicia y par el servicio,
+me cabe el significa que crea una carpeta nueva con ese nombre, p de change director y eso va a
+sacar la carpeta que ha creado, crea otra carpeta, me cabe el script como podéis ver aquí,
+fe de 2 puntos, fe de espacio 2 puntos, punto punto, baja de carpeta, luego bajo 3 de carpeta,
+de acuerdo con esto, con estos 2 puntos aquí y el config sirve para ver nuestra IP de red que
+tenemos por ejemplo, luego doble de nuestro directorio y historia en este caso que nos
+resube un poco todo, el historial de todos los comandos que hemos hecho y estos son
+algunos comandos básicos del INUS que están aquí, también están los de Windows que para
+estar para estar un directorio sería dir, en cambio en el INUS sería ls, eso sería un
+par de comandos básicos para sistemas operativos del INUS en este caso, los que más abundan,
+también los sistemas operativos tienen diferentes tipos de carpetas, aquí tenemos una pequeña tabla
+comparativa de las carpetas de Windows, las que tienen Windows y las que tienen el INUS, en este caso
+empezamos con la carpeta Rive del sistema que en Windows empieja por un fe, fe 2 puntos barra
+invertida, en cambio Linux es una barra, la Rive, los archivos de programas, en este caso,
+en Windows es fe 2 puntos barra invertida, program files o program files y el Linux sería barra
+usr y barra opete, ahora si vos es el sistema de Windows es fe 2 puntos barra invertida
+Windows y el Linux sería barra pin, barra ese pin, barra lito, la carpeta usuario, fe 2 puntos
+barrimente a users y barra invertida usuarios, el usuario que sea en cambio el Linux sería
+home usuario, para que tengamos la tabla esta resumen que no varía tanto de lo que parece,
+pero depende, depende del sistema operativo, porque en este caso si metemos algo parativa
+en Windows es que la fe fe 2 puntos siempre están todos los lados, en cambio Linux es la barra,
+la barra están todos los lados, una característica de configuración, sobre todo Windows es que están
+si estoy en 32, en cambio Linux es en ETF, la diferencia entre Windows y Linux es que Linux se puede
+es un sistema operativo como tal, pero es una distrucción donde las distrucciones de Linux,
+en este caso de Debian, pues en barra tefe se pueden cambiar diferentes archivos de configuración,
+en este caso, en cambio Windows no se puede hacer porque eso es un sistema operativo propietario,
+y por eso no se puede hacer, vale, a continuación os vamos a enseñar un poco cómo trabajamos en
+en torno de comando de Linux, en este caso me conecto a VIA, SSH en mi Windows, de acuerdo,
+en una máquina virtual, entonces a un sudo, sudo apt update, por ejemplo,
+en otro lado, en otro lado de la seña, el update normal y corriente, de acuerdo, y ahora por ejemplo,
+querramos instar un pavete, por ejemplo de Apache 2, RCC, se nos instala correctamente,
+no voy a ser aquí, pantalla, se nos ha instalado, vale,
+hacemos instarando paquetes, cosas,
+vamos a instar paquetes de esta manera en línea en comando, podemos irnos a VIA,
+vamos a un ls, vamos a, vamos a Andrei, el s, hay nada, pide 2 puntos para cambiar el directorio,
+vamos a ir, vamos con ls, estamos en la barra, por ejemplo, que querramos hacer un cambiar la
+configuración de red y de feconfi, hacemos en instar net tools, todo apete instar met tools,
+de acuerdo, ahora sí de feconfi, vamos a ir pegatemos aquí,
+de acuerdo, este es nuestro IP, la podemos cambiar con su nano barra de fe, guarda network,
+bueno, la podemos cambiar de esta manera de acuerdo, nuestro wifi,
+sin un tipo de problema, nuestro IP, y así es como trabajaremos en un turno de línea
+en comando el linux, claro, pero ahora en windows podemos hacerlo de forma gráfica,
+muy simple, me dando, navegando por carpetas y todo, vamos a proceder ahora con la
+instalación de la creación a máquina virtual del linux, para ello le vamos a nuevo,
+tenemos aquí un punto desktop, por ejemplo, le hacemos la iso, lo tenemos,
+vamos a otros, la buscamos aquí, ya tengamos la iso, es esta, abrir, linux terbalo,
+me tiene eso atentida, de acuerdo, de hardware, le metemos aquí con los 8 higas,
+porque nos sobra el espacio, y la tenemos aquí unos 5 higores, el lujo duro con
+55, ya vamos bien, la hemos creado, abrimos,
+esperamos, pero vamos a ver el cargue, se debe tardar un poco,
+está preparando un punto,
+ahora tenemos siguiente, siguiente, español, compramos la eña y la fe trencada,
+siguiente, otelifar borgable, instalamos un punto, interactiva, se le fiebaron de
+hardware, esto nos interesa, son opciones que no nos interesa, le vamos a borrar todo el
+disco, siguiente, nuestro nombre, lo completo, de lo cual lo dejamos de esto, ahí de así,
+contra aseña, contra aseña, vamos a la siguiente, cuando habría madrid de España,
+si en de instalar, si nos está instalando, vamos a esperar que se instale, y enseguya volvemos,
+vale, ya se me ha terminado la instalación, le vamos a reiniciar ahora, de acuerdo,
+está reiniciando, vamos a editarle la agonía de fd,
+vamos a dar quitado todo regamente, le vamos a enter, de acuerdo,
+estamos esperando que el sistema va a ver a ti o a arranque,
+vale, enfíjamos con nuestra cuenta, nuestro nombre aseña,
+y así sería la instalación de Linus, vamos a pasar con Windows, eso sería todo,
+lo puedes ver aquí, algo en partir, siguiente, el termedal, y así sería la instalación de Linus subunto,
+eso sería todo, vamos a pasar con Windows, vamos a proceder ahora con la instalación de Windows,
+le vamos a nuevo, vamos a Windows 10, de acuerdo, se enafíjamos la ISO,
+en los edificos, de acuerdo, le vamos a enter, en los 16, 64 están haciendo esa atentía,
+le metemos aquí, uno, seis cores, y fuentagía, vamos a enter 40, terminamos,
+vamos a la siguiente, le iniciamos ahora, vamos a proceder con la instalación de Windows 10,
+vale, está agarrando Windows 10, vale, vamos a la siguiente, instaramos,
+no te va a clave, queramos la Pro, siguiente,
+aceptamos los términos del licencia, siguiente, personalizada, tal cual,
+vamos a esperar a que esto termine y volvemos,
+le vamos a rendeciar ahora,
+está rendeciando Windows, no queremos expresar nueva tecla,
+porque si vamos a arrancar el WB, y vamos puesto de la ISO,
+está arrancando ahora en el discuduro, para proceder a instalación de Windows 10,
+vale, se refearon a esa región que se España,
+la desrofeión del teclado es adecuada, le vamos a emitir,
+está configurando la retabora,
+dejamos que configure todo la red, el solito,
+el solito,
+vale, vamos aquí a configurar para uso personal,
+siguiente, iniciar con cuenta sin conexión,
+experiencia limitada,
+entonces nuestro nombre,
+siguiente, la otra seña de la desea,
+siguiente, confirmar la otra seña,
+siguiente, una pregunta,
+va a poder lo que sea,
+como esta máquina se proba, no importa,
+siguiente,
+la acuerdo, ya tenemos la cuenta creada, ahora no,
+la verdad todo,
+vale, omitir,
+ahora no, no queremos cortana,
+sí,
+nos da bienvenida,
+en Windows, ahora mismo.
+vale, ya tenemos Windows configurado,
+y así es como se hace la instalación de Windows,
+y así es como es la instalación de Windows,
+ahora mismo,
+el Chrome Tab de Linux,
+es una herramienta que te permite configurar y programar tareas,
+repetitivas para que se juzguten de manera automática,
+en segundo plano,
+Chrome Tab, integrado por defecto,
+en la configuración inicial del sistema,
+es uno de los recursos automatizados del administrado de tareas
+de Linux llamado Chrome.
+Chrome Tab, nosotros podemos configurar, por ejemplo,
+que nos da copias de seguridad, por ejemplo,
+cada cuánto tiempo,
+es muy importante también,
+y también lo podemos asociar a Maya SQL, por ejemplo.

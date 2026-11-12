@@ -1,0 +1,399 @@
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+
+    font-family: var(--fuente-principal);
+
+    min-height: 100vh;
+
+    color: var(--texto-principal);
+
+    background:
+    linear-gradient(
+        135deg,
+        #f8fafc,
+        #eef4ff
+    );
+}
+
+/* ==========================
+   CABECERA
+========================== */
+
+.cabecera{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--azul),
+        #2563eb
+    );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 25px 35px;
+
+    box-shadow:
+        0 10px 40px rgba(29,78,216,0.25);
+}
+
+
+.logo{
+    font-size: 3.5rem;
+}
+
+.titulo_principal h1{
+
+    font-size: 2.6rem;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.titulo_principal p{
+    opacity: 0.9;
+}
+
+/* ==========================
+   CONTENIDO PRINCIPAL
+========================== */
+
+.contenedor_principal{
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 40px 20px;
+}
+
+/* ==========================
+   ZONA DE CARGA
+========================== */
+
+.zona_carga{
+    background: var(--blanco);
+
+    border: 4px dashed var(--azul);
+
+    border-radius: 24px;
+
+    padding: 80px 40px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(29,78,216,0.12);
+
+    transition: all 0.3s ease;
+
+    opacity: 1 !important;
+    transform: none;
+
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.zona_carga:hover{
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 25px 60px rgba(29,78,216,0.18);
+}
+
+.zona_carga.activa{
+
+    border-color: var(--naranja);
+
+    background: #fff7ed;
+
+    box-shadow:
+        0 30px 70px rgba(249,115,22,0.25);
+}
+
+.icono_carga{
+    font-size: 6rem;
+
+    opacity: 1 !important;
+
+    margin-bottom: 30px;
+}
+
+.zona_carga h2{
+
+    font-size: 3rem;
+
+    color: var(--azul);
+
+    opacity: 1 !important;
+
+    margin-bottom: 15px;
+
+    font-weight: 700;
+}
+
+.zona_carga p{
+
+    color: var(--gris-oscuro);
+
+    opacity: 1 !important;
+
+    font-size: 1.2rem;
+
+    margin-bottom: 35px;
+}
+
+/* ==========================
+   BOTONES
+========================== */
+
+.boton_principal{
+
+    background: var(--naranja);
+
+    opacity: 1 !important;
+
+    color: var(--blanco);
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 18px 36px;
+
+    font-size: 1.05rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        0 10px 25px rgba(249,115,22,0.35);
+}
+
+.boton_principal:hover{
+
+    transform: translateY(-3px);
+
+    background: #ea580c;
+
+    box-shadow:
+        0 18px 40px rgba(249,115,22,0.45);
+}
+
+.boton_secundario{
+    background: var(--azul);
+    color: var(--blanco);
+
+    border: none;
+
+    border-radius: var(--radio-pequeno);
+
+    padding: 0.8rem 1.2rem;
+
+    cursor: pointer;
+
+    transition: var(--transicion-normal);
+}
+
+.boton_secundario:hover{
+    background: #1e40af;
+}
+
+/* ==========================
+   PANELES
+========================== */
+
+.panel{
+    background: var(--fondo-panel);
+
+    border-radius: var(--radio-grande);
+
+    padding: var(--espaciado-xl);
+
+    margin-top: var(--espaciado-xl);
+
+    box-shadow: var(--sombra-pequena);
+}
+
+.panel h2{
+    margin-bottom: var(--espaciado-lg);
+    color: var(--azul);
+}
+
+/* ==========================
+   OCULTAR PANELES
+========================== */
+
+.panel_oculto{
+    display: none;
+}
+
+/* ==========================
+   INFORMACIÓN DEL VÍDEO
+========================== */
+
+.grid_informacion{
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap: var(--espaciado-lg);
+}
+
+.tarjeta_info{
+    background: var(--gris-claro);
+
+    border-radius: var(--radio-medio);
+
+    padding: var(--espaciado-lg);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.etiqueta{
+    font-size: var(--tamano-sm);
+    color: var(--texto-secundario);
+    font-weight: 600;
+}
+
+/* ==========================
+   PROCESAMIENTO
+========================== */
+
+.barra_progreso_contenedor{
+    width: 100%;
+    height: 20px;
+
+    background: var(--gris-claro);
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+.barra_progreso{
+    width: 0%;
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        var(--azul),
+        var(--naranja)
+    );
+
+    transition: width 0.3s ease;
+}
+
+#texto_estado{
+    margin-top: var(--espaciado-md);
+    color: var(--texto-secundario);
+}
+
+/* ==========================
+   SUBTÍTULOS
+========================== */
+
+.cabecera_panel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--espaciado-md);
+
+    margin-bottom: var(--espaciado-lg);
+
+    flex-wrap: wrap;
+}
+
+.acciones_subtitulos{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+#contenido_subtitulos{
+    width: 100%;
+    min-height: 350px;
+
+    resize: vertical;
+
+    border: 2px solid #d1d5db;
+
+    border-radius: var(--radio-medio);
+
+    padding: var(--espaciado-lg);
+
+    font-family: Consolas, monospace;
+
+    outline: none;
+}
+
+#contenido_subtitulos:focus{
+    border-color: var(--azul);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px){
+
+    .cabecera{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .titulo_principal h1{
+        font-size: 1.8rem;
+    }
+
+    .contenedor_principal{
+        padding: var(--espaciado-md);
+    }
+
+    .zona_carga{
+        padding: 3rem 1rem;
+    }
+
+    .cabecera_panel{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .acciones_subtitulos{
+        width: 100%;
+    }
+
+    .acciones_subtitulos button{
+        width: 100%;
+    }
+
+}
+::selection{
+    background: var(--naranja);
+    color: white;
+}

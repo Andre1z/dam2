@@ -1,0 +1,484 @@
+1
+00:00:00,000 --> 00:00:06,280
+Hola muy buenas a todos, en este vídeo os vamos a explicar unas cuantas cosas sobre
+
+2
+00:00:06,280 --> 00:00:17,240
+sistemas informáticos, vamos a empezar primero de todo por las operaciones básicas que sobre
+
+3
+00:00:17,240 --> 00:00:22,080
+los comandos que hemos aprendido en la línea de comandos, es decir, como podéis ver aquí en
+
+4
+00:00:22,080 --> 00:00:28,040
+pantalla, tenemos diferentes comandos del INUS en este caso y los que los cuandos del INUS
+
+5
+00:00:28,120 --> 00:00:36,600
+estos comandos son bastante, bastante los más usados por decirlo a manera que clear, clear
+
+6
+00:00:36,600 --> 00:00:46,800
+significa borra pantalla, esto significa ser vais a patch 2, es que inicia y par el servicio,
+
+7
+00:00:46,800 --> 00:00:55,400
+me cabe el significa que crea una carpeta nueva con ese nombre, p de change director y eso va a
+
+8
+00:00:55,400 --> 00:01:01,160
+sacar la carpeta que ha creado, crea otra carpeta, me cabe el script como podéis ver aquí,
+
+9
+00:01:01,160 --> 00:01:11,120
+fe de 2 puntos, fe de espacio 2 puntos, punto punto, baja de carpeta, luego bajo 3 de carpeta,
+
+10
+00:01:11,120 --> 00:01:22,400
+de acuerdo con esto, con estos 2 puntos aquí y el config sirve para ver nuestra IP de red que
+
+11
+00:01:22,400 --> 00:01:30,160
+tenemos por ejemplo, luego doble de nuestro directorio y historia en este caso que nos
+
+12
+00:01:30,160 --> 00:01:38,040
+resube un poco todo, el historial de todos los comandos que hemos hecho y estos son
+
+13
+00:01:38,040 --> 00:01:47,240
+algunos comandos básicos del INUS que están aquí, también están los de Windows que para
+
+14
+00:01:47,240 --> 00:01:54,320
+estar para estar un directorio sería dir, en cambio en el INUS sería ls, eso sería un
+
+15
+00:01:54,320 --> 00:02:03,000
+par de comandos básicos para sistemas operativos del INUS en este caso, los que más abundan,
+
+16
+00:02:03,000 --> 00:02:09,400
+también los sistemas operativos tienen diferentes tipos de carpetas, aquí tenemos una pequeña tabla
+
+17
+00:02:09,400 --> 00:02:15,640
+comparativa de las carpetas de Windows, las que tienen Windows y las que tienen el INUS, en este caso
+
+18
+00:02:15,960 --> 00:02:21,920
+empezamos con la carpeta Rive del sistema que en Windows empieja por un fe, fe 2 puntos barra
+
+19
+00:02:21,920 --> 00:02:29,640
+invertida, en cambio Linux es una barra, la Rive, los archivos de programas, en este caso,
+
+20
+00:02:29,640 --> 00:02:40,160
+en Windows es fe 2 puntos barra invertida, program files o program files y el Linux sería barra
+
+21
+00:02:40,160 --> 00:02:47,840
+usr y barra opete, ahora si vos es el sistema de Windows es fe 2 puntos barra invertida
+
+22
+00:02:47,840 --> 00:02:58,920
+Windows y el Linux sería barra pin, barra ese pin, barra lito, la carpeta usuario, fe 2 puntos
+
+23
+00:02:58,920 --> 00:03:07,040
+barrimente a users y barra invertida usuarios, el usuario que sea en cambio el Linux sería
+
+24
+00:03:07,040 --> 00:03:17,320
+home usuario, para que tengamos la tabla esta resumen que no varía tanto de lo que parece,
+
+25
+00:03:17,320 --> 00:03:28,400
+pero depende, depende del sistema operativo, porque en este caso si metemos algo parativa
+
+26
+00:03:28,400 --> 00:03:35,840
+en Windows es que la fe fe 2 puntos siempre están todos los lados, en cambio Linux es la barra,
+
+27
+00:03:35,840 --> 00:03:45,840
+la barra están todos los lados, una característica de configuración, sobre todo Windows es que están
+
+28
+00:03:45,840 --> 00:03:52,480
+si estoy en 32, en cambio Linux es en ETF, la diferencia entre Windows y Linux es que Linux se puede
+
+29
+00:03:52,480 --> 00:04:02,240
+es un sistema operativo como tal, pero es una distrucción donde las distrucciones de Linux,
+
+30
+00:04:03,200 --> 00:04:12,520
+en este caso de Debian, pues en barra tefe se pueden cambiar diferentes archivos de configuración,
+
+31
+00:04:12,520 --> 00:04:17,920
+en este caso, en cambio Windows no se puede hacer porque eso es un sistema operativo propietario,
+
+32
+00:04:17,920 --> 00:04:26,360
+y por eso no se puede hacer, vale, a continuación os vamos a enseñar un poco cómo trabajamos en
+
+33
+00:04:26,360 --> 00:04:35,240
+en torno de comando de Linux, en este caso me conecto a VIA, SSH en mi Windows, de acuerdo,
+
+34
+00:04:35,240 --> 00:04:45,640
+en una máquina virtual, entonces a un sudo, sudo apt update, por ejemplo,
+
+35
+00:04:45,640 --> 00:04:56,640
+en otro lado, en otro lado de la seña, el update normal y corriente, de acuerdo, y ahora por ejemplo,
+
+36
+00:04:56,640 --> 00:05:12,880
+querramos instar un pavete, por ejemplo de Apache 2, RCC, se nos instala correctamente,
+
+37
+00:05:12,880 --> 00:05:19,840
+no voy a ser aquí, pantalla, se nos ha instalado, vale,
+
+38
+00:05:27,520 --> 00:05:29,720
+hacemos instarando paquetes, cosas,
+
+39
+00:05:29,720 --> 00:05:43,880
+vamos a instar paquetes de esta manera en línea en comando, podemos irnos a VIA,
+
+40
+00:05:45,640 --> 00:05:56,360
+vamos a un ls, vamos a, vamos a Andrei, el s, hay nada, pide 2 puntos para cambiar el directorio,
+
+41
+00:05:57,080 --> 00:06:06,320
+vamos a ir, vamos con ls, estamos en la barra, por ejemplo, que querramos hacer un cambiar la
+
+42
+00:06:06,320 --> 00:06:18,920
+configuración de red y de feconfi, hacemos en instar net tools, todo apete instar met tools,
+
+43
+00:06:19,920 --> 00:06:26,840
+de acuerdo, ahora sí de feconfi, vamos a ir pegatemos aquí,
+
+44
+00:06:26,840 --> 00:06:41,240
+de acuerdo, este es nuestro IP, la podemos cambiar con su nano barra de fe, guarda network,
+
+45
+00:06:41,240 --> 00:06:56,640
+bueno, la podemos cambiar de esta manera de acuerdo, nuestro wifi,
+
+46
+00:06:56,640 --> 00:07:04,920
+sin un tipo de problema, nuestro IP, y así es como trabajaremos en un turno de línea
+
+47
+00:07:04,920 --> 00:07:13,680
+en comando el linux, claro, pero ahora en windows podemos hacerlo de forma gráfica,
+
+48
+00:07:13,680 --> 00:07:21,960
+muy simple, me dando, navegando por carpetas y todo, vamos a proceder ahora con la
+
+49
+00:07:21,960 --> 00:07:26,520
+instalación de la creación a máquina virtual del linux, para ello le vamos a nuevo,
+
+50
+00:07:26,520 --> 00:07:37,880
+tenemos aquí un punto desktop, por ejemplo, le hacemos la iso, lo tenemos,
+
+51
+00:07:39,880 --> 00:07:47,720
+vamos a otros, la buscamos aquí, ya tengamos la iso, es esta, abrir, linux terbalo,
+
+52
+00:07:47,720 --> 00:07:54,360
+me tiene eso atentida, de acuerdo, de hardware, le metemos aquí con los 8 higas,
+
+53
+00:07:55,160 --> 00:08:03,240
+porque nos sobra el espacio, y la tenemos aquí unos 5 higores, el lujo duro con
+
+54
+00:08:03,240 --> 00:08:07,760
+55, ya vamos bien, la hemos creado, abrimos,
+
+55
+00:08:07,760 --> 00:08:30,080
+esperamos, pero vamos a ver el cargue, se debe tardar un poco,
+
+56
+00:08:38,640 --> 00:08:40,080
+está preparando un punto,
+
+57
+00:08:51,360 --> 00:08:57,240
+ahora tenemos siguiente, siguiente, español, compramos la eña y la fe trencada,
+
+58
+00:08:57,240 --> 00:09:03,520
+siguiente, otelifar borgable, instalamos un punto, interactiva, se le fiebaron de
+
+59
+00:09:03,520 --> 00:09:09,120
+hardware, esto nos interesa, son opciones que no nos interesa, le vamos a borrar todo el
+
+60
+00:09:09,120 --> 00:09:19,280
+disco, siguiente, nuestro nombre, lo completo, de lo cual lo dejamos de esto, ahí de así,
+
+61
+00:09:22,320 --> 00:09:28,240
+contra aseña, contra aseña, vamos a la siguiente, cuando habría madrid de España,
+
+62
+00:09:28,240 --> 00:09:33,920
+si en de instalar, si nos está instalando, vamos a esperar que se instale, y enseguya volvemos,
+
+63
+00:09:37,920 --> 00:09:42,080
+vale, ya se me ha terminado la instalación, le vamos a reiniciar ahora, de acuerdo,
+
+64
+00:09:42,080 --> 00:09:49,720
+está reiniciando, vamos a editarle la agonía de fd,
+
+65
+00:09:57,000 --> 00:10:00,120
+vamos a dar quitado todo regamente, le vamos a enter, de acuerdo,
+
+66
+00:10:00,120 --> 00:10:09,360
+estamos esperando que el sistema va a ver a ti o a arranque,
+
+67
+00:10:18,560 --> 00:10:21,440
+vale, enfíjamos con nuestra cuenta, nuestro nombre aseña,
+
+68
+00:11:00,120 --> 00:11:12,440
+y así sería la instalación de Linus, vamos a pasar con Windows, eso sería todo,
+
+69
+00:11:12,440 --> 00:11:23,840
+lo puedes ver aquí, algo en partir, siguiente, el termedal, y así sería la instalación de Linus subunto,
+
+70
+00:11:31,120 --> 00:11:40,600
+eso sería todo, vamos a pasar con Windows, vamos a proceder ahora con la instalación de Windows,
+
+71
+00:11:41,600 --> 00:11:47,480
+le vamos a nuevo, vamos a Windows 10, de acuerdo, se enafíjamos la ISO,
+
+72
+00:11:52,760 --> 00:12:00,600
+en los edificos, de acuerdo, le vamos a enter, en los 16, 64 están haciendo esa atentía,
+
+73
+00:12:00,600 --> 00:12:12,600
+le metemos aquí, uno, seis cores, y fuentagía, vamos a enter 40, terminamos,
+
+74
+00:12:12,600 --> 00:12:18,600
+vamos a la siguiente, le iniciamos ahora, vamos a proceder con la instalación de Windows 10,
+
+75
+00:12:19,600 --> 00:12:35,600
+vale, está agarrando Windows 10, vale, vamos a la siguiente, instaramos,
+
+76
+00:12:35,600 --> 00:12:46,600
+no te va a clave, queramos la Pro, siguiente,
+
+77
+00:12:46,600 --> 00:12:53,600
+aceptamos los términos del licencia, siguiente, personalizada, tal cual,
+
+78
+00:12:53,600 --> 00:12:57,600
+vamos a esperar a que esto termine y volvemos,
+
+79
+00:14:36,600 --> 00:14:39,600
+le vamos a rendeciar ahora,
+
+80
+00:14:41,600 --> 00:14:46,600
+está rendeciando Windows, no queremos expresar nueva tecla,
+
+81
+00:14:46,600 --> 00:14:50,600
+porque si vamos a arrancar el WB, y vamos puesto de la ISO,
+
+82
+00:14:50,600 --> 00:14:55,600
+está arrancando ahora en el discuduro, para proceder a instalación de Windows 10,
+
+83
+00:16:35,600 --> 00:16:44,600
+vale, se refearon a esa región que se España,
+
+84
+00:16:44,600 --> 00:16:50,600
+la desrofeión del teclado es adecuada, le vamos a emitir,
+
+85
+00:16:50,600 --> 00:16:53,600
+está configurando la retabora,
+
+86
+00:16:53,600 --> 00:17:04,600
+dejamos que configure todo la red, el solito,
+
+87
+00:17:04,600 --> 00:17:06,600
+el solito,
+
+88
+00:17:34,600 --> 00:17:56,600
+vale, vamos aquí a configurar para uso personal,
+
+89
+00:17:57,600 --> 00:18:01,600
+siguiente, iniciar con cuenta sin conexión,
+
+90
+00:18:01,600 --> 00:18:04,600
+experiencia limitada,
+
+91
+00:18:04,600 --> 00:18:07,600
+entonces nuestro nombre,
+
+92
+00:18:07,600 --> 00:18:11,600
+siguiente, la otra seña de la desea,
+
+93
+00:18:11,600 --> 00:18:16,600
+siguiente, confirmar la otra seña,
+
+94
+00:18:16,600 --> 00:18:19,600
+siguiente, una pregunta,
+
+95
+00:18:19,600 --> 00:18:21,600
+va a poder lo que sea,
+
+96
+00:18:21,600 --> 00:18:26,600
+como esta máquina se proba, no importa,
+
+97
+00:18:26,600 --> 00:18:29,600
+siguiente,
+
+98
+00:18:29,600 --> 00:18:34,600
+la acuerdo, ya tenemos la cuenta creada, ahora no,
+
+99
+00:18:34,600 --> 00:18:37,600
+la verdad todo,
+
+100
+00:18:43,600 --> 00:18:47,600
+vale, omitir,
+
+101
+00:18:48,600 --> 00:18:51,600
+ahora no, no queremos cortana,
+
+102
+00:18:51,600 --> 00:18:54,600
+sí,
+
+103
+00:18:54,600 --> 00:18:56,600
+nos da bienvenida,
+
+104
+00:18:56,600 --> 00:18:59,600
+en Windows, ahora mismo.
+
+105
+00:19:47,600 --> 00:20:07,600
+vale, ya tenemos Windows configurado,
+
+106
+00:20:07,600 --> 00:20:11,600
+y así es como se hace la instalación de Windows,
+
+107
+00:20:11,600 --> 00:20:14,600
+y así es como es la instalación de Windows,
+
+108
+00:20:14,600 --> 00:20:17,600
+ahora mismo,
+
+109
+00:20:17,600 --> 00:20:19,600
+el Chrome Tab de Linux,
+
+110
+00:20:19,600 --> 00:20:23,600
+es una herramienta que te permite configurar y programar tareas,
+
+111
+00:20:23,600 --> 00:20:27,600
+repetitivas para que se juzguten de manera automática,
+
+112
+00:20:27,600 --> 00:20:29,600
+en segundo plano,
+
+113
+00:20:29,600 --> 00:20:32,600
+Chrome Tab, integrado por defecto,
+
+114
+00:20:32,600 --> 00:20:34,600
+en la configuración inicial del sistema,
+
+115
+00:20:34,600 --> 00:20:39,600
+es uno de los recursos automatizados del administrado de tareas
+
+116
+00:20:39,600 --> 00:20:41,600
+de Linux llamado Chrome.
+
+117
+00:20:41,600 --> 00:20:43,600
+Chrome Tab, nosotros podemos configurar, por ejemplo,
+
+118
+00:20:43,600 --> 00:20:45,600
+que nos da copias de seguridad, por ejemplo,
+
+119
+00:20:45,600 --> 00:20:48,600
+cada cuánto tiempo,
+
+120
+00:20:48,600 --> 00:20:51,600
+es muy importante también,
+
+121
+00:20:51,600 --> 00:20:58,600
+y también lo podemos asociar a Maya SQL, por ejemplo.
+

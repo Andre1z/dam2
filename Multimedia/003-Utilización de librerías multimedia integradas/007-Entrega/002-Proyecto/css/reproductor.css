@@ -1,0 +1,331 @@
+/* =========================================
+   REPRODUCTOR
+========================================= */
+
+#seccion_reproductor{
+    width: 100%;
+}
+
+.contenedor_reproductor{
+
+    background: var(--negro);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px rgba(17,24,39,0.25);
+
+    border: 2px solid rgba(29,78,216,0.10);
+
+}
+
+/* =========================================
+   VIDEO
+========================================= */
+
+#reproductor_video{
+
+    width: 100%;
+
+    display: block;
+
+    background: #000;
+
+    max-height: 700px;
+
+    object-fit: contain;
+
+}
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+.controles_video{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    background: var(--negro);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    flex-wrap: wrap;
+
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+.control_video{
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    background: var(--azul);
+
+    color: var(--blanco);
+
+    border-radius: 12px;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+.control_video:hover{
+
+    background: var(--naranja);
+
+    transform: translateY(-2px);
+
+}
+
+.control_video.activo{
+
+    background: var(--naranja);
+
+}
+
+/* =========================================
+   TIEMPOS
+========================================= */
+
+#tiempo_actual,
+#tiempo_total{
+
+    color: var(--blanco);
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    min-width: 55px;
+
+    text-align: center;
+
+}
+
+/* =========================================
+   BARRA REPRODUCCIÓN
+========================================= */
+
+.barra_reproduccion{
+
+    flex: 1;
+
+    min-width: 200px;
+
+    height: 10px;
+
+    background: rgba(255,255,255,0.15);
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+.barra_progreso_video{
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        var(--naranja),
+        var(--azul)
+    );
+
+    border-radius: 999px;
+
+    transition: width 0.1s linear;
+
+}
+
+/* =========================================
+   VOLUMEN
+========================================= */
+
+#control_volumen{
+
+    width: 120px;
+
+    accent-color: var(--naranja);
+
+    cursor: pointer;
+
+}
+
+/* =========================================
+   EFECTOS
+========================================= */
+
+.controles_video button:active{
+
+    transform: scale(0.95);
+
+}
+
+.contenedor_reproductor:hover{
+
+    box-shadow:
+        0 25px 60px rgba(29,78,216,0.15);
+
+}
+
+/* =========================================
+   SUBTÍTULOS NATIVOS
+========================================= */
+
+video::cue{
+
+    background: rgba(17,24,39,0.85);
+
+    color: var(--blanco);
+
+    font-size: 1.2rem;
+
+    padding: 4px 8px;
+
+}
+
+/* =========================================
+   MODO CINE
+========================================= */
+
+.modo_cine{
+
+    background: #000 !important;
+
+}
+
+.modo_cine .cabecera{
+
+    opacity: 0.2;
+
+}
+
+.modo_cine .panel{
+
+    opacity: 0.5;
+
+}
+
+.modo_cine #seccion_reproductor{
+
+    opacity: 1 !important;
+
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 992px){
+
+    .controles_video{
+
+        gap: 10px;
+
+    }
+
+    .barra_reproduccion{
+
+        min-width: 150px;
+
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE MÓVIL
+========================================= */
+
+@media (max-width: 768px){
+
+    .controles_video{
+
+        justify-content: center;
+
+        padding: 15px;
+
+    }
+
+    .barra_reproduccion{
+
+        width: 100%;
+
+        order: 99;
+
+    }
+
+    #control_volumen{
+
+        width: 100px;
+
+    }
+
+    .control_video{
+
+        width: 42px;
+        height: 42px;
+
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE MÓVIL PEQUEÑO
+========================================= */
+
+@media (max-width: 480px){
+
+    .controles_video{
+
+        gap: 6px;
+
+    }
+
+    .control_video{
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 0.85rem;
+
+    }
+
+    #tiempo_actual,
+    #tiempo_total{
+
+        font-size: 0.75rem;
+
+    }
+
+}

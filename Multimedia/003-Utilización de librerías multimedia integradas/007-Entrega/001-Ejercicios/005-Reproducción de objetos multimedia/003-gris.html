@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- ==================================================== -->
+  <!-- INTERFAZ: paleta, barra de controles, toasts y       -->
+  <!-- transcripción. El ejercicio de abajo no cambia.      -->
+  <!-- ==================================================== -->
+
+  <style>
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+      padding:30px 16px;
+      background:var(--blanco);
+      color:var(--negro);
+      font-family:Arial,sans-serif;
+    }
+
+    /* Vídeo original y canvas procesado */
+    video, canvas{
+      display:block;
+      width:800px;
+      max-width:100%;
+      height:auto;
+      background:var(--negro);
+      border:3px solid var(--azul);
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(17,24,39,0.25);
+    }
+
+    video{
+      cursor:pointer;
+    }
+
+    /* Deslizadores de los ejercicios (brillo, contraste...) */
+    body > p{
+      margin:0;
+      width:800px;
+      max-width:100%;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      background:var(--negro);
+      color:var(--blanco);
+      border-radius:8px;
+    }
+
+    body > p input[type="range"]{
+      flex:1;
+      accent-color:var(--naranja);
+    }
+
+    body > p span{
+      color:var(--naranja);
+      font-family:monospace;
+      font-weight:bold;
+    }
+
+    /* Barra de controles */
+    .controles{
+      width:800px;
+      max-width:100%;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      background:var(--negro);
+      border:3px solid var(--azul);
+      border-radius:12px;
+    }
+
+    .controles button{
+      width:38px;
+      height:38px;
+      flex-shrink:0;
+      border:none;
+      border-radius:50%;
+      background:var(--azul);
+      color:var(--blanco);
+      font-size:17px;
+      cursor:pointer;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      transition:background 0.2s, transform 0.2s;
+    }
+
+    .controles button:hover{
+      background:var(--naranja);
+      transform:scale(1.1);
+    }
+
+    .controles button:active{
+      transform:scale(0.95);
+    }
+
+    .controles input[type="range"]{
+      accent-color:var(--naranja);
+      cursor:pointer;
+    }
+
+    .progreso{
+      flex:1;
+    }
+
+    .volumen{
+      width:80px;
+    }
+
+    /* ========================= */
+    /* PALETA */
+    /* ========================= */
+
+    :root{
+      --azul:#1d4ed8;
+      --naranja:#f97316;
+      --blanco:#ffffff;
+      --negro:#111827;
+    }
+
+    .controles input[type="range"]::-moz-range-thumb{
+      width:13px;
+      height:13px;
+      border:none;
+      border-radius:50%;
+      background:var(--naranja);
+    }
+
+
+    /* ========================= */
+    /* TIEMPO / DURACIÓN */
+    /* ========================= */
+
+    .tiempo{
+      flex-shrink:0;
+      color:var(--blanco);
+      font-family:monospace;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .tiempo .total{
+      color:var(--naranja);
+    }
+
+
+    /* ========================= */
+    /* TRANSCRIPCIÓN */
+    /* ========================= */
+
+    .transcripcion{
+      width:800px;
+      max-width:90vw;
+      border:2px solid var(--negro);
+      border-radius:14px;
+      overflow:hidden;
+      background:var(--blanco);
+    }
+
+    .transcripcion h2{
+      margin:0;
+      padding:12px 18px;
+      font-size:17px;
+      background:var(--azul);
+      color:var(--blanco);
+    }
+
+    .lineas{
+      max-height:260px;
+      overflow-y:auto;
+      padding:8px;
+    }
+
+    .linea{
+      display:flex;
+      gap:12px;
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      line-height:1.4;
+      transition:background 0.2s;
+    }
+
+    .linea:hover{
+      background:#eff6ff;
+    }
+
+    .linea .marca{
+      color:var(--azul);
+      font-family:monospace;
+      font-weight:bold;
+      flex-shrink:0;
+    }
+
+    .linea.activa{
+      background:var(--naranja);
+      color:var(--blanco);
+    }
+
+    .linea.activa .marca{
+      color:var(--negro);
+    }
+
+    .aviso{
+      padding:12px 10px;
+      color:#6b7280;
+    }
+
+
+    /* ========================= */
+    /* TOAST */
+    /* ========================= */
+
+    .toast{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      background:var(--negro);
+      color:var(--blanco);
+      border-left:6px solid var(--naranja);
+      border-radius:8px;
+      padding:12px 18px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.35);
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.3s, transform 0.3s;
+      pointer-events:none;
+      z-index:1000;
+    }
+
+    .toast.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .toast strong{
+      display:block;
+      color:var(--naranja);
+      margin-bottom:3px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <video src="andrei.mp4" controls></video>
+  <canvas></canvas>
+
+  <script>
+    let video = document.querySelector("video");
+    let lienzo = document.querySelector("canvas");
+    let contexto = lienzo.getContext("2d");
+
+    video.onloadedmetadata = function(){
+
+      lienzo.width = video.videoWidth;
+      lienzo.height = video.videoHeight;
+
+      function fotograma(){
+
+        // Dibujamos el vídeo
+        contexto.drawImage(
+          video,
+          0,
+          0,
+          lienzo.width,
+          lienzo.height
+        );
+
+        // Obtenemos los píxeles
+        let imagen = contexto.getImageData(
+          0,
+          0,
+          lienzo.width,
+          lienzo.height
+        );
+
+        let pixeles = imagen.data;
+
+        // Recorremos los píxeles
+        for(let i = 0; i < pixeles.length; i += 4){
+
+          let rojo = pixeles[i];
+          let verde = pixeles[i + 1];
+          let azul = pixeles[i + 2];
+
+          // Calculamos gris
+          let gris = (rojo + verde + azul) / 3;
+
+          pixeles[i]     = gris; // R
+          pixeles[i + 1] = gris; // G
+          pixeles[i + 2] = gris; // B
+
+          // pixeles[i + 3] es Alpha
+        }
+
+        // Volvemos a colocar la imagen
+        contexto.putImageData(imagen, 0, 0);
+
+        requestAnimationFrame(fotograma);
+      }
+
+      fotograma();
+    };
+  </script>
+
+<!-- ==================================================== -->
+<!-- INTERFAZ: barra de controles, toasts y transcripción -->
+<!-- ==================================================== -->
+
+<script>
+
+// ========================================================
+// TOAST
+// ========================================================
+
+let toast = document.createElement("div")
+toast.classList.add("toast")
+document.body.appendChild(toast)
+let temporizadorToast
+
+function mostrarToast(boton, mensaje){
+  toast.innerHTML = "<strong>" + boton + "</strong>Mensaje: " + mensaje
+  toast.classList.add("visible")
+  clearTimeout(temporizadorToast)
+  temporizadorToast = setTimeout(function(){
+    toast.classList.remove("visible")
+  }, 2500)
+}
+
+
+
+// ========================================================
+// TIEMPO EN FORMATO m:ss
+// ========================================================
+
+function marcaCorta(segundos){
+  if(!segundos || isNaN(segundos)) segundos = 0
+  let m = Math.floor(segundos / 60)
+  let s = Math.floor(segundos % 60)
+  return m + ":" + String(s).padStart(2, "0")
+}
+
+
+
+// ========================================================
+// PANEL DE TRANSCRIPCIÓN (archivo WebVTT)
+// ========================================================
+
+// "00:01:02.500" o "01:02.500" -> segundos
+function aSegundos(marca){
+  let partes = marca.trim().replace(",", ".").split(":").map(Number)
+  let segundos = 0
+  partes.forEach(function(p){ segundos = segundos * 60 + p })
+  return segundos
+}
+
+/*
+  Crea un panel debajo del reproductor y carga
+  el .vtt con el mismo nombre que el vídeo.
+*/
+function crearTranscripcion(media, despuesDe){
+
+  let panel = document.createElement("div")
+  panel.classList.add("transcripcion")
+  panel.innerHTML =
+    '<h2>Transcripción</h2>' +
+    '<div class="lineas"><div class="aviso">Cargando transcripción...</div></div>'
+
+  despuesDe.after(panel)
+
+  let lineas = panel.querySelector(".lineas")
+  let frases = []
+
+  let rutaVtt = media.getAttribute("src").replace(/\.[^.]+$/, ".vtt")
+
+  fetch(rutaVtt)
+    .then(function(respuesta){
+      if(!respuesta.ok) throw new Error("No existe")
+      return respuesta.text()
+    })
+    .then(function(texto){
+
+      // Cada bloque separado por una línea en blanco es una frase
+      let bloques = texto.replace(/\r/g, "").split(/\n\n+/)
+
+      bloques.forEach(function(bloque){
+        let filas = bloque.trim().split("\n")
+        let indice = filas.findIndex(f => f.includes("-->"))
+        if(indice === -1) return
+
+        let tiempos = filas[indice].split("-->")
+        frases.push({
+          inicio: aSegundos(tiempos[0]),
+          fin: aSegundos(tiempos[1].trim().split(" ")[0]),
+          texto: filas.slice(indice + 1).join(" ")
+        })
+      })
+
+      lineas.innerHTML = ""
+
+      frases.forEach(function(frase){
+
+        let linea = document.createElement("div")
+        linea.classList.add("linea")
+
+        let marca = document.createElement("span")
+        marca.classList.add("marca")
+        marca.textContent = marcaCorta(frase.inicio)
+
+        let textoFrase = document.createElement("span")
+        textoFrase.textContent = frase.texto
+
+        linea.appendChild(marca)
+        linea.appendChild(textoFrase)
+        lineas.appendChild(linea)
+
+        // Clic en una frase = saltar a ese momento
+        linea.addEventListener("click", function(){
+          media.currentTime = frase.inicio
+          mostrarToast("Transcripción", "Saltando a " + marcaCorta(frase.inicio))
+        })
+
+        frase.elemento = linea
+      })
+    })
+    .catch(function(){
+      lineas.innerHTML = '<div class="aviso">No se ha encontrado la transcripción (' + rutaVtt + ').</div>'
+    })
+
+
+  // Resaltar la frase que está sonando
+  media.addEventListener("timeupdate", function(){
+
+    frases.forEach(function(frase){
+
+      let activa = media.currentTime >= frase.inicio && media.currentTime < frase.fin
+
+      if(activa && !frase.elemento.classList.contains("activa")){
+        frase.elemento.classList.add("activa")
+        lineas.scrollTop = frase.elemento.offsetTop - lineas.offsetTop - lineas.clientHeight / 2
+      }
+
+      if(!activa){
+        frase.elemento.classList.remove("activa")
+      }
+    })
+  })
+}
+
+
+
+let videos = document.querySelectorAll("video")
+
+videos.forEach(function(video){
+
+  // Quitamos los controles nativos: usamos los nuestros
+  video.controls = false
+
+
+  // ========================================================
+  // BARRA DE CONTROLES (debajo del vídeo)
+  // ========================================================
+
+  let controles = document.createElement("div")
+  controles.classList.add("controles")
+  video.after(controles)
+
+  function crearBoton(icono, titulo){
+    let boton = document.createElement("button")
+    boton.textContent = icono
+    boton.title = titulo
+    controles.appendChild(boton)
+    return boton
+  }
+
+  let atras = crearBoton("↶", "Retroceder 5 segundos")
+  let reproducir = crearBoton("▶", "Reproducir")
+  let adelante = crearBoton("↷", "Avanzar 5 segundos")
+
+  let tiempo = document.createElement("span")
+  tiempo.classList.add("tiempo")
+  controles.appendChild(tiempo)
+
+  let progreso = document.createElement("input")
+  progreso.type = "range"
+  progreso.min = 0
+  progreso.max = 1
+  progreso.step = 0.001
+  progreso.value = 0
+  progreso.classList.add("progreso")
+  controles.appendChild(progreso)
+
+  let volumen = document.createElement("input")
+  volumen.type = "range"
+  volumen.min = 0
+  volumen.max = 1
+  volumen.step = 0.01
+  volumen.value = 1
+  volumen.title = "Volumen"
+  volumen.classList.add("volumen")
+  controles.appendChild(volumen)
+
+
+  // ========================================================
+  // EVENTOS
+  // ========================================================
+
+  function alternarReproduccion(){
+    if(video.paused){
+      video.play()
+      mostrarToast("Reproducir", "El vídeo se está reproduciendo...")
+    }else{
+      video.pause()
+      mostrarToast("Pausar", "El vídeo se ha pausado.")
+    }
+  }
+
+  reproducir.addEventListener("click", alternarReproduccion)
+  video.addEventListener("click", alternarReproduccion)
+
+  adelante.addEventListener("click", function(){
+    video.currentTime = Math.min(video.currentTime + 5, video.duration || 0)
+    mostrarToast("Avanzar", "Avanzando 5 segundos...")
+  })
+
+  atras.addEventListener("click", function(){
+    video.currentTime = Math.max(video.currentTime - 5, 0)
+    mostrarToast("Retroceder", "Retrocediendo 5 segundos...")
+  })
+
+  volumen.addEventListener("input", function(){
+    video.volume = this.value
+  })
+
+  progreso.addEventListener("input", function(){
+    if(video.duration){
+      video.currentTime = this.value * video.duration
+    }
+  })
+
+  function actualizarTiempo(){
+    if(video.duration){
+      progreso.value = video.currentTime / video.duration
+    }
+    tiempo.innerHTML =
+      marcaCorta(video.currentTime) +
+      ' / <span class="total">' + marcaCorta(video.duration) + '</span>'
+  }
+
+  actualizarTiempo()
+  video.addEventListener("loadedmetadata", actualizarTiempo)
+  video.addEventListener("timeupdate", actualizarTiempo)
+
+  video.addEventListener("play", function(){
+    reproducir.textContent = "❚❚"
+    reproducir.title = "Pausar"
+  })
+
+  video.addEventListener("pause", function(){
+    reproducir.textContent = "▶"
+    reproducir.title = "Reproducir"
+  })
+
+
+  // ========================================================
+  // TRANSCRIPCIÓN (al final de la página)
+  // ========================================================
+
+  let ultimo = document.querySelector("canvas") || controles
+  crearTranscripcion(video, ultimo)
+
+})
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Subtitulador Inteligente de Vídeos
+    </title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/reproductor.css">
+    <link rel="stylesheet" href="css/animaciones.css">
+    <link rel="stylesheet" href="css/toast.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+</head>
+
+<body>
+
+    <header class="cabecera">
+
+        <div class="logo">
+            🎬
+        </div>
+
+        <div class="titulo_principal">
+
+            <h1>
+                Subtitulador Inteligente IA
+            </h1>
+
+            <p>
+                Generación automática de subtítulos mediante Whisper
+            </p>
+
+        </div>
+
+    </header>
+
+    <main class="contenedor_principal">
+
+        <!-- =======================
+             ZONA DE CARGA
+        ======================== -->
+
+        <section
+            id="zona_carga"
+            class="zona_carga">
+
+            <div class="icono_carga">
+                📂
+            </div>
+
+            <h2>
+                Arrastra un vídeo aquí
+            </h2>
+
+            <p>
+                o selecciona un archivo desde tu ordenador
+            </p>
+
+            <input
+                type="file"
+                id="selector_video"
+                accept="video/*"
+                hidden>
+
+            <button
+                id="btn_seleccionar_video"
+                class="boton_principal">
+
+                Seleccionar vídeo
+
+            </button>
+
+        </section>
+
+        <!-- =======================
+             INFORMACIÓN DEL VÍDEO
+        ======================== -->
+
+        <section
+            id="panel_informacion"
+            class="panel panel_oculto">
+
+            <h2>
+                Información del vídeo
+            </h2>
+
+            <div class="grid_informacion">
+
+                <div class="tarjeta_info">
+                    <span class="etiqueta">Nombre</span>
+                    <span id="nombre_video">-</span>
+                </div>
+
+                <div class="tarjeta_info">
+                    <span class="etiqueta">Duración</span>
+                    <span id="duracion_video">-</span>
+                </div>
+
+                <div class="tarjeta_info">
+                    <span class="etiqueta">Tamaño</span>
+                    <span id="tamano_video">-</span>
+                </div>
+
+                <div class="tarjeta_info">
+                    <span class="etiqueta">Resolución</span>
+                    <span id="resolucion_video">-</span>
+                </div>
+
+                <div class="tarjeta_info">
+                    <span class="etiqueta">Formato</span>
+                    <span id="formato_video">-</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =======================
+             REPRODUCTOR
+        ======================== -->
+
+        <section
+            id="seccion_reproductor"
+            class="panel panel_oculto">
+
+            <h2>
+                Reproductor multimedia
+            </h2>
+
+            <div class="contenedor_reproductor">
+
+                <img
+                    id="miniatura_video"
+                    class="miniatura_video"
+                    alt="Miniatura del vídeo"
+                    hidden>
+
+                <video
+                    id="reproductor_video"
+                    preload="metadata">
+
+                    <track
+                        id="pista_subtitulos"
+                        kind="subtitles"
+                        srclang="es"
+                        label="Español">
+
+                </video>
+
+                <!-- =======================
+                     CONTROLES
+                ======================== -->
+
+                <div class="controles_video">
+
+                    <button
+                        id="btn_reproducir"
+                        class="control_video">
+
+                        ▶️
+
+                    </button>
+
+                    <button
+                        id="btn_pausar"
+                        class="control_video">
+
+                        ⏸️
+
+                    </button>
+
+                    <button
+                        id="btn_detener"
+                        class="control_video">
+
+                        ⏹️
+
+                    </button>
+
+                    <!-- TIEMPO -->
+
+                    <span id="tiempo_actual">
+
+                        00:00
+
+                    </span>
+
+                    <!-- BARRA -->
+
+                    <div
+                        id="barra_reproduccion"
+                        class="barra_reproduccion">
+
+                        <div
+                            id="barra_progreso_video"
+                            class="barra_progreso_video">
+
+                        </div>
+
+                    </div>
+
+                    <span
+                        id="tiempo_total">
+
+                        00:00
+
+                    </span>
+
+                    <!-- VOLUMEN -->
+
+                    <button
+                        id="btn_volumen"
+                        class="control_video">
+
+                        🔊
+
+                    </button>
+
+                    <input
+                        id="control_volumen"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value="1">
+
+                    <!-- SUBTÍTULOS -->
+
+                    <button
+                        id="btn_subtitulos"
+                        class="control_video"
+                        title="Activar o desactivar subtítulos">
+
+                        💬
+
+                    </button>
+
+                    <!-- MODO CINE -->
+
+                    <button
+                        id="btn_cine"
+                        class="control_video"
+                        title="Modo cine">
+
+                        📺
+
+                    </button>
+
+                    <!-- PANTALLA COMPLETA -->
+
+                    <button
+                        id="btn_pantalla_completa"
+                        class="control_video"
+                        title="Pantalla completa">
+
+                        ⛶
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =======================
+             PROCESAMIENTO
+        ======================== -->
+
+        <section
+            id="panel_procesamiento"
+            class="panel panel_oculto">
+
+            <h2>
+                Procesamiento con IA
+            </h2>
+
+            <div class="loader_whisper"></div>
+
+            <div class="modelo_whisper">
+                Modelo: Whisper Small
+            </div>
+
+            <div class="barra_progreso_contenedor">
+
+                <div
+                    id="barra_progreso"
+                    class="barra_progreso">
+                </div>
+
+            </div>
+
+            <p id="texto_estado">
+
+                Esperando vídeo...
+
+            </p>
+
+        </section>
+
+        <!-- =======================
+             SUBTÍTULOS
+        ======================== -->
+
+        <section
+            id="panel_subtitulos"
+            class="panel panel_oculto">
+
+            <div class="cabecera_panel">
+
+                <h2>
+                    Subtítulos generados
+                </h2>
+
+                <div class="acciones_subtitulos">
+
+                    <button
+                        id="btn_descargar_srt"
+                        class="boton_secundario">
+
+                        Descargar SRT
+
+                    </button>
+
+                    <button
+                        id="btn_descargar_vtt"
+                        class="boton_secundario">
+
+                        Descargar VTT
+
+                    </button>
+
+                    <button
+                        id="btn_copiar_subtitulos"
+                        class="boton_secundario">
+
+                        Copiar texto
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <textarea
+                id="contenido_subtitulos"
+                spellcheck="false"
+                placeholder="Los subtítulos aparecerán aquí...">
+            </textarea>
+
+        </section>
+
+    </main>
+
+    <!-- TOASTS -->
+
+    <div id="contenedor_toasts"></div>
+
+    <!-- VIDEO METADATOS -->
+
+    <video
+        id="video_metadatos"
+        hidden>
+    </video>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/utilidades.js"></script>
+    <script src="js/gestor_toasts.js"></script>
+    <script src="js/almacenamiento_local.js"></script>
+    <script src="js/arrastrar_soltar.js"></script>
+    <script src="js/gestor_video.js"></script>
+    <script src="js/gestor_subtitulos.js"></script>
+    <script src="js/exportador_subtitulos.js"></script>
+    <script src="js/animaciones.js"></script>
+    <script src="js/principal.js"></script>
+
+</body>
+
+</html>

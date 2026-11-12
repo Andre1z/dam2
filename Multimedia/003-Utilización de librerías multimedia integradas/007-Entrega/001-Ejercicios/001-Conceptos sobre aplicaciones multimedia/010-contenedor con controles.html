@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root{
+      --azul:#1d4ed8;
+      --naranja:#f97316;
+      --blanco:#ffffff;
+      --negro:#111827;
+    }
+
+    body{
+      background:var(--blanco);
+      color:var(--negro);
+      font-family:Arial, Helvetica, sans-serif;
+      padding:20px;
+    }
+
+    .jvvideo{
+      display:inline-block;
+      padding:12px;
+      background:var(--negro);
+      border:3px solid var(--azul);
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.35);
+    }
+
+    .jvvideo video{
+      display:block;
+      width:600px;
+      border-radius:6px;
+      background:#000;
+    }
+
+    .controles{
+      display:flex;
+      gap:6px;
+      padding:12px 0 2px;
+      align-items:center;
+    }
+
+    .controles button{
+      background:var(--azul);
+      color:var(--blanco);
+      border:none;
+      border-radius:6px;
+      padding:7px 12px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:background 0.2s;
+    }
+
+    .controles button:hover{
+      background:var(--naranja);
+    }
+
+    .controles input[type=range]{
+      accent-color:var(--naranja);
+      cursor:pointer;
+    }
+
+    .progreso{
+      flex:1;
+    }
+
+    .tiempo{
+      color:var(--blanco);
+      font-family:monospace;
+      font-size:14px;
+      white-space:nowrap;
+      min-width:95px;
+      text-align:right;
+    }
+
+    .tiempo .total{
+      color:var(--naranja);
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      background:var(--negro);
+      color:var(--blanco);
+      border-left:6px solid var(--naranja);
+      border-radius:8px;
+      padding:12px 18px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.35);
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.3s, transform 0.3s;
+      pointer-events:none;
+      z-index:1000;
+    }
+
+    .toast.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .toast strong{
+      display:block;
+      color:var(--naranja);
+      margin-bottom:3px;
+    }
+  </style>
+</head>
+
+<body>
+
+<video src="andrei.mp4"></video>
+
+<script>
+
+// ----------------------------
+// UTILIDADES
+// ----------------------------
+
+// Convierte segundos a mm:ss
+function formatoTiempo(segundos){
+  let m = Math.floor(segundos / 60)
+  let s = Math.floor(segundos % 60)
+  return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0")
+}
+
+// Toast (un único elemento reutilizable)
+let toast = document.createElement("div")
+toast.classList.add("toast")
+document.body.appendChild(toast)
+let temporizadorToast
+
+function mostrarToast(boton, mensaje){
+  toast.innerHTML = "<strong>" + boton + "</strong>Mensaje: " + mensaje
+  toast.classList.add("visible")
+  clearTimeout(temporizadorToast)
+  temporizadorToast = setTimeout(function(){
+    toast.classList.remove("visible")
+  }, 2500)
+}
+
+let videos = document.querySelectorAll("video")
+
+videos.forEach(function(video){
+
+  // Crear contenedor
+  let contenedor = document.createElement("div")
+  contenedor.classList.add("jvvideo")
+
+  // Insertarlo antes del vídeo
+  video.parentNode.insertBefore(contenedor, video)
+
+  // Meter vídeo dentro
+  contenedor.appendChild(video)
+
+
+  // ----------------------------
+  // CREAR CONTROLES
+  // ----------------------------
+
+  let controles = document.createElement("div")
+  controles.classList.add("controles")
+  contenedor.appendChild(controles)
+
+
+  // Reproducir
+  let reproducir = document.createElement("button")
+  reproducir.textContent = "Reproducir"
+  controles.appendChild(reproducir)
+
+
+  // Parar
+  let parar = document.createElement("button")
+  parar.textContent = "Parar"
+  controles.appendChild(parar)
+
+
+  // Atrás
+  let atras = document.createElement("button")
+  atras.textContent = "Atrás"
+  controles.appendChild(atras)
+
+
+  // Adelante
+  let adelante = document.createElement("button")
+  adelante.textContent = "Adelante"
+  controles.appendChild(adelante)
+
+
+  // Volumen
+  let volumen = document.createElement("input")
+  volumen.type = "range"
+  volumen.min = 0
+  volumen.max = 1
+  volumen.step = 0.01
+  volumen.value = 1
+  controles.appendChild(volumen)
+
+
+  // Progreso
+  let progreso = document.createElement("input")
+  progreso.type = "range"
+  progreso.min = 0
+  progreso.max = 1
+  progreso.step = 0.001
+  progreso.value = 0
+  progreso.classList.add("progreso")
+  controles.appendChild(progreso)
+
+
+  // Tiempo / duración
+  let tiempo = document.createElement("span")
+  tiempo.classList.add("tiempo")
+  tiempo.innerHTML = '00:00 / <span class="total">00:00</span>'
+  controles.appendChild(tiempo)
+
+  function actualizarTiempo(){
+    let total = video.duration ? formatoTiempo(video.duration) : "00:00"
+    tiempo.innerHTML = formatoTiempo(video.currentTime) + ' / <span class="total">' + total + '</span>'
+  }
+
+  video.onloadedmetadata = actualizarTiempo
+
+
+  // ----------------------------
+  // EVENTOS
+  // ----------------------------
+
+  reproducir.onclick = function(){
+    video.play()
+    mostrarToast("Reproducir", "El vídeo se está reproduciendo...")
+  }
+
+  parar.onclick = function(){
+    video.pause()
+    mostrarToast("Parar", "El vídeo se ha pausado.")
+  }
+
+  adelante.onclick = function(){
+    video.currentTime += 1
+    mostrarToast("Adelante", "Avanzando 1 segundo...")
+  }
+
+  atras.onclick = function(){
+    video.currentTime -= 1
+    mostrarToast("Atrás", "Retrocediendo 1 segundo...")
+  }
+
+  volumen.oninput = function(){
+    video.volume = this.value
+  }
+
+  video.ontimeupdate = function(){
+    if(video.duration){
+      progreso.value = video.currentTime / video.duration
+    }
+    actualizarTiempo()
+  }
+
+  progreso.oninput = function(){
+    video.currentTime = this.value * video.duration
+  }
+
+})
+
+</script>
+
+</body>
+</html>
