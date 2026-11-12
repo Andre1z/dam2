@@ -1,0 +1,6 @@
+[submodule "Multimedia/IDE"]
+	path = Multimedia/IDE
+	url = https://github.com/Andre1z/IDE.git
+[submodule "Multimedia/neopulso"]
+	path = Multimedia/neopulso
+	url = https://github.com/Andre1z/neopulso.git
