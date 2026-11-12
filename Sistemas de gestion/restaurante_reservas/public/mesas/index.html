@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesas — Reservas del restaurante</title>
+<meta name="description" content="Marca qué mesas están reservadas y cuáles libres.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Mesas</h1>
+  <p id="resumen"></p>
+  <div class="acciones">
+    <button id="descargar" class="principal">Descargar mesas.json</button>
+    <button id="cargarBtn">Cargar .json</button>
+    <button id="anadir">+ Mesa</button>
+    <button id="liberar">Liberar todas</button>
+    <input type="file" id="archivo" accept=".json,application/json" hidden>
+  </div>
+  <div id="mesas" class="grid"></div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
