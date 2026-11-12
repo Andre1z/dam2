@@ -62,7 +62,7 @@ paso('9 antes insertar');
 $resultado = andreibbdd_insertar_columnas(
     'clientes_debug',
     ['nombre', 'email'],
-    ['Jose Vicente', 'info@jocarsa.com']
+    ['Andrei', 'info@jocarsa.com']
 );
 
 paso('9 despues insertar = ' . var_export($resultado, true));

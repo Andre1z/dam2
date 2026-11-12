@@ -5,7 +5,7 @@
 * Cambiado el color corporativo principal de `mediumseagreen` a `crimson`.
 * El color continúa centralizado mediante la variable CSS `--color-principal`.
 * Establecida `Ubuntu` como fuente primaria de la interfaz, con `sans-serif` como alternativa.
-* Recuperada la identidad corporativa permanente `jocarsa | crimson` en la zona izquierda de la cabecera.
+* Recuperada la identidad corporativa permanente `Andrei | crimson` en la zona izquierda de la cabecera.
 * La zona central de la cabecera muestra la tabla activa, la operación actual y las acciones disponibles.
 * La zona derecha mantiene la identidad y opciones del usuario.
 * Reducida la altura de la cabecera para conseguir una interfaz más compacta.
@@ -302,7 +302,7 @@ Esta versión establece la estructura básica sobre la que se desarrollarán los
   * Área principal de trabajo.
   * Pie de página.
 * Cabecera con:
-  * Identidad corporativa de jocarsa | crimson.
+  * Identidad corporativa de Andrei | crimson.
   * Herramientas principales.
   * Identificación del usuario.
   * Acceso a opciones.

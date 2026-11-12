@@ -241,7 +241,7 @@ Esta versión establece la estructura básica sobre la que se desarrollarán los
   * Área principal de trabajo.
   * Pie de página.
 * Cabecera con:
-  * Identidad corporativa de jocarsa | crimson.
+  * Identidad corporativa de Andrei | crimson.
   * Herramientas principales.
   * Identificación del usuario.
   * Acceso a opciones.

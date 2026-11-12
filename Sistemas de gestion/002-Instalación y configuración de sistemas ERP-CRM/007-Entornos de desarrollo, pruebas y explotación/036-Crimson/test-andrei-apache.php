@@ -49,7 +49,7 @@ var_dump(
     andreibbdd_insertar_columnas(
         'clientes_debug',
         ['nombre', 'email'],
-        ['Jose Vicente', 'info@jocarsa.com']
+        ['Andrei', 'info@jocarsa.com']
     )
 );
 
