@@ -5,6 +5,8 @@
 <title>Path Tracer 2D Monte Carlo</title>
 
 <style>
+:root{ --azul:#1d4ed8; --naranja:#f97316; --blanco:#ffffff; --negro:#111827; }
+
 
 *{
     margin:0;
@@ -16,7 +18,7 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#020202;
+    background:var(--negro);
 }
 
 canvas{
@@ -33,8 +35,9 @@ canvas{
     left:15px;
     z-index:10;
 
-    color:white;
-    background:rgba(0,0,0,0.65);
+    color:var(--blanco);
+    background:rgba(17,24,39,.85);
+    border:1px solid var(--azul);
 
     padding:10px 14px;
     border-radius:8px;

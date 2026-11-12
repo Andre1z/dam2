@@ -8,8 +8,8 @@ struct Persona {
 
 int main() {
     struct Persona persona1;
-    strcpy(persona1.nombre, "Jose Vicente");
-    persona1.edad = 48;
+    strcpy(persona1.nombre, "Andrei");
+    persona1.edad = 20;
     
     struct Persona persona2;
     strcpy(persona2.nombre, "Juan");

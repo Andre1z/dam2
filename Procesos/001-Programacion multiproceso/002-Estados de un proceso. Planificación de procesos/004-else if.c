@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int edad = 48;
+    int edad = 20;
     if(edad < 10){
     	printf("Eres un niño \n");
     }else if(edad >= 10 && edad < 20){
