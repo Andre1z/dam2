@@ -1,1 +1,0 @@
-let botonanadeproductos = document.querySelector("#anadeproducto")
