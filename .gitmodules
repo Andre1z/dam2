@@ -4,3 +4,6 @@
 [submodule "Multimedia/neopulso"]
 	path = Multimedia/neopulso
 	url = https://github.com/Andre1z/neopulso.git
+[submodule "Sistemas de gestion/facturaclickya"]
+	path = Sistemas de gestion/facturaclickya
+	url = https://github.com/Andre1z/facturaclickya.git
