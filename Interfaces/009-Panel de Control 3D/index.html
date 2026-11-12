@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control 3D</title>
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Componentes -->
+    <script src="componentes/luz_inteligente.js"></script>
+    <script src="componentes/cambio_color.js"></script>
+    <script src="componentes/panel_info.js"></script>
+
+    <!-- Lógica principal -->
+    <script src="js/principal.js" defer></script>
+</head>
+
+<body>
+
+    <a-scene background="color: #ECECEC">
+
+        <!-- Cámara -->
+        <a-camera position="0 1.6 5"></a-camera>
+
+        <!-- Luz principal -->
+        <a-light
+            id="luz-principal"
+            type="point"
+            color="#ffffff"
+            intensity="1"
+            position="0 4 2">
+        </a-light>
+
+        <!-- Suelo -->
+        <a-plane
+            rotation="-90 0 0"
+            width="20"
+            height="20"
+            color="#7BC8A4">
+        </a-plane>
+
+        <!-- Esfera que cambia de color -->
+        <a-sphere
+            id="esfera-color"
+            position="0 1.5 -4"
+            radius="1"
+            color="#EF2D5E"
+            cambio-color>
+        </a-sphere>
+
+        <!-- Botón para la luz -->
+        <a-box
+            id="boton-luz"
+            position="-3 1 -4"
+            depth="0.5"
+            height="1"
+            width="1"
+            color="#FFD700"
+            luz-inteligente>
+        </a-box>
+
+        <a-text
+            value="LUZ"
+            position="-3.35 2 -4"
+            color="#000000">
+        </a-text>
+
+        <!-- Botón para panel informativo -->
+        <a-box
+            id="boton-panel"
+            position="3 1 -4"
+            depth="0.5"
+            height="1"
+            width="1"
+            color="#4CC3D9"
+            panel-info>
+        </a-box>
+
+        <a-text
+            value="INFO"
+            position="2.65 2 -4"
+            color="#000000">
+        </a-text>
+
+        <!-- Panel informativo -->
+        <a-plane
+            id="panel-informacion"
+            position="0 3 -4"
+            width="4"
+            height="1.5"
+            color="#FFFFFF"
+            visible="true">
+        </a-plane>
+
+        <a-text
+            id="texto-panel"
+            value="Panel de Control 3D"
+            position="-1.6 3 -3.9"
+            color="#000000"
+            width="6">
+        </a-text>
+
+    </a-scene>
+
+</body>
+
+</html>
