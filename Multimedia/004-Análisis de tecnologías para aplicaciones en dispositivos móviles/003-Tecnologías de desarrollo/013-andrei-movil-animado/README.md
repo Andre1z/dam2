@@ -1,4 +1,4 @@
-# jocarsa | móvil — navegación animada
+# andrei | móvil — navegación animada
 
 Servidor HTTP: `python3 -m http.server 8000` y abrir http://localhost:8000.
 

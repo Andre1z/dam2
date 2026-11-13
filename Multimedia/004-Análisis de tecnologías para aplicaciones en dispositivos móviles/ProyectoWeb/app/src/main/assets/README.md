@@ -1,6 +1,6 @@
-# jocarsa | móvil — estética jocarsa-iu
+# andrei | móvil — estética andrei-iu
 
-Adaptación móvil de la identidad de jocarsa-iu a partir del proyecto de referencia facilitado.
+Adaptación móvil de la identidad de andrei-iu a partir del proyecto de referencia facilitado.
 
 - Variables HSL originales (`--tono`, `--saturacion`, `--brillo`, `--escalon`) y paleta derivada.
 - Tipografía Ubuntu, chaflanes geométricos, tarjetas blancas, formularios y tablas coherentes.

@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.jocarsa.aplicacionjosevicente"
+    namespace = "com.andrei.aplicacionandrei"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.jocarsa.aplicacionjosevicente"
+        applicationId = "com.andrei.aplicacionandrei"
         minSdk = 24
         targetSdk = 37
         versionCode = 1

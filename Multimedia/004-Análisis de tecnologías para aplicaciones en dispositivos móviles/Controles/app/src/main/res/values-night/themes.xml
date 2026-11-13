@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Controles" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/azul</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorPrimaryContainer">@color/azul_palido</item>
+        <item name="colorOnPrimaryContainer">@color/azul_medio</item>
+        <item name="colorSecondary">@color/naranja</item>
+        <item name="colorOnSecondary">@color/blanco</item>
+        <item name="colorTertiary">@color/azul_medio</item>
+        <item name="android:colorBackground">@color/negro</item>
+        <item name="colorSurface">@color/negro</item>
+        <item name="colorOnSurface">@color/azul_claro</item>
+        <item name="shapeAppearanceSmallComponent">@style/FormaRedondeada</item>
+        <item name="shapeAppearanceMediumComponent">@style/FormaRedondeada</item>
     </style>
 </resources>

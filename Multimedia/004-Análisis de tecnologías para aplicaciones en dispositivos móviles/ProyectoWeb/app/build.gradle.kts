@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.jocarsa.proyectoweb"
+    namespace = "com.andrei.proyectoweb"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.jocarsa.proyectoweb"
+        applicationId = "com.andrei.proyectoweb"
         minSdk = 24
         targetSdk = 37
         versionCode = 1

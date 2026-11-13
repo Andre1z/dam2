@@ -1,0 +1,2 @@
+/* Splash: visible hasta que se renderiza la primera vista, sin esperas artificiales. */
+(()=>{const splash=document.getElementById('andrei-splash');if(!splash)return;let terminado=false;function cerrar(){if(terminado)return;terminado=true;splash.classList.add('oculto');setTimeout(()=>splash.remove(),450)}document.addEventListener('andrei:primera-vista-lista',cerrar,{once:true});document.addEventListener('andrei:error-inicial',cerrar,{once:true});})();

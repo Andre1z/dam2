@@ -286,12 +286,12 @@ Para tu framework, crearía una capa de abstracción de capacidades, de manera q
 Por ejemplo:
 
 ```
-await jocarsa.device.camera.capture();
-await jocarsa.device.location.get();
-await jocarsa.storage.set("clave", valor);
-await jocarsa.network.get("/api/datos");
-await jocarsa.notifications.requestPermission();
-await jocarsa.app.install();
+await andrei.device.camera.capture();
+await andrei.device.location.get();
+await andrei.storage.set("clave", valor);
+await andrei.network.get("/api/datos");
+await andrei.notifications.requestPermission();
+await andrei.app.install();
 ```
 
 Internamente, el framework detectaría si la capacidad está disponible y devolvería resultados y errores normalizados. La instalación, en particular, necesitaría distintos flujos según el navegador y no siempre podría iniciarse mediante JavaScript.
