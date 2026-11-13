@@ -17,92 +17,41 @@ async function iniciarDeteccionPose(){
         return;
     }
 
-    if(typeof Pose === "undefined"){
+    poseInicializada = true;
 
-        registrarEvento(
-            "❌ MediaPipe Pose no encontrado"
-        );
+    registrarConsumidorHolistico(
+        "pose",
+        (resultados)=>{
 
-        return;
-    }
+            if(!sistema.poseActiva){
+                return;
+            }
 
-    detectorPose = new Pose({
-
-        locateFile:(archivo)=>{
-
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${archivo}`;
+            procesarResultadosPose(resultados);
 
         }
-
-    });
-
-    detectorPose.setOptions({
-
-        modelComplexity:1,
-
-        smoothLandmarks:true,
-
-        minDetectionConfidence:0.7,
-
-        minTrackingConfidence:0.5
-
-    });
-
-    detectorPose.onResults(
-        procesarResultadosPose
     );
-
-    iniciarSeguimientoPose();
-
-    poseInicializada = true;
 
     sistema.poseActiva = true;
 
-    registrarEvento(
-        "👤 Detección corporal iniciada"
-    );
+    try{
 
-}
-
-/* ========================================
-   SEGUIMIENTO
-======================================== */
-
-function iniciarSeguimientoPose(){
-
-    if(!videoCamara){
+        await asegurarDeteccionHolistica();
 
         registrarEvento(
-            "❌ Cámara no disponible"
+            "👤 Detección corporal iniciada"
         );
 
-        return;
+    }catch(error){
+
+        poseInicializada = false;
+        sistema.poseActiva = false;
+
+        registrarEvento(
+            "❌ " + error.message
+        );
+
     }
-
-    const camaraPose =
-    new Camera(
-        videoCamara,
-        {
-
-            onFrame:async()=>{
-
-                if(!detectorPose){
-                    return;
-                }
-
-                await detectorPose.send({
-                    image:videoCamara
-                });
-
-            },
-
-            width:1280,
-            height:720
-
-        }
-    );
-
-    camaraPose.start();
 
 }
 

@@ -1,0 +1,13 @@
+start	end	text
+0	5000	Vale, esto es lo que hemos usado para la creación de nuestras aplicaciones.
+6000	9000	Hemos desarrollado, en mi caso, en Windows 11.
+10000	16000	De acuerdo, y lo hemos pasado a producción mediante SSH a Ubuntu Server.
+18000	23000	Los ides que hemos usado han sido Visual Studio Code y Idle.
+24000	32000	Para Visual Studio Code, tenemos instalado las siguientes dependencias, que son C, C++,
+33000	42000	la dependencia de C++, PHP, algunas que otras de Python, para CSV también.
+44000	46000	Para visualizar PDF.
+47000	53000	Y para el control de versiones, hemos usado GitHub para controlar versiones mediante Q-Mits.
+56000	60000	mediante Q-Mits, porque nos ha aparecido más entretenido.
+61000	73000	Y también hemos usado GitHub para, en nuestro GitHub, tenéis todo el código con la documentación.
+74000	78000	Bien documentado allí con el breakdown, el ritme.
+79000	81000	No tenéis todo documentado.

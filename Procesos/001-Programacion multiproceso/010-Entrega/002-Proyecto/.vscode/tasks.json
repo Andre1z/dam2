@@ -1,10 +1,4 @@
 {
-    // Tareas para compilar y ejecutar el Centro Logistico con CMake
-    // usando el compilador g++ 16 de WinLibs (no el MinGW 6.3 antiguo).
-    //
-    //   Ctrl+Shift+B                         -> Compilar
-    //   Terminal > Ejecutar tarea > "Centro logistico: ejecutar"
-    //   F5 / Ctrl+F5                         -> Depurar / Ejecutar (launch.json)
     "version": "2.0.0",
     "options": {
         "cwd": "${workspaceFolder}",
@@ -18,9 +12,12 @@
             "type": "process",
             "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
             "args": [
-                "-S", ".",
-                "-B", "build",
-                "-G", "MinGW Makefiles",
+                "-S",
+                ".",
+                "-B",
+                "build",
+                "-G",
+                "MinGW Makefiles",
                 "-DCMAKE_BUILD_TYPE=Debug"
             ],
             "problemMatcher": []
@@ -30,7 +27,8 @@
             "type": "process",
             "command": "${env:LOCALAPPDATA}\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\cmake.exe",
             "args": [
-                "--build", "build"
+                "--build",
+                "build"
             ],
             "dependsOn": "Centro logistico: configurar",
             "problemMatcher": {
@@ -39,7 +37,7 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
@@ -55,6 +53,29 @@
                 "clear": true
             },
             "group": "test"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe compilar archivo activo",
+            "command": "C:\\Users\\bugaa\\AppData\\Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:\\Users\\bugaa\\AppData\\Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tarea generada por el depurador."
         }
     ]
 }

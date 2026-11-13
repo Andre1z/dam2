@@ -17,91 +17,47 @@ async function iniciarDeteccionManos(){
         return;
     }
 
-    if(typeof Hands === "undefined"){
+    manosInicializadas = true;
 
-        registrarEvento(
-            "❌ MediaPipe Hands no disponible"
-        );
+    registrarConsumidorHolistico(
+        "manos",
+        (resultados)=>{
 
-        return;
-    }
+            if(!sistema.manosActivas){
+                return;
+            }
 
-    detectorManos = new Hands({
+            const mano =
+            resultados.rightHandLandmarks ||
+            resultados.leftHandLandmarks;
 
-        locateFile:(archivo)=>{
-
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${archivo}`;
+            procesarResultadosManos({
+                multiHandLandmarks: mano ? [mano] : []
+            });
 
         }
-
-    });
-
-    detectorManos.setOptions({
-
-        maxNumHands:1,
-
-        modelComplexity:1,
-
-        minDetectionConfidence:0.7,
-
-        minTrackingConfidence:0.5
-
-    });
-
-    detectorManos.onResults(
-        procesarResultadosManos
     );
-
-    iniciarSeguimientoManos();
 
     sistema.manosActivas = true;
 
-    manosInicializadas = true;
+    try{
 
-    registrarEvento(
-        "✋ Detección de manos iniciada"
-    );
-
-}
-
-/* ========================================
-   CÁMARA PARA MANOS
-======================================== */
-
-function iniciarSeguimientoManos(){
-
-    if(!videoCamara){
+        await asegurarDeteccionHolistica();
 
         registrarEvento(
-            "❌ Cámara no disponible"
+            "✋ Detección de manos iniciada"
         );
 
-        return;
+    }catch(error){
+
+        manosInicializadas = false;
+        sistema.manosActivas = false;
+
+        registrarEvento(
+            "❌ " + error.message
+        );
+
     }
-
-    const camara = new Camera(
-        videoCamara,
-        {
-
-            onFrame:async()=>{
-
-                if(!detectorManos){
-                    return;
-                }
-
-                await detectorManos.send({
-                    image:videoCamara
-                });
-
-            },
-
-            width:1280,
-            height:720
-
-        }
-    );
-
-    camara.start();
 
 }
 
