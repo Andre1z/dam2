@@ -1,0 +1,15 @@
+/* Tema corporativo andrei | ERP: saddlebrown (#f97316). */
+:root{--tono:25;--saturacion:75%;--brillo:31%;--escalon:19%;--ju-borde:#f97316;--ju-tinta:#111827;--ju-papel:#ffffff;--ju-foco:#f97316}
+.erp-view-tabs{display:flex;gap:6px;background:#f97316;padding:8px;margin-top:12px}
+.erp-view-tabs button{border:1px solid #f97316;background:#ffffff;color:#f97316;padding:9px 15px;cursor:pointer;border-radius:var(--radio,12px)}
+.erp-view-tabs button.activo{background:var(--color);color:#ffffff}
+.erp-alt-view:empty{display:none}.erp-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding:14px;background:#ffffff}
+.erp-record-card{background:#ffffff;border:1px solid #f97316;padding:14px;min-width:0;border-radius:var(--radio,12px)}
+.erp-record-card-title{font-size:15px;font-weight:bold;color:#f97316;margin-bottom:12px;background:transparent;padding:0;height:auto}
+.erp-record-card dl{margin:0 0 12px}.erp-record-card dl>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px;border-bottom:1px solid #eff6ff;padding:5px 0}.erp-record-card dt{font-weight:600;color:#f97316}.erp-record-card dd{margin:0;overflow-wrap:anywhere}
+.erp-tree-view{background:#ffffff;padding:18px}.erp-tree-view details{border:1px solid #f97316;margin-bottom:10px}.erp-tree-view summary{padding:12px;background:#f97316;cursor:pointer;font-weight:bold}.erp-tree-view ul{list-style:none;margin:0;padding:0 12px}.erp-tree-view li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border-bottom:1px solid #eff6ff}
+/* Imagen suministrada por el usuario al desplegar el proyecto. */
+body.ju-login-page{background-image:linear-gradient(rgba(17,24,39,.58),rgba(17,24,39,.58)),url('../andrei-empresa.png')!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
+body.ju-login-page .ju-login-side{background:linear-gradient(145deg,rgba(17,24,39,.9),rgba(249,115,22,.8))}
+
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}

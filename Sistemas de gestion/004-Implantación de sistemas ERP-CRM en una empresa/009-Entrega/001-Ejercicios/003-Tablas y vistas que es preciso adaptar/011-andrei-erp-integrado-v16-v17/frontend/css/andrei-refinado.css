@@ -1,0 +1,61 @@
+
+/* andrei | refinamiento visual v10
+   Capa exclusivamente visual: no altera eventos, nombres, formularios ni datos. */
+:root {
+  --chaflan:12px;
+  --ju-borde:#1d4ed8;
+  --ju-tinta:#1e40af;
+  --ju-papel:#ffffff;
+  --ju-foco:#f97316;
+}
+.andrei-iu { color:var(--ju-tinta); }
+.andrei-iu > header {
+  min-height:50px; height:auto; padding:8px 14px;
+  background:linear-gradient(90deg,var(--color0),var(--color));
+  border-bottom:2px solid #1d4ed8;
+  gap:14px;
+}
+.andrei-iu .corporativo { min-width:180px; text-decoration:none; color:#ffffff; }
+.andrei-iu .corporativo h1 { font-size:19px; letter-spacing:.1px; }
+.andrei-iu main { min-width:0; }
+.andrei-iu main > nav {
+  background:linear-gradient(180deg,var(--color),var(--color0));
+  border-right:1px solid #ffffff30;
+}
+.andrei-iu main > section {
+  background:var(--color2);
+  border-right:1px solid #ffffff55;
+}
+.andrei-iu .contenido-columna a,
+.andrei-iu .contenido-columna article,
+.andrei-iu .ju-integrated-menu a {
+  border-radius:var(--radio,12px);
+  border-radius:10px;
+  min-height:40px;
+  transition:background-color .15s,filter .15s,transform .15s;
+}
+.andrei-iu .contenido-columna a:hover,
+.andrei-iu .contenido-columna article:hover,
+.andrei-iu .ju-integrated-menu a:hover { filter:brightness(1.09); }
+.andrei-iu .contenido-columna .activo { transform:none; filter:brightness(1.08); box-shadow:inset 4px 0 #fff; }
+.andrei-iu .ficha { border-radius:10px; border-radius:var(--radio,12px); }
+.andrei-iu .escenario { min-width:0; }
+.andrei-iu button:not(.andrei-switch):not(.andrei-radio),
+.andrei-iu input[type=button],.andrei-iu input[type=submit] {
+  border-radius:10px;
+  border-radius:var(--radio,12px);
+}
+.andrei-iu input:not([type=checkbox]):not([type=radio]):not([type=range]),
+.andrei-iu select,.andrei-iu textarea { border-radius:10px; }
+.andrei-iu :is(a,button,input,select,textarea,[tabindex]):focus-visible {
+  outline:3px solid var(--ju-foco)!important; outline-offset:2px;
+}
+.andrei-iu .minimizar { width:auto; min-width:34px; }
+.andrei-iu .escenario :is(table,th,td) { border-radius:10px; }
+@media(max-width:850px){
+ .andrei-iu .corporativo h1 { font-size:15px; }
+ .andrei-iu > header { gap:7px; }
+ .andrei-iu header input { min-width:100px; }
+}
+
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}

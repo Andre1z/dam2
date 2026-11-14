@@ -1,0 +1,31 @@
+/* Configuración declarativa de vistas: no altera la paleta ni las fichas de andrei-iu */
+.erp-toolbar>div:last-child{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.erp-toolbar select{height:34px;max-width:190px;background:#fff;border:1px solid #1d4ed8;padding:4px 8px}
+.erp-table th[data-sort]{cursor:pointer;user-select:none}
+.erp-table th[data-sort]:hover{background:#dbeafe}
+.erp-actions .erp-star{font-size:20px;line-height:1;background:transparent;color:#1e40af;border:0;padding:2px 5px}
+.erp-actions .erp-star.is-favorite{color:#f97316}
+.erp-table tbody tr.erp-row-warning td{background:#f97316}
+.erp-table tbody tr.erp-row-danger td{background:#eff6ff}
+.erp-table tbody tr.erp-row-success td{background:#dbeafe}
+.erp-table tbody tr.erp-row-info td{background:#eff6ff}
+.erp-config-overlay{position:fixed;inset:0;z-index:20000;background:#1e40afa8;display:flex;justify-content:flex-end}
+.erp-config-panel{background:#eff6ff;color:#1e40af;width:min(640px,100%);height:100%;display:flex;flex-direction:column;box-shadow:-10px 0 35px #1e40af44}
+.erp-config-header{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#1d4ed8;color:#ffffff}
+.erp-config-header h2{margin:0;font-size:21px}.erp-config-header button{font-size:25px}
+.erp-config-content{overflow:auto;padding:22px;flex:1}.erp-config-content h3{margin:24px 0 12px;font-size:16px}
+.erp-config-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:5px}
+.erp-config-col{display:flex;align-items:center;gap:9px;background:#ffffff;padding:7px 10px}
+.erp-config-col span{flex:1}.erp-config-col button{padding:4px 9px}
+.erp-config-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.erp-config-field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.erp-config-field input,.erp-config-field select,.erp-config-rule input,.erp-config-rule select{width:100%;min-width:0;background:#ffffff;border:1px solid #1e40af;padding:8px}
+.erp-config-rule{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:6px;margin-bottom:7px}
+.erp-config-footer{padding:15px 20px;background:#dbeafe;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.erp-config-panel button{cursor:pointer;border:0;background:#1d4ed8;color:#ffffff;padding:8px 12px;border-radius:var(--radio,12px)}
+.erp-config-panel button:hover{filter:brightness(1.12)}
+@media(max-width:650px){.erp-config-grid{grid-template-columns:1fr}.erp-config-rule{grid-template-columns:1fr 1fr}.erp-config-panel{width:100%}}
+
+.erp-config-action-list{display:grid;gap:12px;margin:10px 0}.erp-config-action{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;background:#fff;border-left:3px solid #f97316}.erp-config-action>.erp-config-field{min-width:0}.erp-config-action input,.erp-config-action select{width:100%;box-sizing:border-box}.erp-config-action>button{justify-self:start}.erp-bulk-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:8px 0;padding:10px;background:#f97316;color:#111827}.erp-bulk-toolbar button{background:#f97316;color:#ffffff;border:0;padding:8px 12px;cursor:pointer}
+
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}
