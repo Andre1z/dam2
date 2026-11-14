@@ -27,11 +27,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │   │   ├── AndreiBBDD.hpp
 │   │   │   │   └── AndreiORM.hpp
 │   │   │   ├── install.sh
-│   │   │   ├── jocarsabbdd
-│   │   │   ├── jocarsabbdd.cpython-312-x86_64-linux-gnu.so
-│   │   │   ├── jocarsabbdd.cpython-313-x86_64-linux-gnu.so
-│   │   │   ├── jocarsabbdd.so
-│   │   │   ├── libjocarsaorm.so
 │   │   │   ├── php
 │   │   │   │   └── AndreiORM.php
 │   │   │   ├── python
@@ -60,10 +55,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │   │   └── AndreiORM.hpp
 │   │   │   ├── install-system.sh
 │   │   │   ├── install.sh
-│   │   │   ├── jocarsabbdd
-│   │   │   ├── jocarsabbdd.cpython-312-x86_64-linux-gnu.so
-│   │   │   ├── jocarsabbdd.so
-│   │   │   ├── libjocarsaorm.so
 │   │   │   ├── php
 │   │   │   │   └── AndreiORM.php
 │   │   │   ├── python
@@ -75,7 +66,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │       ├── conector_python.cpp
 │   │   │       ├── jocarsaorm_c.cpp
 │   │   │       └── main.cpp
-│   │   ├── 002-andreibbdd-colecciones-sistema.zip
 │   │   ├── 003-andrei-gestor-visual
 │   │   │   ├── .htaccess
 │   │   │   ├── README.md
@@ -728,7 +718,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │   │   └── usuarios.php
 │   │   │   └── frontend
 │   │   │       ├── README-INTEGRACION.md
-│   │   │       ├── andrei-empresa.png
 │   │   │       ├── componentes-formulario.html
 │   │   │       ├── componentes-reporting.html
 │   │   │       ├── componentes-v5
@@ -2088,7 +2077,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │   │   └── usuarios.php
 │   │   │   └── frontend
 │   │   │       ├── README-INTEGRACION.md
-│   │   │       ├── andrei-empresa.png
 │   │   │       ├── componentes-formulario.html
 │   │   │       ├── componentes-reporting.html
 │   │   │       ├── componentes-v5
@@ -2137,163 +2125,162 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │       │   ├── nav.html
 │   │   │       │   └── toast.html
 │   │   │       └── toasts.html
-│   │   ├── 014-andrei-erp-integrado-v20
-│   │   │   ├── CAMBIOS-V10.md
-│   │   │   ├── CAMBIOS-V11.md
-│   │   │   ├── CAMBIOS-V12.md
-│   │   │   ├── CAMBIOS-V13.md
-│   │   │   ├── CAMBIOS-V14.md
-│   │   │   ├── CAMBIOS-V15.md
-│   │   │   ├── CAMBIOS-V16-V17.md
-│   │   │   ├── CAMBIOS-V18.md
-│   │   │   ├── CAMBIOS-V19.md
-│   │   │   ├── CAMBIOS-V20.md
-│   │   │   ├── CAMBIOS-V3.md
-│   │   │   ├── CAMBIOS-V4.md
-│   │   │   ├── CAMBIOS-V5.md
-│   │   │   ├── CAMBIOS-V7.md
-│   │   │   ├── CAMBIOS-V8.md
-│   │   │   ├── CAMBIOS-V9.md
-│   │   │   ├── README-INTEGRACION.md
-│   │   │   ├── backend
-│   │   │   │   ├── FIX-AUTENTICACION.md
-│   │   │   │   ├── README-INTEGRACION.md
-│   │   │   │   ├── README-MIGRACION.md
-│   │   │   │   ├── README.md
-│   │   │   │   ├── VERSION-046.md
-│   │   │   │   ├── VERSION-048.md
-│   │   │   │   ├── api
-│   │   │   │   │   ├── api.php
-│   │   │   │   │   ├── auth.php
-│   │   │   │   │   ├── auth_common.php
-│   │   │   │   │   ├── changelog.md
-│   │   │   │   │   ├── configuracion.php
-│   │   │   │   │   ├── demo.php
-│   │   │   │   │   ├── diagnostico_andreibbdd.php
-│   │   │   │   │   ├── empresa-pequena.json
-│   │   │   │   │   ├── erp-completo.json
-│   │   │   │   │   ├── formulario.php
-│   │   │   │   │   ├── formularios.php
-│   │   │   │   │   ├── index.html
-│   │   │   │   │   ├── intercambio.php
-│   │   │   │   │   ├── recursos.php
-│   │   │   │   │   └── usuarios.php
-│   │   │   │   ├── api.php
-│   │   │   │   ├── auth.php
-│   │   │   │   ├── auth_common.php
-│   │   │   │   ├── changelog.md
-│   │   │   │   ├── configuracion.php
-│   │   │   │   ├── demo.php
-│   │   │   │   ├── index.html
-│   │   │   │   ├── informes
-│   │   │   │   │   └── demo.html
-│   │   │   │   ├── inicializar-usuarios-cli.php
-│   │   │   │   ├── instalacion
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── cabecera.html
-│   │   │   │   │   ├── crud.html
-│   │   │   │   │   ├── designer.css
-│   │   │   │   │   ├── empresa-pequena.json
-│   │   │   │   │   ├── erp-completo.json
-│   │   │   │   │   ├── es.php
-│   │   │   │   │   ├── general.css
-│   │   │   │   │   ├── login.php
-│   │   │   │   │   ├── menu.html
-│   │   │   │   │   ├── modelo.php
-│   │   │   │   │   ├── modulo.json
-│   │   │   │   │   ├── modulos.html
-│   │   │   │   │   ├── piedepagina.html
-│   │   │   │   │   ├── schema.json
-│   │   │   │   │   └── schema.sql
-│   │   │   │   ├── io
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── es.php
-│   │   │   │   │   ├── login.php
-│   │   │   │   │   └── migrar.php
-│   │   │   │   ├── modelo
-│   │   │   │   │   ├── AndreiDB.php
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── cabecera.html
-│   │   │   │   │   ├── crud-tabla-avanzada.js
-│   │   │   │   │   ├── crud-vistas.js
-│   │   │   │   │   ├── crud.html
-│   │   │   │   │   ├── designer.css
-│   │   │   │   │   ├── formularios-publicos.json
-│   │   │   │   │   ├── general.css
-│   │   │   │   │   ├── graficas.css
-│   │   │   │   │   ├── graficas.js
-│   │   │   │   │   ├── incluir.js
-│   │   │   │   │   ├── menu.html
-│   │   │   │   │   ├── modulo.json
-│   │   │   │   │   ├── modulos.html
-│   │   │   │   │   ├── piedepagina.html
-│   │   │   │   │   └── schema.json
-│   │   │   │   ├── nucleo
-│   │   │   │   │   ├── AndreiDB.php
-│   │   │   │   │   ├── README-ANDREIBBDD.md
-│   │   │   │   │   ├── VERSION-044.md
-│   │   │   │   │   ├── incluir.js
-│   │   │   │   │   ├── integracion.js
-│   │   │   │   │   ├── perfil.php
-│   │   │   │   │   ├── recursos.css
-│   │   │   │   │   ├── recursos.js
-│   │   │   │   │   ├── reporting.css
-│   │   │   │   │   ├── reporting.js
-│   │   │   │   │   ├── test-andrei-apache.php
-│   │   │   │   │   └── usuarios.php
-│   │   │   │   ├── recursos.php
-│   │   │   │   └── usuarios.php
-│   │   │   └── frontend
-│   │   │       ├── README-INTEGRACION.md
-│   │   │       ├── componentes-formulario.html
-│   │   │       ├── componentes-reporting.html
-│   │   │       ├── componentes-v5
-│   │   │       │   ├── andrei-extension.js
-│   │   │       │   ├── andrei-iu.css
-│   │   │       │   ├── andrei-refinado.css
-│   │   │       │   ├── andrei-ui.js
-│   │   │       │   ├── demo-formulario.html
-│   │   │       │   ├── demo-reporting.html
-│   │   │       │   └── demo.html
-│   │   │       ├── css
-│   │   │       │   ├── accesibilidad.css
-│   │   │       │   ├── andrei-refinado.css
-│   │   │       │   ├── ayudas.css
-│   │   │       │   ├── erp.css
-│   │   │       │   ├── estilo.css
-│   │   │       │   ├── personalizacion.css
-│   │   │       │   ├── teclado.css
-│   │   │       │   └── tema-empresa.css
-│   │   │       ├── data
-│   │   │       │   ├── clientes.json
-│   │   │       │   ├── datos.json
-│   │   │       │   ├── entidades.json
-│   │   │       │   ├── menu.json
-│   │   │       │   └── productos.json
-│   │   │       ├── formularios.html
-│   │   │       ├── index.html
-│   │   │       ├── js
-│   │   │       │   ├── accesibilidad.js
-│   │   │       │   ├── asistente-iu.js
-│   │   │       │   ├── ayudas.js
-│   │   │       │   ├── componentes.js
-│   │   │       │   ├── demo-ui.js
-│   │   │       │   ├── erp.js
-│   │   │       │   ├── personalizacion.js
-│   │   │       │   ├── responsive-vistas.js
-│   │   │       │   └── teclado.js
-│   │   │       ├── login.html
-│   │   │       ├── ollama.php
-│   │   │       ├── templates
-│   │   │       │   ├── article.html
-│   │   │       │   ├── celda.html
-│   │   │       │   ├── fila.html
-│   │   │       │   ├── formulario-ui.html
-│   │   │       │   ├── formulario.html
-│   │   │       │   ├── nav.html
-│   │   │       │   └── toast.html
-│   │   │       └── toasts.html
-│   │   └── andrei-empresa.png
+│   │   └── 014-andrei-erp-integrado-v20
+│   │       ├── CAMBIOS-V10.md
+│   │       ├── CAMBIOS-V11.md
+│   │       ├── CAMBIOS-V12.md
+│   │       ├── CAMBIOS-V13.md
+│   │       ├── CAMBIOS-V14.md
+│   │       ├── CAMBIOS-V15.md
+│   │       ├── CAMBIOS-V16-V17.md
+│   │       ├── CAMBIOS-V18.md
+│   │       ├── CAMBIOS-V19.md
+│   │       ├── CAMBIOS-V20.md
+│   │       ├── CAMBIOS-V3.md
+│   │       ├── CAMBIOS-V4.md
+│   │       ├── CAMBIOS-V5.md
+│   │       ├── CAMBIOS-V7.md
+│   │       ├── CAMBIOS-V8.md
+│   │       ├── CAMBIOS-V9.md
+│   │       ├── README-INTEGRACION.md
+│   │       ├── backend
+│   │       │   ├── FIX-AUTENTICACION.md
+│   │       │   ├── README-INTEGRACION.md
+│   │       │   ├── README-MIGRACION.md
+│   │       │   ├── README.md
+│   │       │   ├── VERSION-046.md
+│   │       │   ├── VERSION-048.md
+│   │       │   ├── api
+│   │       │   │   ├── api.php
+│   │       │   │   ├── auth.php
+│   │       │   │   ├── auth_common.php
+│   │       │   │   ├── changelog.md
+│   │       │   │   ├── configuracion.php
+│   │       │   │   ├── demo.php
+│   │       │   │   ├── diagnostico_andreibbdd.php
+│   │       │   │   ├── empresa-pequena.json
+│   │       │   │   ├── erp-completo.json
+│   │       │   │   ├── formulario.php
+│   │       │   │   ├── formularios.php
+│   │       │   │   ├── index.html
+│   │       │   │   ├── intercambio.php
+│   │       │   │   ├── recursos.php
+│   │       │   │   └── usuarios.php
+│   │       │   ├── api.php
+│   │       │   ├── auth.php
+│   │       │   ├── auth_common.php
+│   │       │   ├── changelog.md
+│   │       │   ├── configuracion.php
+│   │       │   ├── demo.php
+│   │       │   ├── index.html
+│   │       │   ├── informes
+│   │       │   │   └── demo.html
+│   │       │   ├── inicializar-usuarios-cli.php
+│   │       │   ├── instalacion
+│   │       │   │   ├── README.md
+│   │       │   │   ├── cabecera.html
+│   │       │   │   ├── crud.html
+│   │       │   │   ├── designer.css
+│   │       │   │   ├── empresa-pequena.json
+│   │       │   │   ├── erp-completo.json
+│   │       │   │   ├── es.php
+│   │       │   │   ├── general.css
+│   │       │   │   ├── login.php
+│   │       │   │   ├── menu.html
+│   │       │   │   ├── modelo.php
+│   │       │   │   ├── modulo.json
+│   │       │   │   ├── modulos.html
+│   │       │   │   ├── piedepagina.html
+│   │       │   │   ├── schema.json
+│   │       │   │   └── schema.sql
+│   │       │   ├── io
+│   │       │   │   ├── README.md
+│   │       │   │   ├── es.php
+│   │       │   │   ├── login.php
+│   │       │   │   └── migrar.php
+│   │       │   ├── modelo
+│   │       │   │   ├── AndreiDB.php
+│   │       │   │   ├── README.md
+│   │       │   │   ├── cabecera.html
+│   │       │   │   ├── crud-tabla-avanzada.js
+│   │       │   │   ├── crud-vistas.js
+│   │       │   │   ├── crud.html
+│   │       │   │   ├── designer.css
+│   │       │   │   ├── formularios-publicos.json
+│   │       │   │   ├── general.css
+│   │       │   │   ├── graficas.css
+│   │       │   │   ├── graficas.js
+│   │       │   │   ├── incluir.js
+│   │       │   │   ├── menu.html
+│   │       │   │   ├── modulo.json
+│   │       │   │   ├── modulos.html
+│   │       │   │   ├── piedepagina.html
+│   │       │   │   └── schema.json
+│   │       │   ├── nucleo
+│   │       │   │   ├── AndreiDB.php
+│   │       │   │   ├── README-ANDREIBBDD.md
+│   │       │   │   ├── VERSION-044.md
+│   │       │   │   ├── incluir.js
+│   │       │   │   ├── integracion.js
+│   │       │   │   ├── perfil.php
+│   │       │   │   ├── recursos.css
+│   │       │   │   ├── recursos.js
+│   │       │   │   ├── reporting.css
+│   │       │   │   ├── reporting.js
+│   │       │   │   ├── test-andrei-apache.php
+│   │       │   │   └── usuarios.php
+│   │       │   ├── recursos.php
+│   │       │   └── usuarios.php
+│   │       └── frontend
+│   │           ├── README-INTEGRACION.md
+│   │           ├── componentes-formulario.html
+│   │           ├── componentes-reporting.html
+│   │           ├── componentes-v5
+│   │           │   ├── andrei-extension.js
+│   │           │   ├── andrei-iu.css
+│   │           │   ├── andrei-refinado.css
+│   │           │   ├── andrei-ui.js
+│   │           │   ├── demo-formulario.html
+│   │           │   ├── demo-reporting.html
+│   │           │   └── demo.html
+│   │           ├── css
+│   │           │   ├── accesibilidad.css
+│   │           │   ├── andrei-refinado.css
+│   │           │   ├── ayudas.css
+│   │           │   ├── erp.css
+│   │           │   ├── estilo.css
+│   │           │   ├── personalizacion.css
+│   │           │   ├── teclado.css
+│   │           │   └── tema-empresa.css
+│   │           ├── data
+│   │           │   ├── clientes.json
+│   │           │   ├── datos.json
+│   │           │   ├── entidades.json
+│   │           │   ├── menu.json
+│   │           │   └── productos.json
+│   │           ├── formularios.html
+│   │           ├── index.html
+│   │           ├── js
+│   │           │   ├── accesibilidad.js
+│   │           │   ├── asistente-iu.js
+│   │           │   ├── ayudas.js
+│   │           │   ├── componentes.js
+│   │           │   ├── demo-ui.js
+│   │           │   ├── erp.js
+│   │           │   ├── personalizacion.js
+│   │           │   ├── responsive-vistas.js
+│   │           │   └── teclado.js
+│   │           ├── login.html
+│   │           ├── ollama.php
+│   │           ├── templates
+│   │           │   ├── article.html
+│   │           │   ├── celda.html
+│   │           │   ├── fila.html
+│   │           │   ├── formulario-ui.html
+│   │           │   ├── formulario.html
+│   │           │   ├── nav.html
+│   │           │   └── toast.html
+│   │           └── toasts.html
 │   ├── 004-Consultas necesarias para obtener información
 │   │   ├── 000-Introducción.md
 │   │   ├── 015-andrei-erp-integrado-v20
@@ -3113,7 +3100,6 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │       │   ├── nav.html
 │   │   │       │   └── toast.html
 │   │   │       └── toasts.html
-│   │   ├── 004-andrei-empresa.zip
 │   │   ├── 005-andrei-empresa
 │   │   │   ├── CAMBIOS-V10.md
 │   │   │   ├── CAMBIOS-V11.md
@@ -3281,174 +3267,173 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   │       │   ├── nav.html
 │   │   │       │   └── toast.html
 │   │   │       └── toasts.html
-│   │   ├── 006-andrei-empresa
-│   │   │   ├── CAMBIOS-V10.md
-│   │   │   ├── CAMBIOS-V11.md
-│   │   │   ├── CAMBIOS-V12.md
-│   │   │   ├── CAMBIOS-V13.md
-│   │   │   ├── CAMBIOS-V14.md
-│   │   │   ├── CAMBIOS-V15.md
-│   │   │   ├── CAMBIOS-V16-V17.md
-│   │   │   ├── CAMBIOS-V18.md
-│   │   │   ├── CAMBIOS-V19.md
-│   │   │   ├── CAMBIOS-V20.md
-│   │   │   ├── CAMBIOS-V3.md
-│   │   │   ├── CAMBIOS-V4.md
-│   │   │   ├── CAMBIOS-V5.md
-│   │   │   ├── CAMBIOS-V7.md
-│   │   │   ├── CAMBIOS-V8.md
-│   │   │   ├── CAMBIOS-V9.md
-│   │   │   ├── INTEGRACION-MOTOR-FORMULARIOS-V2.md
-│   │   │   ├── README-INTEGRACION.md
-│   │   │   ├── README.md
-│   │   │   ├── backend
-│   │   │   │   ├── FIX-AUTENTICACION.md
-│   │   │   │   ├── README-INTEGRACION.md
-│   │   │   │   ├── README-MIGRACION.md
-│   │   │   │   ├── README.md
-│   │   │   │   ├── VERSION-046.md
-│   │   │   │   ├── VERSION-048.md
-│   │   │   │   ├── api
-│   │   │   │   │   ├── api.php
-│   │   │   │   │   ├── auth.php
-│   │   │   │   │   ├── auth_common.php
-│   │   │   │   │   ├── changelog.md
-│   │   │   │   │   ├── configuracion.php
-│   │   │   │   │   ├── demo.php
-│   │   │   │   │   ├── diagnostico_andreibbdd.php
-│   │   │   │   │   ├── empresa-pequena.json
-│   │   │   │   │   ├── endpoints-common.php
-│   │   │   │   │   ├── endpoints.php
-│   │   │   │   │   ├── erp-completo.json
-│   │   │   │   │   ├── formulario.php
-│   │   │   │   │   ├── formularios.php
-│   │   │   │   │   ├── index.html
-│   │   │   │   │   ├── intercambio.php
-│   │   │   │   │   ├── public.php
-│   │   │   │   │   ├── recursos.php
-│   │   │   │   │   └── usuarios.php
-│   │   │   │   ├── api.php
-│   │   │   │   ├── auth.php
-│   │   │   │   ├── auth_common.php
-│   │   │   │   ├── changelog.md
-│   │   │   │   ├── configuracion.php
-│   │   │   │   ├── demo.php
-│   │   │   │   ├── endpoints.html
-│   │   │   │   ├── index.html
-│   │   │   │   ├── informes
-│   │   │   │   │   └── demo.html
-│   │   │   │   ├── inicializar-usuarios-cli.php
-│   │   │   │   ├── instalacion
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── cabecera.html
-│   │   │   │   │   ├── crud.html
-│   │   │   │   │   ├── designer.css
-│   │   │   │   │   ├── empresa-pequena.json
-│   │   │   │   │   ├── erp-completo.json
-│   │   │   │   │   ├── es.php
-│   │   │   │   │   ├── general.css
-│   │   │   │   │   ├── login.php
-│   │   │   │   │   ├── menu.html
-│   │   │   │   │   ├── modelo.php
-│   │   │   │   │   ├── modulo.json
-│   │   │   │   │   ├── modulos.html
-│   │   │   │   │   ├── piedepagina.html
-│   │   │   │   │   ├── schema.json
-│   │   │   │   │   └── schema.sql
-│   │   │   │   ├── instalar.php
-│   │   │   │   ├── io
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── es.php
-│   │   │   │   │   ├── login.php
-│   │   │   │   │   └── migrar.php
-│   │   │   │   ├── modelo
-│   │   │   │   │   ├── AndreiDB.php
-│   │   │   │   │   ├── README.md
-│   │   │   │   │   ├── cabecera.html
-│   │   │   │   │   ├── crud-tabla-avanzada.js
-│   │   │   │   │   ├── crud-vistas.js
-│   │   │   │   │   ├── crud.html
-│   │   │   │   │   ├── designer.css
-│   │   │   │   │   ├── formularios-publicos.json
-│   │   │   │   │   ├── general.css
-│   │   │   │   │   ├── graficas.css
-│   │   │   │   │   ├── graficas.js
-│   │   │   │   │   ├── incluir.js
-│   │   │   │   │   ├── menu.html
-│   │   │   │   │   ├── modulo.json
-│   │   │   │   │   ├── modulos.html
-│   │   │   │   │   ├── piedepagina.html
-│   │   │   │   │   └── schema.json
-│   │   │   │   ├── nucleo
-│   │   │   │   │   ├── AndreiDB.php
-│   │   │   │   │   ├── README-ANDREIBBDD.md
-│   │   │   │   │   ├── VERSION-044.md
-│   │   │   │   │   ├── incluir.js
-│   │   │   │   │   ├── integracion.js
-│   │   │   │   │   ├── perfil.php
-│   │   │   │   │   ├── recursos.css
-│   │   │   │   │   ├── recursos.js
-│   │   │   │   │   ├── reporting.css
-│   │   │   │   │   ├── reporting.js
-│   │   │   │   │   ├── test-andrei-apache.php
-│   │   │   │   │   └── usuarios.php
-│   │   │   │   ├── recursos.php
-│   │   │   │   └── usuarios.php
-│   │   │   └── frontend
-│   │   │       ├── README-INTEGRACION.md
-│   │   │       ├── componentes-formulario.html
-│   │   │       ├── componentes-reporting.html
-│   │   │       ├── componentes-v5
-│   │   │       │   ├── andrei-extension.js
-│   │   │       │   ├── andrei-iu.css
-│   │   │       │   ├── andrei-refinado.css
-│   │   │       │   ├── andrei-ui.js
-│   │   │       │   ├── demo-formulario.html
-│   │   │       │   ├── demo-reporting.html
-│   │   │       │   └── demo.html
-│   │   │       ├── css
-│   │   │       │   ├── accesibilidad.css
-│   │   │       │   ├── andrei-refinado.css
-│   │   │       │   ├── api-endpoints.css
-│   │   │       │   ├── ayudas.css
-│   │   │       │   ├── erp-nested.css
-│   │   │       │   ├── erp.css
-│   │   │       │   ├── estilo.css
-│   │   │       │   ├── personalizacion.css
-│   │   │       │   ├── teclado.css
-│   │   │       │   └── tema-empresa.css
-│   │   │       ├── data
-│   │   │       │   ├── clientes.json
-│   │   │       │   ├── datos.json
-│   │   │       │   ├── entidades.json
-│   │   │       │   ├── menu.json
-│   │   │       │   └── productos.json
-│   │   │       ├── formularios.html
-│   │   │       ├── index.html
-│   │   │       ├── js
-│   │   │       │   ├── accesibilidad.js
-│   │   │       │   ├── api-endpoints.js
-│   │   │       │   ├── asistente-iu.js
-│   │   │       │   ├── ayudas.js
-│   │   │       │   ├── componentes.js
-│   │   │       │   ├── crimson-form-engine.js
-│   │   │       │   ├── demo-ui.js
-│   │   │       │   ├── erp.js
-│   │   │       │   ├── personalizacion.js
-│   │   │       │   ├── responsive-vistas.js
-│   │   │       │   └── teclado.js
-│   │   │       ├── login.html
-│   │   │       ├── ollama.php
-│   │   │       ├── templates
-│   │   │       │   ├── article.html
-│   │   │       │   ├── celda.html
-│   │   │       │   ├── fila.html
-│   │   │       │   ├── formulario-ui.html
-│   │   │       │   ├── formulario.html
-│   │   │       │   ├── nav.html
-│   │   │       │   └── toast.html
-│   │   │       └── toasts.html
-│   │   └── 006-andrei-empresa.zip
+│   │   └── 006-andrei-empresa
+│   │       ├── CAMBIOS-V10.md
+│   │       ├── CAMBIOS-V11.md
+│   │       ├── CAMBIOS-V12.md
+│   │       ├── CAMBIOS-V13.md
+│   │       ├── CAMBIOS-V14.md
+│   │       ├── CAMBIOS-V15.md
+│   │       ├── CAMBIOS-V16-V17.md
+│   │       ├── CAMBIOS-V18.md
+│   │       ├── CAMBIOS-V19.md
+│   │       ├── CAMBIOS-V20.md
+│   │       ├── CAMBIOS-V3.md
+│   │       ├── CAMBIOS-V4.md
+│   │       ├── CAMBIOS-V5.md
+│   │       ├── CAMBIOS-V7.md
+│   │       ├── CAMBIOS-V8.md
+│   │       ├── CAMBIOS-V9.md
+│   │       ├── INTEGRACION-MOTOR-FORMULARIOS-V2.md
+│   │       ├── README-INTEGRACION.md
+│   │       ├── README.md
+│   │       ├── backend
+│   │       │   ├── FIX-AUTENTICACION.md
+│   │       │   ├── README-INTEGRACION.md
+│   │       │   ├── README-MIGRACION.md
+│   │       │   ├── README.md
+│   │       │   ├── VERSION-046.md
+│   │       │   ├── VERSION-048.md
+│   │       │   ├── api
+│   │       │   │   ├── api.php
+│   │       │   │   ├── auth.php
+│   │       │   │   ├── auth_common.php
+│   │       │   │   ├── changelog.md
+│   │       │   │   ├── configuracion.php
+│   │       │   │   ├── demo.php
+│   │       │   │   ├── diagnostico_andreibbdd.php
+│   │       │   │   ├── empresa-pequena.json
+│   │       │   │   ├── endpoints-common.php
+│   │       │   │   ├── endpoints.php
+│   │       │   │   ├── erp-completo.json
+│   │       │   │   ├── formulario.php
+│   │       │   │   ├── formularios.php
+│   │       │   │   ├── index.html
+│   │       │   │   ├── intercambio.php
+│   │       │   │   ├── public.php
+│   │       │   │   ├── recursos.php
+│   │       │   │   └── usuarios.php
+│   │       │   ├── api.php
+│   │       │   ├── auth.php
+│   │       │   ├── auth_common.php
+│   │       │   ├── changelog.md
+│   │       │   ├── configuracion.php
+│   │       │   ├── demo.php
+│   │       │   ├── endpoints.html
+│   │       │   ├── index.html
+│   │       │   ├── informes
+│   │       │   │   └── demo.html
+│   │       │   ├── inicializar-usuarios-cli.php
+│   │       │   ├── instalacion
+│   │       │   │   ├── README.md
+│   │       │   │   ├── cabecera.html
+│   │       │   │   ├── crud.html
+│   │       │   │   ├── designer.css
+│   │       │   │   ├── empresa-pequena.json
+│   │       │   │   ├── erp-completo.json
+│   │       │   │   ├── es.php
+│   │       │   │   ├── general.css
+│   │       │   │   ├── login.php
+│   │       │   │   ├── menu.html
+│   │       │   │   ├── modelo.php
+│   │       │   │   ├── modulo.json
+│   │       │   │   ├── modulos.html
+│   │       │   │   ├── piedepagina.html
+│   │       │   │   ├── schema.json
+│   │       │   │   └── schema.sql
+│   │       │   ├── instalar.php
+│   │       │   ├── io
+│   │       │   │   ├── README.md
+│   │       │   │   ├── es.php
+│   │       │   │   ├── login.php
+│   │       │   │   └── migrar.php
+│   │       │   ├── modelo
+│   │       │   │   ├── AndreiDB.php
+│   │       │   │   ├── README.md
+│   │       │   │   ├── cabecera.html
+│   │       │   │   ├── crud-tabla-avanzada.js
+│   │       │   │   ├── crud-vistas.js
+│   │       │   │   ├── crud.html
+│   │       │   │   ├── designer.css
+│   │       │   │   ├── formularios-publicos.json
+│   │       │   │   ├── general.css
+│   │       │   │   ├── graficas.css
+│   │       │   │   ├── graficas.js
+│   │       │   │   ├── incluir.js
+│   │       │   │   ├── menu.html
+│   │       │   │   ├── modulo.json
+│   │       │   │   ├── modulos.html
+│   │       │   │   ├── piedepagina.html
+│   │       │   │   └── schema.json
+│   │       │   ├── nucleo
+│   │       │   │   ├── AndreiDB.php
+│   │       │   │   ├── README-ANDREIBBDD.md
+│   │       │   │   ├── VERSION-044.md
+│   │       │   │   ├── incluir.js
+│   │       │   │   ├── integracion.js
+│   │       │   │   ├── perfil.php
+│   │       │   │   ├── recursos.css
+│   │       │   │   ├── recursos.js
+│   │       │   │   ├── reporting.css
+│   │       │   │   ├── reporting.js
+│   │       │   │   ├── test-andrei-apache.php
+│   │       │   │   └── usuarios.php
+│   │       │   ├── recursos.php
+│   │       │   └── usuarios.php
+│   │       └── frontend
+│   │           ├── README-INTEGRACION.md
+│   │           ├── componentes-formulario.html
+│   │           ├── componentes-reporting.html
+│   │           ├── componentes-v5
+│   │           │   ├── andrei-extension.js
+│   │           │   ├── andrei-iu.css
+│   │           │   ├── andrei-refinado.css
+│   │           │   ├── andrei-ui.js
+│   │           │   ├── demo-formulario.html
+│   │           │   ├── demo-reporting.html
+│   │           │   └── demo.html
+│   │           ├── css
+│   │           │   ├── accesibilidad.css
+│   │           │   ├── andrei-refinado.css
+│   │           │   ├── api-endpoints.css
+│   │           │   ├── ayudas.css
+│   │           │   ├── erp-nested.css
+│   │           │   ├── erp.css
+│   │           │   ├── estilo.css
+│   │           │   ├── personalizacion.css
+│   │           │   ├── teclado.css
+│   │           │   └── tema-empresa.css
+│   │           ├── data
+│   │           │   ├── clientes.json
+│   │           │   ├── datos.json
+│   │           │   ├── entidades.json
+│   │           │   ├── menu.json
+│   │           │   └── productos.json
+│   │           ├── formularios.html
+│   │           ├── index.html
+│   │           ├── js
+│   │           │   ├── accesibilidad.js
+│   │           │   ├── api-endpoints.js
+│   │           │   ├── asistente-iu.js
+│   │           │   ├── ayudas.js
+│   │           │   ├── componentes.js
+│   │           │   ├── crimson-form-engine.js
+│   │           │   ├── demo-ui.js
+│   │           │   ├── erp.js
+│   │           │   ├── personalizacion.js
+│   │           │   ├── responsive-vistas.js
+│   │           │   └── teclado.js
+│   │           ├── login.html
+│   │           ├── ollama.php
+│   │           ├── templates
+│   │           │   ├── article.html
+│   │           │   ├── celda.html
+│   │           │   ├── fila.html
+│   │           │   ├── formulario-ui.html
+│   │           │   ├── formulario.html
+│   │           │   ├── nav.html
+│   │           │   └── toast.html
+│   │           └── toasts.html
 │   ├── 006-Creación de informes personalizados
 │   │   ├── 000-Introducción.md
 │   │   ├── 006-andrei-empresa
@@ -3849,8 +3834,7 @@ C:\xampp\htdocs\dam2\Sistemas de gestion\004-Implantación de sistemas ERP-CRM e
 │   │   ├── eliminar.php
 │   │   └── listar.php
 │   ├── database
-│   │   ├── conexion.php
-│   │   └── erp.sqlite
+│   │   └── conexion.php
 │   ├── docs
 │   │   ├── incidencias.md
 │   │   ├── manual_instalacion.md
@@ -583334,7 +583318,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </html>
 ```
 ## 003-Resultado de Aprendizaje
-
 A- Se han identificado las posibilidades de adaptación del ERP-CRM.
 --------------------------------------------------------------------
 
