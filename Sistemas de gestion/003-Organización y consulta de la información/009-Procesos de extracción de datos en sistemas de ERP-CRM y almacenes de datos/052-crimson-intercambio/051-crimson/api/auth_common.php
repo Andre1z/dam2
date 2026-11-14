@@ -1,8 +1,8 @@
 <?php
 if(session_status()!==PHP_SESSION_ACTIVE)session_start();
-require_once dirname(__DIR__).'/nucleo/JocarsaDB.php';
-function crimsonDb(bool $required=true): JocarsaDB{return JocarsaDB::instance($required);}
-function crimsonUser(){if(empty($_SESSION['crimson_user_id'])||!JocarsaDB::installed())return null;$u=crimsonDb()->find('__crimson_users',(int)$_SESSION['crimson_user_id']);return($u&&(int)($u['activo']??0)===1)?$u:null;}
+require_once dirname(__DIR__).'/nucleo/AndreiDB.php';
+function crimsonDb(bool $required=true): AndreiDB{return AndreiDB::instance($required);}
+function crimsonUser(){if(empty($_SESSION['crimson_user_id'])||!AndreiDB::installed())return null;$u=crimsonDb()->find('__crimson_users',(int)$_SESSION['crimson_user_id']);return($u&&(int)($u['activo']??0)===1)?$u:null;}
 function requireLogin($json=true){$u=crimsonUser();if(!$u){if($json){http_response_code(401);echo json_encode(['error'=>'No autenticado']);exit;}header('Location: ' . rtrim(dirname($_SERVER['SCRIPT_NAME'], 2), '/') . '/io/login.php');exit;}return $u;}
 function requireAdmin($json=true){$u=requireLogin($json);if(($u['rol']??'')!=='admin'){if($json){http_response_code(403);echo json_encode(['error'=>'Acceso reservado al administrador']);exit;}http_response_code(403);echo 'Acceso reservado al administrador';exit;}return $u;}
 function moduleConfig($id){if(!preg_match('/^[a-zA-Z0-9_-]+$/',$id))return null;$f=dirname(__DIR__).'/modulos/'.$id.'/modulo.json';if(!is_file($f))return null;$m=json_decode(file_get_contents($f),true);return is_array($m)?$m:null;}

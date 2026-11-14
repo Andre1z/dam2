@@ -158,7 +158,7 @@ try {
     }
 
     // Guardamos arrays como Base64 para evitar el fallo
-    // de persistencia de cadenas JSON en JocarsaBBDD.
+    // de persistencia de cadenas JSON en AndreiBBDD.
     $saveData = [
         'entidad' => $table,
         'ruta' => $route,
@@ -222,7 +222,7 @@ try {
         )
     ) {
         ep_out([
-            'error' => 'JocarsaBBDD no ha confirmado el guardado'
+            'error' => 'AndreiBBDD no ha confirmado el guardado'
         ], 500);
     }
 

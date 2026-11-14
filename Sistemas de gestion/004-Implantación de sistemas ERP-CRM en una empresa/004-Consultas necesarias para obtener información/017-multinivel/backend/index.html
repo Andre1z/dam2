@@ -26,13 +26,13 @@
       fetch("api/api.php?bloque=estado",{cache:"no-store"})
       .then(function(retorno){return retorno.json()})
       .then(function(datos){
-        if(!datos.instalado){ alert("No existe la base jocarsa-erp. Créala en jocarsa | bbdd y ejecuta el inicializador de usuarios."); return; }
+        if(!datos.instalado){ alert("No existe la base andrei-erp. Créala en andrei | bbdd y ejecuta el inicializador de usuarios."); return; }
         return fetch("api/auth.php?action=status",{cache:"no-store"}).then(r=>r.json()).then(auth=>{
           if(!auth.authenticated){window.location.href="io/login.php";return;}
           window.CRIMSON_USER=auth.user;
           // El motor de gráficas debe estar cargado antes del dashboard y del CRUD.
-          if(window.JocarsaGraficas && typeof window.JocarsaGraficas.dashboard === "function") {
-            window.JocarsaGraficas.dashboard(document.querySelector("main"));
+          if(window.AndreiGraficas && typeof window.AndreiGraficas.dashboard === "function") {
+            window.AndreiGraficas.dashboard(document.querySelector("main"));
           }
           let script=document.createElement("script");script.src="nucleo/js/incluir.js?v=047";document.body.appendChild(script);
         });

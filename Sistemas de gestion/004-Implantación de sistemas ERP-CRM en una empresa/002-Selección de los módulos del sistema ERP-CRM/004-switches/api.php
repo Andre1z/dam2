@@ -4,8 +4,8 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 try {
  if (!extension_loaded('jocarsabbdd')) throw new RuntimeException('Falta la extensión PHP jocarsabbdd. Instala el motor y reinicia Apache.');
- if (!is_file('/etc/jocarsa/config.json')) throw new RuntimeException('No existe /etc/jocarsa/config.json');
- jocarsabbdd_configurar('/etc/jocarsa/config.json');
+ if (!is_file('/etc/andrei/config.json')) throw new RuntimeException('No existe /etc/andrei/config.json');
+ jocarsabbdd_configurar('/etc/andrei/config.json');
  $input=json_decode(file_get_contents('php://input'),true,512,JSON_THROW_ON_ERROR);
  if (!is_array($input)) throw new RuntimeException('JSON inválido');
  $root=__DIR__.'/private';if(!is_dir($root)&&!mkdir($root,0770,true))throw new RuntimeException('No se puede crear private/');
@@ -23,9 +23,9 @@ try {
  }
  function renameDatabase($old,$new){
   if($old===$new)return;
-  $cfg=json_decode(file_get_contents('/etc/jocarsa/config.json'),true);
+  $cfg=json_decode(file_get_contents('/etc/andrei/config.json'),true);
   $root=$cfg['instalacion']??null;
-  if(!is_string($root)||!str_starts_with($root,'/'))throw new RuntimeException('Para renombrar bases, configura una ruta absoluta en /etc/jocarsa/config.json (instalacion).');
+  if(!is_string($root)||!str_starts_with($root,'/'))throw new RuntimeException('Para renombrar bases, configura una ruta absoluta en /etc/andrei/config.json (instalacion).');
   $root=realpath($root);
   if(!$root||!is_dir($root))throw new RuntimeException('Directorio de bases no disponible');
   foreach([$old,$new] as $v)if(!preg_match('/^[a-z0-9_-]+$/',$v))throw new RuntimeException('Identificador de base inválido');

@@ -6,4 +6,4 @@
 - Las escrituras siguen pasando por `actualizar`, con los permisos y reglas de flujo existentes.
 - No se modifica el motor de persistencia.
 
-Limitación: la búsqueda se realiza sobre los registros devueltos por el adaptador jocarsa-bbdd y se filtra en PHP; no hay índices ni paginación. Para conjuntos de datos grandes conviene añadir filtrado nativo al motor.
+Limitación: la búsqueda se realiza sobre los registros devueltos por el adaptador andrei-bbdd y se filtra en PHP; no hay índices ni paginación. Para conjuntos de datos grandes conviene añadir filtrado nativo al motor.

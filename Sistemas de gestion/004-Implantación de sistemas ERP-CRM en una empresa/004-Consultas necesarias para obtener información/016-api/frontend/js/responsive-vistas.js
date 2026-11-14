@@ -2,7 +2,7 @@
 const mq=matchMedia('(max-width:700px)');
 function responsive(){const z=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ju-content-scale'))||1;return mq.matches||innerWidth/z<=700;}
 function setupMenus(){
- document.querySelectorAll('body.jocarsa-iu > main > nav, body.jocarsa-iu > main > section#entidades').forEach((menu,i)=>{
+ document.querySelectorAll('body.andrei-iu > main > nav, body.andrei-iu > main > section#entidades').forEach((menu,i)=>{
   if(menu.dataset.juAccordion)return;menu.dataset.juAccordion='1';menu.classList.add('ju-mobile-menu');
   const title=menu.querySelector(':scope > .titulo-columna');
   const toggle=document.createElement('button');toggle.type='button';toggle.className='ju-mobile-menu-toggle';toggle.setAttribute('aria-expanded','false');

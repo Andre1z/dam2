@@ -64,7 +64,7 @@ function renderArrows(){
 function highlight(){
  canvas.querySelectorAll(".entity").forEach(e=>e.style.outline="");
  arrows.querySelectorAll("line").forEach(l=>l.classList.remove("sel"));
- if(selected?.type==="table"){const e=[...canvas.querySelectorAll(".entity")].find(x=>x.dataset.table===selected.table);if(e)e.style.outline="3px solid #dc143c55"}
+ if(selected?.type==="table"){const e=[...canvas.querySelectorAll(".entity")].find(x=>x.dataset.table===selected.table);if(e)e.style.outline="3px solid #1d4ed855"}
  if(selected?.type==="relation"){arrows.querySelector(`line[data-i="${selected.index}"]`)?.classList.add("sel")}
 }
 document.querySelector("#addEntity").onclick=()=>{let n="nueva_entidad",i=1;while(tableByName(n))n="nueva_entidad_"+(++i);model.tables.push({name:n,x:260,y:120,columns:[{name:"Identificador",type:"INTEGER",pk:true}]});render()};
@@ -73,6 +73,6 @@ document.querySelector("#deleteSelected").onclick=()=>{if(!selected)return;if(se
 async function preview(){const r=await fetch("api/modelo.php?action=preview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model})});const d=await r.json();if(!d.ok)throw new Error(d.error);return d.sql}
 document.querySelector("#sqlBtn").onclick=async()=>{try{document.querySelector("#sqlText").value=await preview();document.querySelector("#sqlModal").hidden=false}catch(e){alert(e.message)}};
 document.querySelector("#closeSql").onclick=()=>document.querySelector("#sqlModal").hidden=true;
-document.querySelector("#applyBtn").onclick=async()=>{try{const sql=await preview();if(!confirm("Se va a aplicar esta migración mediante una transacción de JocarsaBBDD.\\n\\n¿Continuar?"))return;const r=await fetch("api/modelo.php?action=apply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model})});const d=await r.json();if(!d.ok)throw new Error(d.error);alert(`Migración aplicada: ${d.migration}\\nBackup: ${d.backup}`);mark("Migración aplicada correctamente")}catch(e){alert(e.message)}};
+document.querySelector("#applyBtn").onclick=async()=>{try{const sql=await preview();if(!confirm("Se va a aplicar esta migración mediante una transacción de AndreiBBDD.\\n\\n¿Continuar?"))return;const r=await fetch("api/modelo.php?action=apply",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model})});const d=await r.json();if(!d.ok)throw new Error(d.error);alert(`Migración aplicada: ${d.migration}\\nBackup: ${d.backup}`);mark("Migración aplicada correctamente")}catch(e){alert(e.message)}};
 load().catch(e=>mark("Error: "+e.message));
 });

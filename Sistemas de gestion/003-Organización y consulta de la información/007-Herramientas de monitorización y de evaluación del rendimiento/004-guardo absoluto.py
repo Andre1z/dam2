@@ -5,7 +5,7 @@ import csv
 from datetime import datetime
 import os
 
-archivo = "/home/josevicente/log/registros.csv"
+archivo = "/home/andrei/log/registros.csv"
 
 # Obtener datos
 fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

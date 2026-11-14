@@ -18,7 +18,7 @@ try{
 
     // Estado público: lo usa login.php antes de intentar autenticar.
     if($action==='status'){
-        $installed=JocarsaDB::installed();
+        $installed=AndreiDB::installed();
         $u=$installed?crimsonUser():null;
         out([
             'ok'=>true,
@@ -29,7 +29,7 @@ try{
     }
 
     if($action==='login'){
-        if(!JocarsaDB::installed())out(['ok'=>false,'error'=>'Crimson no está instalado'],409);
+        if(!AndreiDB::installed())out(['ok'=>false,'error'=>'Crimson no está instalado'],409);
         $username=trim((string)($body['username']??$_POST['username']??''));
         $password=(string)($body['password']??$_POST['password']??'');
         $rows=crimsonDb()->search('__crimson_users','username',$username);

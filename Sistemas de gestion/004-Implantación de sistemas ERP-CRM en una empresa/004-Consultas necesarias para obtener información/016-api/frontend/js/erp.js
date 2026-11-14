@@ -1,8 +1,8 @@
 (()=>{'use strict';
 const API='../backend/api.php',AUTH='../backend/auth.php';
 const $=s=>document.querySelector(s), nav=$('#navegacion .contenido-columna'), entities=$('#entidades .contenido-columna'),stage=$('#escenario');
-let activeModule='',activeTable='',model=null,records=[],search='',viewMode='tabla';let erpSettings={themeColor:'#8b4513',rowsPerPage:25},canEditSettings=false,currentPage=1;const selectedIds=new Set();let columnFilters={},filterRequest=0,filterTimer=null;
-const personalization=window.JocarsaPersonalizacion;
+let activeModule='',activeTable='',model=null,records=[],search='',viewMode='tabla';let erpSettings={themeColor:'#f97316',rowsPerPage:25},canEditSettings=false,currentPage=1;const selectedIds=new Set();let columnFilters={},filterRequest=0,filterTimer=null;
+const personalization=window.AndreiPersonalizacion;
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function req(url,data){const o=data===undefined?{credentials:'same-origin'}:{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)};const r=await fetch(url,o);let j;try{j=await r.json()}catch{throw Error('El servidor no ha devuelto JSON válido')};if(!r.ok||j.error||j.ok===false)throw Error(j.error||'Error HTTP '+r.status);return j}
 function applyTheme(color){
@@ -37,7 +37,7 @@ function showSettings(){
  panel.onsubmit=async e=>{e.preventDefault();const rowsPerPage=Number(panel.elements.rowsPerPage.value);try{const response=await req(API+'?bloque=erp_settings_save',{themeColor:color.value,rowsPerPage});erpSettings=response.settings;currentPage=1;overlay.remove();applyTheme(erpSettings.themeColor);render()}catch(err){alert(err.message)}};
 }
 function error(e){stage.innerHTML='<div class="erp-empty"><h2>Error</h2><p>'+escape(e.message)+'</p></div>'}
-const badgePalette=['#b68b29','#347db1','#bf2f56','#2ab66d','#a82aa4','#afbf29','#9a612a','#247f86'];
+const badgePalette=['#f97316','#1d4ed8','#1d4ed8','#1d4ed8','#1d4ed8','#f97316','#f97316','#1d4ed8'];
 function badgeColor(label){let hash=0;for(const ch of String(label))hash=(hash*31+ch.charCodeAt(0))>>>0;return badgePalette[hash%badgePalette.length]}
 function item(label,selected,action){const a=document.createElement('a');a.href='#';a.className='erp-menu-item'+(selected?' activo':'');a.style.setProperty('--erp-ficha-color',badgeColor(label));a.innerHTML='<span class="ficha" aria-hidden="true">'+escape(label.charAt(0).toUpperCase())+'</span><span class="etiqueta">'+escape(label)+'</span>';a.addEventListener('click',e=>{e.preventDefault();action()});return a}
 async function loadModules(){const modules=await req(API+'?bloque=modulos');nav.replaceChildren();nav.insertAdjacentHTML('beforeend','<div class="titulo-columna">Departamentos</div>');for(const m of modules){const id=typeof m==='string'?m:m.modulo;nav.append(item(m.nombre||id,id===activeModule,()=>loadTables(id)))}if(modules.length)await loadTables(modules[0].modulo||modules[0]);else stage.innerHTML='<div class="erp-empty">No tienes departamentos asignados.</div>'}
@@ -144,7 +144,7 @@ function printCustom(action,rows,params){
  const htmlMode=action.printFormat==='html';
  const body=custom?rows.map(row=>'<section class="record">'+(htmlMode?sanitizeHTML(replaceTokens(custom,row)):replaceTokens(custom,row).split('\n').join('<br>'))+'</section>').join(''):('<table><thead><tr>'+cols.map(c=>'<th>'+escape(c.name)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+cols.map(c=>'<td data-inline-field="'+escape(c.name)+'" data-inline-id="'+escape(r.Identificador)+'" title="Doble clic para editar">'+escape(r['__fk__'+c.name]??r[c.name])+'</td>').join('')+'</tr>').join('')+'</tbody></table>');
  const w=window.open('','_blank');if(!w){alert('Permite las ventanas emergentes para imprimir.');return}
- w.document.open();w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src \'none\'; base-uri \'none\'"><title>'+escape(title)+'</title><style>body{font:14px sans-serif;margin:32px;color:#43250f}h1{color:#8b4513}table{border-collapse:collapse;width:100%;margin:20px 0}th,td{border:1px solid #bbb;padding:9px;text-align:left}th{background:#f2e7dd}.record{padding:16px 0;border-bottom:1px solid #ddd;white-space:normal}@media print{button{display:none}}</style></head><body><h1>'+escape(title)+'</h1><button onclick="print()">Imprimir</button>'+body+'</body></html>');w.document.close();
+ w.document.open();w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="object-src \'none\'; base-uri \'none\'"><title>'+escape(title)+'</title><style>body{font:14px sans-serif;margin:32px;color:#111827}h1{color:#f97316}table{border-collapse:collapse;width:100%;margin:20px 0}th,td{border:1px solid #dbeafe;padding:9px;text-align:left}th{background:#f97316}.record{padding:16px 0;border-bottom:1px solid #dbeafe;white-space:normal}@media print{button{display:none}}</style></head><body><h1>'+escape(title)+'</h1><button onclick="print()">Imprimir</button>'+body+'</body></html>');w.document.close();
 }
 async function executeCustom(action,rows){
  if(!action||!rows.length){alert('Selecciona al menos un registro.');return}
@@ -164,7 +164,7 @@ async function remove(id){if(!confirm('¿Eliminar este registro?'))return;try{aw
 function setupColumns(){
  for(const column of [$('#navegacion'),$('#entidades')]){
   const btn=column.querySelector('.minimizar');if(!btn)continue;
-  const key='jocarsa-erp-width-'+column.id;const stored=Number(localStorage.getItem(key));
+  const key='andrei-erp-width-'+column.id;const stored=Number(localStorage.getItem(key));
   if(stored>=100&&stored<=600){column.style.width=stored+'px';column.style.flexBasis=stored+'px'}
   btn.addEventListener('click',()=>{
    if(column.classList.contains('compacto')){column.classList.remove('compacto');const w=Number(column.dataset.savedWidth)||Number(localStorage.getItem(key))||240;column.style.width=w+'px';column.style.flexBasis=w+'px';btn.textContent='◀';btn.setAttribute('aria-label','Minimizar columna')}
@@ -173,7 +173,7 @@ function setupColumns(){
  }
  for(const splitter of document.querySelectorAll('main > .separador')){
   splitter.setAttribute('role','separator');splitter.setAttribute('aria-orientation','vertical');splitter.tabIndex=0;
-  const column=splitter.previousElementSibling,key='jocarsa-erp-width-'+column.id;
+  const column=splitter.previousElementSibling,key='andrei-erp-width-'+column.id;
   const setWidth=w=>{const value=Math.max(110,Math.min(600,w));column.style.width=value+'px';column.style.flexBasis=value+'px';column.dataset.savedWidth=value;localStorage.setItem(key,String(value))};
   splitter.addEventListener('pointerdown',e=>{
    if(e.button!==0)return;e.preventDefault();if(column.classList.contains('compacto'))return;

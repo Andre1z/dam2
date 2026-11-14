@@ -1,9 +1,9 @@
 /**
- * jocarsa | iu · demostraciones
- * Namespace técnico: jocarsa.iu
+ * andrei | iu · demostraciones
+ * Namespace técnico: andrei.iu
  */
-window.jocarsa = window.jocarsa || {};
-window.jocarsa.iu = window.jocarsa.iu || {};
+window.andrei = window.andrei || {};
+window.andrei.iu = window.andrei.iu || {};
 
 (() => {
   "use strict";
@@ -80,11 +80,11 @@ window.jocarsa.iu = window.jocarsa.iu || {};
     }
   }
 
-  window.jocarsa.iu.ToastDemo = ToastDemo;
-  window.jocarsa.iu.DemoIU = DemoIU;
+  window.andrei.iu.ToastDemo = ToastDemo;
+  window.andrei.iu.DemoIU = DemoIU;
 
   document.addEventListener("DOMContentLoaded", () => {
-    window.jocarsa.iu.demo = new DemoIU();
-    window.jocarsa.iu.demo.iniciar();
+    window.andrei.iu.demo = new DemoIU();
+    window.andrei.iu.demo.iniciar();
   });
 })();

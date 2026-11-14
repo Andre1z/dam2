@@ -12,20 +12,20 @@
 - Conservado el diseñador de Modelo de datos.
 - Limitaciones del conector: cambio de tipos y eliminación de FK no automatizados.
 
-## 0.38 - Fusión interfaz de configuración y JocarsaBBDD
+## 0.38 - Fusión interfaz de configuración y AndreiBBDD
 - Recuperada pantalla de configuración de la versión 036.
-- Conservada API JocarsaBBDD de la versión 037.
+- Conservada API AndreiBBDD de la versión 037.
 - Excluidas tablas internas __crimson_ de asignación a módulos.
 - Error de carga visible en la pantalla.
 
-## 0.34 - Migración a JocarsaBBDD
+## 0.34 - Migración a AndreiBBDD
 - Eliminada la dependencia activa de SQLite/PDO SQLite.
-- Nueva capa `nucleo/JocarsaDB.php`.
-- Persistencia en la base `crimson` de JocarsaBBDD.
+- Nueva capa `nucleo/AndreiDB.php`.
+- Persistencia en la base `crimson` de AndreiBBDD.
 - `Identificador` se adapta al `id` interno del motor.
 - El campo lógico `activo` se adapta a `__crimson_activo` para no colisionar con el borrado lógico interno.
 - API, login, usuarios, permisos, módulos, CRUD, API E/S, instalador y diseñador migrados al conector PHP nativo.
-- Migraciones protegidas mediante transacciones JocarsaBBDD.
+- Migraciones protegidas mediante transacciones AndreiBBDD.
 
 ## 0.21 - corrección [object Object]
 - Navegación de módulos compatible con objetos `{modulo,nombre}` y cadenas.
@@ -46,7 +46,7 @@
 * Cambiado el color corporativo principal de `mediumseagreen` a `crimson`.
 * El color continúa centralizado mediante la variable CSS `--color-principal`.
 * Establecida `Ubuntu` como fuente primaria de la interfaz, con `sans-serif` como alternativa.
-* Recuperada la identidad corporativa permanente `jocarsa | crimson` en la zona izquierda de la cabecera.
+* Recuperada la identidad corporativa permanente `andrei | crimson` en la zona izquierda de la cabecera.
 * La zona central de la cabecera muestra la tabla activa, la operación actual y las acciones disponibles.
 * La zona derecha mantiene la identidad y opciones del usuario.
 * Reducida la altura de la cabecera para conseguir una interfaz más compacta.
@@ -343,7 +343,7 @@ Esta versión establece la estructura básica sobre la que se desarrollarán los
   * Área principal de trabajo.
   * Pie de página.
 * Cabecera con:
-  * Identidad corporativa de jocarsa | crimson.
+  * Identidad corporativa de andrei | crimson.
   * Herramientas principales.
   * Identificación del usuario.
   * Acceso a opciones.

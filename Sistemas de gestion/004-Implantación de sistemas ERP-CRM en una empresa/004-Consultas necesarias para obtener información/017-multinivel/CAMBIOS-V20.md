@@ -11,10 +11,10 @@
 
 ## Alcance
 
-La paginación es **del lado del navegador** sobre los registros obtenidos por Crimson; no reduce el volumen inicial de datos transferidos. Para grandes tablas conviene introducir paginación real en jocarsa-bbdd.
+La paginación es **del lado del navegador** sobre los registros obtenidos por Crimson; no reduce el volumen inicial de datos transferidos. Para grandes tablas conviene introducir paginación real en andrei-bbdd.
 
 Los estilos de componentes heredados que no utilizan variables CSS podrían conservar algún color propio; los componentes principales del ERP usan la paleta derivada.
 
 ## Verificación
 
-Validación estática de sintaxis JavaScript y PHP y estructura ZIP. Pendiente de prueba funcional con el motor jocarsa-bbdd del servidor.
+Validación estática de sintaxis JavaScript y PHP y estructura ZIP. Pendiente de prueba funcional con el motor andrei-bbdd del servidor.

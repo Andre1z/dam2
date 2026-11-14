@@ -1,6 +1,6 @@
 
 <?php
-$archivo = "/home/josevicente/log/registros.csv";
+$archivo = "/home/andrei/log/registros.csv";
 
 $fechas = [];
 $cpu = [];
@@ -47,8 +47,8 @@ $actualDisco = count($disco) ? end($disco) : 0;
 body {
     margin: 0;
     padding: 20px;
-    background: #10151e;
-    color: #e8edf5;
+    background: #111827;
+    color: #eff6ff;
     font-family: Arial, sans-serif;
 }
 
@@ -66,8 +66,8 @@ h1 {
 }
 
 .panel {
-    background: #1b2432;
-    border: 1px solid #303b4d;
+    background: #111827;
+    border: 1px solid #1e40af;
     border-radius: 12px;
     padding: 18px;
     min-height: 0;
@@ -103,7 +103,7 @@ canvas {
         height: 270px;
     }
 }
-</style>
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}</style>
 </head>
 
 <body>
@@ -166,8 +166,8 @@ const actualCPU = <?php echo json_encode($actualCPU); ?>;
 const actualRAM = <?php echo json_encode($actualRAM); ?>;
 const actualDisco = <?php echo json_encode($actualDisco); ?>;
 
-Chart.defaults.color = "#aab8cc";
-Chart.defaults.borderColor = "#344154";
+Chart.defaults.color = "#1d4ed8";
+Chart.defaults.borderColor = "#1e40af";
 
 // GRÁFICAS HISTÓRICAS
 
@@ -265,7 +265,7 @@ function crearGauge(id, valor, color) {
                 data: [valor, 100 - valor],
                 backgroundColor: [
                     color,
-                    "#354153"
+                    "#1e40af"
                 ],
                 borderWidth: 0,
                 circumference: 180,
@@ -290,13 +290,13 @@ function crearGauge(id, valor, color) {
 
 // CREAR LAS SEIS GRÁFICAS
 
-crearLinea("cpuLinea", cpu, "#38bdf8");
-crearLinea("ramLinea", ram, "#34d399");
-crearLinea("discoLinea", disco, "#fbbf24");
+crearLinea("cpuLinea", cpu, "#1d4ed8");
+crearLinea("ramLinea", ram, "#1d4ed8");
+crearLinea("discoLinea", disco, "#f97316");
 
-crearGauge("cpuGauge", actualCPU, "#38bdf8");
-crearGauge("ramGauge", actualRAM, "#34d399");
-crearGauge("discoGauge", actualDisco, "#fbbf24");
+crearGauge("cpuGauge", actualCPU, "#1d4ed8");
+crearGauge("ramGauge", actualRAM, "#1d4ed8");
+crearGauge("discoGauge", actualDisco, "#f97316");
 </script>
 
 </body>

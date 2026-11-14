@@ -1,13 +1,13 @@
 /**
- * jocarsa | iu
+ * andrei | iu
  * Control principal de la interfaz mediante programación orientada a objetos.
  *
  * Nota sobre el namespace:
  * JavaScript no admite "|" dentro de un identificador. Por ello el namespace
- * técnico equivalente es `jocarsa.iu`.
+ * técnico equivalente es `andrei.iu`.
  */
-window.jocarsa = window.jocarsa || {};
-window.jocarsa.iu = window.jocarsa.iu || {};
+window.andrei = window.andrei || {};
+window.andrei.iu = window.andrei.iu || {};
 
 (() => {
   "use strict";
@@ -489,7 +489,7 @@ window.jocarsa.iu = window.jocarsa.iu || {};
       escenario.innerHTML = `
         <article class="ju-card">
           <h2>Librería · Formularios</h2>
-          <p>Controles reutilizables con el lenguaje visual jocarsa-iu.</p>
+          <p>Controles reutilizables con el lenguaje visual andrei-iu.</p>
           <form id="demoForm" class="ju-form-grid">
             <label>
               <span>Nombre</span>
@@ -545,8 +545,8 @@ window.jocarsa.iu = window.jocarsa.iu || {};
           <article class="ju-login-side">
             <div class="ju-login-brand">
               <img src="https://static.jocarsa.com/logos/white.svg" alt="">
-              <h1 class="ju-login-product-title">jocarsa | interfaz integrada</h1>
-              <p>Pantalla de acceso basada en jocarsa-iu.</p>
+              <h1 class="ju-login-product-title">andrei | interfaz integrada</h1>
+              <p>Pantalla de acceso basada en andrei-iu.</p>
             </div>
           </article>
           <article class="ju-login-card">
@@ -621,7 +621,7 @@ window.jocarsa.iu = window.jocarsa.iu || {};
       const escenario = DOM.uno("#escenario");
       escenario.innerHTML = `<article class="ju-card"><h2>Librería · Modal y panel lateral</h2><p>Dos patrones reutilizables para acciones que no deben sustituir el contenido del escenario.</p><div class="ju-showcase-grid"><div class="ju-showcase-box"><h3>Ventana modal</h3><p>Bloquea temporalmente la interfaz para confirmaciones, avisos o contenido focal.</p><button class="ju-btn" id="demoModal">Abrir modal</button></div><div class="ju-showcase-box"><h3>Panel lateral</h3><p>Entra desde la derecha, mantiene visible el contexto y puede redimensionarse arrastrando su borde izquierdo.</p><button class="ju-btn" id="demoDrawer">Abrir panel de creación</button></div></div></article>`;
       DOM.uno("#demoModal").addEventListener("click", () => {
-        this.modal.abrir("Ejemplo de ventana modal", `<p>Esta es la nueva ventana modal reutilizable de <strong>jocarsa | iu</strong>.</p><p>Se puede cerrar con el botón ×, haciendo clic fuera o pulsando Escape.</p><div class="ju-button-row"><button class="ju-btn" id="modalAceptar">Aceptar</button></div>`);
+        this.modal.abrir("Ejemplo de ventana modal", `<p>Esta es la nueva ventana modal reutilizable de <strong>andrei | iu</strong>.</p><p>Se puede cerrar con el botón ×, haciendo clic fuera o pulsando Escape.</p><div class="ju-button-row"><button class="ju-btn" id="modalAceptar">Aceptar</button></div>`);
         DOM.uno("#modalAceptar").addEventListener("click", () => this.modal.cerrar());
       });
       DOM.uno("#demoDrawer").addEventListener("click", () => this.drawer.abrirCrear());
@@ -666,20 +666,20 @@ window.jocarsa.iu = window.jocarsa.iu || {};
     }
   }
 
-  window.jocarsa.iu.DOM = DOM;
-  window.jocarsa.iu.Utilidades = Utilidades;
-  window.jocarsa.iu.OrigenDatos = OrigenDatos;
-  window.jocarsa.iu.EstadoIU = EstadoIU;
-  window.jocarsa.iu.FichaIU = FichaIU;
-  window.jocarsa.iu.ToastIU = ToastIU;
-  window.jocarsa.iu.ModalIU = ModalIU;
-  window.jocarsa.iu.DrawerIU = DrawerIU;
-  window.jocarsa.iu.GestorColumnas = GestorColumnas;
-  window.jocarsa.iu.AplicacionIU = AplicacionIU;
+  window.andrei.iu.DOM = DOM;
+  window.andrei.iu.Utilidades = Utilidades;
+  window.andrei.iu.OrigenDatos = OrigenDatos;
+  window.andrei.iu.EstadoIU = EstadoIU;
+  window.andrei.iu.FichaIU = FichaIU;
+  window.andrei.iu.ToastIU = ToastIU;
+  window.andrei.iu.ModalIU = ModalIU;
+  window.andrei.iu.DrawerIU = DrawerIU;
+  window.andrei.iu.GestorColumnas = GestorColumnas;
+  window.andrei.iu.AplicacionIU = AplicacionIU;
 
   document.addEventListener("DOMContentLoaded", () => {
-    window.jocarsa.iu.aplicacion = new AplicacionIU();
-    window.jocarsa.iu.aplicacion.iniciar();
+    window.andrei.iu.aplicacion = new AplicacionIU();
+    window.andrei.iu.aplicacion.iniciar();
   });
 })();
 /* =========================================================

@@ -1,0 +1,57 @@
+
+/* Capa visual de componentes v5: conserva componentes nativos y sus scripts. */
+:root { --chaflan:12px; --ju-ink:#1e40af; --ju-line:#dbeafe; }
+.andrei-demo { padding:14px 16px 26px; }
+.andrei-demo>header {
+  background:linear-gradient(105deg,var(--color0),var(--color));
+  border-bottom:3px solid var(--color2);
+  border-radius:var(--radio,12px);
+}
+.andrei-demo section {
+  border:1px solid var(--ju-line);
+  border-left:3px solid var(--color2);
+  border-radius:var(--radio,12px);
+  padding:17px;
+}
+.andrei-demo section h2 { padding-bottom:9px; border-bottom:1px solid #dbeafe; }
+.andrei-demo .grid { gap:14px 18px; }
+.andrei-demo .grid label { color:var(--ju-ink); font-weight:500; }
+.andrei-demo .grid :is(input,textarea,select):not([type=checkbox]):not([type=radio]):not([type=range]),
+.andrei-date-display,.andrei-multidatalist,.andrei-control {
+  border-radius:10px!important;
+}
+.andrei-input-envoltura,.andrei-date-display,
+.andrei-demo .grid :is(input,textarea,select):not([type=checkbox]):not([type=radio]):not([type=range]) {
+  border-radius:var(--radio,12px);
+}
+.andrei-demo :is(button,.andrei-chip,.andrei-segment,.andrei-popup,.andrei-barra) {
+  border-radius:10px!important;
+}
+.andrei-demo button:not(.andrei-switch):not(.andrei-radio),
+.andrei-popup button,.andrei-chip {
+  border-radius:var(--radio,12px);
+}
+.andrei-demo :is(button,input,select,textarea,[tabindex]):focus-visible,
+.andrei-popup :is(button,input,select):focus-visible {
+  outline:3px solid #f97316!important;outline-offset:2px;
+}
+.andrei-demo .andrei-tabla,
+.andrei-demo .andrei-control { max-width:100%; }
+.andrei-tabla-scroll { max-width:100%; overflow-x:auto; }
+.andrei-tabla th { background:var(--color); color:#fff; }
+.andrei-tabla th:hover { background:var(--color0); }
+.andrei-tabla tbody tr:nth-child(even) { background:#eff6ff; }
+.andrei-tabla tbody tr:hover { background:#dbeafe; }
+.andrei-tabla-controles,.andrei-tabla-pie { background:#eff6ff; }
+.andrei-popup { border:2px solid var(--color2); }
+.andrei-arbol-nodo { border-radius:10px; }
+.andrei-arbol-nodo.seleccionado { background:#dbeafe; }
+@media(min-width:900px){
+ .andrei-demo .grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+@media(max-width:650px){
+ .andrei-demo .grid { grid-template-columns:1fr; }
+ .andrei-demo section { padding:12px; }
+}
+
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}

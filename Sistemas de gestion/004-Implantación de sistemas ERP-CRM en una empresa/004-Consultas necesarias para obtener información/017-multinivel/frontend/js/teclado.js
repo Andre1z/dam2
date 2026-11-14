@@ -47,7 +47,7 @@ function init(){
   if(!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
   if(el.matches('input,textarea,select,[contenteditable="true"]'))return;
   // Flechas para navegar elementos de menús, filas y controles de formulario agrupados.
-  const group=el.closest('#navegacion,#entidades,.ju-integrated-menu,[role="menu"],[role="listbox"],[role="tree"],.ju-a11y-panel,table,form,.jocarsa-demo section');
+  const group=el.closest('#navegacion,#entidades,.ju-integrated-menu,[role="menu"],[role="listbox"],[role="tree"],.ju-a11y-panel,table,form,.andrei-demo section');
   if(group)move(e,group);
  });
 }

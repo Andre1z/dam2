@@ -8,4 +8,4 @@ Desde cada tabla, botón **API endpoint** de la barra de acciones. Desde **Confi
 
 Se mantiene la autenticación de administrador de la API anterior y la creación de claves con hash. Las publicaciones nuevas están desactivadas. **No activar escritura en producción** sin integrar las validaciones de workflows del ERP. Se requiere HTTPS, CSRF y rate limiting antes de exposición pública.
 
-No probado en una instancia activa de JocarsaBBDD.
+No probado en una instancia activa de AndreiBBDD.

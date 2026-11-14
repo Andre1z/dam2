@@ -3,7 +3,7 @@ require_once __DIR__.'/auth_common.php';
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 requireAdmin(true);
-$path='/home/josevicente/log/registros.csv';
+$path='/home/andrei/log/registros.csv';
 if(!is_readable($path)){http_response_code(503);echo json_encode(['error'=>'No se puede leer el CSV de recursos']);exit;}
 $rows=[];
 if(($f=fopen($path,'r'))!==false){

@@ -15,8 +15,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 25px;
-    background: #f2f3f5;
-    color: #222;
+    background: #eff6ff;
+    color: #111827;
 }
 
 h1 {
@@ -34,10 +34,10 @@ h1 {
 
 .grafico {
     position: relative;
-    background: white;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 8px #0001;
+    box-shadow: 0 2px 8px #11182711;
     min-width: 0;
 }
 
@@ -68,12 +68,12 @@ svg {
     display: none;
     pointer-events: none;
     z-index: 100;
-    background: #222;
-    color: white;
+    background: #111827;
+    color: #ffffff;
     padding: 12px 16px;
     border-radius: 8px;
     font-size: 13px;
-    box-shadow: 0 4px 12px #0004;
+    box-shadow: 0 4px 12px #11182744;
     min-width: 140px;
     max-width: 230px;
 }
@@ -107,19 +107,19 @@ svg {
     display: inline-block;
     width: 10px;
     height: 10px;
-    border-radius: 2px;
+    border-radius: 10px;
     flex-shrink: 0;
 }
 
 @media print {
     body {
-        background: white;
+        background: #ffffff;
         padding: 0;
     }
 
     .grafico {
         box-shadow: none;
-        border: 1px solid #ddd;
+        border: 1px solid #dbeafe;
         break-inside: avoid;
     }
 
@@ -127,7 +127,7 @@ svg {
         display: none !important;
     }
 }
-</style>
+/* paleta-andrei */:root{--naranja:#f97316;--azul:#1d4ed8;--azul-medio:#1e40af;--azul-claro:#eff6ff;--azul-palido:#dbeafe;--blanco:#ffffff;--negro:#111827;--radio:12px}:where(button,input,select,textarea,fieldset,img,video,canvas,iframe,table,pre,dialog,details,article,section,aside,nav a,[class*="card"],[class*="tarjeta"],[class*="panel"],[class*="caja"],[class*="boton"],[class*="btn"],[class*="widget"],[class*="modal"]){border-radius:var(--radio)}</style>
 </head>
 
 <body>
@@ -146,31 +146,31 @@ svg {
         {
             "nombre": "Enero",
             "valor": 40,
-            "color": "#548fdf",
+            "color": "#1d4ed8",
             "descripcion": "Inicio del año"
         },
         {
             "nombre": "Febrero",
             "valor": 65,
-            "color": "#37a88a",
+            "color": "#1d4ed8",
             "descripcion": "Crecimiento de ventas"
         },
         {
             "nombre": "Marzo",
             "valor": 85,
-            "color": "#e6a03d",
+            "color": "#f97316",
             "descripcion": "Muy buen rendimiento"
         },
         {
             "nombre": "Abril",
             "valor": 55,
-            "color": "#a184d7",
+            "color": "#1d4ed8",
             "descripcion": "Descenso temporal"
         },
         {
             "nombre": "Mayo",
             "valor": 95,
-            "color": "#e36e7b",
+            "color": "#1d4ed8",
             "descripcion": "Mejor mes del periodo"
         }
     ]
@@ -464,7 +464,7 @@ function crearEjes(svg) {
             y1: y,
             x2: 580,
             y2: y,
-            stroke: "#ddd"
+            stroke: "#dbeafe"
         }));
 
         svg.appendChild(svgElemento("text", {
@@ -472,7 +472,7 @@ function crearEjes(svg) {
             y: y + 4,
             "text-anchor": "end",
             "font-size": 11,
-            fill: "#666"
+            fill: "#1e40af"
         }, Number(valor.toFixed(1))));
     }
 
@@ -583,7 +583,7 @@ function dibujarBarrasHorizontales(svg, contenedor) {
             y1: margenSuperior - 10,
             x2: x,
             y2: margenSuperior + datos.length * altoFila,
-            stroke: "#ddd"
+            stroke: "#dbeafe"
         }));
 
         svg.appendChild(svgElemento("text", {
@@ -591,7 +591,7 @@ function dibujarBarrasHorizontales(svg, contenedor) {
             y: altoGrafico - 15,
             "text-anchor": "middle",
             "font-size": 11,
-            fill: "#666"
+            fill: "#1e40af"
         }, Number(valor.toFixed(1))));
     }
 
@@ -610,7 +610,7 @@ function dibujarBarrasHorizontales(svg, contenedor) {
             y: y + altoBarra / 2 + 4,
             "text-anchor": "end",
             "font-size": 13,
-            fill: "#333"
+            fill: "#111827"
         }, dato.nombre);
 
         svg.appendChild(etiqueta);
@@ -633,7 +633,7 @@ function dibujarBarrasHorizontales(svg, contenedor) {
             x: margenIzquierdo + anchoBarra + 8,
             y: y + altoBarra / 2 + 4,
             "font-size": 12,
-            fill: "#333"
+            fill: "#111827"
         }, dato.valor);
 
         svg.appendChild(valor);
@@ -676,7 +676,7 @@ function dibujarLineas(svg, contenedor, area = false) {
             d: ruta +
                ` L ${ultimo.x} ${ejes.baseY}` +
                ` L ${primero.x} ${ejes.baseY} Z`,
-            fill: "#548fdf",
+            fill: "#1d4ed8",
             "fill-opacity": .25
         });
 
@@ -686,7 +686,7 @@ function dibujarLineas(svg, contenedor, area = false) {
     svg.appendChild(svgElemento("path", {
         d: ruta,
         fill: "none",
-        stroke: "#548fdf",
+        stroke: "#1d4ed8",
         "stroke-width": 3,
         "stroke-linejoin": "round"
     }));

@@ -1,13 +1,13 @@
-# Jocarsa BBDD — Gestor visual
+# Andrei BBDD — Gestor visual
 
 Aplicación HTML/CSS/JS/PHP sobre la extensión PHP nativa `jocarsabbdd`.
 
 ## Instalación Ubuntu / Apache
 
-1. Instala el motor Jocarsa BBDD con `sudo ./install-system.sh` desde el proyecto del motor.
+1. Instala el motor Andrei BBDD con `sudo ./install-system.sh` desde el proyecto del motor.
 2. Copia esta carpeta a una ruta servida por Apache.
-3. Configura permisos de escritura para `www-data` en `private/` y en `/var/lib/jocarsa/basededatos/` (preferentemente con grupo y ACL, no chmod 777).
-4. Comprueba `php -m | grep jocarsabbdd` y `phpinfo()` en Apache (CLI y Apache pueden cargar diferentes INI).
+3. Configura permisos de escritura para `www-data` en `private/` y en `/var/lib/andrei/basededatos/` (preferentemente con grupo y ACL, no chmod 777).
+4. Comprueba `php -m | grep andreibbdd` y `phpinfo()` en Apache (CLI y Apache pueden cargar diferentes INI).
 5. Accede a `index.html` mediante `http://localhost/...`, nunca con `file://`.
 
 ## Correspondencia
@@ -38,4 +38,4 @@ Aplicación HTML/CSS/JS/PHP sobre la extensión PHP nativa `jocarsabbdd`.
 
 
 ## Identidad visual
-Nombre: jocarsa | bbdd. Tema pink suave y logo oficial https://static.jocarsa.com/logos/pink.svg. El logo requiere conexión a Internet.
+Nombre: andrei | bbdd. Tema pink suave y logo oficial https://static.jocarsa.com/logos/pink.svg. El logo requiere conexión a Internet.

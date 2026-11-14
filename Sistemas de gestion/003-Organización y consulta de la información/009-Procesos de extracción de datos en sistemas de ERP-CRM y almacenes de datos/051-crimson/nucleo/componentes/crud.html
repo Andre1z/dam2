@@ -171,12 +171,12 @@
       if(window.CrimsonTablaAvanzada) window.CrimsonTablaAvanzada.enhance(tablahtml);
       const vistasHost=document.createElement('div');
       tablahtml.before(vistasHost);
-      if(window.JocarsaVistas) window.JocarsaVistas.switcher(vistasHost,{
+      if(window.AndreiVistas) window.AndreiVistas.switcher(vistasHost,{
         table:tablahtml,rows:datos.contenido,columns:datos.estructura.map(c=>({key:c.name,label:c.name})),
         onEdit:r=>permisosActuales.actualizar&&crud(tabla,'actualizar',r.Identificador),
         onDelete:r=>{if(!permisosActuales.eliminar)return;if(!confirm('¿Eliminar el registro '+r.Identificador+'?'))return;fetch('api/api.php?bloque=eliminar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tabla,Identificador:r.Identificador})}).then(comprobarRespuesta).then(()=>crud(tabla,'seleccionar')).catch(mostrarErrorCRUD)}
       });
-      if(window.JocarsaGraficas) window.JocarsaGraficas.attach(principal,datos.contenido,datos.estructura);
+      if(window.AndreiGraficas) window.AndreiGraficas.attach(principal,datos.contenido,datos.estructura);
     })
     .catch(mostrarErrorCRUD);
   }
@@ -230,8 +230,8 @@
 
           foraneas.push(relacion);
 
-          // La API descubre la relación mediante la introspección nativa de JocarsaBBDD.
-          // No hay configuración específica por tabla: funciona para cualquier FK declarada en JocarsaBBDD.
+          // La API descubre la relación mediante la introspección nativa de AndreiBBDD.
+          // No hay configuración específica por tabla: funciona para cualquier FK declarada en AndreiBBDD.
           let peticion = fetch(
             "api/api.php?bloque=fk_opciones"+
             "&tabla="+encodeURIComponent(tabla)+

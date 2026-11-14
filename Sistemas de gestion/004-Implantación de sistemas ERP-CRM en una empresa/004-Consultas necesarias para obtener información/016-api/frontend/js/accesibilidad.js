@@ -1,8 +1,8 @@
 (()=>{
- const key='jocarsa-ui-high-contrast';
- const textKey='jocarsa-ui-text-scale';
+ const key='andrei-ui-high-contrast';
+ const textKey='andrei-ui-text-scale';
  const init=()=>{
-  const header=document.querySelector('body.jocarsa-iu > header');if(!header)return;
+  const header=document.querySelector('body.andrei-iu > header');if(!header)return;
   const wrap=document.createElement('div');wrap.className='ju-accessibility';
   wrap.innerHTML=`<button type="button" class="ju-a11y-button" aria-label="Accesibilidad" aria-expanded="false" aria-controls="ju-a11y-panel">Accesibilidad</button><div class="ju-a11y-panel" id="ju-a11y-panel" hidden><strong>Accesibilidad</strong><label class="ju-a11y-option"><span>Alto contraste</span><input type="checkbox" role="switch" aria-label="Activar alto contraste"></label><div class="ju-a11y-zoom"><label for="ju-a11y-text-range">Tamaño del contenido <output id="ju-a11y-text-value">100 %</output></label><input id="ju-a11y-text-range" type="range" min="100" max="200" step="10" value="100" aria-label="Ampliación del contenido de 100 a 200 por ciento"><button type="button" class="ju-a11y-reset">Restablecer tamaño</button></div></div>`;
   header.append(wrap);const btn=wrap.querySelector('button'),panel=wrap.querySelector('.ju-a11y-panel'),sw=wrap.querySelector('input');

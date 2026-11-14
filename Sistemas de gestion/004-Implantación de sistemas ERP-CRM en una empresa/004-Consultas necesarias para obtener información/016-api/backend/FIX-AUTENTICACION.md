@@ -4,7 +4,7 @@ Las tablas internas de Crimson pasan a llamarse `crimson_users` y `crimson_permi
 
 ## Uso
 
-1. Hacer copia de seguridad de la base `jocarsa-erp`.
+1. Hacer copia de seguridad de la base `andrei-erp`.
 2. Sustituir los archivos del proyecto.
 3. Ejecutar `CRIMSON_ADMIN_PASSWORD=... php inicializar-usuarios-cli.php admin Administrador admin@example.com` con una contraseña de al menos 12 caracteres.
 4. Comprobar que existen `crimson_users` y `crimson_permissions`.

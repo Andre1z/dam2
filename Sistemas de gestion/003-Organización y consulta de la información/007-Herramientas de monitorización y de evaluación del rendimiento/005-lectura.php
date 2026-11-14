@@ -1,5 +1,5 @@
 <?php
-$archivo = fopen("/home/josevicente/log/registros.csv", "r");
+$archivo = fopen("/home/andrei/log/registros.csv", "r");
 
 if ($archivo) {
     while (($fila = fgetcsv($archivo, 1000, ",")) !== false) {

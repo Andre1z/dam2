@@ -219,8 +219,8 @@
 
           foraneas.push(relacion);
 
-          // La API descubre la relación mediante la introspección nativa de JocarsaBBDD.
-          // No hay configuración específica por tabla: funciona para cualquier FK declarada en JocarsaBBDD.
+          // La API descubre la relación mediante la introspección nativa de AndreiBBDD.
+          // No hay configuración específica por tabla: funciona para cualquier FK declarada en AndreiBBDD.
           let peticion = fetch(
             "api/api.php?bloque=fk_opciones"+
             "&tabla="+encodeURIComponent(tabla)+
