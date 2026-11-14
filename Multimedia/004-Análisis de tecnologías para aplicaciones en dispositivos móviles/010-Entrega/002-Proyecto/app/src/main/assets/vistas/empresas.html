@@ -1,0 +1,81 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Empresas
+    </ui-titulo>
+
+    <p>
+        Administra todas las empresas registradas en el CRM.
+    </p>
+
+    <ui-badge>
+        Módulo Empresas
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nueva Empresa
+    </ui-titulo>
+
+    <ui-formulario id="formulario-empresas">
+
+        <ui-input
+                id="nombre"
+                label="Nombre de la empresa"
+                placeholder="Andrei Solutions S.L."
+                required
+        ></ui-input>
+
+        <ui-input
+                id="cif"
+                label="CIF"
+                placeholder="B12345678"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="telefono"
+                label="Teléfono"
+                placeholder="961234567"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="email"
+                type="email"
+                label="Correo electrónico"
+                placeholder="info@empresa.com"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="ciudad"
+                label="Ciudad"
+                placeholder="Valencia"
+                required
+        ></ui-input>
+
+        <ui-boton type="submit">
+            Guardar Empresa
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Empresas Registradas
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-empresas"
+            columnas="ID,Empresa,CIF,Teléfono,Email,Ciudad,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

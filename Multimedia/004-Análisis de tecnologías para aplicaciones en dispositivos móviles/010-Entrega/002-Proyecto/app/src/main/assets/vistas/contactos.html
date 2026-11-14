@@ -1,0 +1,74 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Contactos
+    </ui-titulo>
+
+    <p>
+        Administra las personas de contacto relacionadas con clientes y empresas.
+    </p>
+
+    <ui-badge>
+        Módulo Contactos
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nuevo Contacto
+    </ui-titulo>
+
+    <ui-formulario id="formulario-contactos">
+
+        <ui-input
+                id="nombre"
+                label="Nombre"
+                placeholder="Juan"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="apellidos"
+                label="Apellidos"
+                placeholder="Pérez García"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="telefono"
+                label="Teléfono"
+                placeholder="600123456"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="email"
+                type="email"
+                label="Correo electrónico"
+                placeholder="juan@empresa.com"
+                required
+        ></ui-input>
+
+        <ui-boton type="submit">
+            Guardar Contacto
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Contactos Registrados
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-contactos"
+            columnas="ID,Nombre,Apellidos,Teléfono,Email,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

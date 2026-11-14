@@ -1,47 +1,83 @@
 package com.andrei.crm
 
 import android.os.Bundle
+import android.util.Log
+import android.webkit.ConsoleMessage
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.andrei.crm.ui.theme.AndreicrmTheme
+import androidx.webkit.WebViewAssetLoader
+import androidx.webkit.WebViewClientCompat
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AndreicrmTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+        val webView = WebView(this)
+        setContentView(webView)
+
+        // Permite depurar la WebView desde Chrome
+        WebView.setWebContentsDebuggingEnabled(true)
+
+        // Configuración básica
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.settings.allowFileAccess = true
+        webView.settings.allowContentAccess = true
+
+        // Carga segura de archivos desde assets
+        val assetLoader = WebViewAssetLoader.Builder()
+            .addPathHandler(
+                "/assets/",
+                WebViewAssetLoader.AssetsPathHandler(this)
+            )
+            .build()
+
+        webView.webViewClient = object : WebViewClientCompat() {
+
+            override fun shouldInterceptRequest(
+                view: WebView,
+                request: WebResourceRequest
+            ): WebResourceResponse? {
+                return assetLoader.shouldInterceptRequest(request.url)
+            }
+
+            override fun onPageFinished(
+                view: WebView,
+                url: String
+            ) {
+                super.onPageFinished(view, url)
+
+                Log.d(
+                    "ANDREI_CRM",
+                    "Página cargada correctamente: $url"
+                )
             }
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        webView.webChromeClient = object : WebChromeClient() {
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndreicrmTheme {
-        Greeting("Android")
+            override fun onConsoleMessage(
+                message: ConsoleMessage
+            ): Boolean {
+
+                Log.d(
+                    "ANDREI_CRM",
+                    "JS: ${message.message()} | " +
+                            "Línea: ${message.lineNumber()} | " +
+                            "Archivo: ${message.sourceId()}"
+                )
+
+                return true
+            }
+        }
+
+        // Carga la aplicación principal
+        webView.loadUrl(
+            "https://appassets.androidplatform.net/assets/index.html"
+        )
     }
 }

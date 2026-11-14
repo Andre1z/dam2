@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+
+    --naranja:#f97316;
+
+    --azul:#1d4ed8;
+    --azul-medio:#1e40af;
+    --azul-claro:#eff6ff;
+    --azul-palido:#dbeafe;
+
+    --blanco:#ffffff;
+    --negro:#111827;
+
+    --gris:#6b7280;
+    --borde:#e5e7eb;
+
+    --radio:18px;
+
+    --header-height:70px;
+    --nav-height:75px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,sans-serif;
+    background:var(--azul-claro);
+    color:var(--negro);
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* ==========================
+   CABECERA
+========================== */
+
+.app-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:var(--header-height);
+
+    background:var(--azul);
+
+    color:var(--blanco);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.app-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.app-logo{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:var(--naranja);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+.app-info{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.app-info strong{
+    font-size:18px;
+}
+
+.app-info small{
+    font-size:13px;
+    opacity:.9;
+}
+
+/* ==========================
+   CONTENEDOR
+========================== */
+
+#contenedor{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    padding:16px;
+
+    /*
+    Solo dejamos espacio real
+    para el menú inferior.
+    */
+
+    padding-bottom:95px;
+}
+
+/* ==========================
+   PANTALLAS
+========================== */
+
+.pantalla{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+}
+
+/* ==========================
+   TARJETAS
+========================== */
+
+.card{
+
+    background:white;
+
+    border:1px solid var(--borde);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.05);
+}
+
+.card p{
+
+    margin-top:12px;
+
+    line-height:1.8;
+
+    color:#4b5563;
+}
+
+.card ul{
+
+    margin-top:12px;
+
+    padding-left:24px;
+}
+
+.card li{
+
+    margin-bottom:8px;
+}
+
+/* ==========================
+   TITULOS
+========================== */
+
+h1{
+
+    font-size:32px;
+
+    color:var(--azul);
+}
+
+h2{
+
+    font-size:24px;
+
+    color:var(--azul);
+
+    margin-bottom:10px;
+}
+
+h3{
+
+    font-size:20px;
+}
+
+/* ==========================
+   BADGES
+========================== */
+
+.badge{
+
+    display:inline-flex;
+
+    margin-top:12px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:var(--azul-palido);
+
+    color:var(--azul);
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+/* ==========================
+   FORMULARIOS
+========================== */
+
+.ui-campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:16px;
+}
+
+.ui-campo span{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+}
+
+.ui-campo input,
+.ui-campo select,
+.ui-campo textarea{
+
+    width:100%;
+
+    min-height:54px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    border:1px solid var(--borde);
+
+    background:white;
+
+    font-size:16px;
+
+    outline:none;
+}
+
+.ui-campo textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+}
+
+.ui-campo input:focus,
+.ui-campo select:focus,
+.ui-campo textarea:focus{
+
+    border-color:var(--azul);
+
+    box-shadow:
+        0 0 0 3px rgba(29,78,216,.15);
+}
+
+/* ==========================
+   BOTONES
+========================== */
+
+.ui-boton,
+button{
+
+    min-height:54px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--azul);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.ui-boton:hover,
+button:hover{
+
+    background:var(--azul-medio);
+}
+
+.secundario{
+
+    background:var(--naranja);
+}
+
+/* ==========================
+   TABLAS
+========================== */
+
+.ui-tabla-scroll{
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+}
+
+thead{
+
+    background:var(--azul);
+
+    color:white;
+}
+
+th,
+td{
+
+    padding:12px;
+
+    text-align:left;
+}
+
+tbody tr{
+
+    border-bottom:1px solid var(--borde);
+}
+
+/* ==========================
+   DASHBOARD
+========================== */
+
+.grid-dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(140px,1fr));
+
+    gap:16px;
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    border:1px solid var(--borde);
+
+    padding:18px;
+
+    text-align:center;
+}
+
+.stat-card .numero{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--azul);
+
+    margin-bottom:8px;
+}
+
+.stat-card .texto{
+
+    color:var(--gris);
+}
+
+/* ==========================
+   MENU INFERIOR
+========================== */
+
+.navegacion-principal{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:75px;
+
+    background:white;
+
+    border-top:1px solid var(--borde);
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:9999;
+
+    box-shadow:
+        0 -2px 10px rgba(0,0,0,.08);
+}
+
+.navegacion-principal button{
+
+    flex:1;
+
+    height:100%;
+
+    min-height:auto;
+
+    background:none;
+
+    border:none;
+
+    border-radius:0;
+
+    color:var(--gris);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:4px;
+
+    font-size:11px;
+}
+
+.navegacion-principal button.activo{
+
+    color:var(--azul);
+
+    font-weight:700;
+}
+
+.nav-icon{
+
+    font-size:20px;
+}
+
+/* ==========================
+   ANIMACIONES
+========================== */
+
+.fade-in{
+
+    animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================
+   MOVIL
+========================== */
+
+@media(max-width:480px){
+
+    #contenedor{
+        padding:12px;
+        padding-bottom:95px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+}

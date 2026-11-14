@@ -1,0 +1,83 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Tareas
+    </ui-titulo>
+
+    <p>
+        Organiza y realiza el seguimiento de todas las tareas pendientes.
+    </p>
+
+    <ui-badge>
+        Módulo Tareas
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nueva Tarea
+    </ui-titulo>
+
+    <ui-formulario id="formulario-tareas">
+
+        <ui-input
+                id="titulo"
+                label="Título"
+                placeholder="Llamar al cliente"
+                required
+        ></ui-input>
+
+        <ui-textarea
+                id="descripcion"
+                label="Descripción"
+                placeholder="Describe la tarea..."
+        ></ui-textarea>
+
+        <ui-input
+                id="fecha"
+                type="date"
+                label="Fecha"
+                required
+        ></ui-input>
+
+        <ui-select
+                id="prioridad"
+                label="Prioridad"
+        >
+            <option value="Baja">Baja</option>
+            <option value="Media" selected>Media</option>
+            <option value="Alta">Alta</option>
+        </ui-select>
+
+        <ui-select
+                id="estado"
+                label="Estado"
+        >
+            <option value="Pendiente">Pendiente</option>
+            <option value="En progreso">En progreso</option>
+            <option value="Completada">Completada</option>
+        </ui-select>
+
+        <ui-boton type="submit">
+            Guardar Tarea
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Tareas Registradas
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-tareas"
+            columnas="ID,Título,Fecha,Prioridad,Estado,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

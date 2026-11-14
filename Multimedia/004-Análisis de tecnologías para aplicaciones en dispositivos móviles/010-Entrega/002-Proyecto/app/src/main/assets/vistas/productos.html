@@ -1,0 +1,75 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Productos
+    </ui-titulo>
+
+    <p>
+        Gestiona el catálogo de productos y servicios disponibles.
+    </p>
+
+    <ui-badge>
+        Módulo Productos
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nuevo Producto
+    </ui-titulo>
+
+    <ui-formulario id="formulario-productos">
+
+        <ui-input
+                id="nombre"
+                label="Nombre"
+                placeholder="Portátil HP"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="categoria"
+                label="Categoría"
+                placeholder="Informática"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="precio"
+                type="number"
+                label="Precio (€)"
+                placeholder="499.99"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="stock"
+                type="number"
+                label="Stock"
+                placeholder="100"
+                required
+        ></ui-input>
+
+        <ui-boton type="submit">
+            Guardar Producto
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Productos Registrados
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-productos"
+            columnas="ID,Nombre,Categoría,Precio,Stock,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

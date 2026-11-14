@@ -1,0 +1,91 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Informes y Estadísticas
+    </ui-titulo>
+
+    <p>
+        Consulta un resumen completo de toda la actividad registrada en Andrei - CRM.
+    </p>
+
+    <ui-badge>
+        Dashboard Analítico
+    </ui-badge>
+
+</ui-tarjeta>
+
+<div class="grid-dashboard">
+
+    <div class="stat-card">
+        <div class="numero" id="total-clientes">0</div>
+        <div class="texto">Clientes</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="numero" id="total-empresas">0</div>
+        <div class="texto">Empresas</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="numero" id="total-contactos">0</div>
+        <div class="texto">Contactos</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="numero" id="total-productos">0</div>
+        <div class="texto">Productos</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="numero" id="total-tareas">0</div>
+        <div class="texto">Tareas</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="numero" id="total-presupuestos">0</div>
+        <div class="texto">Presupuestos</div>
+    </div>
+
+</div>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Estado de Tareas
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-tareas-resumen"
+            columnas="Estado,Cantidad"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Estado de Presupuestos
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-presupuestos-resumen"
+            columnas="Estado,Cantidad"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Resumen General
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-resumen-general"
+            columnas="Módulo,Registros"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

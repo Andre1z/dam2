@@ -1,0 +1,74 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Clientes
+    </ui-titulo>
+
+    <p>
+        Registra, consulta y administra todos los clientes del CRM.
+    </p>
+
+    <ui-badge>
+        Módulo Clientes
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nuevo Cliente
+    </ui-titulo>
+
+    <ui-formulario id="formulario-clientes">
+
+        <ui-input
+                id="nombre"
+                label="Nombre"
+                placeholder="Introduce el nombre"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="apellidos"
+                label="Apellidos"
+                placeholder="Introduce los apellidos"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="telefono"
+                label="Teléfono"
+                placeholder="600123456"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="email"
+                type="email"
+                label="Correo electrónico"
+                placeholder="cliente@empresa.com"
+                required
+        ></ui-input>
+
+        <ui-boton type="submit">
+            Guardar Cliente
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Clientes Registrados
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-clientes"
+            columnas="ID,Nombre,Apellidos,Teléfono,Email,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

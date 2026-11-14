@@ -1,0 +1,84 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Gestión de Presupuestos
+    </ui-titulo>
+
+    <p>
+        Registra y controla los presupuestos enviados a clientes.
+    </p>
+
+    <ui-badge>
+        Módulo Presupuestos
+    </ui-badge>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Nuevo Presupuesto
+    </ui-titulo>
+
+    <ui-formulario id="formulario-presupuestos">
+
+        <ui-input
+                id="cliente"
+                label="Cliente"
+                placeholder="Nombre del cliente"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="concepto"
+                label="Concepto"
+                placeholder="Desarrollo web corporativo"
+                required
+        ></ui-input>
+
+        <ui-input
+                id="importe"
+                type="number"
+                label="Importe (€)"
+                placeholder="1500"
+                required
+        ></ui-input>
+
+        <ui-select
+                id="estado"
+                label="Estado"
+        >
+            <option value="Pendiente">
+                Pendiente
+            </option>
+
+            <option value="Aceptado">
+                Aceptado
+            </option>
+
+            <option value="Rechazado">
+                Rechazado
+            </option>
+        </ui-select>
+
+        <ui-boton type="submit">
+            Guardar Presupuesto
+        </ui-boton>
+
+    </ui-formulario>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Presupuestos Registrados
+    </ui-titulo>
+
+    <ui-tabla
+            id="tabla-presupuestos"
+            columnas="ID,Cliente,Concepto,Importe,Estado,Acciones"
+    >
+    </ui-tabla>
+
+</ui-tarjeta>

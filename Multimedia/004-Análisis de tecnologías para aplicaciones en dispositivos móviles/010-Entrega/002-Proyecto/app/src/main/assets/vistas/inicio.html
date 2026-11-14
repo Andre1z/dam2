@@ -1,0 +1,178 @@
+<ui-tarjeta>
+
+    <ui-titulo>
+        Bienvenido a Andrei - CRM
+    </ui-titulo>
+
+    <p>
+        Sistema CRM móvil diseñado para gestionar clientes,
+        empresas, tareas, productos, contactos y presupuestos
+        desde una única plataforma.
+    </p>
+
+    <ui-badge>
+        Versión Móvil
+    </ui-badge>
+
+</ui-tarjeta>
+
+<div class="grid-dashboard">
+
+    <div class="stat-card">
+
+        <div
+                class="numero"
+                id="total-clientes"
+        >
+            0
+        </div>
+
+        <div class="texto">
+            Clientes
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div
+                class="numero"
+                id="total-empresas"
+        >
+            0
+        </div>
+
+        <div class="texto">
+            Empresas
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div
+                class="numero"
+                id="total-tareas"
+        >
+            0
+        </div>
+
+        <div class="texto">
+            Tareas
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div
+                class="numero"
+                id="total-productos"
+        >
+            0
+        </div>
+
+        <div class="texto">
+            Productos
+        </div>
+
+    </div>
+
+</div>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Accesos rápidos
+    </ui-titulo>
+
+    <div
+            style="
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:12px;
+            margin-top:16px;
+        "
+    >
+
+        <button
+                type="button"
+                data-url="clientes"
+        >
+            👥 Clientes
+        </button>
+
+        <button
+                type="button"
+                data-url="empresas"
+        >
+            🏢 Empresas
+        </button>
+
+        <button
+                type="button"
+                data-url="tareas"
+        >
+            ✅ Tareas
+        </button>
+
+        <button
+                type="button"
+                data-url="informes"
+        >
+            📊 Informes
+        </button>
+
+        <button
+                type="button"
+                data-url="mas"
+        >
+            ☰ Más opciones
+        </button>
+
+    </div>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Resumen del sistema
+    </ui-titulo>
+
+    <p>
+        Gestiona toda tu actividad comercial desde un único
+        panel centralizado.
+    </p>
+
+    <ul
+            style="
+            margin-top:12px;
+            padding-left:20px;
+            line-height:1.8;
+        "
+    >
+        <li>Gestión de clientes.</li>
+        <li>Gestión de empresas.</li>
+        <li>Gestión de contactos.</li>
+        <li>Gestión de tareas.</li>
+        <li>Gestión de productos.</li>
+        <li>Gestión de presupuestos.</li>
+        <li>Informes y estadísticas.</li>
+    </ul>
+
+</ui-tarjeta>
+
+<ui-tarjeta>
+
+    <ui-titulo>
+        Estado del CRM
+    </ui-titulo>
+
+    <p>
+        Todos los datos se almacenan localmente mediante
+        LocalStorage para un acceso rápido y sin necesidad
+        de conexión a servidores externos.
+    </p>
+
+</ui-tarjeta>

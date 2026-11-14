@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AplicacionAndrei" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/azul</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorPrimaryContainer">@color/azul_palido</item>
+        <item name="colorOnPrimaryContainer">@color/azul_medio</item>
+        <item name="colorSecondary">@color/naranja</item>
+        <item name="colorOnSecondary">@color/blanco</item>
+        <item name="colorTertiary">@color/azul_medio</item>
+        <item name="android:colorBackground">@color/azul_claro</item>
+        <item name="colorSurface">@color/blanco</item>
+        <item name="colorOnSurface">@color/negro</item>
+        <item name="shapeAppearanceSmallComponent">@style/FormaRedondeada</item>
+        <item name="shapeAppearanceMediumComponent">@style/FormaRedondeada</item>
+    </style>
+
+    <style name="Theme.AplicacionAndrei" parent="Base.Theme.AplicacionAndrei" />
+
+    <style name="FormaRedondeada" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+</resources>
