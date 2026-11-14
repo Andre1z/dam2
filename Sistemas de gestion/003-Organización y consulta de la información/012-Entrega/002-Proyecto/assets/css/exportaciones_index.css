@@ -1,0 +1,63 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+.contenedor{
+    max-width:1200px;
+    margin:auto;
+}
+
+h1{    color:#1e3a8a;
+    margin-bottom:30px;
+}
+
+.tarjetas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+   gap:20px;
+}
+
+.tarjeta{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.tarjet h2{
+    margin-bottom:10px;
+    color:#1e3a8a;
+}
+
+.tarjeta p{
+    margin-bottom:20px;
+}
+
+.tarjeta a{
+    display:inline-block;
+    text-decoration:none;
+    background:#16a34a;
+    color:white;
+    padding:10px 18px;
+    border-radius:6px;
+}
+
+.tarjeta a:hover{
+    background:#15803d;
+}
+
+.volver{
+    display:inline-block;
+    margin-top:30px;
+    color:#1e3a8a;
+    text-decoration:none;
+    font-weight:bold;
+}

@@ -12,15 +12,26 @@ class Conexion
 
             self::$db = new PDO('sqlite:' . $ruta);
 
+            // Activar claves foráneas en SQLite
+            self::$db->exec('PRAGMA foreign_keys = ON');
+
+            // Mostrar errores PDO
             self::$db->setAttribute(
                 PDO::ATTR_ERRMODE,
                 PDO::ERRMODE_EXCEPTION
             );
 
+            // Devolver resultados como array asociativo
             self::$db->setAttribute(
                 PDO::ATTR_DEFAULT_FETCH_MODE,
                 PDO::FETCH_ASSOC
             );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Tabla clientes
+            |--------------------------------------------------------------------------
+            */
 
             self::$db->exec("
                 CREATE TABLE IF NOT EXISTS clientes (
@@ -31,6 +42,12 @@ class Conexion
                 )
             ");
 
+            /*
+            |--------------------------------------------------------------------------
+            | Tabla productos
+            |--------------------------------------------------------------------------
+            */
+
             self::$db->exec("
                 CREATE TABLE IF NOT EXISTS productos (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,16 +57,28 @@ class Conexion
                 )
             ");
 
+            /*
+            |--------------------------------------------------------------------------
+            | Tabla ventas
+            |--------------------------------------------------------------------------
+            */
+
             self::$db->exec("
                 CREATE TABLE IF NOT EXISTS ventas (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     cliente_id INTEGER NOT NULL,
                     fecha TEXT NOT NULL,
                     total REAL NOT NULL,
-                    FOREIGN KEY(cliente_id)
+                    FOREIGN KEY (cliente_id)
                     REFERENCES clientes(id)
                 )
             ");
+
+            /*
+            |--------------------------------------------------------------------------
+            | Tabla detalle_ventas
+            |--------------------------------------------------------------------------
+            */
 
             self::$db->exec("
                 CREATE TABLE IF NOT EXISTS detalle_ventas (
@@ -58,9 +87,11 @@ class Conexion
                     producto_id INTEGER NOT NULL,
                     cantidad INTEGER NOT NULL,
                     precio REAL NOT NULL,
-                    FOREIGN KEY(venta_id)
+
+                    FOREIGN KEY (venta_id)
                     REFERENCES ventas(id),
-                    FOREIGN KEY(producto_id)
+
+                    FOREIGN KEY (producto_id)
                     REFERENCES productos(id)
                 )
             ");

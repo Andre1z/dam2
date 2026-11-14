@@ -1,0 +1,210 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root{
+    --color-primario:#1e3a8a;
+    --color-secundario:#2563eb;
+    --color-exito:#16a34a;
+    --color-info:#0891b2;
+    --color-fondo:#f4f6f9;
+    --color-texto:#1f2937;
+    --color-blanco:#ffffff;
+    --sombra:0 4px 12px rgba(0,0,0,.08);
+}
+
+body{
+    background:var(--color-fondo);
+    color:var(--color-texto);
+    min-height:100vh;
+}
+
+header{
+    background:linear-gradient(
+        135deg,
+        var(--color-primario),
+        var(--color-secundario)
+    );
+
+    color:white;
+    padding:30px;
+    box-shadow:var(--sombra);
+}
+
+header h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+header p{
+    opacity:.95;
+}
+
+nav{
+    background:white;
+    padding:15px 30px;
+    box-shadow:var(--sombra);
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--color-primario);
+    font-weight:600;
+    padding:10px 15px;
+    border-radius:6px;
+    transition:.3s;
+}
+
+nav a:hover{
+    background:#dbeafe;
+}
+
+.contenedor{
+    width:95%;
+    max-width:1400px;
+    margin:30px auto;
+}
+
+.bienvenida{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:var(--sombra);
+    margin-bottom:25px;
+}
+
+.bienvenida h2{
+    color:var(--color-primario);
+    margin-bottom:10px;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(250px,1fr)
+    );
+
+    gap:20px;
+}
+
+.tarjeta{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:var(--sombra);
+    transition:.3s;
+}
+
+.tarjeta:hover{
+    transform:translateY(-5px);
+}
+
+.tarjeta h2{
+    color:var(--color-primario);
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.numero{
+    font-size:42px;
+    font-weight:bold;
+}
+
+.tarjeta.clientes{
+    border-left:6px solid #2563eb;
+}
+
+.tarjeta.productos{
+    border-left:6px solid #0891b2;
+}
+
+.tarjeta.ventas{
+    border-left:6px solid #16a34a;
+}
+
+.tarjeta.facturacion{
+    border-left:6px solid #ca8a04;
+}
+
+.modulos{
+    margin-top:35px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(250px,1fr)
+    );
+
+    gap:20px;
+}
+
+.modulo{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:var(--sombra);
+}
+
+.modulo h3{
+    color:var(--color-primario);
+    margin-bottom:15px;
+}
+
+.modulo p{
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.modulo a{
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:var(--color-secundario);
+    color:white;
+
+    padding:10px 16px;
+
+    border-radius:6px;
+}
+
+.modulo a:hover{
+    opacity:.9;
+}
+
+footer{
+    margin-top:50px;
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#6b7280;
+}
+
+@media (max-width:768px){
+
+    header{
+        text-align:center;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .numero{
+        font-size:32px;
+    }
+
+}
